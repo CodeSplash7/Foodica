@@ -1,4 +1,6 @@
+"use client";
 import "./styles.css";
+import ReduxProvider from "@/store/redux-provider";
 
 export default function RootLayout({
   children
@@ -15,7 +17,7 @@ export default function RootLayout({
       </head>
       <body className="bg-white w-screen h-fit flex flex-col items-center px-[32px]">
         <div className="w-full min-w-[200px] max-w-[1200px] h-screen">
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
         </div>
       </body>
     </html>
