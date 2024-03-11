@@ -1,0 +1,44 @@
+.burger-menu-container button span {
+  top: 50%;
+}
+
+.burger-menu-container button:not(.open) span:nth-child(2) {
+  opacity: 1;
+}
+
+.burger-menu-container button:not(.open) span:nth-child(1) {
+  transform: translateY(-6px);
+}
+
+.burger-menu-container button:not(.open) span:nth-child(3) {
+  transform: translateY(6px);
+}
+
+.burger-menu-container button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu-container button.open span:nth-child(1) {
+  transform: translateY(0) rotate(45deg);
+}
+
+.burger-menu-container button.open span:nth-child(3) {
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* .burger-menu-container .Dropdown-arrow-wrapper {
+  @apply flex justify-center items-center mr-[16px]
+}
+
+.burger-menu-container .Dropdown-option {
+  font-family: 'Roboto Condensed', sans-serif;
+  @apply hover:text-[#818592] transition duration-150 border-b border-[#e2e2e2] w-full pt-[16px]
+}
+
+.burger-menu-container .Dropdown-option:last-child {
+  @apply border-b
+}
+
+.burger-menu-container .Dropdown-option:hover, .is-selected {
+  @apply text-[#818592]
+} */
