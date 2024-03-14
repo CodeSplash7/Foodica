@@ -1,0 +1,76 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "image": {
+        "src": "food-2569257_1280-1024x682.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Healthy Breakfast in 5 Minutes",
+      "author": "John Smith",
+      "creationDate": "Wed Oct 03 2018",
+      "tag": "Breakfast",
+      "description": "Elevate your breakfast routine with Erik Brown's Espresso Tiramisu Cups. This easy recipe delivers a decadent treat in just 5 minutes of preparation. With layers of espresso-soaked ladyfingers, mascarpone cream, and a finishing touch of grated chocolate and cocoa, these cups are a delightful indulgence. Perfect for busy mornings or special occasions, these tiramisu cups can be prepared ahead and refrigerated for a minimum of four hours. Enjoy a burst of flavor with this speedy and delicious breakfast option.",
+      "difficulty": "easy",
+      "servings": 4,
+      "prepTime": 30,
+      "cookTime": 40,
+      "calories": 300,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "cup",
+          "quantity": 0.5,
+          "name": "espresso",
+          "details": "at room temperature"
+        },
+        {
+          "id": 2,
+          "unit": "Tbsp",
+          "quantity": 1,
+          "name": "cognac",
+          "details": null
+        },
+        {
+          "id": 3,
+          "unit": null,
+          "quantity": 2,
+          "name": "large egges",
+          "details": "separated, at room temperature"
+        },
+        {
+          "id": 4,
+          "unit": "pinch",
+          "quantity": 1,
+          "name": "salt",
+          "details": null
+        },
+        {
+          "id": 5,
+          "unit": "Tbsp",
+          "quantity": 7,
+          "name": "sugar",
+          "details": "separated"
+        }
+      ],
+      "directions": [
+        "Mix together the espresso, rum, and cognac. The mixture should taste strongly of alcohol. If not, add more until it does. (That flavor will tone down when mixed with the other ingredients, but feel free to adjust to taste.)",
+        "In the bowl of an electric mixer, or by hand, beat the egg whites with a pinch of salt until they begin to get stiff. Beat in half of the sugar until stiff. Scrape the egg whites into a small bowl.",
+        "In the same bowl, beat the egg yolks with the remaining sugar until stiff and light-colored, about three minutes. (If using a standing electric mixer, you may need to stop and scrape down the sides.) By hand, beat in the mascarpone with a spatula or whisk, until lump-free.",
+        "Fold in half of the beaten egg whites, then the remaining half, just until fully incorporated",
+        "Put a splat, a heaping soup spoon, of the mascarpone cream into each vessel",
+        "Submerge each ladyfinger in the espresso mixture for 5-10 seconds, until completely, utterly soaked. (Dried ladyfingers will take longer to saturate than softer ones.) Break the ladyfinger in half to be sure; they should be dropping wet, and can’t be saturated enough. Then layer them over the mascarpone cream in each vessel. Use two ladyfingers per.",
+        "Grate a generous amount of chocolate over each.",
+        "Top with remaining mascarpone cream, cover, and refrigerate at least four hours, but preferably overnight.",
+        "Right before serving, shake powdered cocoa generously on top."
+      ],
+      "conclusion": "Congratulations on creating the delectable Healthy Breakfast! A symphony of espresso, cognac, and luscious mascarpone cream awaits your taste buds. Enjoy the fruits of your labor—a delightful morning treat that promises to make your day extra special. Bon appétit!",
+      "comments": [
+        { "id": 1, "message": "" },
+        { "id": 1, "message": "" },
+        { "id": 1, "message": "" }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import Select from "react-select";
 
 export default function Navbar() {
   return (
