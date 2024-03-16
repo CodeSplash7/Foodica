@@ -84,7 +84,7 @@ function formatCreationDate(date: string) {
 
 function BlogIntroduction({ blog }: { blog: Blog }) {
   return (
-    <div className="py-[96px] h-fit z-20 relative w-full md:w-1/2 flex flex-col items-center justify-center gap-[24px] pr-[24px]">
+    <div className="py-[96px] px-[24px] h-fit z-20 relative w-full md:w-1/2 flex flex-col items-center justify-center gap-[24px]">
       <Link
         href=""
         className="text-white md:text-[#9297A4] hover:text-[#aeb4be] transition duraiton-150 text-[16px] [font-family:'Roboto_Condensed',sans-serif]"
@@ -98,7 +98,7 @@ function BlogIntroduction({ blog }: { blog: Blog }) {
       >
         {blog.title}
       </Link>
-      <div className="text-white flex gap-[16px] items-center">
+      <div className="text-white md:text-[#9297a4] flex gap-[16px] items-center">
         <div>{formatCreationDate(blog.creationDate)}</div>
         <div className="border-2 border-[#d2d7d9] w-[2px] h-[2px] rounded-full"></div>
         <div>{blog.comments.length} comments</div>
