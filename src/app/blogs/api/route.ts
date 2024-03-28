@@ -9,9 +9,9 @@ export async function GET() {
     if (!cachedData) {
       const filePath = path.join(process.cwd(), "db", "db.json");
       const fileContents = fs.readFileSync(filePath, "utf-8");
-      cachedData = JSON.parse(fileContents);
+      cachedData = JSON.parse(fileContents).blogs;
     }
-    if (!cachedData.blogs) {
+    if (!cachedData) {
       return NextResponse.json({ message: "No blogs found" }, { status: 404 });
     }
     return NextResponse.json(cachedData, { status: 200 });

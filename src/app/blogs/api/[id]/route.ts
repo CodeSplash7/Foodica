@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import fs from "fs";
 import path from "path";
 
-import { type Blog } from "@/app/HighlightedBlog";
+import { type Blog } from "@/store/blogsSlice";
 
 let cachedData: Blog;
 

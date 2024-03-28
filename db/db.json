@@ -3,7 +3,7 @@
     {
       "id": 1,
       "image": {
-        "src": "food-2569257_1280-1024x682.jpg",
+        "src": "healhy-5min-breakfast.jpg",
         "height": 682,
         "width": 1024
       },
@@ -71,6 +71,1231 @@
         { "id": 1, "message": "" },
         { "id": 1, "message": "" }
       ]
+    },
+    {
+      "id": 2,
+      "image": {
+        "src": "ham-salad-with-poached-egg.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Ham Salad with Poached Egg",
+      "author": "Erik Brown",
+      "creationDate": "Thu Jan 21 2016",
+      "tag": "Appetizers",
+      "description": "Savor the exquisite blend of flavors and textures in our Ham Salad with Poached Egg. A light and satisfying appetizer featuring crisp salad leaves, juicy tomatoes, tender poached eggs, and savory Parma ham-wrapped breadsticks.",
+      "difficulty": "easy",
+      "servings": 2,
+      "prepTime": 15,
+      "cookTime": 15,
+      "calories": 300,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": null,
+          "quantity": 8,
+          "name": "Grissini Breadsticks",
+          "details": null
+        },
+        {
+          "id": 2,
+          "unit": "g",
+          "quantity": 180,
+          "name": "Cherry Tomatoes",
+          "details": null
+        },
+        {
+          "id": 3,
+          "unit": null,
+          "quantity": 4,
+          "name": "raw egg",
+          "details": null
+        },
+        {
+          "id": 4,
+          "unit": null,
+          "quantity": null,
+          "name": "Parma ham",
+          "details": null
+        },
+        {
+          "id": 5,
+          "unit": "Tbsp",
+          "quantity": 1,
+          "name": "olive oil",
+          "details": null
+        }
+      ],
+      "directions": [
+        "Mix together the salad leaves, shredded lettuce, plum tomatoes and sun blush tomatoes. Share between 4 plates.",
+        "Poach the eggs in gently simmering water for 3-4 minutes, until cooked to your liking. Meanwhile, make the dressing by mixing together the olive oil, lemon juice or vinegar, mustard and seasoning.",
+        "Wrap one slice of Parma ham around each breadstick. Place a poached egg on top of each salad, sprinkle with dressing and serve with two Parma ham-wrapped breadsticks."
+      ],
+      "conclusion": "Elevate your appetizer experience with this elegant dish. Impress guests or treat yourself to a flavorful delight that's as visually stunning as it is delicious.",
+      "comments": [
+        { "id": 2, "message": "" },
+        { "id": 3, "message": "" }
+      ]
+    },
+    {
+      "id": 3,
+      "image": {
+        "src": "berry-crumble-with-fresh-berries.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Berry Crumble with Fresh Berries",
+      "author": "Sarah Johnson",
+      "creationDate": "Fri Mar 12 2023",
+      "tag": "Desserts",
+      "description": "Indulge in the irresistible charm of our Berry Crumble with Fresh Berries. This delightful dessert combines juicy mixed berries with a buttery crumble topping, creating a symphony of flavors and textures that will leave you craving for more.",
+      "difficulty": "medium",
+      "servings": 6,
+      "prepTime": 20,
+      "cookTime": 35,
+      "calories": 250,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "c",
+          "quantity": 3,
+          "name": "mixed berries",
+          "details": "such as strawberries, blueberries, raspberries, and blackberries"
+        },
+        {
+          "id": 2,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "granulated sugar",
+          "details": null
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "cornstarch",
+          "details": null
+        },
+        {
+          "id": 4,
+          "unit": null,
+          "quantity": null,
+          "name": "lemon zest",
+          "details": "from 1 lemon"
+        },
+        {
+          "id": 5,
+          "unit": null,
+          "quantity": null,
+          "name": "lemon juice",
+          "details": "from 1 lemon"
+        },
+        {
+          "id": 6,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "all-purpose flour",
+          "details": null
+        },
+        {
+          "id": 7,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "rolled oats",
+          "details": null
+        },
+        {
+          "id": 8,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "packed light brown sugar",
+          "details": null
+        },
+        {
+          "id": 9,
+          "unit": null,
+          "quantity": null,
+          "name": "unsalted butter",
+          "details": "cut into small cubes"
+        },
+        {
+          "id": 10,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "vanilla extract",
+          "details": null
+        },
+        {
+          "id": 11,
+          "unit": "pinch",
+          "quantity": 1,
+          "name": "salt",
+          "details": null
+        }
+      ],
+      "directions": [
+        "Preheat the oven to 375°F (190°C). Lightly grease a baking dish.",
+        "In a large bowl, combine the mixed berries, granulated sugar, cornstarch, lemon zest, and lemon juice. Toss until the berries are evenly coated. Transfer the berry mixture to the prepared baking dish.",
+        "In another bowl, mix together the flour, rolled oats, brown sugar, cubed butter, vanilla extract, and salt until crumbly. Sprinkle the crumble mixture evenly over the berries.",
+        "Bake in the preheated oven for 30-35 minutes, or until the topping is golden brown and the berries are bubbling. Remove from the oven and let it cool slightly before serving.",
+        "Serve warm with a scoop of vanilla ice cream or a dollop of whipped cream, if desired. Enjoy!"
+      ],
+      "conclusion": "Indulge in the irresistible charm of our Berry Crumble with Fresh Berries. This delightful dessert is perfect for any occasion, from casual family gatherings to elegant dinner parties. With its vibrant colors, enticing aroma, and satisfying crunch, it's sure to become a favorite in your dessert repertoire. Treat yourself and your loved ones to this delectable treat today!",
+      "comments": [
+        { "userId": 1, "message": "" },
+        { "userId": 2, "message": "" }
+      ]
+    },
+    {
+      "id": 4,
+      "image": {
+        "src": "pistachio-pavlova-meringue-cakes.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Pistachio Pavlova Meringue Cakes",
+      "author": "Sophia Lee",
+      "creationDate": "Tue Jun 15 2021",
+      "tag": "Desserts",
+      "description": "Indulge in the delicate sweetness of Pistachio Pavlova Meringue Cakes. These light and airy confections are adorned with whipped cream, fresh berries, and a sprinkle of crushed pistachios for a delightful texture and flavor combination.",
+      "difficulty": "medium",
+      "servings": 6,
+      "prepTime": 30,
+      "cookTime": 90,
+      "calories": 250,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "g",
+          "quantity": 150,
+          "name": "pistachios",
+          "details": "shelled and finely chopped"
+        },
+        {
+          "id": 2,
+          "unit": "g",
+          "quantity": 200,
+          "name": "granulated sugar"
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "cornstarch"
+        },
+        {
+          "id": 4,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "white vinegar"
+        },
+        {
+          "id": 5,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "vanilla extract"
+        },
+        {
+          "id": 6,
+          "unit": "ea",
+          "quantity": 4,
+          "name": "egg whites",
+          "details": "at room temperature"
+        },
+        {
+          "id": 7,
+          "unit": "pinch",
+          "quantity": 1,
+          "name": "salt"
+        },
+        {
+          "id": 8,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "heavy cream",
+          "details": "cold"
+        },
+        {
+          "id": 9,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "powdered sugar"
+        },
+        {
+          "id": 10,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "fresh berries",
+          "details": "for garnish"
+        }
+      ],
+      "directions": [
+        "Preheat your oven to 250°F (120°C) and line a baking sheet with parchment paper.",
+        "In a mixing bowl, beat the egg whites and salt until soft peaks form. Gradually add the granulated sugar, cornstarch, vinegar, and vanilla extract, and continue beating until stiff peaks form. Fold in the chopped pistachios.",
+        "Spoon the meringue mixture onto the prepared baking sheet, forming small cake-like shapes.",
+        "Bake the meringue cakes for 90 minutes, or until they are firm and lightly golden. Allow them to cool completely on the baking sheet.",
+        "In a separate mixing bowl, whip the heavy cream and powdered sugar until stiff peaks form.",
+        "To assemble, place a dollop of whipped cream on each meringue cake, top with fresh berries, and sprinkle with additional chopped pistachios if desired."
+      ],
+      "conclusion": "Indulge in these Pistachio Pavlova Meringue Cakes for a delightful dessert experience. With their crisp exteriors, marshmallow-like centers, and creamy topping, they are sure to impress. Enjoy the delicate sweetness and satisfying crunch of these heavenly treats!",
+      "comments": [
+        { "userId": 1, "message": "" },
+        { "userId": 2, "message": "" }
+      ]
+    },
+    {
+      "id": 5,
+      "image": {
+        "src": "sliced-bread-ciabatta-and-oil.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Sliced Bread Ciabatta and Oil",
+      "author": "Erik Brown",
+      "creationDate": "2024-03-20",
+      "tag": "Appetizers",
+      "description": "A delicious Italian appetizer featuring sliced ciabatta bread served with oil.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 30,
+      "cookTime": 40,
+      "calories": 300,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "c",
+          "quantity": 2,
+          "name": "all-purpose flour"
+        },
+        {
+          "id": 2,
+          "unit": "tsp",
+          "quantity": 1.5,
+          "name": "salt"
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 0.5,
+          "name": "instant (rapid-rise) yeast"
+        },
+        {
+          "id": 4,
+          "unit": "c",
+          "quantity": 0.75,
+          "name": "water",
+          "details": "at room temperature"
+        },
+        {
+          "id": 5,
+          "unit": "c",
+          "quantity": 0.25,
+          "name": "whole or 2% milk",
+          "details": "at room temperature"
+        }
+      ],
+      "directions": [
+        "In a large mixing bowl, combine the all-purpose flour, salt, and instant yeast.",
+        "Add the water and whole or 2% milk to the dry ingredients. Mix until a shaggy dough forms.",
+        "Cover the bowl with a clean kitchen towel and let the dough rise in a warm place for about 1 hour, or until doubled in size.",
+        "Preheat the oven to 425°F (220°C).",
+        "Once the dough has risen, gently deflate it and turn it out onto a lightly floured surface.",
+        "Divide the dough into equal portions and shape each portion into a ciabatta loaf shape.",
+        "Transfer the shaped loaves onto a baking sheet lined with parchment paper.",
+        "Cover the loaves loosely with plastic wrap and let them rise for another 30 minutes.",
+        "Remove the plastic wrap and brush the tops of the loaves with olive oil.",
+        "Bake in the preheated oven for 20-25 minutes, or until the ciabatta loaves are golden brown and sound hollow when tapped on the bottom.",
+        "Remove from the oven and let cool slightly before serving.",
+        "Enjoy your delicious sliced ciabatta bread with oil!"
+      ],
+      "conclusion": "Enjoy this delicious sliced ciabatta bread with oil as an appetizer or snack!",
+      "comments": []
+    },
+    {
+      "id": 6,
+      "image": {
+        "src": "salad-with-arugula-&-cherry-tomatoes.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Salad with Arugula & Cherry Tomatoes",
+      "author": "Erik Brown",
+      "creationDate": "2015-03-10",
+      "tag": "Salads",
+      "description": "A delicious salad featuring arugula and cherry tomatoes.",
+      "difficulty": "easy",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 0,
+      "calories": 150,
+      "ingredients": [
+        { "id": 1, "quantity": 4, "unit": "c", "name": "arugula" },
+        {
+          "id": 2,
+          "quantity": 1,
+          "unit": "c",
+          "name": "cherry tomatoes",
+          "details": "halved"
+        },
+        {
+          "id": 3,
+          "quantity": 1,
+          "unit": "ea",
+          "name": "cucumber",
+          "details": "sliced"
+        },
+        {
+          "id": 4,
+          "quantity": 0.25,
+          "unit": "c",
+          "name": "red onion",
+          "details": "thinly sliced"
+        },
+        {
+          "id": 5,
+          "quantity": 0.25,
+          "unit": "c",
+          "name": "feta cheese",
+          "details": "crumbled"
+        },
+        {
+          "id": 6,
+          "quantity": 2,
+          "unit": "Tbsp",
+          "name": "extra virgin olive oil"
+        },
+        { "id": 7, "quantity": 1, "unit": "Tbsp", "name": "balsamic vinegar" },
+        { "id": 8, "quantity": 0.5, "unit": "tsp", "name": "dijon mustard" },
+        { "id": 9, "quantity": 0.25, "unit": "tsp", "name": "honey" },
+        { "id": 10, "quantity": 1, "unit": "pinch", "name": "salt" },
+        {
+          "id": 11,
+          "quantity": 1,
+          "unit": "pinch",
+          "name": "black pepper",
+          "details": "freshly ground"
+        }
+      ],
+      "directions": [
+        "In a small bowl, whisk together olive oil, balsamic vinegar, dijon mustard, honey, salt, and black pepper to make the dressing.",
+        "In a large salad bowl, combine arugula, cherry tomatoes, cucumber, red onion, and feta cheese.",
+        "Drizzle the dressing over the salad and toss gently to coat evenly.",
+        "Serve immediately and enjoy!"
+      ],
+      "conclusion": "Enjoy this delicious salad with arugula and cherry tomatoes!",
+      "comments": []
+    },
+    {
+      "id": 7,
+      "image": {
+        "src": "spaghetti-with-mushroom-sauce.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Spaghetti with Mushroom Sauce",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "Italian Cuisine",
+      "description": "A delicious recipe for spaghetti topped with a flavorful mushroom sauce.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 30,
+      "calories": 350,
+      "ingredients": [
+        { "id": 1, "quantity": 8, "unit": "oz", "name": "spaghetti" },
+        { "id": 2, "quantity": 2, "unit": "Tbsp", "name": "olive oil" },
+        {
+          "id": 3,
+          "quantity": 1,
+          "name": "onion",
+          "details": "finely chopped"
+        },
+        {
+          "id": 4,
+          "quantity": 2,
+          "name": "garlic cloves",
+          "details": "minced"
+        },
+        {
+          "id": 5,
+          "quantity": 8,
+          "unit": "oz",
+          "name": "mushrooms",
+          "details": "sliced"
+        },
+        { "id": 6, "quantity": 1, "unit": "cup", "name": "vegetable broth" },
+        { "id": 7, "quantity": 1, "unit": "cup", "name": "heavy cream" },
+        {
+          "id": 8,
+          "quantity": 1,
+          "unit": "cup",
+          "name": "grated Parmesan cheese"
+        },
+        {
+          "id": 9,
+          "quantity": 2,
+          "unit": "Tbsp",
+          "name": "fresh parsley",
+          "details": "chopped"
+        },
+        { "id": 10, "quantity": 1, "unit": "tsp", "name": "salt" },
+        {
+          "id": 11,
+          "quantity": 1,
+          "unit": "tsp",
+          "name": "black pepper",
+          "details": "ground"
+        }
+      ],
+      "directions": [
+        "Cook the spaghetti according to package instructions until al dente. Drain and set aside.",
+        "In a large skillet, heat the olive oil over medium heat. Add the onion and garlic, and cook until softened.",
+        "Add the mushrooms to the skillet and cook until they release their moisture and start to brown.",
+        "Pour in the vegetable broth and simmer for a few minutes.",
+        "Stir in the heavy cream and grated Parmesan cheese until the sauce is creamy.",
+        "Season with salt and black pepper, to taste.",
+        "Add the cooked spaghetti to the skillet and toss to coat in the sauce.",
+        "Serve hot, garnished with fresh parsley.",
+        "Enjoy!"
+      ],
+      "conclusion": "This spaghetti with mushroom sauce is a comforting and satisfying meal that's perfect for a cozy night in. The creamy sauce pairs beautifully with the tender spaghetti, making it a dish that's sure to please everyone at the table.",
+      "comments": []
+    },
+    {
+      "id": 8,
+      "image": {
+        "src": "cinnamon-&-orange-jam-linzer-cookies.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Cinnamon & Orange Jam Linzer Cookies",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "Baking",
+      "description": "Learn how to make delicious Cinnamon & Orange Jam Linzer Cookies with this easy-to-follow recipe!",
+      "difficulty": "medium",
+      "servings": 24,
+      "prepTime": 20,
+      "cookTime": 12,
+      "calories": 150,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "All-purpose flour",
+          "details": "plus extra for dusting"
+        },
+        {
+          "id": 2,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "Ground cinnamon"
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "Baking powder"
+        },
+        {
+          "id": 4,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "Unsalted butter",
+          "details": "room temperature"
+        },
+        {
+          "id": 5,
+          "unit": "cup",
+          "quantity": 2,
+          "name": "Powdered sugar"
+        },
+        {
+          "id": 6,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "Vanilla extract"
+        },
+        {
+          "id": 7,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "Orange jam",
+          "details": "or other fruit jam"
+        }
+      ],
+      "directions": [
+        "In a medium bowl, whisk together the flour, cinnamon, and baking powder.",
+        "In a large bowl, beat the butter and powdered sugar until light and fluffy.",
+        "Add the vanilla extract and beat until combined.",
+        "Gradually add the flour mixture to the butter mixture and beat until the dough comes together.",
+        "Divide the dough into two equal portions, flatten each portion into a disk, and wrap them in plastic wrap.",
+        "Chill the dough in the refrigerator for at least 1 hour.",
+        "Preheat the oven to 350°F (175°C). Line baking sheets with parchment paper.",
+        "On a lightly floured surface, roll out one portion of the dough to a thickness of about 1/8 inch.",
+        "Using a cookie cutter, cut out shapes from the dough and place them on the prepared baking sheets.",
+        "Bake the cookies for 10-12 minutes, or until lightly golden brown around the edges.",
+        "Let the cookies cool on the baking sheets for a few minutes, then transfer them to wire racks to cool completely.",
+        "Once the cookies are completely cooled, spread a thin layer of jam on the bottom side of half of the cookies.",
+        "Place the remaining cookies on top of the jam-coated cookies to form sandwiches.",
+        "Dust the tops of the cookies with powdered sugar before serving, if desired."
+      ],
+      "conclusion": "Enjoy these delicious Cinnamon & Orange Jam Linzer Cookies with a cup of tea or coffee!",
+      "comments": []
+    },
+    {
+      "id": 9,
+      "image": {
+        "src": "strawberry-pancakes.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Strawberry Pancakes",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "breakfast",
+      "description": "Delicious strawberry pancakes that are perfect for a weekend breakfast.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 15,
+      "calories": 300,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "all-purpose flour",
+          "details": "sifted"
+        },
+        {
+          "id": 2,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "granulated sugar"
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "baking powder"
+        },
+        {
+          "id": 4,
+          "unit": "tsp",
+          "quantity": 0.5,
+          "name": "baking soda"
+        },
+        {
+          "id": 5,
+          "unit": "tsp",
+          "quantity": 0.25,
+          "name": "salt"
+        },
+        {
+          "id": 6,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "milk"
+        },
+        {
+          "id": 7,
+          "unit": "cup",
+          "quantity": 0.25,
+          "name": "unsalted butter",
+          "details": "melted"
+        },
+        {
+          "id": 8,
+          "unit": "large",
+          "quantity": 1,
+          "name": "egg"
+        },
+        {
+          "id": 9,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "fresh strawberries",
+          "details": "sliced"
+        }
+      ],
+      "directions": [
+        "In a large bowl, whisk together flour, sugar, baking powder, baking soda, and salt.",
+        "In another bowl, whisk together milk, melted butter, and egg.",
+        "Pour wet ingredients into dry ingredients and stir until just combined. Let the batter rest for 5 minutes.",
+        "Heat a non-stick skillet or griddle over medium heat. Pour 1/4 cup of batter onto the skillet for each pancake.",
+        "Cook until bubbles form on the surface of the pancakes and the edges look set, about 2 minutes. Flip and cook until golden brown, about 1-2 minutes more.",
+        "Serve hot with sliced strawberries on top."
+      ],
+      "conclusion": "These strawberry pancakes are fluffy, flavorful, and perfect for a leisurely breakfast or brunch. Enjoy them with maple syrup, whipped cream, or additional fresh fruit for a delicious start to your day.",
+      "comments": [
+        {
+          "userId": 1,
+          "message": "I tried this recipe and it turned out amazing! My family loved it."
+        },
+        {
+          "userId": 2,
+          "message": "Can't wait to make these for breakfast tomorrow!"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "image": {
+        "src": "apple-pie.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Apple Pie",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "Desserts",
+      "description": "A delicious recipe for homemade apple pie.",
+      "difficulty": "medium",
+      "servings": 8,
+      "prepTime": 30,
+      "cookTime": 60,
+      "calories": 350,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "ea",
+          "quantity": 6,
+          "name": "apples",
+          "details": "peeled, cored, and sliced"
+        },
+        {
+          "id": 2,
+          "unit": "tbsp",
+          "quantity": 2,
+          "name": "lemon juice"
+        },
+        {
+          "id": 3,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "ground cinnamon"
+        },
+        {
+          "id": 4,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "granulated sugar"
+        },
+        {
+          "id": 5,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "all-purpose flour"
+        },
+        {
+          "id": 6,
+          "unit": "tbsp",
+          "quantity": 1,
+          "name": "unsalted butter",
+          "details": "cold, diced"
+        },
+        {
+          "id": 7,
+          "unit": "tbsp",
+          "quantity": 1,
+          "name": "ice water"
+        }
+      ],
+      "directions": [
+        "Preheat oven to 375°F (190°C).",
+        "In a large bowl, toss apples with lemon juice, cinnamon, and sugar until well coated.",
+        "In a separate bowl, combine flour and diced butter. Use a pastry cutter or your fingers to cut the butter into the flour until the mixture resembles coarse crumbs.",
+        "Add ice water, 1 tablespoon at a time, and mix until dough comes together.",
+        "Divide dough in half and roll out one half on a lightly floured surface to fit a 9-inch pie dish.",
+        "Transfer rolled dough to pie dish. Add apple filling.",
+        "Roll out remaining dough and place over the filling. Trim and crimp edges to seal.",
+        "Cut a few slits in the top crust to vent steam.",
+        "Bake for 45-50 minutes, or until crust is golden brown and filling is bubbly.",
+        "Let cool before serving."
+      ],
+      "conclusion": "This homemade apple pie is a classic dessert that's perfect for any occasion. Serve it warm with a scoop of vanilla ice cream for a truly indulgent treat!",
+      "comments": []
+    },
+    {
+      "id": 11,
+      "image": {
+        "src": "caprese-salad.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Caprese Salad",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "Salad",
+      "description": "A classic Italian salad made with fresh tomatoes, mozzarella cheese, basil leaves, and olive oil.",
+      "difficulty": "easy",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 0,
+      "calories": 250,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "ea",
+          "quantity": 4,
+          "name": "ripe tomatoes",
+          "details": "sliced"
+        },
+        {
+          "id": 2,
+          "unit": "oz",
+          "quantity": 8,
+          "name": "fresh mozzarella cheese",
+          "details": "sliced"
+        },
+        {
+          "id": 3,
+          "unit": "handful",
+          "quantity": 1,
+          "name": "fresh basil leaves",
+          "details": "torn"
+        },
+        {
+          "id": 4,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "extra virgin olive oil"
+        },
+        {
+          "id": 5,
+          "unit": "pinch",
+          "quantity": 1,
+          "name": "salt",
+          "details": "to taste"
+        },
+        {
+          "id": 6,
+          "unit": "pinch",
+          "quantity": 1,
+          "name": "black pepper",
+          "details": "to taste"
+        }
+      ],
+      "directions": [
+        "Arrange tomato and mozzarella slices on a serving platter, alternating and overlapping them.",
+        "Tuck basil leaves between tomato and cheese slices.",
+        "Drizzle with olive oil and sprinkle with salt and pepper.",
+        "Serve immediately, or refrigerate until ready to serve."
+      ],
+      "conclusion": "Caprese Salad is a refreshing and delicious dish that's perfect for summer gatherings or as a light lunch. Enjoy the combination of ripe tomatoes, creamy mozzarella, and fragrant basil!",
+      "comments": []
+    },
+    {
+      "id": 12,
+      "image": {
+        "src": "beef-steak.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Beef Steak",
+      "author": "John Doe",
+      "creationDate": "2024-03-20",
+      "tag": "meat",
+      "description": "Learn how to cook a delicious beef steak with this easy recipe.",
+      "difficulty": "medium",
+      "servings": 2,
+      "prepTime": 15,
+      "cookTime": 20,
+      "calories": 500,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "oz",
+          "quantity": 12,
+          "name": "beef steak",
+          "details": "sirloin or ribeye"
+        },
+        {
+          "id": 2,
+          "unit": "tbsp",
+          "quantity": 2,
+          "name": "olive oil"
+        },
+        {
+          "id": 3,
+          "unit": null,
+          "quantity": 1,
+          "name": "garlic clove",
+          "details": "minced"
+        },
+        {
+          "id": 4,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "salt"
+        },
+        {
+          "id": 5,
+          "unit": "tsp",
+          "quantity": 1,
+          "name": "black pepper"
+        }
+      ],
+      "directions": [
+        "Preheat grill to medium-high heat.",
+        "Rub steak with olive oil, minced garlic, salt, and pepper.",
+        "Grill steak for about 5-7 minutes on each side for medium-rare.",
+        "Let the steak rest for a few minutes before slicing.",
+        "Serve hot and enjoy!"
+      ],
+      "conclusion": "This beef steak recipe is simple yet delicious. Perfect for a quick and satisfying meal.",
+      "comments": []
+    },
+    {
+      "id": 13,
+      "image": {
+        "src": "chicked-wrap.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Chicken Wrap",
+      "author": "John Doe",
+      "creationDate": "2024-03-20",
+      "tag": "recipes",
+      "description": "Learn how to make delicious chicken wraps at home!",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 20,
+      "cookTime": 15,
+      "calories": 300,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "ea",
+          "quantity": 4,
+          "name": "flour tortillas"
+        },
+        {
+          "id": 2,
+          "unit": "lb",
+          "quantity": 1,
+          "name": "boneless, skinless chicken breasts",
+          "details": "cooked and sliced"
+        },
+        {
+          "id": 3,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "shredded lettuce"
+        },
+        {
+          "id": 4,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "diced tomatoes"
+        },
+        {
+          "id": 5,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "shredded cheddar cheese"
+        },
+        {
+          "id": 6,
+          "unit": "cup",
+          "quantity": 1,
+          "name": "ranch dressing"
+        },
+        {
+          "id": 7,
+          "unit": "tbsp",
+          "quantity": 2,
+          "name": "olive oil"
+        }
+      ],
+      "directions": [
+        "Heat olive oil in a skillet over medium heat.",
+        "Add sliced chicken breasts and cook until no longer pink in the center, about 6-8 minutes per side.",
+        "Remove chicken from skillet and slice into strips.",
+        "Warm tortillas in the skillet for about 30 seconds per side.",
+        "Assemble wraps by layering chicken, lettuce, tomatoes, cheese, and ranch dressing onto tortillas.",
+        "Fold sides of tortillas over filling and roll tightly to form wraps.",
+        "Serve immediately and enjoy!"
+      ],
+      "conclusion": "These chicken wraps are perfect for a quick and delicious meal!",
+      "comments": []
+    },
+    {
+      "id": 14,
+      "image": {
+        "src": "homemade-tomato-sauce.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Homemade Tomato Sauce",
+      "author": "Your Name",
+      "creationDate": "2024-03-20",
+      "tag": "Cooking",
+      "description": "Learn how to make delicious homemade tomato sauce from scratch.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 45,
+      "calories": 150,
+      "ingredients": [
+        { "id": 1, "quantity": 2, "unit": "Tbsp", "name": "olive oil" },
+        {
+          "id": 2,
+          "quantity": 1,
+          "unit": "medium",
+          "name": "onion",
+          "details": "chopped"
+        },
+        {
+          "id": 3,
+          "quantity": 2,
+          "unit": "cloves",
+          "name": "garlic",
+          "details": "minced"
+        },
+        {
+          "id": 4,
+          "quantity": 28,
+          "unit": "oz",
+          "name": "canned tomatoes",
+          "details": "crushed"
+        },
+        { "id": 5, "quantity": 1, "unit": "Tbsp", "name": "tomato paste" },
+        { "id": 6, "quantity": 1, "unit": "Tbsp", "name": "sugar" },
+        { "id": 7, "quantity": 1, "unit": "tsp", "name": "dried basil" },
+        { "id": 8, "quantity": 1, "unit": "tsp", "name": "dried oregano" },
+        { "id": 9, "quantity": 1, "unit": "tsp", "name": "salt" },
+        { "id": 10, "quantity": 0.5, "unit": "tsp", "name": "black pepper" }
+      ],
+      "directions": [
+        "In a large saucepan, heat olive oil over medium heat.",
+        "Add chopped onion and cook until softened, about 5 minutes.",
+        "Add minced garlic and cook for an additional"
+      ],
+      "comments": []
+    },
+    {
+      "id": 15,
+      "image": {
+        "src": "club-sandwich.jpg",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Club Sandwich",
+      "author": "John Doe",
+      "creationDate": "2024-03-20",
+      "tag": "sandwich",
+      "description": "A classic club sandwich recipe with turkey, bacon, lettuce, tomato, and mayonnaise.",
+      "difficulty": "medium",
+      "servings": 2,
+      "prepTime": 15,
+      "cookTime": 10,
+      "calories": 600,
+      "ingredients": [
+        {
+          "id": 1,
+          "unit": "slice",
+          "quantity": 6,
+          "name": "bread",
+          "details": "toasted"
+        },
+        {
+          "id": 2,
+          "unit": "slice",
+          "quantity": 6,
+          "name": "turkey breast",
+          "details": "cooked"
+        },
+        {
+          "id": 3,
+          "unit": "slice",
+          "quantity": 6,
+          "name": "bacon",
+          "details": "cooked"
+        },
+        {
+          "id": 4,
+          "unit": "leaf",
+          "quantity": 4,
+          "name": "lettuce"
+        },
+        {
+          "id": 5,
+          "unit": "slice",
+          "quantity": 2,
+          "name": "tomato"
+        },
+        {
+          "id": 6,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "mayonnaise"
+        }
+      ],
+      "directions": [
+        "Spread mayonnaise on one side of each toasted bread slice.",
+        "Layer turkey, bacon, lettuce, and tomato on one slice of bread.",
+        "Top with another slice of bread.",
+        "Cut the sandwich diagonally into halves.",
+        "Serve immediately."
+      ],
+      "conclusion": "Enjoy this delicious club sandwich for a satisfying meal!",
+      "comments": [
+        {
+          "userId": 1,
+          "message": "This sandwich looks amazing! Can't wait to try it."
+        },
+        {
+          "userId": 2,
+          "message": "I made this sandwich for lunch today, and it was fantastic!"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "image": {
+        "src": "cheeseburger.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Cheeseburger",
+      "author": "John Doe",
+      "creationDate": "2024-03-20",
+      "tag": "meat",
+      "description": "A delicious cheeseburger recipe that will satisfy your cravings.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 15,
+      "calories": 500,
+      "ingredients": [
+        { "id": 1, "unit": "ea", "quantity": 4, "name": "hamburger buns" },
+        { "id": 2, "unit": "ea", "quantity": 4, "name": "beef patties" },
+        { "id": 3, "unit": "slice", "quantity": 4, "name": "cheese slices" },
+        { "id": 4, "unit": "slice", "quantity": 4, "name": "tomato slices" },
+        { "id": 5, "unit": "slice", "quantity": 4, "name": "lettuce leaves" },
+        { "id": 6, "unit": "slice", "quantity": 1, "name": "onion" },
+        { "id": 7, "unit": "Tbsp", "quantity": 4, "name": "ketchup" },
+        { "id": 8, "unit": "Tbsp", "quantity": 4, "name": "mustard" },
+        { "id": 9, "unit": "Tbsp", "quantity": 4, "name": "mayonnaise" },
+        { "id": 10, "unit": "tsp", "quantity": 1, "name": "salt" },
+        { "id": 11, "unit": "tsp", "quantity": 1, "name": "black pepper" }
+      ],
+      "directions": [
+        "Preheat grill to medium-high heat.",
+        "Grill beef patties for 4-5 minutes on each side until desired doneness is reached.",
+        "Toast hamburger buns on the grill for 1-2 minutes.",
+        "Assemble cheeseburgers by placing cooked patties on bottom buns, topping with cheese slices, tomato slices, lettuce leaves, and onion slices.",
+        "Spread ketchup, mustard, and mayonnaise on the top buns.",
+        "Season assembled cheeseburgers with salt and black pepper.",
+        "Serve immediately and enjoy!"
+      ],
+      "conclusion": "These cheeseburgers are perfect for a quick and satisfying meal.",
+      "comments": []
+    },
+    {
+      "id": 17,
+      "image": {
+        "src": "spaghetti-with-garlic-and-oil.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Spaghetti with Garlic and Oil",
+      "author": "John Doe",
+      "creationDate": "2024-03-20",
+      "tag": "Italian Cuisine",
+      "description": "A simple and classic Italian pasta dish featuring spaghetti tossed in olive oil and garlic.",
+      "difficulty": "easy",
+      "servings": 4,
+      "prepTime": 10,
+      "cookTime": 10,
+      "calories": 350,
+      "ingredients": [
+        { "id": 1, "unit": "oz", "quantity": 8, "name": "spaghetti" },
+        {
+          "id": 2,
+          "unit": "clove",
+          "quantity": 4,
+          "name": "garlic",
+          "details": "minced"
+        },
+        { "id": 3, "unit": "Tbsp", "quantity": 4, "name": "olive oil" },
+        {
+          "id": 4,
+          "unit": "",
+          "quantity": 1,
+          "name": "red pepper flakes",
+          "details": "optional"
+        },
+        { "id": 5, "unit": "tsp", "quantity": 1, "name": "salt" },
+        {
+          "id": 6,
+          "unit": "Tbsp",
+          "quantity": 2,
+          "name": "fresh parsley",
+          "details": "chopped"
+        }
+      ],
+      "directions": [
+        "Cook the spaghetti according to package instructions until al dente. Reserve 1 cup of pasta water, then drain the spaghetti.",
+        "In a large skillet, heat the olive oil over medium heat. Add the minced garlic and red pepper flakes (if using) and cook until fragrant, about 1 minute.",
+        "Add the cooked spaghetti to the skillet along with 1/2 cup of the reserved pasta water. Toss to coat the spaghetti in the garlic-infused oil, adding more pasta water as needed to loosen the sauce.",
+        "Season with salt to taste, then sprinkle with chopped parsley before serving."
+      ],
+      "conclusion": "Spaghetti with garlic and oil is a delicious and comforting dish that comes together in minutes. It's perfect for a quick weeknight meal or a cozy dinner at home.",
+      "comments": [
+        {
+          "userId": 1,
+          "message": "This recipe was fantastic! It tasted just like the one my grandmother used to make."
+        },
+        {
+          "userId": 2,
+          "message": "I loved how simple and flavorful this dish was. Will definitely be making it again!"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "image": {
+        "src": "pasta-salad.png",
+        "height": 682,
+        "width": 1024
+      },
+      "title": "Pasta Salad",
+      "author": "Author Name",
+      "creationDate": "2024-03-20",
+      "tag": "Salads",
+      "description": "A delicious and refreshing pasta salad perfect for any occasion.",
+      "difficulty": "medium",
+      "servings": 4,
+      "prepTime": 15,
+      "cookTime": 10,
+      "calories": 300,
+      "ingredients": [
+        { "id": 1, "quantity": 250, "unit": "g", "name": "pasta", "details": "any type" },
+        { "id": 2, "quantity": 1, "unit": "cup", "name": "cherry tomatoes", "details": "halved" },
+        { "id": 3, "quantity": 1, "unit": "cup", "name": "cucumber", "details": "diced" },
+        { "id": 4, "quantity": 1, "unit": "cup", "name": "black olives", "details": "pitted and sliced" },
+        { "id": 5, "quantity": 1, "unit": "cup", "name": "feta cheese", "details": "crumbled" },
+        { "id": 6, "quantity": 1, "unit": "cup", "name": "fresh basil leaves", "details": "chopped" },
+        { "id": 7, "quantity": 2, "unit": "tbsp", "name": "olive oil" },
+        { "id": 8, "quantity": 2, "unit": "tbsp", "name": "balsamic vinegar" },
+        { "id": 9, "quantity": 1, "unit": "", "name": "salt", "details": "to taste" },
+        { "id": 10, "quantity": 1, "unit": "", "name": "black pepper", "details": "to taste" }
+      ],
+      "directions": [
+        "Cook pasta according to package instructions.",
+        "In a large bowl, combine cooked pasta, cherry tomatoes, cucumber, black olives, feta cheese, and basil leaves.",
+        "In a small bowl, whisk together olive oil, balsamic vinegar, salt, and black pepper.",
+        "Pour dressing over pasta salad and toss to coat evenly.",
+        "Serve immediately or refrigerate until ready to serve."
+      ],
+      "conclusion": "This pasta salad is a perfect dish for picnics, potlucks, or as a refreshing side dish for any meal.",
+      "comments": []
     }
+    
   ]
 }
