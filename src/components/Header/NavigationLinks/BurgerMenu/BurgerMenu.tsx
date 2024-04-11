@@ -16,6 +16,11 @@ export default function BurgerMenu() {
   const isOpen = useAppSelector(
     (state) => state.pageHeader.navigationMenu.isBurgerMenuOpen
   );
+  const recipeIndexLinksCount = useAppSelector(
+    (state) =>
+      state.pageHeader.navigationMenu.links.find((l) => l.id === 3)?.links!
+        .length
+  );
   const dispatch = useAppDispatch();
 
   const links = useAppSelector(
@@ -44,7 +49,9 @@ export default function BurgerMenu() {
       </div>
       <div
         className="overflow-hidden absolute top-[24px] transition-all duration-500 w-full"
-        style={{ height: `${isOpen ? `${7 * 48}px` : "0px"}` }}
+        style={{
+          height: `${isOpen ? `${recipeIndexLinksCount! * 50}px` : "0px"}`
+        }}
       >
         <div className="flex flex-col w-full bg-[#f5f5f5] rounded-lg h-fit px-[30px] py-[20px]">
           {mainLinks.map((link) => (
@@ -62,6 +69,8 @@ function MenuLink({ link, miniLink }: { link: LinkType; miniLink?: boolean }) {
   const isNormalLink = !link.links && !miniLink;
   const isMinilink = !link.links && miniLink;
 
+  const dispatch = useAppDispatch();
+
   if (isDropdownLink) return <BurgerMenuDropdownLink link={link} />;
   if (isNormalLink)
     return (
@@ -76,6 +85,7 @@ function MenuLink({ link, miniLink }: { link: LinkType; miniLink?: boolean }) {
     return (
       <Link
         href={link.href}
+        onClick={() => dispatch(closeBurgerMenu())}
         className={`hover:text-[#818592] transition duration-150 [font-family:'Roboto_Condensed',sans-serif] border-b last:border-none border-[#e2e2e2] w-full pt-[16px]`}
       >
         {link.label}

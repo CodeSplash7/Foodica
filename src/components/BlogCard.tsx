@@ -8,19 +8,31 @@ import { formatCreationDate } from "@/app/HighlightedBlog";
 
 type BlogCardProps = {
   blog: Blog;
+  isSmall: boolean;
 };
 
-export default function BlogCard({ blog }: BlogCardProps) {
-  const { image, tag, title, creationDate, author, comments, description } =
-    blog;
+export default function BlogCard({ blog, isSmall }: BlogCardProps) {
+  const {
+    image,
+    mainTag: tag,
+    title,
+    creationDate,
+    author,
+    comments,
+    description
+  } = blog;
   return (
-    <div className={`h-fit w-full flex flex-col items-center gap-[16px]`}>
-      <BlogCardImage image={image} />
-      <BlogCardTag tag={tag} />
-      <BlogCardTitle title={title} />
-      <BlogCardInfo info={{ creationDate, author, comments }} />
-      <BlogCardDesc desc={description} />
-      <BlogCardButton />
+    <div
+      className={`h-fit w-full sm:w-full flex flex-col items-start gap-[16px] ${
+        isSmall && "gap-[8px]"
+      }`}
+    >
+      <BlogCardImage image={image} isSmall={isSmall} />
+      <BlogCardTag tag={tag} isSmall={isSmall} />
+      <BlogCardTitle title={title} isSmall={isSmall} />
+      {!isSmall && <BlogCardInfo info={{ creationDate, author, comments }} />}
+      {!isSmall && <BlogCardDesc desc={description} />}
+      {!isSmall && <BlogCardButton />}
     </div>
   );
 }
@@ -36,10 +48,21 @@ function shortenText(text: string, maxLength: number) {
   return shortenedText;
 }
 
-function BlogCardImage({ image }: { image: StaticImageData }) {
+function BlogCardImage({
+  image,
+  isSmall
+}: {
+  image: StaticImageData;
+  isSmall: boolean;
+}) {
   return (
     <Image
-      className={`[object-fit:cover]    w-[360px] sm:w-full    h-[540px] sm:h-[64vw] md:h-[42vw]`}
+      className={`[object-fit:cover] w-full    ${
+        isSmall
+          ? "h-[32vw] sm:h-[32vw] md:h-[32vw]"
+          : "h-[540px] sm:h-[64vw] md:h-[42vw]"
+      }
+              `}
       alt="blog image"
       src={"/" + image.src}
       width={image.width}
@@ -47,24 +70,33 @@ function BlogCardImage({ image }: { image: StaticImageData }) {
     />
   );
 }
-function BlogCardTag({ tag }: { tag: string }) {
+function BlogCardTag({ tag, isSmall }: { tag: string; isSmall: boolean }) {
   return (
     <div
-      className={`w-full flex justify-center mt-[24px] 
-        [letter-spacing:1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] [font-family:'Roboto_Condensed',sans-serif] 
-        transition duraiton-150`}
+      className={`w-full flex justify-${isSmall ? "start" : "center"} mt-[24px] 
+        tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] [font-family:'Roboto_Condensed',sans-serif] 
+        transition duration-150 
+        ${isSmall && "mt-[8px] text-[14px] tracking-[0.8px]"}`}
     >
       {tag.toLocaleUpperCase()}
     </div>
   );
 }
 
-function BlogCardTitle({ title }: { title: string }) {
+function BlogCardTitle({
+  title,
+  isSmall
+}: {
+  title: string;
+  isSmall: boolean;
+}) {
   return (
     <Link
       href=""
-      className={`text-[rgb(54,57,64)] hover:text-[#818592] text-[20px] font-bold 
-        transition duration-150`}
+      className={`text-[rgb(54,57,64)] hover:text-[#818592] ${
+        !isSmall && "text-[20px]"
+      } ${isSmall && "text-[16px] md:text-[20px]"} font-bold 
+        transition duration-150 `}
     >
       {title}
     </Link>

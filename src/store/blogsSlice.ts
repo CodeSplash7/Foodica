@@ -53,7 +53,8 @@ export type Blog = {
   title: string;
   author: string;
   creationDate: string;
-  tag: string;
+  mainTag: string;
+  secondaryTags: string[];
   description: string;
   difficulty: RecipeDifficulty;
   servings: number;

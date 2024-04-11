@@ -7,35 +7,55 @@ import { Blog, setCurrentBlogPage, setPagesCount } from "@/store/blogsSlice";
 import { useEffect } from "react";
 
 type BlogListProps = {
+  oneDivisionForAll: boolean;
   currentDivision: number;
   tag?: string;
-  keywords?: string;
+  keyword?: string;
 };
 
 const blogPageSize = 4;
 export default function BlogList({
+  oneDivisionForAll,
   currentDivision,
   tag,
-  keywords
+  keyword
 }: BlogListProps) {
   const dispatch = useAppDispatch();
   const blogs = useAppSelector((state) => state.blogs.blogs);
+  let selectedBlogs: Blog[] = [];
 
-  let selectedBlogs: Blog[];
-  if (tag) {
-    selectedBlogs = blogs.filter((blog) => blog.tag === tag);
+  if (blogs.length > 0) {
+    if (tag) {
+      selectedBlogs = blogs.filter(
+        (blog) => blog.mainTag.toLowerCase() === tag.toLowerCase()
+      );
+    }
+    if (keyword) {
+      selectedBlogs = (
+        selectedBlogs.length > 0 ? selectedBlogs : tag ? [] : blogs
+      ).filter((blog) => {
+        const allValuesString = Object.values(blog).join(" ").toLowerCase();
+        if (allValuesString.includes(keyword.toLowerCase())) return true;
+      });
+    }
+    if (!tag && !keyword) {
+      selectedBlogs = blogs;
+    }
   }
-  if (keywords) {
-    selectedBlogs = blogs.filter(() => {});
-  }
-  if (!tag && !keywords) {
-    selectedBlogs = blogs;
-  }
-  const pageBlogs = getNthDivision(blogs, currentDivision || 1);
+  const pageBlogs = getNthDivision(
+    selectedBlogs,
+    currentDivision || 1,
+    oneDivisionForAll ? 9999 : blogPageSize
+  );
 
   useEffect(() => {
     dispatch(setCurrentBlogPage(currentDivision));
-    dispatch(setPagesCount(getDivisions(blogs).length));
+    dispatch(
+      setPagesCount(
+        getDivisions(selectedBlogs, oneDivisionForAll ? 9999 : blogPageSize)
+          .length
+      )
+    );
   }, [blogs]);
 
   if (pageBlogs)
@@ -43,25 +63,32 @@ export default function BlogList({
       <>
         <div className={`flex flex-[2] flex-col gap-[32px]`}>
           <div
-            className={`[letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
-          >
-            LATEST POSTS
-          </div>
-          <div
-            className={`flex-[2] gap-y-[72px] gap-x-[3vw] h-fit grid grid-cols-1 sm:grid-cols-2`}
+            className={`flex-[2] grid h-fit gap-x-[3vw] ${
+              !oneDivisionForAll && "gap-y-[72px] grid-cols-1 sm:grid-cols-2 "
+            } ${
+              oneDivisionForAll && "gap-y-[24px] sm:grid-cols-3 grid-cols-2"
+            }`}
           >
             {pageBlogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog}></BlogCard>
+              <BlogCard
+                key={blog.id}
+                blog={blog}
+                isSmall={oneDivisionForAll}
+              ></BlogCard>
             ))}
           </div>
-          <Pagination />
+          {!oneDivisionForAll && <Pagination />}
         </div>
       </>
     );
 }
 
-function getNthDivision<T extends any[]>(array: T, nthDivision: number) {
-  const dividedArray = getDivisions(array);
+function getNthDivision<T extends any[]>(
+  array: T,
+  nthDivision: number,
+  divisionSize: number
+) {
+  const dividedArray = getDivisions(array, divisionSize);
   if (nthDivision > 0 && nthDivision <= dividedArray.length) {
     return dividedArray[nthDivision - 1] as T;
   } else {
@@ -69,10 +96,10 @@ function getNthDivision<T extends any[]>(array: T, nthDivision: number) {
   }
 }
 
-export function getDivisions(array: any[]) {
+export function getDivisions(array: any[], divisionSize: number) {
   let dividedArray = [];
-  for (let i = 0; i < array.length; i += blogPageSize) {
-    dividedArray.push(array.slice(i, i + blogPageSize));
+  for (let i = 0; i < array.length; i += divisionSize) {
+    dividedArray.push(array.slice(i, i + divisionSize));
   }
   return dividedArray;
 }

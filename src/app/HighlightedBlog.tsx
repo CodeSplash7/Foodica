@@ -24,7 +24,7 @@ function BlogIntroduction({ blog }: { blog: Blog }) {
         href=""
         className="text-white md:text-[#9297A4] hover:text-[#aeb4be] transition duraiton-150 text-[16px] [font-family:'Roboto_Condensed',sans-serif]"
       >
-        {blog.tag}
+        {blog.mainTag}
       </Link>
       <div className="border-t border-[#00000024] w-[48px]"></div>
       <Link

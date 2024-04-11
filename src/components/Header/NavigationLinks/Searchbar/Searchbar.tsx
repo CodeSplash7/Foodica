@@ -4,9 +4,18 @@ import {
   closeSearchBar,
   setTextSearch
 } from "@/store/pageHeaderSlice";
+import { useEffect, useRef } from "react";
+
+import { useRouter } from "next/navigation";
 
 export default function Searchbar() {
   const dispatch = useAppDispatch();
+
+  const divRef = useRef<HTMLDivElement>(null);
+  useEffect(handleClickOutside, []);
+
+  const router = useRouter();
+  // State variables
   const isSearchBarOpen = useAppSelector(
     (state) => state.pageHeader.searchbar.isOpen
   );
@@ -14,14 +23,11 @@ export default function Searchbar() {
     (state) => state.pageHeader.searchbar.textSearch
   );
 
+  // Functions
   function handleOpenSearchbar() {
     return isSearchBarOpen
       ? dispatch(closeSearchBar())
       : dispatch(openSearchBar());
-  }
-
-  function handleBlur() {
-    dispatch(closeSearchBar());
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -30,10 +36,26 @@ export default function Searchbar() {
     }
   }
 
-  function searchBlogs() {}
+  function searchBlogs() {
+    router.replace(`/blogs/?s=${textSearch}`);
+  }
+
+  function handleClickOutside() {
+    const innerHandleClickOutside = (event: MouseEvent) => {
+      if (divRef.current && !divRef.current.contains(event.target as Node)) {
+        dispatch(closeSearchBar());
+      }
+    };
+
+    document.addEventListener("click", innerHandleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", innerHandleClickOutside);
+    };
+  }
 
   return (
-    <div className="flex relative group">
+    <div ref={divRef} className="flex relative group">
       <div
         className={`z-0 absolute rounded-full bg-[#818592] h-full ps-[16px] flex items-center justify-start overflow-hidden transition-all duration-200 right-0 ${
           isSearchBarOpen ? "w-[248px]" : "w-full"
@@ -45,7 +67,6 @@ export default function Searchbar() {
           value={textSearch}
           onChange={(e) => dispatch(setTextSearch(e.target.value))}
           onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
         />
       </div>
       <svg

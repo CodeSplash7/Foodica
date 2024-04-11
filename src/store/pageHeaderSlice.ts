@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { fetchTags } from "./tagsSlice";
 
 export type LetterSymbol = "F" | "O1" | "O2" | "D" | "I" | "C" | "A";
 type LogoLetter = {
@@ -59,13 +60,10 @@ const initialState: pageHeaderState = {
         href: "",
         label: "RECIPE INDEX",
         isOpen: false,
-        links: [5, 6, 7],
+        links: [],
         isContained: false
       },
-      { id: 4, href: "", label: "CONTACT", isContained: false },
-      { id: 5, href: "", label: "ONE", isContained: true },
-      { id: 6, href: "", label: "TWO", isContained: true },
-      { id: 7, href: "", label: "THREE", isContained: true }
+      { id: 4, href: "", label: "CONTACT", isContained: false }
     ]
   },
   logo: {
@@ -179,6 +177,24 @@ export const pageHeaderSlice = createSlice({
     setTextSearch(state, action: PayloadAction<string>) {
       state.searchbar.textSearch = action.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTags.fulfilled, (state, action) => {
+      const recipeIndexLink = state.navigationMenu.links.find(
+        (l) => l.id === 3
+      );
+      const newLinks: Link[] = action.payload.map((l: string) => {
+        let newLink: Link = {
+          id: Number(generateNumericId()),
+          href: `blogs?t=${l.toLowerCase()}`,
+          label: l,
+          isContained: true
+        };
+        return newLink;
+      });
+      recipeIndexLink!.links = newLinks.map((l) => l.id);
+      state.navigationMenu.links = state.navigationMenu.links.concat(newLinks);
+    });
   }
 });
 
@@ -194,3 +210,11 @@ export const {
   setTextSearch
 } = pageHeaderSlice.actions;
 export const pageHeaderReducer = pageHeaderSlice.reducer;
+
+function generateNumericId(): string {
+  let result = "";
+  for (let i = 0; i < 10; i++) {
+    result += Math.floor(Math.random() * 10); // Generates random number between 0 and 9
+  }
+  return result;
+}
