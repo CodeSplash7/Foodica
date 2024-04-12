@@ -13,6 +13,10 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 
 // the button that opens the menu (includes the menu too)
 export default function BurgerMenu() {
+  // hooks
+  const dispatch = useAppDispatch();
+
+  // selectors
   const isOpen = useAppSelector(
     (state) => state.pageHeader.navigationMenu.isBurgerMenuOpen
   );
@@ -21,11 +25,10 @@ export default function BurgerMenu() {
       state.pageHeader.navigationMenu.links.find((l) => l.id === 3)?.links!
         .length
   );
-  const dispatch = useAppDispatch();
-
   const links = useAppSelector(
     (state) => state.pageHeader.navigationMenu.links
   );
+  
   const mainLinks = links.filter((link) => !link.isContained);
 
   function handleOpen(open: boolean) {

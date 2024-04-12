@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header/Header";
-import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer/Footer";
 
 export default async function BlogsPageLayout({
   children
@@ -17,6 +17,7 @@ export default async function BlogsPageLayout({
       >
         {children}
       </div>
+      <Footer />
     </div>
   );
 }
