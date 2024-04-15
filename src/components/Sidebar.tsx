@@ -16,7 +16,7 @@ import { useAppSelector } from "@/store/store";
 
 export default function Sidebar() {
   return (
-    <div className={`flex-1 flex flex-col gap-[64px]`}>
+    <div className={`flex flex-col flex-1 gap-[64px] w-full md:w-[10px]`}>
       <AboutMeSection />
       <SectionDivider />
       <FollowMeSection />
@@ -32,9 +32,9 @@ function SectionDivider() {
 
 function AboutMeSection() {
   return (
-    <div className={`flex flex-col gap-[16px]`}>
+    <div className={`flex flex-col gap-[16px] w-full`}>
       <div
-        className={`[letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+        className={`w-full [letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
       >
         ABOUT ME
       </div>
@@ -43,8 +43,11 @@ function AboutMeSection() {
         src="/about-me-image.png"
         width={400}
         height={400}
+        className={`w-full`}
       />
-      <div className={`text-[#444444] text-[16px] [letter-spacing:.3px]`}>
+      <div
+        className={`text-[#444444] text-[16px] [letter-spacing:.3px] w-full`}
+      >
         Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam quis risus
         eget urna mollis ornare vel eu leo. Morbi leo risus, porta ac
         consectetur ac, vestibulum at eros.
@@ -56,10 +59,12 @@ function AboutMeSection() {
 function FollowMeSection() {
   return (
     <div className={`flex flex-wrap flex-col gap-[16px]`}>
-      <div className={`[letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}>
+      <div
+        className={`[letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+      >
         FOLLOW ME
       </div>
-      <div className={`flex gap-[16px]`}>
+      <div className={`flex flex-wrap gap-[16px]`}>
         <Link href="https://www.facebook.com/profile.php?id=100058719204557">
           <FacebookIcon w="36" />
         </Link>
@@ -84,7 +89,9 @@ function RecentBlogsSection({ count }: { count: number }) {
   const recentBlogs = getRecentBlogs(count);
   return (
     <div className={`gap-[16px] flex flex-col`}>
-      <div className={` [letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}>
+      <div
+        className={` [letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+      >
         RECENT POSTS
       </div>
       <div className={`gap-[24px] h-fit flex flex-col`}>
@@ -98,10 +105,14 @@ function RecentBlogsSection({ count }: { count: number }) {
               height={blog.image.height}
             />
             <div className={`flex flex-col`}>
-              <div className={`hover:text-[#818592] transition duration-150 font-bold [line-height:1.3] text-[16px]`}>
+              <div
+                className={`hover:text-[#818592] transition duration-150 font-bold [line-height:1.3] text-[16px]`}
+              >
                 {blog.title}
               </div>
-              <div className={`text-[14px] font-thin [letter-spacing:.5px] text-[#acacac]`}>
+              <div
+                className={`text-[14px] font-thin [letter-spacing:.5px] text-[#acacac]`}
+              >
                 {formatCreationDate(blog.creationDate)}
               </div>
             </div>

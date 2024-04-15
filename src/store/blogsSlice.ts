@@ -69,6 +69,7 @@ export type Blog = {
 
 type BlogsState = {
   blogs: Blog[];
+  randomBlog: Blog | null;
   loading: boolean;
   error: null | string;
   currentBlogPage: number;
@@ -79,6 +80,7 @@ const initialState: BlogsState = {
   currentBlogPage: 0,
   pagesCount: 0,
   blogs: [],
+  randomBlog: null,
   loading: false,
   error: null
 };
@@ -103,6 +105,8 @@ export const blogsSlice = createSlice({
       .addCase(fetchBlogs.fulfilled, (state, action) => {
         state.loading = false;
         state.blogs = action.payload;
+        state.randomBlog =
+          state.blogs[Math.floor(Math.random() * state.blogs.length)];
       })
       .addCase(fetchBlogs.rejected, (state, action) => {
         state.loading = false;

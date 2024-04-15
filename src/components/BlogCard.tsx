@@ -5,6 +5,7 @@ import { type StaticImageData } from "next/image";
 import { type Blog, type BlogComment } from "@/store/blogsSlice";
 
 import { formatCreationDate } from "@/app/HighlightedBlog";
+import ClickableTag from "./ClickableTag";
 
 type BlogCardProps = {
   blog: Blog;
@@ -23,7 +24,7 @@ export default function BlogCard({ blog, isSmall }: BlogCardProps) {
   } = blog;
   return (
     <div
-      className={`h-fit w-full sm:w-full flex flex-col items-start gap-[16px] ${
+      className={`h-fit w-full flex flex-col items-start gap-[16px] ${
         isSmall && "gap-[8px]"
       }`}
     >
@@ -72,14 +73,13 @@ function BlogCardImage({
 }
 function BlogCardTag({ tag, isSmall }: { tag: string; isSmall: boolean }) {
   return (
-    <div
+    <ClickableTag
+      tagName={tag}
       className={`w-full flex justify-${isSmall ? "start" : "center"} mt-[24px] 
-        tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] [font-family:'Roboto_Condensed',sans-serif] 
-        transition duration-150 
-        ${isSmall && "mt-[8px] text-[14px] tracking-[0.8px]"}`}
-    >
-      {tag.toLocaleUpperCase()}
-    </div>
+                  tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] [font-family:'Roboto_Condensed',sans-serif] 
+                  transition duration-150 
+                ${isSmall && "mt-[8px] text-[14px] tracking-[0.8px]"}`}
+    />
   );
 }
 
@@ -93,7 +93,7 @@ function BlogCardTitle({
   return (
     <Link
       href=""
-      className={`text-[rgb(54,57,64)] hover:text-[#818592] ${
+      className={`text-[rgb(54,57,64)] hover:text-[#818592] w-full ${
         !isSmall && "text-[20px]"
       } ${isSmall && "text-[16px] md:text-[20px]"} font-bold 
         transition duration-150 `}
@@ -111,7 +111,7 @@ function BlogCardInfo({
   const { creationDate, author, comments } = info;
   return (
     <div
-      className={`flex flex-wrap gap-[8px] items-center 
+      className={`flex flex-wrap gap-[8px] items-center w-full
         text-[12px] sm:text-[16px]`}
     >
       <div className="text-[#999999]">{formatCreationDate(creationDate)}</div>
@@ -130,7 +130,7 @@ function BlogCardInfo({
 function BlogCardDesc({ desc }: { desc: string }) {
   return (
     <div
-      className={`text-[16px] text-[#4c4c4c] [line-height:28.8px] [text-spacing:.7px]`}
+      className={`w-full text-[16px] text-[#4c4c4c] [line-height:28.8px] [text-spacing:.7px]`}
     >
       {shortenText(desc, 56)}
     </div>

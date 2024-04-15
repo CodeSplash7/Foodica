@@ -47,7 +47,7 @@ function PaginationPreviosButton() {
     (state) => state.blogs.currentBlogPage
   );
   const destinatedBlogPage = currentBlogPage - 1;
-  const urlDestination = `/blogs/${destinatedBlogPage}`;
+  const urlDestination = `/blogs?p=${destinatedBlogPage}`;
   return (
     <Link
       href={urlDestination}
@@ -72,7 +72,7 @@ function PaginationNextButton() {
     (state) => state.blogs.currentBlogPage
   );
   const destinatedBlogPage = currentBlogPage + 1;
-  const urlDestination = `/blogs/${destinatedBlogPage}`;
+  const urlDestination = `/blogs?p=${destinatedBlogPage}`;
   const pagesCount = useAppSelector((state) => state.blogs.pagesCount);
 
   return (
@@ -102,7 +102,7 @@ function PaginationButton({
 }) {
   return (
     <Link
-      href={`/blogs/${String(btn)}`}
+      href={`/blogs?p=${String(btn)}`}
       className={`bg-white h-fit
                     border ${
                       isActive ? "border-[#c7c9cf]" : "border-transparent"

@@ -1,31 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import { type Blog } from "@/store/blogsSlice";
+import ClickableTag from "@/components/ClickableTag";
+import { useAppSelector } from "@/store/store";
 
-type HighlightedBlogProps = {
-  blog: Blog;
-};
-
-export default function HighlightedBlog({ blog }: HighlightedBlogProps) {
-  return (
-    <>
-      <div className="w-full flex justify-end h-fit relative mt-[64px]">
-        <OverlayImage />
-        <BackgroundImage src={blog.image.src} />
-        <BlogIntroduction blog={blog} />
-      </div>
-    </>
-  );
+export default function HighlightedBlog() {
+  const randomBlog = useAppSelector((state) => state.blogs.randomBlog);
+  if (randomBlog)
+    return (
+      <>
+        <div className={`relative w-full h-fit flex justify-end mt-[64px]`}>
+          <OverlayImage />
+          <BackgroundImage src={randomBlog.image.src} />
+          <BlogIntroduction blog={randomBlog} />
+        </div>
+      </>
+    );
 }
 
 function BlogIntroduction({ blog }: { blog: Blog }) {
   return (
     <div className="py-[96px] px-[24px] h-fit z-20 relative w-full md:w-1/2 flex flex-col items-center justify-center gap-[24px]">
-      <Link
-        href=""
-        className="text-white md:text-[#9297A4] hover:text-[#aeb4be] transition duraiton-150 text-[16px] [font-family:'Roboto_Condensed',sans-serif]"
-      >
-        {blog.mainTag}
-      </Link>
+      <ClickableTag
+        tagName={blog.mainTag}
+        className={`text-white md:text-[#9297A4] hover:text-[#aeb4be] transition duraiton-150 text-[16px] [font-family:'Roboto_Condensed',sans-serif]`}
+      />
       <div className="border-t border-[#00000024] w-[48px]"></div>
       <Link
         href=""
