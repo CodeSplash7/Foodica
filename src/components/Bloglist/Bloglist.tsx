@@ -1,92 +1,45 @@
 "use client";
 
-import BlogCard from "@/components/BlogCard";
-import Pagination from "./Pagination";
-import { useAppDispatch, useAppSelector } from "@/store/store";
-import { Blog, setCurrentBlogPage, setPagesCount } from "@/store/blogsSlice";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
+import { type Blog } from "@/utils/allSides/blogsFunctions";
+
+import { useSearchParams } from "next/navigation";
+import {
+  filterSelectedBlogs,
+  getNthDivision
+} from "@/utils/allSides/blogsFunctions";
+
+const BlogCard = dynamic(() => import("@/components/BlogCard"));
+const Pagination = dynamic(() => import("./Pagination/Pagination"));
 
 type BlogListProps = {
-  oneDivisionForAll: boolean;
-  currentDivision: number;
-  tag?: string;
-  keyword?: string;
+  blogs: Blog[];
   year?: string;
   month?: string;
   day?: string;
 };
 
 const blogPageSize = 4;
-export default function BlogList({
-  oneDivisionForAll,
-  currentDivision,
-  tag,
-  keyword,
-  year,
-  month,
-  day
-}: BlogListProps) {
-  const dispatch = useAppDispatch();
-  const blogs = useAppSelector((state) => state.blogs.blogs);
+export default function BlogList({ blogs, year, month, day }: BlogListProps) {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("s");
+  const tag = searchParams.get("t");
+  const page = searchParams.get("p");
+
+  const currentDivision = Number(page) || 1;
+  const oneDivisionForAll = page === null ? true : false;
+
   let selectedBlogs: Blog[] = [];
 
-  console.log(tag, keyword, year, month, day);
-
   if (blogs.length > 0) {
-    selectedBlogs = blogs.filter((blog) => {
-      const tagFilter = tag
-        ? blog.mainTag.toLowerCase() === tag.toLowerCase()
-        : true;
-      const keywordFilter = keyword
-        ? Object.values(blog)
-            .join(" ")
-            .toLowerCase()
-            .includes(keyword.toLowerCase())
-        : true;
-      const yearFilter = year
-        ? new Date(blog.creationDate).getFullYear() === Number(year)
-        : true;
-      const monthFilter = month
-        ? new Date(blog.creationDate).getMonth() === Number(month) - 1
-        : true;
-      const dayFilter = day
-        ? new Date(blog.creationDate).getDate() === Number(day)
-        : true;
-
-      return tagFilter && keywordFilter && yearFilter && monthFilter && dayFilter;
-    });
-    // if (tag) {
-    //   selectedBlogs = blogs.filter(
-    //     (blog) => blog.mainTag.toLowerCase() === tag.toLowerCase()
-    //   );
-    // }
-    // if (keyword) {
-    //   selectedBlogs = (
-    //     selectedBlogs.length > 0 ? selectedBlogs : tag ? [] : blogs
-    //   ).filter((blog) => {
-    //     const allValuesString = Object.values(blog).join(" ").toLowerCase();
-    //     if (allValuesString.includes(keyword.toLowerCase())) return true;
-    //   });
-    // }
-    // if (!tag && !keyword) {
-    //   selectedBlogs = blogs;
-    // }
+    selectedBlogs = filterSelectedBlogs(blogs, tag, search, year, month, day);
   }
+
   const pageBlogs = getNthDivision(
     selectedBlogs,
     currentDivision || 1,
     oneDivisionForAll ? 9999 : blogPageSize
   );
-
-  useEffect(() => {
-    dispatch(setCurrentBlogPage(currentDivision));
-    dispatch(
-      setPagesCount(
-        getDivisions(selectedBlogs, oneDivisionForAll ? 9999 : blogPageSize)
-          .length
-      )
-    );
-  }, [blogs]);
 
   if (pageBlogs)
     return (
@@ -107,29 +60,10 @@ export default function BlogList({
               ></BlogCard>
             ))}
           </div>
-          {!oneDivisionForAll && <Pagination />}
+          {!oneDivisionForAll && (
+            <Pagination currentBlogPage={currentDivision} allBlogs={blogs} />
+          )}
         </div>
       </>
     );
-}
-
-function getNthDivision<T extends any[]>(
-  array: T,
-  nthDivision: number,
-  divisionSize: number
-) {
-  const dividedArray = getDivisions(array, divisionSize);
-  if (nthDivision > 0 && nthDivision <= dividedArray.length) {
-    return dividedArray[nthDivision - 1] as T;
-  } else {
-    return null;
-  }
-}
-
-export function getDivisions(array: any[], divisionSize: number) {
-  let dividedArray = [];
-  for (let i = 0; i < array.length; i += divisionSize) {
-    dividedArray.push(array.slice(i, i + divisionSize));
-  }
-  return dividedArray;
 }

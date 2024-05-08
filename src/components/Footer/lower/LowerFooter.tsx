@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { useAppSelector } from "@/store/store";
+import { getMainLinks } from "@/utils/allSides/linksFunctions";
+import { Roboto_Condensed } from "next/font/google";
+const roboto_condensed = Roboto_Condensed({
+  weight: "400",
+  subsets: ["latin"]
+});
 
 export default function LowerFooter() {
-  const links = useAppSelector((state) =>
-    state.pageHeader.navigationMenu.links.filter((link) => !link.isContained)
-  );
-
+  const links = getMainLinks();
   return (
     <div
       className={`flex justify-center gap-[32px] 
@@ -19,11 +21,11 @@ export default function LowerFooter() {
         <Link
           key={link.id}
           className={`duration-150 transition hover:text-slate-500 
-                      [font-family:'Roboto_Condensed',sans-serif] text-slate-700 
+                      ${roboto_condensed.className} text-slate-700 
                       z-20 `}
           href={link.href}
         >
-          {link.label}
+          {link.label.toUpperCase()}
         </Link>
       ))}
     </div>

@@ -1,4 +1,3 @@
-"use client";
 import "./styles.css";
 import ReduxProvider from "@/store/redux-provider";
 

@@ -1,11 +1,46 @@
+"use client";
+//! --- blogs/[]/[]/[] ----
+
+// * ---<| IMPORT |>-----------------------------------------------------------------------
+//
+//
+// custom modules
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-
-export default async function BlogPage({
+// hleper functions
+import { checkForBlogName } from "../../page";
+// redux
+import { useAppDispatch, useAppSelector } from "@/store/store";
+//
+//
+// * ---|> IMPORT <| -----------------------------------------------------------------------------------------------------
+//
+//
+//
+//
+//
+// * ---<| page component <<<BLOG PAGE>>> |>-----------------------------------------------------
+//
+//
+export default function BlogPage({
   params
 }: {
   params: { year: string; month: string; day: string };
 }) {
+  //
+  //
+  // ? ---<< component code >>----------------------------------
+  //
+  checkForBlogName({
+    possibleName: params.day,
+    appDispatch: useAppDispatch,
+    appSelector: useAppSelector
+  });
+  //
+  // ? --->> component code <<--------------------------------------
+  //
+  //
+  // ? ---<< return statement >>-----------------------------------------------------------
   return (
     <div className={`flex flex-col gap-[32px] w-full`}>
       <div
@@ -14,8 +49,7 @@ export default async function BlogPage({
         POSTS OF{" "}
         <span className="underline">
           {params.year}{" "}
-          {new Date(params.month).toLocaleString("en", { month: "long" })}
-          {" "}
+          {new Date(params.month).toLocaleString("en", { month: "long" })}{" "}
           {params.day}
         </span>
       </div>
@@ -35,3 +69,4 @@ export default async function BlogPage({
     </div>
   );
 }
+// ? --->> return statement <<--------------------------------------------------------------------

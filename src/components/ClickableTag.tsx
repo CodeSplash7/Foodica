@@ -1,15 +1,16 @@
+import { Blog } from "@/store/blogsSlice";
 import Link from "next/link";
 
 export default function ClickableTag({
-  tagName,
+  blog,
   className
 }: {
-  tagName: string;
+  blog: Blog;
   className?: string;
 }) {
   return (
-    <Link href={`/blogs?t=${tagName.toLowerCase()}`} className={className}>
-      {tagName}
+    <Link href={`/blogs?t=${blog.mainTag.toLowerCase()}`} className={className}>
+      {blog.mainTag}
     </Link>
   );
 }

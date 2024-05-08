@@ -1,3 +1,5 @@
+"use client"
+
 import { useAppSelector, useAppDispatch } from "@/store/store";
 import {
   openSearchBar,

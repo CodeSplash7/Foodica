@@ -1,11 +1,17 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { type StaticImageData } from "next/image";
-import { type Blog, type BlogComment } from "@/store/blogsSlice";
+import { type Blog, type BlogComment } from "@/utils/allSides/blogsFunctions";
 
-import { formatCreationDate } from "@/app/HighlightedBlog";
 import ClickableTag from "./ClickableTag";
+import ClickableTitle from "./ClickableTitle";
+import { formatCreationDate, shortenText } from "@/utils/general-utils";
+import { Roboto_Condensed } from "next/font/google";
+
+const roboto_condensed = Roboto_Condensed({
+  weight: ["700", "400"],
+  subsets: ["latin"]
+});
 
 type BlogCardProps = {
   blog: Blog;
@@ -13,15 +19,7 @@ type BlogCardProps = {
 };
 
 export default function BlogCard({ blog, isSmall }: BlogCardProps) {
-  const {
-    image,
-    mainTag: tag,
-    title,
-    creationDate,
-    author,
-    comments,
-    description
-  } = blog;
+  const { image, creationDate, author, comments, description } = blog;
   return (
     <div
       className={`h-fit w-full flex flex-col items-start gap-[16px] ${
@@ -29,24 +27,13 @@ export default function BlogCard({ blog, isSmall }: BlogCardProps) {
       }`}
     >
       <BlogCardImage image={image} isSmall={isSmall} />
-      <BlogCardTag tag={tag} isSmall={isSmall} />
-      <BlogCardTitle title={title} isSmall={isSmall} />
+      <BlogCardTag blog={blog} isSmall={isSmall} />
+      <BlogCardTitle blog={blog} isSmall={isSmall} />
       {!isSmall && <BlogCardInfo info={{ creationDate, author, comments }} />}
       {!isSmall && <BlogCardDesc desc={description} />}
-      {!isSmall && <BlogCardButton />}
+      {!isSmall && <BlogCardButton blog={blog} />}
     </div>
   );
-}
-
-function shortenText(text: string, maxLength: number) {
-  const words = text.split(" ");
-
-  if (words.length <= maxLength) {
-    return text;
-  }
-
-  const shortenedText = words.slice(0, maxLength).join(" ") + " [...]";
-  return shortenedText;
 }
 
 function BlogCardImage({
@@ -65,41 +52,35 @@ function BlogCardImage({
       }
               `}
       alt="blog image"
-      src={"/" + image.src}
+      src={"/images/" + image.src}
       width={image.width}
       height={image.height}
     />
   );
 }
-function BlogCardTag({ tag, isSmall }: { tag: string; isSmall: boolean }) {
+function BlogCardTag({ blog, isSmall }: { blog: Blog; isSmall: boolean }) {
   return (
     <ClickableTag
-      tagName={tag}
+      blog={blog}
       className={`w-full flex justify-${isSmall ? "start" : "center"} mt-[24px] 
-                  tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] [font-family:'Roboto_Condensed',sans-serif] 
+                  uppercase tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] ${
+                    roboto_condensed.className
+                  }
                   transition duration-150 
                 ${isSmall && "mt-[8px] text-[14px] tracking-[0.8px]"}`}
     />
   );
 }
 
-function BlogCardTitle({
-  title,
-  isSmall
-}: {
-  title: string;
-  isSmall: boolean;
-}) {
+function BlogCardTitle({ blog, isSmall }: { blog: Blog; isSmall: boolean }) {
   return (
-    <Link
-      href=""
+    <ClickableTitle
       className={`text-[rgb(54,57,64)] hover:text-[#818592] w-full ${
         !isSmall && "text-[20px]"
       } ${isSmall && "text-[16px] md:text-[20px]"} font-bold 
-        transition duration-150 `}
-    >
-      {title}
-    </Link>
+      transition duration-150 `}
+      blog={blog}
+    />
   );
 }
 
@@ -137,16 +118,16 @@ function BlogCardDesc({ desc }: { desc: string }) {
   );
 }
 
-function BlogCardButton() {
+function BlogCardButton({ blog }: { blog: Blog }) {
   return (
-    <div
-      className={`[letter-spacing:2px] [font-family:'Roboto_Condensed',sans-serif] text-[#363940] hover:text-white text-[14px] font-bold
+    <ClickableTitle
+      blog={blog}
+      label={"READ MORE"}
+      className={`[letter-spacing:2px] ${roboto_condensed.className} text-[#363940] hover:text-white text-[14px] font-bold
         border-2 hover:border-transparent rounded-sm
       bg-white hover:bg-[#363940]
-        transition duration-150 
+        transition duration-150
         px-[32px] py-[12px]`}
-    >
-      READ MORE
-    </div>
+    />
   );
 }

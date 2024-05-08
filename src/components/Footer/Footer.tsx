@@ -1,5 +1,3 @@
-"use client";
-
 import LowerFooter from "./lower/LowerFooter";
 import UpperFooter from "./upper/UpperFooter";
 

@@ -1,7 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { Roboto_Condensed } from "next/font/google";
+
+const roboto_condensed = Roboto_Condensed({
+  weight: "600",
+  subsets: ["latin"]
+});
 
 import {
   FacebookIcon,
@@ -11,8 +15,9 @@ import {
   YoutubeIcon
 } from "./Icons";
 
-import { formatCreationDate } from "@/app/HighlightedBlog";
-import { useAppSelector } from "@/store/store";
+import ClickableTitle from "./ClickableTitle";
+import { getRecentBlogs } from "@/utils/serverside/blogsFunctions";
+import { formatCreationDate } from "@/utils/general-utils";
 
 export default function Sidebar() {
   return (
@@ -34,7 +39,7 @@ function AboutMeSection() {
   return (
     <div className={`flex flex-col gap-[16px] w-full`}>
       <div
-        className={`w-full [letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+        className={`w-full [letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
       >
         ABOUT ME
       </div>
@@ -60,7 +65,7 @@ function FollowMeSection() {
   return (
     <div className={`flex flex-wrap flex-col gap-[16px]`}>
       <div
-        className={`[letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+        className={`[letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
       >
         FOLLOW ME
       </div>
@@ -90,13 +95,13 @@ function RecentBlogsSection({ count }: { count: number }) {
   return (
     <div className={`gap-[16px] flex flex-col`}>
       <div
-        className={` [letter-spacing:1.2px] [font-family:'Roboto_Condensed',sans-serif] text-[18px] font-bold`}
+        className={` [letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
       >
         RECENT POSTS
       </div>
       <div className={`gap-[24px] h-fit flex flex-col`}>
         {recentBlogs.map((blog) => (
-          <div key={blog.id} className="flex gap-[16px]">
+          <ClickableTitle blog={blog} key={blog.id} className="flex gap-[16px]">
             <Image
               className={`w-[72px] h-[48px] [object-fit:cover`}
               alt="blog image"
@@ -116,20 +121,9 @@ function RecentBlogsSection({ count }: { count: number }) {
                 {formatCreationDate(blog.creationDate)}
               </div>
             </div>
-          </div>
+          </ClickableTitle>
         ))}
       </div>
     </div>
   );
-}
-
-function getRecentBlogs(count: number) {
-  const blogs = useAppSelector((state) => state.blogs.blogs);
-  const sortedBlogs = [...blogs].sort((a, b) => {
-    const dateA = new Date(a.creationDate).getTime();
-    const dateB = new Date(b.creationDate).getTime();
-    return dateB - dateA;
-  });
-
-  return sortedBlogs.slice(0, count);
 }

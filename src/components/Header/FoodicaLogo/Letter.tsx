@@ -1,57 +1,41 @@
-import { useState, useEffect } from "react";
-
-import { useAppSelector } from "@/store/store";
 import { useAppDispatch } from "@/store/store";
+import {
+  LogoLetterIdentity,
+  hoverLetterWithIndex,
+  unhoverLetterWithIndex
+} from "@/store/pageHeaderSlice";
+import { getAllLetters, getLetter } from "@/utils/serverside/logoFunctions";
 
-import { useNormalLetter } from "@/store/pageHeaderSlice";
-import { useHoverLetter } from "@/store/pageHeaderSlice";
+const letterHoverOffset = 4;
 
-import { LetterSymbol } from "@/store/pageHeaderSlice";
+let LETTER_SIZE = 0.7;
 
 export default function Letter({
-  letterSymbol
+  letterIdentityState
 }: {
-  letterSymbol: LetterSymbol;
+  letterIdentityState: LogoLetterIdentity;
 }) {
-  const [viewportWidth, setViewportWidth] = useState<number>(0);
-  let LETTER_SIZE = 0.7;
-
-  if (viewportWidth && viewportWidth < 1200) {
-    LETTER_SIZE = 0.6;
-  }
-  if (viewportWidth && viewportWidth < 800) {
-    LETTER_SIZE = 0.5;
-  }
-  if (viewportWidth && viewportWidth < 400) {
-    LETTER_SIZE = 0.4;
-  }
-
-  useEffect(() => {
-    setViewportWidth(window.innerWidth);
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const letters = useAppSelector((state) => state.pageHeader.logo.letters);
+  const letter = getLetter(letterIdentityState.id);
+  const allLetters = getAllLetters();
   const dispatch = useAppDispatch();
 
-  const targetedLetter = letters[letterSymbol];
-  const { pathData, width, height, fill, activtesLetter } = targetedLetter;
+  let targetedLetterIndex = letterIdentityState.id - letterHoverOffset;
+  if (targetedLetterIndex < 0) {
+    targetedLetterIndex += allLetters.length;
+  }
+  const targetedLetter = allLetters.find((l) => l.id === targetedLetterIndex);
+  if (!targetedLetter) return;
+
+  const { fill } = letterIdentityState;
+  const { width, height, pathData } = letter!;
   return (
     <div
-      className="group flex items-end"
+      className="group flex items-end h-[36px]"
       onMouseOver={() => {
-        dispatch(useHoverLetter(activtesLetter));
+        dispatch(hoverLetterWithIndex(targetedLetter.id));
       }}
       onMouseOut={() => {
-        dispatch(useNormalLetter(activtesLetter));
+        dispatch(unhoverLetterWithIndex(targetedLetter.id));
       }}
     >
       <svg
