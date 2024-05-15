@@ -44,7 +44,9 @@ export const post = async <T = any>(
   }
 };
 
-export default {
+const httpService = {
   get,
   post
 };
+
+export default httpService;

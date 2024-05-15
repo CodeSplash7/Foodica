@@ -1,11 +1,7 @@
 "use client";
 
-//* ---<| IMPORT |>-------------------------------------------------------------------
-// Hooks
 import { useSearchParams } from "next/navigation";
-// Types
 import { type Blog } from "@/utils/allSides/blogsFunctions";
-// Helper components
 import ClickableTag from "@/components/ClickableTag";
 import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate } from "@/utils/general-utils";
@@ -19,20 +15,9 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-//* ---<|/ IMPORT |>-------------------------------------------------------------------
-//
-//
-//
-//
-//
-//* ---<| MAIN |>----------------------------------------------------------
 export default function HighlightedBlog({ randomBlog }: { randomBlog: Blog }) {
-  //? ---< component code >------------------------
   const searchParams = useSearchParams();
   const page = searchParams.get("p");
-  //? ---</ component code >-----------------------
-  //
-  //? ---< return statement >--------------------
   if (randomBlog && page)
     return (
       <>
@@ -45,19 +30,8 @@ export default function HighlightedBlog({ randomBlog }: { randomBlog: Blog }) {
         </div>
       </>
     );
-  //? ---</ return statement >--------------------
 }
-//* ---<|/ MAIN |>----------------------------------------------------------
-//
-//
-//
-//
-//
-//* ---<| SECONDARY COMPONENTS |>-------------------------------------
-//
-//? ---< 1 - BlogIntroduction >---------------------------------
 function BlogIntroduction({ blog }: { blog: Blog }) {
-  //? ------< return statement >-----------------
   return (
     <div className="py-[96px] px-[24px] h-fit z-20 relative w-full md:w-1/2 flex flex-col items-center justify-center gap-[24px]">
       <ClickableTag
@@ -91,28 +65,13 @@ function BlogIntroduction({ blog }: { blog: Blog }) {
       />
     </div>
   );
-  //? ------</ return statement >-----------------
 }
-//? ---</ 1 - BlogIntroduction >---------------------------------
-//
-//
-//? ---< 2 - BackgroundImage >-----------------------------------
 
-//? ---</ 2 - BackgroundImage >-----------------------------------
-//
-//
-//? ---< 3 - OverlayImage >-----------------------------------
 function OverlayImage() {
-  //? ------< return statement >----------------
   return (
     <div className="z-10 absolute w-full h-full bg-black opacity-[.3] md:opacity-[1] md:bg-transparent md:[backgroundImage:linear-gradient(to_right,_transparent_20%,_#eff4f7_60%)]"></div>
   );
-  //? ------</ return statement >----------------
 }
-//? ---</ 3 - OverlayImage >-----------------------------------
-//
-//
-//? ---< 4 - AdditionalInfo >----------------------------------
 function AdditionalInfo({
   creationDate,
   comments
@@ -128,15 +87,3 @@ function AdditionalInfo({
     </div>
   );
 }
-//? ---</ 4 - AdditionalInfo >----------------------------------
-//
-//
-//* ---<|/ SECONDARY COMPONENTS |>-------------------------------------
-//
-//
-//
-//
-//
-//* ---<| Helper functions |>-------------------------------------
-
-//* ---<|/ Helper functions |>-------------------------------------

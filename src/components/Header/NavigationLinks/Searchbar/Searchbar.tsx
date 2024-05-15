@@ -14,7 +14,7 @@ export default function Searchbar() {
   const dispatch = useAppDispatch();
 
   const divRef = useRef<HTMLDivElement>(null);
-  useEffect(handleClickOutside, []);
+  useEffect(handleClickOutside, [dispatch]);
 
   const router = useRouter();
   // State variables

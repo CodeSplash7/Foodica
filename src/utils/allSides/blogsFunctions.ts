@@ -29,7 +29,7 @@ type IngredientUnit =
   | "slice"
   | "pinch";
 
-type Ingredient = {
+export type Ingredient = {
   id: number;
   unit?: IngredientUnit;
   quantity: number;

@@ -45,7 +45,7 @@ function AboutMeSection() {
       </div>
       <Image
         alt="about me image"
-        src="/about-me-image.png"
+        src="/images/about-me-image.png"
         width={400}
         height={400}
         className={`w-full`}
@@ -103,9 +103,9 @@ function RecentBlogsSection({ count }: { count: number }) {
         {recentBlogs.map((blog) => (
           <ClickableTitle blog={blog} key={blog.id} className="flex gap-[16px]">
             <Image
-              className={`w-[72px] h-[48px] [object-fit:cover`}
+              className={`w-[72px] h-[48px] [object-fit:cover]`}
               alt="blog image"
-              src={"/" + blog.image.src}
+              src={"/images/" + blog.image.src}
               width={blog.image.width}
               height={blog.image.height}
             />

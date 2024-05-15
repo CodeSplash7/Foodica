@@ -1,45 +1,16 @@
-"use client";
-//! --- blogs/[]/[] ----
-
-// * ---<| IMPORT |>-----------------------------------------------------------------------
-//
-//
-// custom modules
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-// helper functions
-import { checkForBlogName } from "../page";
-// redux
-import { useAppDispatch, useAppSelector } from "@/store/store";
-//
-//
-// * ---|> IMPORT <| -----------------------------------------------------------------------------------------------------
-//
-//
-//
-//
-//
-// * ---<| page component <<<BLOG PAGE>>> |>-----------------------------------------------------
-//
-//
+import { checkForBlogName, getBlogs } from "@/utils/serverside/blogsFunctions";
+
 export default function BlogPage({
   params
 }: {
   params: { year: string; month: string };
 }) {
-  //
-  //
-  // ? ---<< component code >>-------------------
   checkForBlogName({
-    possibleName: params.month,
-    appDispatch: useAppDispatch,
-    appSelector: useAppSelector
-  });
+    possibleName: params.month
+  })
 
-  // ? --->> component code <<--------------------------------------
-  //
-  //
-  // ? ---<< return statement >>-----------------------------------------------------------
   return (
     <div className={`flex flex-col gap-[32px] w-full`}>
       <div
@@ -55,18 +26,9 @@ export default function BlogPage({
         className={`flex flex-col md:flex-row 
                       gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
-        <BlogList
-          oneDivisionForAll={true}
-          currentDivision={1}
-          year={params.year}
-          month={params.month}
-        />
+        <BlogList blogs={getBlogs()} year={params.year} month={params.month} />
         <Sidebar />
       </div>
     </div>
   );
-  // ? --->> return statement <<--------------------------------------------------------------------
 }
-//
-//
-// * ---|> page component BLOG PAGE <|----------------------------------------------------

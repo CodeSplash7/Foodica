@@ -1,19 +1,17 @@
-import { useAppSelector } from "@/store/store";
+import { Blog } from "@/utils/allSides/blogsFunctions";
 import Image from "next/image";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export default function BlogPost() {
+export default function BlogPost({ blog }: { blog: Blog }) {
   return (
     <div className="flex-[2]">
-      <BlogThumbnail />
+      <BlogThumbnail blog={blog} />
     </div>
   );
 }
 
-function BlogThumbnail() {
-  const activeBlog = useAppSelector((state) => state.blogs.blogActive);
-  if (activeBlog)
+function BlogThumbnail({ blog }: { blog: Blog }) {
+  const activeBlog = blog;
     return (
       <Image
         className={`[object-fit:cover] w-full
@@ -25,10 +23,4 @@ function BlogThumbnail() {
         height={activeBlog.image.height}
       />
     );
-  return (
-    <Skeleton
-      className={`w-full
-                  h-[540px] sm:h-[64vw] md:h-[42vw]`}
-    />
-  );
 }

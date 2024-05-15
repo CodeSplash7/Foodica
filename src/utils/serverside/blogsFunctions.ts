@@ -3,8 +3,9 @@ import "server-only";
 import fs from "fs";
 import path from "path";
 import { Blog, getDivisions } from "../allSides/blogsFunctions";
+import { redirect } from "next/navigation";
 
-let cachedBlogs: any;
+let cachedBlogs: Blog[];
 function cacheBlogs() {
   if (!cachedBlogs) {
     const filePath = path.join(process.cwd(), "db", "db.json");
@@ -38,3 +39,47 @@ export const getPagesCount = () => {
   cacheBlogs();
   return getDivisions(cachedBlogs, 4).length;
 };
+
+export const getRelatedBlogs = (
+  irrelevanBlogId: number,
+  tag: string,
+  count: number
+) => {
+  cacheBlogs();
+  let result: Blog[] = [];
+  cachedBlogs.forEach((b) => {
+    if (result.length > 2 || b.id === irrelevanBlogId) return;
+    if (b.mainTag === tag) result.push(b);
+    if (b.mainTag === tag) console.log(b.title);
+  });
+  if (result.length < 3) {
+    console.log("HET");
+    cachedBlogs.forEach((b) => {
+      if (result.length > 2 || b.id === irrelevanBlogId) return;
+      if (b.secondaryTags.includes(tag)) result.push(b);
+    });
+  }
+  console.log(result);
+  return result;
+};
+
+export function redirectToCorrectBlog(blogSelected: Blog) {
+  const blogDate = new Date(blogSelected.creationDate);
+  redirect(
+    `/blogs/${blogDate.getFullYear()}/${
+      blogDate.getMonth() + 1
+    }/${blogDate.getDate()}/${blogSelected.title
+      .toLowerCase()
+      .split(" ")
+      .join("-")}`
+  );
+}
+
+export function checkForBlogName({ possibleName }: { possibleName: string }) {
+  const blogSelected = getBlogs().find(
+    (blog) => blog.title.toLowerCase().split(" ").join("-") === possibleName
+  );
+  if (blogSelected) {
+    redirectToCorrectBlog(blogSelected);
+  }
+}

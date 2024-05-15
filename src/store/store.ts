@@ -4,10 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 
 import { pageHeaderReducer } from "@/store/pageHeaderSlice";
+import { blogIngredientsReducer } from "./blogIngredientsSlice";
 
 export const store = configureStore({
   reducer: {
-    pageHeader: pageHeaderReducer
+    pageHeader: pageHeaderReducer,
+    blogIngredients: blogIngredientsReducer
   }
 });
 

@@ -1,16 +1,19 @@
-import { Blog } from "@/store/blogsSlice";
+import { Blog } from "@/utils/allSides/blogsFunctions";
 import Link from "next/link";
 
 export default function ClickableTag({
   blog,
-  className
+  className,
+  tag
 }: {
-  blog: Blog;
+  blog?: Blog;
+  tag?: string;
   className?: string;
 }) {
+  const tagToClick = blog ? blog.mainTag : tag!;
   return (
-    <Link href={`/blogs?t=${blog.mainTag.toLowerCase()}`} className={className}>
-      {blog.mainTag}
+    <Link href={`/blogs?t=${tagToClick.toLowerCase()}`} className={className}>
+      {tagToClick}
     </Link>
   );
 }

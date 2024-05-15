@@ -8,8 +8,12 @@ export default function Blogs() {
   const randomBlog = getRandomBlog();
   return (
     <div className={`flex flex-col gap-[32px]`}>
-      <HighlightedBlog randomBlog={randomBlog} />
-      <MessageAboveBlogs />
+      <Suspense>
+        <HighlightedBlog randomBlog={randomBlog} />
+      </Suspense>
+      <Suspense>
+        <MessageAboveBlogs />
+      </Suspense>
       <Suspense>
         <MainBlogsSection />
       </Suspense>
