@@ -52,7 +52,7 @@ function BlogCardImage({
       }
               `}
       alt="blog image"
-      src={"/images/" + image.src}
+      src={"/images/blogImages/" + image.src}
       width={image.width}
       height={image.height}
     />

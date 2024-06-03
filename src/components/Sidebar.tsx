@@ -45,7 +45,7 @@ function AboutMeSection() {
       </div>
       <Image
         alt="about me image"
-        src="/images/about-me-image.png"
+        src="/images/creator/about-me-image.png"
         width={400}
         height={400}
         className={`w-full`}
@@ -105,7 +105,7 @@ function RecentBlogsSection({ count }: { count: number }) {
             <Image
               className={`w-[72px] h-[48px] [object-fit:cover]`}
               alt="blog image"
-              src={"/images/" + blog.image.src}
+              src={"/images/blogImages/" + blog.image.src}
               width={blog.image.width}
               height={blog.image.height}
             />

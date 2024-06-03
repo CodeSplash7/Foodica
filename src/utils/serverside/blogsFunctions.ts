@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 let cachedBlogs: Blog[];
 function cacheBlogs() {
   if (!cachedBlogs) {
-    const filePath = path.join(process.cwd(), "db", "db.json");
+    const filePath = path.join(process.cwd(), "db", "blogs.json");
     const fileContents = fs.readFileSync(filePath, "utf-8");
     cachedBlogs = JSON.parse(fileContents).blogs;
   }
@@ -50,16 +50,13 @@ export const getRelatedBlogs = (
   cachedBlogs.forEach((b) => {
     if (result.length > 2 || b.id === irrelevanBlogId) return;
     if (b.mainTag === tag) result.push(b);
-    if (b.mainTag === tag) console.log(b.title);
   });
   if (result.length < 3) {
-    console.log("HET");
     cachedBlogs.forEach((b) => {
       if (result.length > 2 || b.id === irrelevanBlogId) return;
       if (b.secondaryTags.includes(tag)) result.push(b);
     });
   }
-  console.log(result);
   return result;
 };
 

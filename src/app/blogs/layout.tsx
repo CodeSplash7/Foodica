@@ -8,7 +8,7 @@ export default async function BlogsPageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`h-fit w-full`}>
+    <div className={`flex flex-col h-fit w-full gap-[32px]`}>
       <Navbar />
       <Header />
       <div
