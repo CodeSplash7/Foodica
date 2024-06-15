@@ -30,3 +30,4 @@ export const backendClient = initEdgeStoreClient({
  * This type is used to create the type-safe client for the frontend.
  */
 export type EdgeStoreRouter = typeof edgeStoreRouter;
+

@@ -7,3 +7,4 @@ const { EdgeStoreProvider, useEdgeStore } =
   createEdgeStoreProvider<EdgeStoreRouter>();
 
 export { EdgeStoreProvider, useEdgeStore };
+

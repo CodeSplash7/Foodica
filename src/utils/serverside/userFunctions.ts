@@ -1,113 +1,150 @@
 "use server";
-import "server-only";
 
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import { type ProfilePicture, type User } from "../allSides/usersFunctions";
+import { hashPassword } from "./passwordFunctions";
+import { backendClient } from "@/lib/edgestore-server";
 
 const filePath = path.join(process.cwd(), "db", "users.json");
 
-let cachedUsers: User[];
-function cacheUsers() {
-  if (!cachedUsers) {
-    const fileContents = fs.readFileSync(filePath, "utf-8");
+let cachedUsers: User[] = [];
+let usersInitialized = false;
+
+const initializeUsers = async () => {
+  if (!usersInitialized) {
+    try {
+      const fileContents = await fs.promises.readFile(filePath, "utf-8");
+      cachedUsers = JSON.parse(fileContents);
+      usersInitialized = true;
+    } catch (error) {
+      console.error("Failed to load users from file:", error);
+      cachedUsers = [];
+      usersInitialized = false;
+    }
+  }
+};
+
+const ensureUsersInitialized = async () => {
+  if (!usersInitialized) {
+    await initializeUsers();
+  }
+};
+// Function to load users from file
+async function loadUsersFromFile() {
+  let cachedUsers = [];
+  try {
+    const fileContents = await fs.promises.readFile(filePath, "utf-8"); // Use await to handle the promise
+
     cachedUsers = JSON.parse(fileContents);
+  } catch (error) {
+    console.error("Failed to load users from file:", error);
+  }
+  return cachedUsers;
+}
+// Initialize the cache on server start
+loadUsersFromFile();
+
+function setCache(data: User[]) {
+  cachedUsers = data;
+}
+
+export async function updateDb(data: User[]): Promise<void> {
+  try {
+    await fs.promises.writeFile(filePath, JSON.stringify(data, null, 2));
+    setCache(data);
+  } catch (error) {
+    console.error("Failed to update the database:", error);
   }
 }
 
-export const getUserByEmail: (
+export const getUserByEmail = async (
   email: string | undefined | null
-) => User | null = (email) => {
+): Promise<User | null> => {
+  await ensureUsersInitialized();
   if (!email) return null;
-  cacheUsers();
-  const user = cachedUsers.find((u) => u.account.email === email);
-  if (!user) return null;
-  return user;
+  return cachedUsers.find((u) => u.account.email === email) || null;
 };
 
-export const getUserByUsername: (
+export const getUserByUsername = async (
   username: string | undefined | null
-) => User | null = (username) => {
+): Promise<User | null> => {
   if (!username) return null;
-  cacheUsers();
-  const user = cachedUsers.find((u) => u.profile.username === username);
-  if (!user) return null;
-  return user;
+  return cachedUsers.find((u) => u.profile.username === username) || null;
 };
 
-export const getUserById: (id: string | undefined | null) => User | null = (
-  id
-) => {
+export const getUserById = async (
+  id: string | undefined | null
+): Promise<User | null> => {
   if (!id) return null;
-  cacheUsers();
-  const user = cachedUsers.find((u) => u.id === id);
-  if (!user) return null;
-  return user;
+  return cachedUsers.find((u) => u.id === id) || null;
 };
 
-export const getUsers: () => User[] = () => {
-  cacheUsers();
+export const getUsers = async (): Promise<User[]> => {
   return cachedUsers;
 };
 
 export default async function registerUser(
   data: string,
   options?: { update: boolean; id: string }
-) {
-  cacheUsers();
-  const parsedData: {
-    password: string;
-    username: string;
-    email: string;
-    profilePicture: ProfilePicture | null;
-  } = JSON.parse(data);
+): Promise<User | { error: string }> {
+  let parsedData;
+  try {
+    parsedData = JSON.parse(data);
+  } catch (error) {
+    return { error: "Invalid data format" };
+  }
+
   if (!options?.update) {
     const newUser = createUser(parsedData);
-    try {
-      if (!!getUserByUsername(newUser.profile.username))
-        throw new Error("Username already in use! Try another username");
-      if (!!getUserByEmail(newUser.account.email))
-        throw new Error("Email already in use! Try another email");
-      cachedUsers.push(newUser);
-      fs.writeFileSync(filePath, JSON.stringify(cachedUsers));
-      return newUser;
-    } catch (err) {
-      if (err instanceof Error) return { error: err.message };
-      return { error: "Unexpected error" };
+    if (await getUserByUsername(newUser.profile.username)) {
+      return { error: "Username already in use! Try another username" };
     }
+    if (await getUserByEmail(newUser.account.email)) {
+      return { error: "Email already in use! Try another email" };
+    }
+    await updateDb([...cachedUsers, newUser]);
+    return newUser;
   }
   if (options.update) {
-    const user = getUserById(options.id);
-    try {
-      if (!user) throw new Error("User not found");
-      user.account.email = parsedData.email;
-      user.profile.username = parsedData.username;
-      user.profile.profilePicture = parsedData.profilePicture;
-      fs.writeFileSync(filePath, JSON.stringify(cachedUsers));
-      return user;
-    } catch (err) {
-      if (err instanceof Error) return { error: err.message };
-      return { error: "Unexpected error" };
+    const user = await getUserById(options.id);
+    if (!user) return { error: "User not found" };
+
+    const existingUserByUsername = await getUserByUsername(parsedData.username);
+    const existingUserByEmail = await getUserByEmail(parsedData.email);
+
+    if (existingUserByUsername && existingUserByUsername.id !== user.id) {
+      return { error: "Username already in use! Try another username" };
     }
+    if (existingUserByEmail && existingUserByEmail.id !== user.id) {
+      return { error: "Email already in use! Try another email" };
+    }
+
+    user.account.email = parsedData.email;
+    user.profile.username = parsedData.username;
+    user.profile.profilePicture = parsedData.profilePicture;
+    await updateDb([...cachedUsers]);
+    return user;
   }
   return { error: "Unexpected error" };
 }
 
-export const createUser: (newUserInfo: {
+export const createUser = (newUserInfo: {
   password: string;
   username: string;
   email: string;
   profilePicture: ProfilePicture | null;
-}) => User = (newUserInfo) => {
+}): User => {
   const { username, email, password, profilePicture } = newUserInfo;
-  let hashedPassword = hashPassword(password);
+  const { salt, hash } = hashPassword(password);
   const id = crypto.randomBytes(16).toString("hex");
-  const newUser = {
+
+  return {
     id,
     account: {
       email,
-      password: hashedPassword
+      password: { salt, hash }
     },
     profile: {
       username,
@@ -116,38 +153,11 @@ export const createUser: (newUserInfo: {
     },
     blogs: []
   };
-  return newUser;
 };
 
-// Function to hash a password
-function hashPassword(password: string) {
-  const salt = crypto.randomBytes(16).toString("hex");
-  const hash = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
-    .toString("hex");
-  return {
-    salt: salt,
-    hash: hash
-  };
-}
-
-// Function to verify a password
-export async function verifyPassword(
-  password: string,
-  salt: string,
-  hash: string
-) {
-  const hashedPassword = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
-    .toString("hex");
-  return hash === hashedPassword;
-}
-
-function deletelAfterUserFunctionThatShallNotExist() {
-  cacheUsers();
-  cachedUsers.forEach((u) => {
-    u.account.password = hashPassword("1234");
+export async function deleteBucketImage(url: string) {
+  if (!url) return;
+  await backendClient.publicImages.deleteFile({
+    url
   });
 }
-
-deletelAfterUserFunctionThatShallNotExist();

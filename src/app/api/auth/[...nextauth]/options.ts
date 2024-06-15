@@ -1,8 +1,5 @@
-import {
-  getUserByEmail,
-  getUsers,
-  verifyPassword
-} from "@/utils/serverside/userFunctions";
+import { getUserByEmail, getUsers } from "@/utils/serverside/userFunctions";
+import { verifyPassword } from "@/utils/serverside/passwordFunctions";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -30,7 +27,8 @@ const options: AuthOptions = {
         }
       },
       async authorize(credentials, req) {
-        const appUser = getUserByEmail(credentials?.email);
+        const appUser = await getUserByEmail(credentials?.email);
+        console.log(appUser)
         if (!appUser) return null;
 
         const correctInformation =
@@ -55,7 +53,7 @@ const options: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      const users = getUsers();
+      const users = await getUsers();
       const appUser = users.find(
         (u) =>
           u.account.email === user.email && u.profile.username === user.name
@@ -66,7 +64,7 @@ const options: AuthOptions = {
       return baseUrl;
     },
     async session({ session, user, token }) {
-      const appUser = getUserByEmail(session.user?.email);
+      const appUser = await getUserByEmail(session.user?.email);
       if (!appUser) return undefined!;
       session.user = {
         name: appUser.profile.username,

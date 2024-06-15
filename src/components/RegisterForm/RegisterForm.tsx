@@ -1,186 +1,165 @@
 "use client";
-import Joi from "joi";
-import { useEffect, useState } from "react";
-import ProfileImageInput from "./ProfileImageInput";
-import registerUser, { getUserByEmail } from "@/utils/serverside/userFunctions";
-import SubmitAccountButton from "./SubmitAccountButton";
-import CustomInput from "./CustomInput";
-import { useEdgeStore } from "@/lib/edgestore";
+// hooks
+import { useCallback, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useEdgeStore } from "@/lib/edgestore";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { ProfilePicture } from "@/utils/allSides/usersFunctions";
+// components
+import ProfileImageInput from "./ProfileImageInput";
+import SubmitAccountButton from "./SubmitAccountButton";
+import CustomInput from "./CustomInput";
+// functions
+import registerUser, { getUserByEmail } from "@/utils/serverside/userFunctions";
+import { deleteBucketImage } from "@/utils/serverside/userFunctions";
+// types
 import { Session } from "next-auth";
+import { ProfilePicture } from "@/utils/allSides/usersFunctions";
+// schemas
+import {
+  emailSchema,
+  usernameSchema,
+  passwordSchema,
+  pictureSchema
+} from "./schemas";
+import InputField from "./inputField";
 
-const emailSchema = Joi.string()
-  .email({ tlds: false })
-  .required()
-  .label("email");
-const usernameSchema = Joi.string()
-  .pattern(/^[a-zA-Z0-9 ]*$/)
-  .max(30)
-  .min(4)
-  .required()
-  .label("username");
-const passwordSchema = Joi.string()
-  .alphanum()
-  .max(30)
-  .min(4)
-  .required()
-  .label("password");
+export default function RegisterForm({ session }: { session: Session | null }) {
+  //* Input fields initialization
+  const [usernameField] = useState(
+    () =>
+      new InputField<string>({
+        schema: usernameSchema,
+        type: "text",
+        label: "Username"
+      })
+  );
+  const [emailField] = useState(
+    () =>
+      new InputField<string>({
+        schema: emailSchema,
+        type: "email",
+        label: "Email"
+      })
+  );
+  const [passwordField] = useState(
+    () =>
+      new InputField<string>({
+        schema: passwordSchema,
+        type: "password",
+        label: "Password"
+      })
+  );
 
-export default function RegisterForm() {
+  const [imageField] = useState(
+    () =>
+      new InputField<File, ProfilePicture>({
+        schema: pictureSchema,
+        type: "image",
+        label: "Profile photo"
+      })
+  );
+  //* hooks initialization
   const router = useRouter();
   const { edgestore } = useEdgeStore();
-  const { update, data: session, status } = useSession();
   const searchParams = useSearchParams();
-  const toUpdate = searchParams.get("for") === "update";
-  const [userId, setUserId] = useState("");
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [picture, setPicture] = useState<File>();
-  const [usernameError, setUsernameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [pictureError, setPictureError] = useState("");
+  //* state initialization
+  const toUpdate = searchParams.get("for") === "update" && !!session;
+  const toRegister = !toUpdate;
+  const [userId, setUserId] = useState("");
   const [registrationError, setRegistrationError] = useState("");
 
-  const [modifiedPicture, setModifiedPicture] = useState<boolean>(false);
-  const [initialPicture, setInitialPicture] = useState<ProfilePicture>();
-  const [initialEmail, setInitialEmail] = useState("");
-  const [emailWarning, setEmailWarning] = useState("");
-
-  useEffect(() => {
-    async function getUserInfo() {
-      if (status !== "authenticated") return;
+  //* helper functions
+  const isRegistrationError = useCallback(
+    () =>
+      usernameField.errorMessage ||
+      emailField.errorMessage ||
+      imageField.errorMessage ||
+      (toUpdate ? false : passwordField.errorMessage),
+    [usernameField, emailField, imageField, passwordField, toUpdate]
+  );
+  const getUserInfo = useCallback(async () => {
+    if (session) {
       const user = await getUserByEmail(session?.user?.email);
       if (!user) return;
-      setUsername(user?.profile.username);
-      setInitialEmail(user?.account.email);
-      setEmail(user?.account.email);
-      const profilePicture = user?.profile.profilePicture;
+      usernameField.setInitialValue(user.profile.username);
+      emailField.setInitialValue(user.account.email);
+      imageField.setInitialValue(user.profile.profilePicture);
       setUserId(user.id);
-
-      if (!profilePicture) return;
-      setInitialPicture(user.profile.profilePicture);
     }
-    getUserInfo();
-  }, [session, status]);
+  }, [session]);
+  const stringifyFormInformation = (profilePicture: any) => {
+    return JSON.stringify({
+      password: passwordField.value,
+      username: usernameField.modifiedValue
+        ? usernameField.value
+        : usernameField.initialValue,
+      email: emailField.modifiedValue
+        ? emailField.value
+        : emailField.initialValue,
+      profilePicture
+    });
+  };
+  const getPfp = async () => {
+    if (!imageField.modifiedValue) {
+      return imageField.initialValue;
+    }
+    const result = await uploadProfileImage();
+    if (result instanceof Error) {
+      imageField.setErrorMessage(result.message);
+      return null;
+    }
+    return result;
+  };
 
   useEffect(() => {
-    const { error: usernameError } = usernameSchema.validate(username);
-    if (!!usernameError) setUsernameError(usernameError.message);
-    else setUsernameError("");
-  }, [username]);
+    if (toUpdate) getUserInfo();
+  }, [session]);
 
-  useEffect(() => {
-    const { error: emailError } = emailSchema.validate(email);
-    if (!!emailError) setEmailError(emailError.message);
-    else setEmailError("");
-    if (email !== initialEmail) {
-      setEmailWarning("You have to log in after email update!");
-    } else {
-      setEmailWarning("");
-    }
-  }, [email]);
+  //* form submission handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isRegistrationError())
+      return setRegistrationError("Solve the input problems first!");
 
-  useEffect(() => {
-    if (session) return;
-    const { error: passwordError } = passwordSchema.validate(password);
-    if (!!passwordError) setPasswordError(passwordError.message);
-    else setPasswordError("");
-  }, [password]);
-
-  useEffect(() => {
-    if (picture?.size && picture?.size > 500000) {
-      setPictureError("The image is too big!");
-    } else {
-      setPictureError("");
+    const profilePicture = await getPfp();
+    const stringJsonData = stringifyFormInformation(profilePicture);
+    const newUser = await registerUser(stringJsonData, {
+      update: toUpdate,
+      id: userId
+    });
+    if ("error" in newUser) return setRegistrationError(newUser.error);
+    if (toRegister) {
+      return signIn("credentials", {
+        username: usernameField.value,
+        email: emailField.value,
+        password: passwordField.value
+      });
     }
-    if (picture) {
-      setModifiedPicture(true);
+    if (emailField.modifiedValue) {
+      return router.replace("/api/auth/signin");
     }
-  }, [picture]);
+    setTimeout(() => {
+      router.refresh();
+    }, 0);
+    router.push("/blogs?p=1");
+  };
 
   return (
     <>
       <div className={`w-full text-center relative text-[30px]`}>
         {toUpdate ? "Change Account Information" : "Create Account"}
-        {toUpdate && status === "loading" && (
-          <div className="absolute text-[14px]">Loading...</div>
-        )}
       </div>
       <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          if (
-            usernameError ||
-            emailError ||
-            pictureError ||
-            (status === "authenticated" ? false : passwordError)
-          ) {
-            setRegistrationError("Solve the input problems first!");
-            return;
-          }
-          let profilePicture;
-          if (modifiedPicture) profilePicture = await uploadProfileImage();
-          if (!modifiedPicture) profilePicture = initialPicture;
-          const stringJsonData = JSON.stringify({
-            password,
-            username,
-            email,
-            profilePicture
-          });
-          const newUser = await registerUser(stringJsonData, {
-            update: status === "authenticated" ? true : false,
-            id: userId
-          });
-          if ("error" in newUser) {
-            setRegistrationError(newUser.error);
-            return;
-          }
-          //TODO see why is SOMETIMES error from changing the username
-
-          if (emailWarning) return router.replace("/api/auth/signin");
-          router.replace("/blogs?p=1");
-        }}
+        autoComplete="off"
+        onSubmit={handleSubmit}
         className={`w-full lg:w-1/3 sm:w-2/3 h-fit items-center flex flex-col gap-[16px]`}
       >
-        <CustomInput
-          type="text"
-          label="Username"
-          state={{ value: username, setValue: setUsername }}
-          required={true}
-          error={usernameError}
-        />
-        <CustomInput
-          type="email"
-          label="Email"
-          state={{ value: email, setValue: setEmail }}
-          required={true}
-          error={emailError}
-        />
-        {!toUpdate && (
-          <CustomInput
-            type={"password"}
-            label="Password"
-            state={{
-              value: password,
-              setValue: setPassword
-            }}
-            required={true}
-            error={passwordError}
-          />
-        )}
-        {emailWarning && <div>{emailWarning}</div>}
-        <ProfileImageInput
-          error={pictureError}
-          state={{ picture, setPicture }}
-          initialPicture={initialPicture}
-        />
+        <CustomInput inputField={usernameField} />
+        <CustomInput inputField={emailField} />
+        {toRegister && <CustomInput inputField={passwordField} />}
+        <ProfileImageInput inputField={imageField} />
         <div className={`self-start text-red-600`}>{registrationError}</div>
         <SubmitAccountButton toUpdate={toUpdate} />
       </form>
@@ -188,37 +167,19 @@ export default function RegisterForm() {
   );
 
   async function uploadProfileImage() {
-    if (!modifiedPicture) return null;
-    if (modifiedPicture && picture && initialPicture) {
-      edgestore.publicImages.delete({
-        url: initialPicture.url
-      });
+    if (imageField.value && imageField.initialValue) {
+      deleteBucketImage(imageField.initialValue.url);
     }
-    if (modifiedPicture && picture) {
-      const res = await edgestore.publicImages.upload({
-        file: picture,
-        onProgressChange: (progress) => {
-          // 3.log(progress);
-        }
-      });
-      // you can run some server action or api here
-      // to add the necessary data to your database
-      const result = { ...res, filename: picture.name, type: picture.type };
-      return result;
+    if (imageField.value) {
+      try {
+        const res = await edgestore.publicImages.upload({
+          file: imageField.value
+        });
+        return res;
+      } catch (err) {
+        if (err instanceof Error) return err;
+      }
     }
     return null;
   }
 }
-
-// {`
-//   "id": 1,
-//   "account": {
-//     "email": "raresmarian701@gmail.com"
-//   },
-//   "profile": {
-//     "username": "Rosca Rares",
-//     "imageName": "guest-user.png",
-//     "comments": [0, 0, 0, 0]
-//   },
-//   "blogs": [0, 0, 0, 0]
-// }

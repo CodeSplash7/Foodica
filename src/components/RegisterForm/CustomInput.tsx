@@ -1,32 +1,33 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Inter } from "next/font/google";
+import InputField from "./inputField";
+
+// import
+
 const inter = Inter({
   weight: ["600", "400"],
   subsets: ["latin"]
 });
 
-interface InputProps {
-  type: string;
-  label: string;
-  state: {
-    value: string;
-    setValue: Dispatch<SetStateAction<string>>;
-  };
-  required: boolean;
-  error: string;
-  placeholder?: string;
-}
-
 export default function CustomInput({
-  placeholder,
-  type,
-  label,
-  state,
-  required,
-  error
-}: InputProps) {
+  inputField
+}: {
+  inputField: InputField<any, any>;
+}) {
+  function rerender() {
+    setRender((prev) => !prev);
+  }
+  const [, setRender] = useState(false);
   const [focus, setFocus] = useState(false);
-  const { value, setValue } = state;
+  let {
+    value,
+    setValue,
+    label,
+    errorMessage,
+    type,
+    warningMessage,
+    initialValue
+  } = inputField;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -56,15 +57,17 @@ export default function CustomInput({
         htmlFor={`${label.toLowerCase()}-input`}
       >
         {label}
-        {required && <span className="text-red-500 text-[26px]">*</span>}
-        {error && !focus && value.length > 0 && (
-          <span className="text-[14px] text-red-600">{error}</span>
+        {errorMessage && !focus && value?.length > 0 && (
+          <span className="text-[14px] text-red-600">{errorMessage}</span>
         )}
       </label>
       <input
-        placeholder={placeholder ? placeholder : ""}
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
+        autoComplete="off"
+        onChange={(e) => {
+          setValue(e.target.value);
+          rerender();
+        }}
+        value={value || initialValue}
         ref={inputRef}
         id={`${label.toLowerCase()}-input`}
         className={`w-full outline-none border border-1 transition duration-150 ${
@@ -72,6 +75,7 @@ export default function CustomInput({
         } w-full h-[48px] text-[18px] text-slate-800 rounded-sm border border-slate-400 px-[8px] py-[8px]`}
         type={type}
       />
+      {warningMessage && <div>{warningMessage}</div>}
     </div>
   );
 }
