@@ -6,13 +6,13 @@ export type User = {
   };
   profile: {
     username: string;
-    profilePicture: ProfilePicture;
+    profilePicture: Picture;
     comments: never[];
   };
   blogs: never[];
 };
 
-export type ProfilePicture =
+export type Picture =
   | (File & {
       filename: string;
       type: string;
@@ -31,5 +31,5 @@ export type Password = {
   salt: string;
 };
 
-export function profilePictureToFile(pfp: ProfilePicture) {}
+export function profilePictureToFile(pfp: Picture) {}
 export function FileToProfilePicture(file: File) {}

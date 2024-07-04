@@ -6,8 +6,8 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export default function Category({ name }: { name: string }) {
-  const blogs = getBlogs();
+export default async function Category({ name }: { name: string }) {
+  const blogs = await getBlogs();
   // the number of blogs with the corresponding tag/name
   const count = blogs.filter((blog) => blog.mainTag === name).length;
   return (

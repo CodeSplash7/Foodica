@@ -8,7 +8,7 @@ import TagList from "./TagList";
 
 export default function BlogPost({ blog }: { blog: Blog }) {
   return (
-    <div className={`flex-[2] flex flex-col w-full h-fit gap-[32px]`}>
+    <div className={`flex flex-[1] flex-col h-fit gap-[32px]`}>
       <RecipeCard blog={blog} />
       <BlogDescription blog={blog} />
       <BlogDistribution />

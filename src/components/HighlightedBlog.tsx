@@ -24,7 +24,7 @@ export default function HighlightedBlog({ randomBlog }: { randomBlog: Blog }) {
         <div className={`relative w-full h-fit flex justify-end mt-[64px]`}>
           <OverlayImage />
           <Suspense fallback={<h1 className="self-center">Loading...</h1>}>
-            <HighlightedBlogImage src={randomBlog.image.src} />
+            <HighlightedBlogImage src={randomBlog.picture?.url || ""} />
           </Suspense>
           <BlogIntroduction blog={randomBlog} />
         </div>

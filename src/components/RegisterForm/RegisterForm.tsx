@@ -6,15 +6,15 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 // components
-import ProfileImageInput from "./ProfileImageInput";
+import ImageInput from "./ProfileImageInput";
 import SubmitAccountButton from "./SubmitAccountButton";
 import CustomInput from "./CustomInput";
 // functions
-import registerUser, { getUserByEmail } from "@/utils/serverside/userFunctions";
+import { registerUser, getUserByEmail } from "@/utils/serverside/userFunctions";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 // types
 import { Session } from "next-auth";
-import { ProfilePicture } from "@/utils/allSides/usersFunctions";
+import { Picture } from "@/utils/allSides/usersFunctions";
 // schemas
 import {
   emailSchema,
@@ -53,10 +53,10 @@ export default function RegisterForm({ session }: { session: Session | null }) {
 
   const [imageField] = useState(
     () =>
-      new InputField<File, ProfilePicture>({
+      new InputField<File, Picture>({
         schema: pictureSchema,
         type: "image",
-        label: "Profile photo"
+        label: "Profile Photo"
       })
   );
   //* hooks initialization
@@ -159,7 +159,7 @@ export default function RegisterForm({ session }: { session: Session | null }) {
         <CustomInput inputField={usernameField} />
         <CustomInput inputField={emailField} />
         {toRegister && <CustomInput inputField={passwordField} />}
-        <ProfileImageInput inputField={imageField} />
+        <ImageInput  inputField={imageField} />
         <div className={`self-start text-red-600`}>{registrationError}</div>
         <SubmitAccountButton toUpdate={toUpdate} />
       </form>

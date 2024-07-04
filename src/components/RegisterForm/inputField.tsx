@@ -1,9 +1,17 @@
-import { ProfilePicture } from "@/utils/allSides/usersFunctions";
+import { Ingredient } from "@/utils/allSides/blogsFunctions";
+import { Picture } from "@/utils/allSides/usersFunctions";
 import Joi from "joi";
 
 export default class InputField<
-  T extends string | File | null,
-  U = T | ProfilePicture
+  T extends
+    | string
+    | File
+    | null
+    | string[]
+    | number
+    | Ingredient
+    | Ingredient[],
+  U = T | Picture
 > {
   modifiedValue: boolean;
   initialValue: U;
@@ -13,20 +21,36 @@ export default class InputField<
   type: string;
   label: string;
   warningMessage?: string;
+  options?: string[];
+  step?: number;
+  onSet?: (value: T) => void;
+  max?: number;
+  maxImageSize?: number;
   constructor({
     initialValue = "" as U,
     schema,
     type,
-    label
+    label,
+    options,
+    step,
+    onSet,
+    maxImageSize,
+    max
   }: {
     initialValue?: U;
     schema: Joi.AnySchema<T>;
     type: string;
     label: string;
+    options?: string[];
+    step?: number;
+    onSet?: (value: T) => void;
+    max?: number;
+    maxImageSize?: number;
   }) {
     this.modifiedValue = false;
     this.schema = schema;
     this.setValue = this.setValue.bind(this);
+    this.getCorrectValue = this.getCorrectValue.bind(this);
     this.setInitialValue = this.setInitialValue.bind(this);
     this.setErrorMessage = this.setErrorMessage.bind(this);
     this.setWarning = this.setWarning.bind(this);
@@ -36,6 +60,16 @@ export default class InputField<
     this.errorMessage = "";
     this.initialValue = initialValue;
     this.value = "" as T;
+    this.options = options;
+    this.step = step;
+    this.onSet = onSet;
+    this.max = max;
+    this.maxImageSize = maxImageSize;
+  }
+
+  getCorrectValue() {
+    if (this.modifiedValue) return this.value;
+    return this.initialValue;
   }
 
   setWarning(warnMsg: string) {
@@ -43,15 +77,29 @@ export default class InputField<
   }
 
   setValue(newValue: T | null) {
-    if (!newValue) {
+    if (newValue === null || newValue === undefined) {
       this.value = null as T;
       return;
     }
     this.value = newValue;
     if (String(this.value) === String(this.initialValue))
       this.modifiedValue = false;
-    else this.modifiedValue = true;
+    else if (
+      Array.isArray(newValue) &&
+      Array.isArray(this.initialValue) &&
+      newValue.length !== this.initialValue.length
+    ) {
+      this.modifiedValue = true;
+    } else this.modifiedValue = true;
+    if (
+      Array.isArray(newValue) &&
+      Array.isArray(this.initialValue) &&
+      newValue.length !== this.initialValue.length
+    ) {
+      this.modifiedValue = true;
+    }
     this.validate();
+    this.onSet?.(newValue);
   }
 
   setInitialValue(newValue: U) {
@@ -63,11 +111,12 @@ export default class InputField<
   }
 
   validate() {
-    if (this.value instanceof Blob) {
+    const value = this.getCorrectValue();
+    if (value instanceof Blob) {
       const { error } = this.schema.validate({
-        size: this.value.size,
-        type: this.value.type,
-        name: this.value.name
+        size: value.size,
+        type: value.type,
+        name: value.name
       });
       if (!!error) {
         this.setErrorMessage(error.message);
@@ -75,7 +124,7 @@ export default class InputField<
       }
       this.setErrorMessage("");
     } else {
-      const { error } = this.schema.validate(this.value);
+      const { error } = this.schema.validate(value);
       if (!!error) {
         this.setErrorMessage(error.message);
         return false;
@@ -83,10 +132,7 @@ export default class InputField<
       this.setErrorMessage("");
     }
 
-    if (
-      String(this.initialValue) !== String(this.value) &&
-      this.type === "email"
-    ) {
+    if (String(this.initialValue) !== String(value) && this.type === "email") {
       this.setWarning("Relogin is required after email update!");
       return false;
     }

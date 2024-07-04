@@ -1,4 +1,4 @@
-import { getBlogTags } from "@/utils/allSides/blogsFunctions";
+import { blogTags } from "@/utils/allSides/blogsFunctions";
 import Category from "./Category";
 import { Roboto_Condensed } from "next/font/google";
 const roboto_condensed = Roboto_Condensed({
@@ -6,8 +6,8 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export default function UpperFooter() {
-  const tags = getBlogTags();
+export default async function UpperFooter() {
+  const tags = blogTags;
   return (
     <div className={`h-fit flex flex-col`}>
       <div className={`flex flex-col gap-y-[16px]`}>

@@ -9,8 +9,8 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export default function RelatedPosts({ blog }: { blog: Blog }) {
-  const relatedPosts = getRelatedBlogs(blog.id, blog.mainTag, 3);
+export default async function RelatedPosts({ blog }: { blog: Blog }) {
+  const relatedPosts = await getRelatedBlogs(blog.id, blog.mainTag, 3);
   return (
     <div className={`flex flex-col gap-[16px]`}>
       <div
@@ -28,9 +28,9 @@ export default function RelatedPosts({ blog }: { blog: Blog }) {
             <Image
               className={`w-full [object-fit:cover]`}
               alt="blog image"
-              src={"/images/" + p.image.src}
-              width={blog.image.width}
-              height={blog.image.height}
+              src={p.picture?.url || ""}
+              width={100}
+              height={100}
             />
             <div
               className={`text-blue-600 group-hover:underline hover:text-cyan-600 text-[.9rem]`}

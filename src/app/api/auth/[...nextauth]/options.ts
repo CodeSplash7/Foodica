@@ -28,7 +28,6 @@ const options: AuthOptions = {
       },
       async authorize(credentials, req) {
         const appUser = await getUserByEmail(credentials?.email);
-        console.log(appUser)
         if (!appUser) return null;
 
         const correctInformation =

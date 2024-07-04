@@ -20,6 +20,12 @@ let links: Link[] = [
     ],
     isContained: false
   },
+  {
+    id: 3223137483,
+    href: "/create-blog",
+    label: "Create Blog",
+    isContained: false
+  },
   { id: 4, href: "/contact", label: "Contact", isContained: false },
   {
     id: 5,

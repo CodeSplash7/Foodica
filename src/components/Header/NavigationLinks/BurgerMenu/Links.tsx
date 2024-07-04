@@ -1,19 +1,14 @@
-"use client";
 import {
   getMainLinks,
   getRecipeIndexLinks
 } from "@/utils/allSides/linksFunctions";
-import { useAppSelector } from "@/store/store";
 
 import dynamic from "next/dynamic";
 const MenuLink = dynamic(() => import("./MenuLink"), { ssr: true });
 
-export default function Links() {
+export default function Links({ isOpen }: { isOpen: boolean }) {
   const mainLinks = getMainLinks();
   const recipeIndexLinksCount = getRecipeIndexLinks()?.length;
-  const isOpen = useAppSelector(
-    (state) => state.pageHeader.navigationMenu.isBurgerMenuOpen
-  );
   return (
     <div
       className="overflow-hidden absolute top-[24px] transition-all duration-500 w-full"

@@ -7,7 +7,7 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 export default function TagList({ blog }: { blog: Blog }) {
-  const tagList = [blog.mainTag, ...blog.secondaryTags];
+  const tagList = Array.from(new Set([blog.mainTag, ...blog.secondaryTags]));
   return (
     <div className={`w-full h-fit  flex flex-col items-center gap-[16px]`}>
       <div className={"border-t-2 border-gray-200 w-[128px] pb-[24px]"}></div>
@@ -17,7 +17,9 @@ export default function TagList({ blog }: { blog: Blog }) {
       </div>
       <div className={`flex gap-[16px] flex-wrap justify-center`}>
         {tagList.map((tag) => (
-          <div className={`flex w-fit h-fit pt-[10px] bg-transparent hover:bg-yellow-400 transition duration-300`}>
+          <div
+            className={`flex w-fit h-fit pt-[10px] bg-transparent hover:bg-yellow-400 transition duration-300`}
+          >
             <ClickableTag
               tag={tag}
               className={`${roboto_condensed.className} px-[8px] leading-[3px] border-b-8 border-yellow-400 text-[.9rem] tracking-tighter uppercase`}

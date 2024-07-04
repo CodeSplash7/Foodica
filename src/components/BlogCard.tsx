@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-import { type StaticImageData } from "next/image";
 import { type Blog, type BlogComment } from "@/utils/allSides/blogsFunctions";
 
 import ClickableTag from "./ClickableTag";
 import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate, shortenText } from "@/utils/general-utils";
 import { Roboto_Condensed } from "next/font/google";
+import { Picture } from "@/utils/allSides/usersFunctions";
 
 const roboto_condensed = Roboto_Condensed({
   weight: ["700", "400"],
@@ -19,14 +19,14 @@ type BlogCardProps = {
 };
 
 export default function BlogCard({ blog, isSmall }: BlogCardProps) {
-  const { image, creationDate, author, comments, description } = blog;
+  const { picture, creationDate, author, comments, description } = blog;
   return (
     <div
       className={`h-fit w-full flex flex-col items-start gap-[16px] ${
         isSmall && "gap-[8px]"
       }`}
     >
-      <BlogCardImage image={image} isSmall={isSmall} />
+      <BlogCardPicture picture={picture} isSmall={isSmall} />
       <BlogCardTag blog={blog} isSmall={isSmall} />
       <BlogCardTitle blog={blog} isSmall={isSmall} />
       {!isSmall && <BlogCardInfo info={{ creationDate, author, comments }} />}
@@ -36,11 +36,11 @@ export default function BlogCard({ blog, isSmall }: BlogCardProps) {
   );
 }
 
-function BlogCardImage({
-  image,
+function BlogCardPicture({
+  picture,
   isSmall
 }: {
-  image: StaticImageData;
+  picture: Picture;
   isSmall: boolean;
 }) {
   return (
@@ -52,9 +52,9 @@ function BlogCardImage({
       }
               `}
       alt="blog image"
-      src={"/images/blogImages/" + image.src}
-      width={image.width}
-      height={image.height}
+      src={picture?.url || ""}
+      width={500}
+      height={500}
     />
   );
 }
@@ -111,7 +111,7 @@ function BlogCardInfo({
 function BlogCardDesc({ desc }: { desc: string }) {
   return (
     <div
-      className={`w-full text-[16px] text-[#4c4c4c] [line-height:28.8px] [text-spacing:.7px]`}
+      className={`w-full text-[16px] text-[#4c4c4c] [line-height:28.8px] [text-spacing:.7px] break-words`}
     >
       {shortenText(desc, 56)}
     </div>

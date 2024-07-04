@@ -17,10 +17,17 @@ type BlogListProps = {
   year?: string;
   month?: string;
   day?: string;
+  ids?: number[];
 };
 
 const blogPageSize = 4;
-export default function BlogList({ blogs, year, month, day }: BlogListProps) {
+export default function BlogList({
+  blogs,
+  year,
+  month,
+  day,
+  ids
+}: BlogListProps) {
   const searchParams = useSearchParams();
   const search = searchParams.get("s");
   const tag = searchParams.get("t");
@@ -32,7 +39,7 @@ export default function BlogList({ blogs, year, month, day }: BlogListProps) {
   let selectedBlogs: Blog[] = [];
 
   if (blogs.length > 0) {
-    selectedBlogs = filterSelectedBlogs(blogs, tag, search, year, month, day);
+    selectedBlogs = filterSelectedBlogs(blogs, tag, search, year, month, day, ids);
   }
 
   const pageBlogs = getNthDivision(

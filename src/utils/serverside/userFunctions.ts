@@ -3,7 +3,7 @@
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import { type ProfilePicture, type User } from "../allSides/usersFunctions";
+import { type Picture, type User } from "../allSides/usersFunctions";
 import { hashPassword } from "./passwordFunctions";
 import { backendClient } from "@/lib/edgestore-server";
 
@@ -70,6 +70,7 @@ export const getUserByEmail = async (
 export const getUserByUsername = async (
   username: string | undefined | null
 ): Promise<User | null> => {
+  await ensureUsersInitialized();
   if (!username) return null;
   return cachedUsers.find((u) => u.profile.username === username) || null;
 };
@@ -77,15 +78,26 @@ export const getUserByUsername = async (
 export const getUserById = async (
   id: string | undefined | null
 ): Promise<User | null> => {
+  await ensureUsersInitialized();
   if (!id) return null;
   return cachedUsers.find((u) => u.id === id) || null;
 };
 
 export const getUsers = async (): Promise<User[]> => {
+  await ensureUsersInitialized();
   return cachedUsers;
 };
 
-export default async function registerUser(
+export const getUserByUrlName = async (
+  urlName: string
+): Promise<User | undefined> => {
+  await ensureUsersInitialized();
+  return cachedUsers.find(
+    (u) => u.profile.username.toLowerCase().split(" ").join("") === urlName
+  );
+};
+
+export async function registerUser(
   data: string,
   options?: { update: boolean; id: string }
 ): Promise<User | { error: string }> {
@@ -134,7 +146,7 @@ export const createUser = (newUserInfo: {
   password: string;
   username: string;
   email: string;
-  profilePicture: ProfilePicture | null;
+  profilePicture: Picture | null;
 }): User => {
   const { username, email, password, profilePicture } = newUserInfo;
   const { salt, hash } = hashPassword(password);

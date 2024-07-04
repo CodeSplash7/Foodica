@@ -2,8 +2,8 @@ import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
 import { getBlogs } from "@/utils/serverside/blogsFunctions";
 
-export default function MainBlogsSection() {
-  const blogs = getBlogs();
+export default async function MainBlogsSection() {
+  const blogs = await getBlogs();
   return (
     <div
       className={`flex flex-col md:flex-row 

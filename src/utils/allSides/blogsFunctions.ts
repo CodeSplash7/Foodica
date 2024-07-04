@@ -1,7 +1,36 @@
-import { StaticImageData } from "next/image";
+import { Picture } from "./usersFunctions";
 
 type RecipeDifficulty = "easy" | "medium" | "hard";
-type IngredientUnit =
+export type BlogTag =
+  | "Appetizers"
+  | "Asian"
+  | "Baking"
+  | "Beef"
+  | "Breakfast"
+  | "Brunch"
+  | "Budget-Friendly"
+  | "Chicken"
+  | "Desserts"
+  | "Family"
+  | "Grilling"
+  | "Healthy"
+  | "Homemade"
+  | "International"
+  | "Italian"
+  | "Mexican"
+  | "Party"
+  | "Pasta"
+  | "Quick"
+  | "Salads"
+  | "Seafood"
+  | "Seasonal"
+  | "Slow-Cooker"
+  | "Snacks"
+  | "Soups"
+  | "Vegan"
+  | "Vegetables"
+  | "Vegetarian";
+export type IngredientUnit =
   | "tsp"
   | "Tbsp"
   | "fl oz"
@@ -19,6 +48,11 @@ type IngredientUnit =
   | "dz"
   | "in"
   | "cm"
+  | "piece"
+  | "unit"
+  | "item"
+  | "count"
+  | "whole"
   // informal
   | "dash"
   | "smidgen"
@@ -30,7 +64,6 @@ type IngredientUnit =
   | "pinch";
 
 export type Ingredient = {
-  id: number;
   unit?: IngredientUnit;
   quantity: number;
   name: string;
@@ -40,13 +73,13 @@ export type Ingredient = {
 export type BlogComment = { userId: number; message: string };
 
 export type Blog = {
-  id: number;
-  image: StaticImageData;
+  id: string;
+  picture: Picture;
   title: string;
   author: string;
   creationDate: string;
-  mainTag: string;
-  secondaryTags: string[];
+  mainTag: BlogTag;
+  secondaryTags: BlogTag[];
   description: string;
   difficulty: RecipeDifficulty;
   servings: number;
@@ -65,9 +98,11 @@ export const filterSelectedBlogs = (
   search: string | null,
   year?: string,
   month?: string,
-  day?: string
+  day?: string,
+  ids?: string[]
 ) => {
   return blogs.filter((blog) => {
+    const idsFilter = ids ? ids.includes(blog.id) : true;
     const tagFilter = tag
       ? blog.mainTag.toLowerCase() === tag.toLowerCase()
       : true;
@@ -87,7 +122,14 @@ export const filterSelectedBlogs = (
       ? new Date(blog.creationDate).getDate() === Number(day)
       : true;
 
-    return tagFilter && keywordFilter && yearFilter && monthFilter && dayFilter;
+    return (
+      tagFilter &&
+      keywordFilter &&
+      yearFilter &&
+      monthFilter &&
+      dayFilter &&
+      idsFilter
+    );
   });
 };
 
@@ -112,7 +154,7 @@ export const getDivisions = (array: any[], divisionSize: number) => {
   return dividedArray;
 };
 
-const blogTags = [
+export const blogTags: BlogTag[] = [
   "Appetizers",
   "Asian",
   "Baking",
@@ -143,4 +185,35 @@ const blogTags = [
   "Vegetarian"
 ];
 
-export const getBlogTags = () => blogTags;
+export const ingredientUnits = [
+  "tsp",
+  "Tbsp",
+  "fl oz",
+  "c",
+  "pt",
+  "qt",
+  "gal",
+  "ml",
+  "L",
+  "oz",
+  "lb",
+  "g",
+  "kg",
+  "ea",
+  "dz",
+  "in",
+  "cm",
+  "piece",
+  "unit",
+  "item",
+  "count",
+  "whole",
+  "dash",
+  "smidgen",
+  "handful",
+  "sprig",
+  "bunch",
+  "clove",
+  "slice",
+  "pinch"
+];

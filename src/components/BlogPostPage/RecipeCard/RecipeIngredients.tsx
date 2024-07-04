@@ -1,17 +1,13 @@
 "use client";
-
-import { setCheckList, checkIngredient } from "@/store/blogIngredientsSlice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import { Blog, Ingredient } from "@/utils/allSides/blogsFunctions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function RecipeIngredients({ blog }: { blog: Blog }) {
-  const dispatch = useAppDispatch();
-  const checkList = useAppSelector((state) => state.blogIngredients.checkList);
-  useEffect(() => {
-    dispatch(setCheckList(blog.ingredients.length));
-  }, [dispatch, blog.ingredients.length]);
-  if (checkList.length > 0)
+  const [checkList, setCheckList] = useState<boolean[]>(
+    blog.ingredients.map(() => false)
+  );
+
+  if (blog.ingredients.length > 0)
     return (
       <div
         className={`bg-[#fbf9e7] p-[32px] rounded-md flex flex-col gap-[16px] `}
@@ -25,7 +21,9 @@ export default function RecipeIngredients({ blog }: { blog: Blog }) {
                 key={index}
                 className={`border-t first:border-none text-slate-600 py-[16px] flex items-center gap-[16px]`}
                 onClick={() => {
-                  dispatch(checkIngredient(index));
+                  const oldCheckList = [...checkList];
+                  oldCheckList[index] = !oldCheckList[index];
+                  setCheckList(oldCheckList);
                 }}
               >
                 <IngredientCheckButton checked={checkedState} />

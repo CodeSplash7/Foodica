@@ -1,12 +1,10 @@
-"use client";
-
 import { Link as LinkType } from "@/utils/allSides/linksFunctions";
 import Link from "next/link";
 import DropdownCloseOpenIcon from "./DropdownCloseOpenIcon";
-import { useAppSelector } from "@/store/store";
 import dynamic from "next/dynamic";
 const DropdownLinks = dynamic(() => import("./DroppedLinks"));
 import { Roboto_Condensed } from "next/font/google";
+import { useState } from "react";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "400",
@@ -14,11 +12,7 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 export default function LinkWithDropdown({ link }: { link: LinkType }) {
-  const thisDropdown = useAppSelector(
-    (state) => state.pageHeader.navigationMenu.links
-  ).find((l) => l.id === link.id);
-  const isOpen = thisDropdown?.isOpen!;
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="">
       <div className="flex gap-[5px] h-fit border-b">
@@ -28,7 +22,7 @@ export default function LinkWithDropdown({ link }: { link: LinkType }) {
         >
           {link.label}
         </Link>
-        <DropdownCloseOpenIcon linkId={link.id} />
+        <DropdownCloseOpenIcon isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <div
         className={`overflow-hidden transition-all duration-500 w-full`}

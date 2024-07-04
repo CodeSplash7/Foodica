@@ -1,21 +1,22 @@
-import { ProfilePicture } from "@/utils/allSides/usersFunctions";
+import { Picture } from "@/utils/allSides/usersFunctions";
 import { useState } from "react";
 
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 import InputField from "./inputField";
+import { useRender } from "./CustomInput";
 
-export default function ProfileImageInput({
+export default function ImageInput({
+  formRerender,
   inputField
 }: {
-  inputField: InputField<File, ProfilePicture>;
+  inputField: InputField<File, Picture>;
+  formRerender: () => void;
 }) {
-  function rerender() {
-    setRender((prev) => !prev);
-  }
+  const rerender = useRender(formRerender);
 
   const options = {
-    dropzoneOptions: { maxSize: 500000 },
+    dropzoneOptions: { maxSize: inputField.maxImageSize },
     width: 96,
     height: 96,
     value: inputField.value || inputField.initialValue?.url,
@@ -30,11 +31,10 @@ export default function ProfileImageInput({
     }
   };
 
-  const [, setRender] = useState(false);
   return (
     <div className={`w-full flex flex-col gap-[4px]`}>
       <div className={`text-[18px] text-slate-700 font-bold`}>
-        Profile photo
+        {inputField.label}
       </div>
       <SingleImageDropzone {...options} />
     </div>

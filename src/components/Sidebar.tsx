@@ -21,7 +21,8 @@ import { formatCreationDate } from "@/utils/general-utils";
 
 export default function Sidebar() {
   return (
-    <div className={`flex flex-col flex-1 gap-[64px] w-full md:w-[10px]`}>
+    // <div className={`basis-[196px] flex flex-col gap-[64px]`}>
+    <div className={`flex flex-col gap-[64px] md:w-[200px] w-full`}>
       <AboutMeSection />
       <SectionDivider />
       <FollowMeSection />
@@ -90,8 +91,8 @@ function FollowMeSection() {
   );
 }
 
-function RecentBlogsSection({ count }: { count: number }) {
-  const recentBlogs = getRecentBlogs(count);
+async function RecentBlogsSection({ count }: { count: number }) {
+  const recentBlogs = await getRecentBlogs(count);
   return (
     <div className={`gap-[16px] flex flex-col`}>
       <div
@@ -105,9 +106,9 @@ function RecentBlogsSection({ count }: { count: number }) {
             <Image
               className={`w-[72px] h-[48px] [object-fit:cover]`}
               alt="blog image"
-              src={"/images/blogImages/" + blog.image.src}
-              width={blog.image.width}
-              height={blog.image.height}
+              src={blog.picture?.url || ""}
+              width={100}
+              height={100}
             />
             <div className={`flex flex-col`}>
               <div

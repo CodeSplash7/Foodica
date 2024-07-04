@@ -1,12 +1,12 @@
 "use client";
 
-import { ProfilePicture } from "@/utils/allSides/usersFunctions";
-type ProfilePictureKeys = NonNullable<ProfilePicture>;
+import { Picture } from "@/utils/allSides/usersFunctions";
+type ProfilePictureKeys = NonNullable<Picture>;
 
 export function transformFileToProfilePicture(
   file: File,
   options?: { [K in keyof ProfilePictureKeys]?: any }
-): ProfilePicture {
+): Picture {
   return {
     ...file,
     arrayBuffer: file.arrayBuffer,
@@ -22,4 +22,3 @@ export function transformFileToProfilePicture(
     ...options
   };
 }
-

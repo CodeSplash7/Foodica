@@ -1,18 +1,12 @@
-import { getBlogs } from "@/utils/serverside/blogsFunctions";
+import { getBlogByUrlName, getBlogs } from "@/utils/serverside/blogsFunctions";
 import BlogPost from "./BlogPost/BlogPost";
 import Sidebar from "../Sidebar";
 
 type BlogPostPageProps = {
   params: { year: string; month: string; day: string; blogName: string };
 };
-function BlogPostPage({ params }: BlogPostPageProps) {
-  const blogs = getBlogs();
-
-  const blog = blogs.find(
-    (blog) =>
-      blog.title.toLowerCase().split(" ").join("-").split("&").join("%26") ===
-      params.blogName
-  );
+async function BlogPostPage({ params }: BlogPostPageProps) {
+  const blog = await getBlogByUrlName(params.blogName);
   if (blog)
     return (
       <div

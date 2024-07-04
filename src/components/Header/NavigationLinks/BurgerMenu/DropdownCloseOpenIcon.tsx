@@ -1,20 +1,18 @@
 "use client";
 
 import { closeDropDownMenu, openDropDownMenu } from "@/store/pageHeaderSlice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
+import { getAllLinks } from "@/utils/allSides/linksFunctions";
+import { Dispatch, SetStateAction } from "react";
 
-export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
-  const links = useAppSelector(
-    (state) => state.pageHeader.navigationMenu.links
-  );
-  const dispatch = useAppDispatch();
-  const thisDropdown = links.find((l) => l.id === linkId);
-  const isOpen = thisDropdown?.isOpen!;
-
+export default function DropdownCloseOpenIcon({
+  isOpen,
+  setIsOpen
+}: {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   function handleOpenDropDown() {
-    return isOpen
-      ? dispatch(closeDropDownMenu(thisDropdown?.id))
-      : dispatch(openDropDownMenu(thisDropdown?.id));
+    return isOpen ? setIsOpen(false) : setIsOpen(true);
   }
 
   return (
@@ -30,7 +28,7 @@ export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={`${
-          thisDropdown?.isOpen ? "rotate-180" : "rotate-0"
+          isOpen ? "rotate-180" : "rotate-0"
         } transition duration-200 flex justify-start mr-[32px]`}
       >
         <g clipPath="url(#clip0_210_2)">
