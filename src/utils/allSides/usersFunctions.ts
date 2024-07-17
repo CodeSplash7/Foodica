@@ -7,9 +7,9 @@ export type User = {
   profile: {
     username: string;
     profilePicture: Picture;
-    comments: never[];
+    comments: string[];
   };
-  blogs: never[];
+  blogs: string[];
 };
 
 export type Picture =

@@ -273,6 +273,7 @@ export default function BlogForm({
     if (isBlogSent) return;
     setIsBlogSent(true);
     setIsLoading(true);
+    rerender();
 
     allFields.forEach((f) => f.validate());
     if (isPostError()) {
@@ -291,7 +292,8 @@ export default function BlogForm({
     const stringJsonData = stringifyFormInformation(recipePicture);
     const newBlog = await createBlog(stringJsonData, {
       update: toUpdate,
-      id: blogId
+      id: blogId,
+      authorEmail: session?.user?.email
     });
     if ("error" in newBlog) {
       setPostError(newBlog.error);
@@ -377,16 +379,16 @@ export default function BlogForm({
         </div>
         <ImageInput formRerender={rerender} inputField={blogPictureField} />
         <div className={`self-start text-red-600`}>{postError}</div>
-        <div className={`w-full flex justify-between`}>
-          <SubmitBlogButton toUpdate={toUpdate} />
-          <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDeletePost} />
-        </div>
         {isLoading && (
-          <div className="flex gap-[16px]">
+          <div className="flex text-black gap-[16px]">
             Creating Your Blog...
             <LoadingIcon w={24} />
           </div>
         )}
+        <div className={`w-full flex justify-between`}>
+          <SubmitBlogButton toUpdate={toUpdate} />
+          <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDeletePost} />
+        </div>
       </form>
     </>
   );

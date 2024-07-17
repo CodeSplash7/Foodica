@@ -1,7 +1,5 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
 import { type Blog } from "@/utils/allSides/blogsFunctions";
+import { type BlogPageSearchParams } from "@/app/blogs/page";
 import ClickableTag from "@/components/ClickableTag";
 import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate } from "@/utils/general-utils";
@@ -15,9 +13,14 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export default function HighlightedBlog({ randomBlog }: { randomBlog: Blog }) {
-  const searchParams = useSearchParams();
-  const page = searchParams.get("p");
+export default function HighlightedBlog({
+  randomBlog,
+  searchParams
+}: {
+  searchParams: BlogPageSearchParams;
+  randomBlog: Blog;
+}) {
+  const page = searchParams.page;
   if (randomBlog && page)
     return (
       <>

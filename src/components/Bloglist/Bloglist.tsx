@@ -1,45 +1,49 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import { type Blog } from "@/utils/allSides/blogsFunctions";
 
-import { useSearchParams } from "next/navigation";
 import {
   filterSelectedBlogs,
   getNthDivision
 } from "@/utils/allSides/blogsFunctions";
 
-const BlogCard = dynamic(() => import("@/components/BlogCard"));
-const Pagination = dynamic(() => import("./Pagination/Pagination"));
+import BlogCard from "@/components/BlogCard"; // const BlogCard = dynamic(() => import("@/components/BlogCard"));
+import Pagination from "./Pagination/Pagination"; // const Pagination = dynamic(() => import("./Pagination/Pagination"));
+import { type BlogPageSearchParams } from "@/app/blogs/page";
+import { getBlogs } from "@/utils/serverside/blogsFunctions";
 
 type BlogListProps = {
-  blogs: Blog[];
+  searchParams: BlogPageSearchParams;
   year?: string;
   month?: string;
   day?: string;
-  ids?: number[];
+  ids?: string[];
 };
 
 const blogPageSize = 4;
-export default function BlogList({
-  blogs,
+export default async function BlogList({
+  searchParams,
   year,
   month,
   day,
   ids
 }: BlogListProps) {
-  const searchParams = useSearchParams();
-  const search = searchParams.get("s");
-  const tag = searchParams.get("t");
-  const page = searchParams.get("p");
+  const blogs = await getBlogs();
+  const { search, tag, page, author } = searchParams;
 
   const currentDivision = Number(page) || 1;
-  const oneDivisionForAll = page === null ? true : false;
-
+  const oneDivisionForAll = !searchParams.page;
   let selectedBlogs: Blog[] = [];
 
   if (blogs.length > 0) {
-    selectedBlogs = filterSelectedBlogs(blogs, tag, search, year, month, day, ids);
+    selectedBlogs = filterSelectedBlogs(
+      blogs,
+      tag,
+      search,
+      author,
+      year,
+      month,
+      day,
+      ids
+    );
   }
 
   const pageBlogs = getNthDivision(

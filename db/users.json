@@ -10,13 +10,16 @@
     },
     "profile": {
       "username": "Rosca Rares",
-      "profilePicture": null,
-      "comments": [
-        0,
-        0,
-        0,
-        0
-      ]
+      "profilePicture": {
+        "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f220c3ea-9edb-4ca8-b62a-bab2c4997c94.webp",
+        "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f220c3ea-9edb-4ca8-b62a-bab2c4997c94-thumb.webp",
+        "size": 23674,
+        "uploadedAt": "2024-07-15T13:22:26.371Z",
+        "path": {},
+        "pathOrder": [],
+        "metadata": {}
+      },
+      "comments": [0, 0, 0, 0]
     },
     "blogs": [
       "7",
@@ -24,7 +27,8 @@
       "9",
       "10",
       "11",
-      "14"
+      "14",
+      "1e2184355dab6f0db74bcdfaf3b797b9"
     ]
   },
   {
@@ -38,12 +42,18 @@
     },
     "profile": {
       "username": "John Smith",
-      "profilePicture": null,
+      "profilePicture": {
+        "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/aeb40d74-7b8d-46f1-93ba-6105d592ecce.jpg",
+        "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/aeb40d74-7b8d-46f1-93ba-6105d592ecce-thumb.jpg",
+        "size": 109476,
+        "uploadedAt": "2024-07-06T14:45:29.897Z",
+        "path": {},
+        "pathOrder": [],
+        "metadata": {}
+      },
       "comments": []
     },
-    "blogs": [
-      "1"
-    ]
+    "blogs": ["7375fc282d2ff220dca4372cb13e52d5"]
   },
   {
     "id": "3416ffa3c2747bdc8392e1c65b517d4d",
@@ -59,11 +69,7 @@
       "profilePicture": null,
       "comments": []
     },
-    "blogs": [
-      "2",
-      "5",
-      "6"
-    ]
+    "blogs": ["2", "5", "6"]
   },
   {
     "id": "7632a58d4c707cca9a37f5c5157becbf",
@@ -79,9 +85,7 @@
       "profilePicture": null,
       "comments": []
     },
-    "blogs": [
-      "3"
-    ]
+    "blogs": ["3"]
   },
   {
     "id": "03728caea63f3e40a0a176fd0ec72c50",
@@ -97,9 +101,7 @@
       "profilePicture": null,
       "comments": []
     },
-    "blogs": [
-      "4"
-    ]
+    "blogs": ["4"]
   },
   {
     "id": "cbfc4cd47c8447338714c5a9d79c2a20",
@@ -115,13 +117,7 @@
       "profilePicture": null,
       "comments": []
     },
-    "blogs": [
-      "12",
-      "13",
-      "15",
-      "16",
-      "17"
-    ]
+    "blogs": ["12", "13", "15", "16", "17"]
   },
   {
     "id": "88af35168a89edca92fb528c3f1d15a6",
@@ -137,9 +133,7 @@
       "profilePicture": null,
       "comments": []
     },
-    "blogs": [
-      "18"
-    ]
+    "blogs": ["18"]
   },
   {
     "id": "bdbeec3a61f6216f93426d97f3cd8506",

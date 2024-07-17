@@ -8,16 +8,11 @@ export default async function BlogsPageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`flex flex-col h-fit w-full gap-[32px]`}>
-      <Navbar />
-      <Header />
-      <div
-        className={`flex flex-col md:flex-row 
+    <div
+      className={`flex flex-col md:flex-row 
            gap-[16px] mt-[32px] `}
-      >
-        {children}
-      </div>
-      <Footer />
+    >
+      {children}
     </div>
   );
 }

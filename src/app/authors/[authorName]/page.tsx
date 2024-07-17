@@ -1,5 +1,3 @@
-"use server";
-
 import BlogList from "@/components/Bloglist/Bloglist";
 import MainBlogsSection from "@/components/MainBlogsSection";
 import MessageAboveBlogs from "@/components/MessageAboveBlogs";
@@ -25,6 +23,7 @@ export default async function AuthorPage({
     <div className={`flex flex-col gap-[32px]`}>
       <Suspense>
         <MessageAboveBlogs
+          searchParams={{ author: params.authorName }}
           msg={
             loggedUser
               ? "Your blogs"
@@ -37,13 +36,13 @@ export default async function AuthorPage({
   );
 }
 
-function AuthorBlogsSection({ authorUser }: { authorUser: User | undefined }) {
+async function AuthorBlogsSection({
+  authorUser
+}: {
+  authorUser: User | undefined;
+}) {
   if (!authorUser) return <div>Author not found!</div>;
   if (authorUser.blogs.length === 0)
     return <div>This author hasn't posted any blogs yet!</div>;
-  return (
-    <Suspense>
-      <BlogList blogs={getBlogs()} ids={authorUser.blogs} />
-    </Suspense>
-  );
+  return <BlogList searchParams={{}} ids={authorUser.blogs} />;
 }

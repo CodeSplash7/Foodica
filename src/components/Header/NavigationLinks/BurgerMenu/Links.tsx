@@ -4,9 +4,16 @@ import {
 } from "@/utils/allSides/linksFunctions";
 
 import dynamic from "next/dynamic";
-const MenuLink = dynamic(() => import("./MenuLink"), { ssr: true });
+import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
+import MenuLink from "./MenuLink";
 
-export default function Links({ isOpen }: { isOpen: boolean }) {
+export default function Links({
+  isOpen,
+  setIsOpen
+}: {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const mainLinks = getMainLinks();
   const recipeIndexLinksCount = getRecipeIndexLinks()?.length;
   return (
@@ -16,9 +23,14 @@ export default function Links({ isOpen }: { isOpen: boolean }) {
         height: `${isOpen ? `${recipeIndexLinksCount! * 50}px` : "0px"}`
       }}
     >
-      <div className="flex flex-col w-full bg-[#f5f5f5e4] rounded-lg h-fit px-[30px] py-[20px]">
+      <div className="relative flex flex-col w-full bg-[#f5f5f5e4] rounded-lg h-fit px-[30px] py-[20px]">
         {mainLinks.map((link) => (
-          <MenuLink key={link.id} link={link} />
+          <MenuLink
+            setIsMenuOpen={setIsOpen}
+            isMenuOpen={isOpen}
+            key={link.id}
+            link={link}
+          />
         ))}
       </div>
     </div>

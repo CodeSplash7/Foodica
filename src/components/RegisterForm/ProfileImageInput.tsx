@@ -11,7 +11,7 @@ export default function ImageInput({
   inputField
 }: {
   inputField: InputField<File, Picture>;
-  formRerender: () => void;
+  formRerender?: () => void;
 }) {
   const rerender = useRender(formRerender);
 

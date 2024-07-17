@@ -5,10 +5,9 @@ import Link from "next/link";
 import DropdownCloseOpenIcon from "./DropdownCloseOpenIcon";
 import DroppedLinks from "./DroppedLinks";
 import { LINK_STYLES_CLASS } from "./MenuLink";
-import { useAppDispatch, useAppSelector } from "@/store/store";
-import { closeDropDownMenu, openDropDownMenu } from "@/store/pageHeaderSlice";
 
 import { Roboto_Condensed } from "next/font/google";
+import { useState } from "react";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "400",
@@ -16,23 +15,12 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 export default function LinkWithDropdown({ link }: { link: LinkType }) {
-  const thisDropdown = useAppSelector(
-    (state) => state.pageHeader.navigationMenu.links
-  ).find((l) => l.id === link.id);
-  const isOpen = thisDropdown?.isOpen!;
-  const dispatch = useAppDispatch();
-
-  function handleOpenDropDown() {
-    return isOpen
-      ? dispatch(closeDropDownMenu(thisDropdown?.id))
-      : dispatch(openDropDownMenu(thisDropdown?.id));
-  }
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div
       className=""
-      onMouseOver={handleOpenDropDown}
-      onMouseOut={handleOpenDropDown}
+      onMouseOver={() => setIsOpen(true)}
+      onMouseOut={() => setIsOpen(false)}
     >
       <div className="flex gap-[5px] items-center">
         <Link

@@ -22,16 +22,17 @@ export default async function RelatedPosts({ blog }: { blog: Blog }) {
         {relatedPosts.map((p) => (
           <ClickableTitle
             blog={p}
-            className={`flex-1 group flex flex-col gap-[8px] basis-[128px] opacity-75 hover:opacity-100`}
+            className={`flex-1 group flex flex-col gap-[8px] basis-[128px] opacity-90 hover:opacity-100`}
             key={p.id}
           >
-            <Image
-              className={`w-full [object-fit:cover]`}
-              alt="blog image"
-              src={p.picture?.url || ""}
-              width={100}
-              height={100}
-            />
+            <div className="relative w-full h-[168px] [object-fit:cover]">
+              <Image
+                className={`w-full h-full [object-fit:cover]`}
+                alt="blog image"
+                src={p.picture?.url || ""}
+                fill={true}
+              />
+            </div>
             <div
               className={`text-blue-600 group-hover:underline hover:text-cyan-600 text-[.9rem]`}
             >

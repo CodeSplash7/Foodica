@@ -13,7 +13,7 @@ export default function ClickableTag({
   const tagToClick = blog ? blog.mainTag : tag ? tag : "";
 
   return (
-    <Link href={`/blogs?t=${tagToClick.toLowerCase()}`} className={className}>
+    <Link href={`/blogs?tag=${tagToClick.toLowerCase()}`} className={className}>
       {tagToClick}
     </Link>
   );

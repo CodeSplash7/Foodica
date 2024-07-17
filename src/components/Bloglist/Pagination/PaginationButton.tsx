@@ -15,7 +15,7 @@ export default function PaginationButton({
 }) {
   return (
     <Link
-      href={`/blogs?p=${String(btn)}`}
+      href={`/blogs?page=${String(btn)}`}
       className={`bg-white h-fit
                     border ${
                       isActive ? "border-[#c7c9cf]" : "border-transparent"

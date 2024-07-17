@@ -38,7 +38,7 @@ export default function PaginationDirectionButton({
 
   return (
     <Link
-      href={`/blogs?p=${destinatedPage}`}
+      href={`/blogs?page=${destinatedPage}`}
       className={
         buttonStyles +
         (buttonInvisibilityCondition ? " opacity-0 pointer-events-none" : "")

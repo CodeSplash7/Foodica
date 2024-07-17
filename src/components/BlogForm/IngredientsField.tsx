@@ -53,8 +53,10 @@ export default function IngredientsField({
             <div>{index + 1}.</div>
             <IngredientField
               setListValue={(value) => {
-                inputField.value[index] = value;
-                setValue(inputField.value);
+                const newListValue = inputField.getCorrectValue();
+                newListValue[index] = value;
+                // inputField.value[index] = value;
+                setValue(newListValue);
                 rerender();
               }}
               rerender={rerender}
@@ -171,12 +173,7 @@ function IngredientField({
     index
   ]);
   return (
-    <div
-      className={`flex gap-[16px]  ${
-        ""
-        // listError?.id === index && listError.show && `bg-red-100`
-      }`}
-    >
+    <div className={`flex gap-[16px] `}>
       <CustomInput showError={false} mini inputField={ingredientNameInput} />
       <CustomInput
         showError={false}

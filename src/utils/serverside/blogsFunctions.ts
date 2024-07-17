@@ -5,6 +5,7 @@ import path from "path";
 import { redirect } from "next/navigation";
 import { Blog, BlogTag, getDivisions } from "@/utils/allSides/blogsFunctions";
 import crypto from "crypto";
+import { addBlogToUser } from "./userFunctions";
 
 const filePath = path.join(process.cwd(), "db", "blogs.json");
 
@@ -53,7 +54,6 @@ async function updateDb(): Promise<void> {
     const cachedStringifiedBlogs = JSON.stringify(cachedBlogs);
     if (dbBlogs !== cachedStringifiedBlogs) {
       await fs.promises.writeFile(filePath, cachedStringifiedBlogs, "utf-8");
-      console.log("UPDATED->", cachedBlogs, "<-UPDATED");
       // Reset the cache
       blogsInitialized = false;
       await initializeBlogs();
@@ -104,10 +104,10 @@ export const getRelatedBlogs: (
   await initializeBlogs();
   let result: Blog[] = [];
   cachedBlogs.forEach((b) => {
-    if (result.length > 2 || b.id === irrelevanBlogId) return;
+    if (result.length > count - 1 || b.id === irrelevanBlogId) return;
     if (b.mainTag === tag) result.push(b);
   });
-  if (result.length < 3) {
+  if (result.length < count) {
     cachedBlogs.forEach((b) => {
       if (result.length > 2 || b.id === irrelevanBlogId) return;
       if (b.secondaryTags.includes(tag as BlogTag)) result.push(b);
@@ -144,7 +144,7 @@ export async function checkForBlogName({
 
 export async function createBlog(
   data: string,
-  options?: { update: boolean; id?: string }
+  options?: { update: boolean; id?: string; authorEmail?: string | null }
 ): Promise<Blog | { error: string }> {
   if (options?.update && !options?.id) return { error: "Blog not found" };
   await initializeBlogs();
@@ -157,6 +157,7 @@ export async function createBlog(
     const newBlog: Blog = { ...newBlogInfo, id, creationDate, comments };
     cachedBlogs.push(newBlog);
     updateDb();
+    addBlogToUser(options?.authorEmail, id);
     return newBlog;
   }
 
@@ -180,7 +181,6 @@ export async function createBlog(
 
 export async function getBlogByUrlName(urlName: string) {
   await initializeBlogs();
-  console.log(cachedBlogs);
   const blog = cachedBlogs.find(
     (blog) =>
       blog.title.toLowerCase().split(" ").join("-").split("&").join("%26") ===
@@ -215,7 +215,6 @@ export async function deleteBlogPost(blogId: string): Promise<boolean> {
     // Update the cachedBlogs variable in memory
     await initializeBlogs();
 
-    console.log("Deleted blog with ID:", blogId);
     return true;
   } catch (error) {
     console.error("Failed to delete blog:", error);

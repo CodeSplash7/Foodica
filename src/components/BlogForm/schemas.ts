@@ -120,11 +120,11 @@ export const ingUnitSchema = Joi.string()
 export const ingQuanitySchema = Joi.number()
   .label("Ingredient quantity")
   .max(30)
-  .min(1)
+  .min(0.1)
   .required()
   .messages({
     ...customMessages,
-    "number.min": "{{#label}} should be at least fucking 1"
+    "number.min": "{{#label}} should be more than 0"
   });
 export const ingNameSchema = Joi.string()
   .pattern(/^[a-zA-Z0-9 ]*$/)

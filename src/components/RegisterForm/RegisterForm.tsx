@@ -159,7 +159,7 @@ export default function RegisterForm({ session }: { session: Session | null }) {
         <CustomInput inputField={usernameField} />
         <CustomInput inputField={emailField} />
         {toRegister && <CustomInput inputField={passwordField} />}
-        <ImageInput  inputField={imageField} />
+        <ImageInput inputField={imageField} />
         <div className={`self-start text-red-600`}>{registrationError}</div>
         <SubmitAccountButton toUpdate={toUpdate} />
       </form>

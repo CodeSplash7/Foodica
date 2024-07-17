@@ -2,12 +2,11 @@ import BlogForm from "@/components/BlogForm/BlogForm";
 import Header from "@/components/Header/Header";
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
-import { useRouter } from "next/router";
 
 export default async function CreateBlogPage({
   searchParams
 }: {
-  searchParams: any;
+  searchParams: { blog: string; for: string };
 }) {
   const session = await getServerSession();
   return (

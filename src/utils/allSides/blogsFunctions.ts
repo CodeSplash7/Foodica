@@ -94,14 +94,18 @@ export type Blog = {
 
 export const filterSelectedBlogs = (
   blogs: Blog[],
-  tag: string | null,
-  search: string | null,
+  tag?: string,
+  search?: string,
+  author?: string,
   year?: string,
   month?: string,
   day?: string,
   ids?: string[]
 ) => {
   return blogs.filter((blog) => {
+    const authorFilter = author
+      ? blog.author.toLowerCase().split(" ").join("") === author
+      : true;
     const idsFilter = ids ? ids.includes(blog.id) : true;
     const tagFilter = tag
       ? blog.mainTag.toLowerCase() === tag.toLowerCase()
@@ -128,7 +132,8 @@ export const filterSelectedBlogs = (
       yearFilter &&
       monthFilter &&
       dayFilter &&
-      idsFilter
+      idsFilter &&
+      authorFilter
     );
   });
 };

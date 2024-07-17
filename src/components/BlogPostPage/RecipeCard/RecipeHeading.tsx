@@ -1,3 +1,4 @@
+import ClickableName from "@/components/ClickableName";
 import { Blog } from "@/utils/allSides/blogsFunctions";
 import { hashId } from "@/utils/serverside/blogIdHashing";
 import { getServerSession } from "next-auth";
@@ -25,7 +26,12 @@ export default async function RecipeHeading({ blog }: { blog: Blog }) {
         </Link>
       )}
       <p className={`text-[16px] font-light italic text-gray-500`}>
-        Recipe by {blog.author}
+        Recipe by{" "}
+        <ClickableName
+          className={`hover:text-gray-700 duration-150 transition`}
+        >
+          {blog.author}
+        </ClickableName>
       </p>
       <div
         className={`border-t border-gray-400 border-dashed text-[16px] font-light text-gray-500`}

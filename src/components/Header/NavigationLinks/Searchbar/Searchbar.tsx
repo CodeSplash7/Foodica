@@ -39,7 +39,7 @@ export default function Searchbar() {
   }
 
   function searchBlogs() {
-    router.replace(`/blogs/?s=${textSearch}`);
+    router.replace(`/blogs/?search=${textSearch}`);
   }
 
   function handleClickOutside() {

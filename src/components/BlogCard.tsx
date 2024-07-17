@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { type Blog, type BlogComment } from "@/utils/allSides/blogsFunctions";
 
 import ClickableTag from "./ClickableTag";
@@ -7,10 +5,20 @@ import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate, shortenText } from "@/utils/general-utils";
 import { Roboto_Condensed } from "next/font/google";
 import { Picture } from "@/utils/allSides/usersFunctions";
+import ClickableName from "./ClickableName";
+import { Suspense } from "react";
+import BlogCardPicture from "./BlogCardPicture";
 
-const roboto_condensed = Roboto_Condensed({
-  weight: ["700", "400"],
-  subsets: ["latin"]
+const roboto_condensed_700 = Roboto_Condensed({
+  weight: "700",
+  subsets: ["latin"],
+  display: "swap"
+});
+
+const roboto_condensed_400 = Roboto_Condensed({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap"
 });
 
 type BlogCardProps = {
@@ -22,7 +30,7 @@ export default function BlogCard({ blog, isSmall }: BlogCardProps) {
   const { picture, creationDate, author, comments, description } = blog;
   return (
     <div
-      className={`h-fit w-full flex flex-col items-start gap-[16px] ${
+      className={`relative h-fit w-full flex flex-col items-start gap-[16px] ${
         isSmall && "gap-[8px]"
       }`}
     >
@@ -31,40 +39,22 @@ export default function BlogCard({ blog, isSmall }: BlogCardProps) {
       <BlogCardTitle blog={blog} isSmall={isSmall} />
       {!isSmall && <BlogCardInfo info={{ creationDate, author, comments }} />}
       {!isSmall && <BlogCardDesc desc={description} />}
-      {!isSmall && <BlogCardButton blog={blog} />}
+      {!isSmall && (
+        <Suspense fallback={<>fuck</>}>
+          <BlogCardButton blog={blog} />
+        </Suspense>
+      )}
     </div>
   );
 }
 
-function BlogCardPicture({
-  picture,
-  isSmall
-}: {
-  picture: Picture;
-  isSmall: boolean;
-}) {
-  return (
-    <Image
-      className={`[object-fit:cover] w-full    ${
-        isSmall
-          ? "h-[32vw] sm:h-[32vw] md:h-[32vw]"
-          : "h-[540px] sm:h-[64vw] md:h-[42vw]"
-      }
-              `}
-      alt="blog image"
-      src={picture?.url || ""}
-      width={500}
-      height={500}
-    />
-  );
-}
 function BlogCardTag({ blog, isSmall }: { blog: Blog; isSmall: boolean }) {
   return (
     <ClickableTag
       blog={blog}
       className={`w-full flex justify-${isSmall ? "start" : "center"} mt-[24px] 
                   uppercase tracking-[1.2px] text-[#acacac] hover:text-[#838a9a] text-[16px] ${
-                    roboto_condensed.className
+                    roboto_condensed_400.className
                   }
                   transition duration-150 
                 ${isSmall && "mt-[8px] text-[14px] tracking-[0.8px]"}`}
@@ -98,7 +88,8 @@ function BlogCardInfo({
       <div className="text-[#999999]">{formatCreationDate(creationDate)}</div>
       <div className="border-2 border-[#d2d7d9] rounded-full w-[2px] h-[2px"></div>
       <div className="text-[#363940] hover:text-[#818592]">
-        <span className="text-[#818592]">by</span> {author}
+        <span className="text-[#818592]">by</span>{" "}
+        <ClickableName>{author}</ClickableName>
       </div>
       <div className="border-2 border-[#d2d7d9] rounded-full w-[2px] h-[2px]"></div>
       <div className="text-[#363940] hover:text-[#818592]">
@@ -120,14 +111,19 @@ function BlogCardDesc({ desc }: { desc: string }) {
 
 function BlogCardButton({ blog }: { blog: Blog }) {
   return (
-    <ClickableTitle
-      blog={blog}
-      label={"READ MORE"}
-      className={`[letter-spacing:2px] ${roboto_condensed.className} text-[#363940] hover:text-white text-[14px] font-bold
-        border-2 hover:border-transparent rounded-sm
+    <Suspense>
+      <ClickableTitle
+        blog={blog}
+        label={"READ MORE"}
+        className={`[letter-spacing:2px] ${roboto_condensed_700.className} 
+        text-[#363940] hover:text-white text-[14px] font-bold
+      border-2 hover:border-transparent rounded-sm
       bg-white hover:bg-[#363940]
-        transition duration-150
-        px-[32px] py-[12px]`}
-    />
+      transition duration-150
+      px-[32px] py-[12px]`}
+      />
+    </Suspense>
   );
 }
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

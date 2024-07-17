@@ -18,10 +18,10 @@ import {
 import ClickableTitle from "./ClickableTitle";
 import { getRecentBlogs } from "@/utils/serverside/blogsFunctions";
 import { formatCreationDate } from "@/utils/general-utils";
+import AwaitableImage from "./AwaitableImage";
 
 export default function Sidebar() {
   return (
-    // <div className={`basis-[196px] flex flex-col gap-[64px]`}>
     <div className={`flex flex-col gap-[64px] md:w-[200px] w-full`}>
       <AboutMeSection />
       <SectionDivider />
@@ -40,17 +40,20 @@ function AboutMeSection() {
   return (
     <div className={`flex flex-col gap-[16px] w-full`}>
       <div
-        className={`w-full [letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
+        className={`h-fit w-full [letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
       >
         ABOUT ME
       </div>
-      <Image
-        alt="about me image"
-        src="/images/creator/about-me-image.png"
-        width={400}
-        height={400}
-        className={`w-full`}
-      />
+      <div className="relative w-full sm:w-1/2 md:w-full h-[70vw] sm:h-[184px]">
+        <AwaitableImage
+          fallBackStyles=" h-full w-full absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+          alt="about me image"
+          src="/images/creator/about-me-image.png"
+          width={400}
+          height={400}
+          className={`w-full h-full transition duration-300`}
+        />
+      </div>
       <div
         className={`text-[#444444] text-[16px] [letter-spacing:.3px] w-full`}
       >
@@ -96,20 +99,23 @@ async function RecentBlogsSection({ count }: { count: number }) {
   return (
     <div className={`gap-[16px] flex flex-col`}>
       <div
-        className={` [letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
+        className={`[letter-spacing:1.2px] ${roboto_condensed.className} text-[18px] font-bold`}
       >
         RECENT POSTS
       </div>
       <div className={`gap-[24px] h-fit flex flex-col`}>
         {recentBlogs.map((blog) => (
           <ClickableTitle blog={blog} key={blog.id} className="flex gap-[16px]">
-            <Image
-              className={`w-[72px] h-[48px] [object-fit:cover]`}
-              alt="blog image"
-              src={blog.picture?.url || ""}
-              width={100}
-              height={100}
-            />
+            <div className="relative">
+              <AwaitableImage
+                fallBackStyles="h-full text-[10px] w-full absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+                className={`transition duration-300 w-[72px] h-[48px] [object-fit:cover]`}
+                alt="blog image"
+                src={blog.picture?.url || ""}
+                width={100}
+                height={100}
+              />
+            </div>
             <div className={`flex flex-col`}>
               <div
                 className={`hover:text-[#818592] transition duration-150 font-bold [line-height:1.3] text-[16px]`}

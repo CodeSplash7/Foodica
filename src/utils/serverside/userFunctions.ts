@@ -11,9 +11,13 @@ const filePath = path.join(process.cwd(), "db", "users.json");
 
 let cachedUsers: User[] = [];
 let usersInitialized = false;
+let lastModified = 0;
 
 const initializeUsers = async () => {
-  if (!usersInitialized) {
+  const stats = await fs.promises.stat(filePath);
+  const currentModified = stats.mtimeMs;
+
+  if (!usersInitialized || lastModified !== currentModified) {
     try {
       const fileContents = await fs.promises.readFile(filePath, "utf-8");
       cachedUsers = JSON.parse(fileContents);
@@ -26,12 +30,6 @@ const initializeUsers = async () => {
   }
 };
 
-const ensureUsersInitialized = async () => {
-  if (!usersInitialized) {
-    await initializeUsers();
-  }
-};
-// Function to load users from file
 async function loadUsersFromFile() {
   let cachedUsers = [];
   try {
@@ -43,17 +41,32 @@ async function loadUsersFromFile() {
   }
   return cachedUsers;
 }
-// Initialize the cache on server start
 loadUsersFromFile();
 
-function setCache(data: User[]) {
+export async function setCache(data: User[]) {
   cachedUsers = data;
 }
 
-export async function updateDb(data: User[]): Promise<void> {
+export async function addBlogToUser(
+  userEmail: string | null | undefined,
+  blogId: string
+) {
+  await initializeUsers();
+  const user = await getUserByEmail(userEmail);
+  user?.blogs.push(blogId);
+  updateDb();
+}
+
+export async function updateDb(): Promise<void> {
   try {
-    await fs.promises.writeFile(filePath, JSON.stringify(data, null, 2));
-    setCache(data);
+    const dbUsers = await fs.promises.readFile(filePath, "utf-8");
+    const cachedStringifiedUsers = JSON.stringify(cachedUsers);
+    if (dbUsers !== cachedStringifiedUsers) {
+      await fs.promises.writeFile(filePath, cachedStringifiedUsers, "utf-8");
+      // Reset the cache
+      usersInitialized = false;
+      await initializeUsers();
+    }
   } catch (error) {
     console.error("Failed to update the database:", error);
   }
@@ -62,7 +75,7 @@ export async function updateDb(data: User[]): Promise<void> {
 export const getUserByEmail = async (
   email: string | undefined | null
 ): Promise<User | null> => {
-  await ensureUsersInitialized();
+  await initializeUsers();
   if (!email) return null;
   return cachedUsers.find((u) => u.account.email === email) || null;
 };
@@ -70,7 +83,7 @@ export const getUserByEmail = async (
 export const getUserByUsername = async (
   username: string | undefined | null
 ): Promise<User | null> => {
-  await ensureUsersInitialized();
+  await initializeUsers();
   if (!username) return null;
   return cachedUsers.find((u) => u.profile.username === username) || null;
 };
@@ -78,20 +91,20 @@ export const getUserByUsername = async (
 export const getUserById = async (
   id: string | undefined | null
 ): Promise<User | null> => {
-  await ensureUsersInitialized();
+  await initializeUsers();
   if (!id) return null;
   return cachedUsers.find((u) => u.id === id) || null;
 };
 
 export const getUsers = async (): Promise<User[]> => {
-  await ensureUsersInitialized();
+  await initializeUsers();
   return cachedUsers;
 };
 
 export const getUserByUrlName = async (
   urlName: string
 ): Promise<User | undefined> => {
-  await ensureUsersInitialized();
+  await initializeUsers();
   return cachedUsers.find(
     (u) => u.profile.username.toLowerCase().split(" ").join("") === urlName
   );
@@ -101,13 +114,13 @@ export async function registerUser(
   data: string,
   options?: { update: boolean; id: string }
 ): Promise<User | { error: string }> {
+  await initializeUsers();
   let parsedData;
   try {
     parsedData = JSON.parse(data);
   } catch (error) {
     return { error: "Invalid data format" };
   }
-
   if (!options?.update) {
     const newUser = createUser(parsedData);
     if (await getUserByUsername(newUser.profile.username)) {
@@ -116,7 +129,8 @@ export async function registerUser(
     if (await getUserByEmail(newUser.account.email)) {
       return { error: "Email already in use! Try another email" };
     }
-    await updateDb([...cachedUsers, newUser]);
+    cachedUsers.push(newUser);
+    await updateDb();
     return newUser;
   }
   if (options.update) {
@@ -136,7 +150,7 @@ export async function registerUser(
     user.account.email = parsedData.email;
     user.profile.username = parsedData.username;
     user.profile.profilePicture = parsedData.profilePicture;
-    await updateDb([...cachedUsers]);
+    await updateDb();
     return user;
   }
   return { error: "Unexpected error" };

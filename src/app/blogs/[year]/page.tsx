@@ -2,7 +2,7 @@ import BlogList from "@/components/Bloglist/Bloglist";
 import { checkForBlogName, getBlogs } from "@/utils/serverside/blogsFunctions";
 import Sidebar from "@/components/Sidebar";
 
-export default function BlogPage({ params }: { params: { year: string } }) {
+export default async function BlogPage({ params }: { params: { year: string } }) {
   checkForBlogName({
     possibleName: params.year
   });
@@ -17,7 +17,7 @@ export default function BlogPage({ params }: { params: { year: string } }) {
         className={`flex flex-col md:flex-row 
                       gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
-        <BlogList blogs={getBlogs()} year={params.year} />
+        <BlogList blogs={await getBlogs()} year={params.year} />
         <Sidebar />
       </div>
     </div>
