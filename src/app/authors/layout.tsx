@@ -1,7 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-
 export default async function BlogsPageLayout({
   children
 }: Readonly<{

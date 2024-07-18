@@ -3,7 +3,11 @@
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import { type Picture, type User } from "../allSides/usersFunctions";
+import {
+  usernameToUrl,
+  type Picture,
+  type User
+} from "../allSides/usersFunctions";
 import { hashPassword } from "./passwordFunctions";
 import { backendClient } from "@/lib/edgestore-server";
 
@@ -105,9 +109,7 @@ export const getUserByUrlName = async (
   urlName: string
 ): Promise<User | undefined> => {
   await initializeUsers();
-  return cachedUsers.find(
-    (u) => u.profile.username.toLowerCase().split(" ").join("") === urlName
-  );
+  return cachedUsers.find((u) => usernameToUrl(u.profile.username) === urlName);
 };
 
 export async function registerUser(

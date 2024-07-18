@@ -1,4 +1,4 @@
-import { Picture } from "./usersFunctions";
+import { Picture, usernameToUrl } from "./usersFunctions";
 
 type RecipeDifficulty = "easy" | "medium" | "hard";
 export type BlogTag =
@@ -103,9 +103,7 @@ export const filterSelectedBlogs = (
   ids?: string[]
 ) => {
   return blogs.filter((blog) => {
-    const authorFilter = author
-      ? blog.author.toLowerCase().split(" ").join("") === author
-      : true;
+    const authorFilter = author ? usernameToUrl(blog.author) === author : true;
     const idsFilter = ids ? ids.includes(blog.id) : true;
     const tagFilter = tag
       ? blog.mainTag.toLowerCase() === tag.toLowerCase()

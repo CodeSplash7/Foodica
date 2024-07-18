@@ -1,3 +1,4 @@
+import { usernameToUrl } from "@/utils/allSides/usersFunctions";
 import Link from "next/link";
 
 export default function ClickableName({
@@ -8,10 +9,7 @@ export default function ClickableName({
   className?: string;
 }) {
   return (
-    <Link
-      href={`/authors/${children.toLowerCase().split(" ").join("")}`}
-      className={className}
-    >
+    <Link href={`/authors/${usernameToUrl(children)}`} className={className}>
       {children}
     </Link>
   );

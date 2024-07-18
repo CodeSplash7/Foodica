@@ -31,5 +31,6 @@ export type Password = {
   salt: string;
 };
 
-export function profilePictureToFile(pfp: Picture) {}
-export function FileToProfilePicture(file: File) {}
+export function usernameToUrl(username: string) {
+  return username.toLowerCase().split(" ").join("")
+}
