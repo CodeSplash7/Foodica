@@ -86,6 +86,14 @@ export const getBlogById: (id: string) => Promise<Blog | undefined> = async (
   return cachedBlogs.find((b) => b.id === id);
 };
 
+export const getBlogsByIds: (
+  ids: string[] | undefined
+) => Promise<Blog[]> = async (ids) => {
+  if (!ids) return [];
+  await initializeBlogs();
+  return cachedBlogs.filter((b) => ids.find((id) => b.id === id));
+};
+
 export const getRandomBlog: () => Promise<Blog> = async () => {
   await initializeBlogs();
   return cachedBlogs[Math.floor(Math.random() * cachedBlogs.length)];
@@ -179,7 +187,7 @@ export async function createBlog(
   return {} as Blog;
 }
 
-export async function getBlogByUrlName(urlName: string) {
+export async function getBlogByUrlName(urlName: string | undefined) {
   await initializeBlogs();
   const blog = cachedBlogs.find(
     (blog) =>

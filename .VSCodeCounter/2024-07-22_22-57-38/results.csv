@@ -1,0 +1,122 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "JavaScript", "JSON", "CSS", "JSON with Comments", "Markdown", "comment", "blank", "total"
+"r:\Code\Javascript\Nextjs\foodica\.eslintrc.json", "JSON", 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"r:\Code\Javascript\Nextjs\foodica\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 23, 0, 14, 37
+"r:\Code\Javascript\Nextjs\foodica\db\blogs.json", "JSON", 0, 0, 0, 288, 0, 0, 0, 0, 1, 289
+"r:\Code\Javascript\Nextjs\foodica\db\users.json", "JSON", 0, 0, 0, 262, 0, 0, 0, 0, 1, 263
+"r:\Code\Javascript\Nextjs\foodica\next.config.js", "JavaScript", 0, 0, 21, 0, 0, 0, 0, 0, 1, 22
+"r:\Code\Javascript\Nextjs\foodica\package-lock.json", "JSON", 0, 0, 0, 8269, 0, 0, 0, 0, 1, 8270
+"r:\Code\Javascript\Nextjs\foodica\package.json", "JSON", 0, 0, 0, 52, 0, 0, 0, 0, 1, 53
+"r:\Code\Javascript\Nextjs\foodica\postcss.config.js", "JavaScript", 0, 0, 6, 0, 0, 0, 0, 0, 1, 7
+"r:\Code\Javascript\Nextjs\foodica\src\app\api\auth\[...nextauth]\options.ts", "TypeScript", 79, 0, 0, 0, 0, 0, 0, 0, 6, 85
+"r:\Code\Javascript\Nextjs\foodica\src\app\api\auth\[...nextauth]\route.ts", "TypeScript", 4, 0, 0, 0, 0, 0, 0, 0, 3, 7
+"r:\Code\Javascript\Nextjs\foodica\src\app\api\edgestore\[...edgestore]\route.ts", "TypeScript", 2, 0, 0, 0, 0, 0, 0, 0, 3, 5
+"r:\Code\Javascript\Nextjs\foodica\src\app\authors\[authorName]\page.tsx", "TypeScript JSX", 0, 45, 0, 0, 0, 0, 0, 0, 4, 49
+"r:\Code\Javascript\Nextjs\foodica\src\app\authors\layout.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 1, 15
+"r:\Code\Javascript\Nextjs\foodica\src\app\authors\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\[blogName]\page.tsx", "TypeScript JSX", 0, 2, 0, 0, 0, 0, 0, 0, 2, 4
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\page.tsx", "TypeScript JSX", 0, 38, 0, 0, 0, 0, 0, 1, 2, 41
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\page.tsx", "TypeScript JSX", 0, 32, 0, 0, 0, 0, 0, 0, 3, 35
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\page.tsx", "TypeScript JSX", 0, 24, 0, 0, 0, 0, 0, 0, 2, 26
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\layout.tsx", "TypeScript JSX", 0, 17, 0, 0, 0, 0, 0, 0, 2, 19
+"r:\Code\Javascript\Nextjs\foodica\src\app\blogs\page.tsx", "TypeScript JSX", 0, 31, 0, 0, 0, 0, 0, 0, 3, 34
+"r:\Code\Javascript\Nextjs\foodica\src\app\create-blog\page.tsx", "TypeScript JSX", 0, 22, 0, 0, 0, 0, 0, 0, 2, 24
+"r:\Code\Javascript\Nextjs\foodica\src\app\layout.tsx", "TypeScript JSX", 0, 43, 0, 0, 0, 0, 0, 0, 2, 45
+"r:\Code\Javascript\Nextjs\foodica\src\app\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"r:\Code\Javascript\Nextjs\foodica\src\app\register\page.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 4, 18
+"r:\Code\Javascript\Nextjs\foodica\src\app\styles.css", "CSS", 0, 0, 0, 0, 7, 0, 0, 0, 2, 9
+"r:\Code\Javascript\Nextjs\foodica\src\components\AwaitableImage.tsx", "TypeScript JSX", 0, 42, 0, 0, 0, 0, 0, 0, 4, 46
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogCard.tsx", "TypeScript JSX", 0, 118, 0, 0, 0, 0, 0, 0, 12, 130
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogCardPicture.tsx", "TypeScript JSX", 0, 30, 0, 0, 0, 0, 0, 0, 2, 32
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\BlogForm.tsx", "TypeScript JSX", 0, 387, 0, 0, 0, 0, 0, 5, 21, 413
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\DirectionsField.tsx", "TypeScript JSX", 0, 116, 0, 0, 0, 0, 0, 0, 7, 123
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\IngredientsField.tsx", "TypeScript JSX", 0, 185, 0, 0, 0, 0, 0, 1, 6, 192
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\SubmitBlogButton.tsx", "TypeScript JSX", 0, 34, 0, 0, 0, 0, 0, 0, 3, 37
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\schemas.ts", "TypeScript", 156, 0, 0, 0, 0, 0, 0, 0, 5, 161
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost.tsx", "TypeScript JSX", 0, 24, 0, 0, 0, 0, 0, 0, 3, 27
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPostPage.tsx", "TypeScript JSX", 0, 20, 0, 0, 0, 0, 0, 0, 3, 23
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogComments.tsx", "TypeScript JSX", 0, 4, 0, 0, 0, 0, 0, 0, 2, 6
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogConclusion.tsx", "TypeScript JSX", 0, 10, 0, 0, 0, 0, 0, 0, 2, 12
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogDescription.tsx", "TypeScript JSX", 0, 45, 0, 0, 0, 0, 0, 0, 2, 47
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogDistribution.tsx", "TypeScript JSX", 0, 25, 0, 0, 0, 0, 0, 0, 2, 27
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogPost.tsx", "TypeScript JSX", 0, 27, 0, 0, 0, 0, 0, 0, 2, 29
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\OtherAuthorBlogs.tsx", "TypeScript JSX", 0, 118, 0, 0, 0, 0, 0, 16, 10, 144
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\RelatedPosts.tsx", "TypeScript JSX", 0, 49, 0, 0, 0, 0, 0, 0, 2, 51
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\TagList.tsx", "TypeScript JSX", 0, 31, 0, 0, 0, 0, 0, 0, 4, 35
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeCard.tsx", "TypeScript JSX", 0, 23, 0, 0, 0, 0, 0, 0, 2, 25
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeDetails.tsx", "TypeScript JSX", 0, 67, 0, 0, 0, 0, 0, 0, 3, 70
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeHeading.tsx", "TypeScript JSX", 0, 45, 0, 0, 0, 0, 0, 0, 3, 48
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeImage.tsx", "TypeScript JSX", 0, 16, 0, 0, 0, 0, 0, 0, 2, 18
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeIngredients.tsx", "TypeScript JSX", 0, 84, 0, 0, 0, 0, 0, 3, 8, 95
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeInstructions.tsx", "TypeScript JSX", 0, 21, 0, 0, 0, 0, 0, 0, 2, 23
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Bloglist.tsx", "TypeScript JSX", 0, 72, 0, 0, 0, 0, 0, 0, 9, 81
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\DirectionIcon.tsx", "TypeScript JSX", 0, 22, 0, 0, 0, 0, 0, 0, 1, 23
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\Pagination.tsx", "TypeScript JSX", 0, 31, 0, 0, 0, 0, 0, 0, 2, 33
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationButton.tsx", "TypeScript JSX", 0, 33, 0, 0, 0, 0, 0, 0, 3, 36
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationButtons.tsx", "TypeScript JSX", 0, 56, 0, 0, 0, 0, 0, 0, 11, 67
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationDirectionButton.tsx", "TypeScript JSX", 0, 47, 0, 0, 0, 0, 0, 0, 6, 53
+"r:\Code\Javascript\Nextjs\foodica\src\components\ClickableName.tsx", "TypeScript JSX", 0, 15, 0, 0, 0, 0, 0, 0, 2, 17
+"r:\Code\Javascript\Nextjs\foodica\src\components\ClickableTag.tsx", "TypeScript JSX", 0, 18, 0, 0, 0, 0, 0, 0, 3, 21
+"r:\Code\Javascript\Nextjs\foodica\src\components\ClickableTitle.tsx", "TypeScript JSX", 0, 24, 0, 0, 0, 0, 0, 0, 4, 28
+"r:\Code\Javascript\Nextjs\foodica\src\components\FollowMe.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"r:\Code\Javascript\Nextjs\foodica\src\components\Footer\Footer.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 2, 16
+"r:\Code\Javascript\Nextjs\foodica\src\components\Footer\lower\LowerFooter.tsx", "TypeScript JSX", 0, 32, 0, 0, 0, 0, 0, 0, 2, 34
+"r:\Code\Javascript\Nextjs\foodica\src\components\Footer\upper\Category.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 1, 2, 39
+"r:\Code\Javascript\Nextjs\foodica\src\components\Footer\upper\UpperFooter.tsx", "TypeScript JSX", 0, 26, 0, 0, 0, 0, 0, 0, 2, 28
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\FoodicaLogo\FoodicaLogo.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 3, 17
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\FoodicaLogo\Letter.tsx", "TypeScript JSX", 0, 66, 0, 0, 0, 0, 0, 0, 8, 74
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\Header.tsx", "TypeScript JSX", 0, 25, 0, 0, 0, 0, 0, 0, 4, 29
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\BurgerMenu.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 5, 19
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\DropdownCloseOpenIcon.tsx", "TypeScript JSX", 0, 42, 0, 0, 0, 0, 0, 0, 4, 46
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\DroppedLinks.tsx", "TypeScript JSX", 0, 30, 0, 0, 0, 0, 0, 0, 2, 32
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\Icon.tsx", "TypeScript JSX", 0, 34, 0, 0, 0, 0, 0, 0, 4, 38
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\LinkWithDropdown.tsx", "TypeScript JSX", 0, 60, 0, 0, 0, 0, 0, 0, 7, 67
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\Links.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 3, 39
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\MenuLink.tsx", "TypeScript JSX", 0, 68, 0, 0, 0, 0, 0, 1, 7, 76
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\styles.css", "CSS", 0, 0, 0, 0, 21, 0, 0, 16, 7, 44
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NavigationLinks.tsx", "TypeScript JSX", 0, 25, 0, 0, 0, 0, 0, 0, 2, 27
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\DropdownCloseOpenIcon.tsx", "TypeScript JSX", 0, 28, 0, 0, 0, 0, 0, 0, 3, 31
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\DroppedLinks.tsx", "TypeScript JSX", 0, 13, 0, 0, 0, 0, 0, 0, 2, 15
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\LinkWithDropdown.tsx", "TypeScript JSX", 0, 42, 0, 0, 0, 0, 0, 0, 5, 47
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\MenuLink.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 4, 40
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\NormalMenu.tsx", "TypeScript JSX", 0, 12, 0, 0, 0, 0, 0, 0, 2, 14
+"r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\Searchbar\Searchbar.tsx", "TypeScript JSX", 0, 94, 0, 0, 0, 0, 0, 2, 13, 109
+"r:\Code\Javascript\Nextjs\foodica\src\components\HighlightedBlog.tsx", "TypeScript JSX", 0, 88, 0, 0, 0, 0, 0, 0, 5, 93
+"r:\Code\Javascript\Nextjs\foodica\src\components\HighlightedBlogImage.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 2, 16
+"r:\Code\Javascript\Nextjs\foodica\src\components\Icons.tsx", "TypeScript JSX", 0, 318, 0, 0, 0, 0, 0, 0, 12, 330
+"r:\Code\Javascript\Nextjs\foodica\src\components\LoginWidget.tsx", "TypeScript JSX", 0, 34, 0, 0, 0, 0, 0, 0, 2, 36
+"r:\Code\Javascript\Nextjs\foodica\src\components\MainBlogsSection.tsx", "TypeScript JSX", 0, 20, 0, 0, 0, 0, 0, 0, 1, 21
+"r:\Code\Javascript\Nextjs\foodica\src\components\MessageAboveBlogs.tsx", "TypeScript JSX", 0, 33, 0, 0, 0, 0, 0, 0, 3, 36
+"r:\Code\Javascript\Nextjs\foodica\src\components\Navbar.tsx", "TypeScript JSX", 0, 19, 0, 0, 0, 0, 0, 0, 2, 21
+"r:\Code\Javascript\Nextjs\foodica\src\components\ReadMoreBtn.tsx", "TypeScript JSX", 0, 12, 0, 0, 0, 0, 0, 0, 2, 14
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\CustomInput.tsx", "TypeScript JSX", 0, 311, 0, 0, 0, 0, 0, 0, 17, 328
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\ProfileImageInput.tsx", "TypeScript JSX", 0, 38, 0, 0, 0, 0, 0, 0, 5, 43
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\RegisterForm.tsx", "TypeScript JSX", 0, 166, 0, 0, 0, 0, 0, 10, 10, 186
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\SubmitAccountButton.tsx", "TypeScript JSX", 0, 18, 0, 0, 0, 0, 0, 0, 3, 21
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\inputField.tsx", "TypeScript JSX", 0, 134, 0, 0, 0, 0, 0, 0, 9, 143
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\schemas.tsx", "TypeScript JSX", 0, 23, 0, 0, 0, 0, 0, 0, 4, 27
+"r:\Code\Javascript\Nextjs\foodica\src\components\Sidebar.tsx", "TypeScript JSX", 0, 125, 0, 0, 0, 0, 0, 2, 9, 136
+"r:\Code\Javascript\Nextjs\foodica\src\components\SingleImageDropzone.tsx", "TypeScript JSX", 0, 195, 0, 0, 0, 0, 0, 13, 16, 224
+"r:\Code\Javascript\Nextjs\foodica\src\components\SocialWidget.tsx", "TypeScript JSX", 0, 20, 0, 0, 0, 0, 0, 1, 2, 23
+"r:\Code\Javascript\Nextjs\foodica\src\components\UserBadge.tsx", "TypeScript JSX", 0, 58, 0, 0, 0, 0, 0, 3, 3, 64
+"r:\Code\Javascript\Nextjs\foodica\src\httpService.ts", "TypeScript", 40, 0, 0, 0, 0, 0, 0, 3, 10, 53
+"r:\Code\Javascript\Nextjs\foodica\src\lib\edgestore-server.ts", "TypeScript", 21, 0, 0, 0, 0, 0, 0, 6, 7, 34
+"r:\Code\Javascript\Nextjs\foodica\src\lib\edgestore.tsx", "TypeScript JSX", 0, 6, 0, 0, 0, 0, 0, 0, 5, 11
+"r:\Code\Javascript\Nextjs\foodica\src\lib\next-auth-session.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 0, 0, 0, 3, 12
+"r:\Code\Javascript\Nextjs\foodica\src\store\blogIngredientsSlice.ts", "TypeScript", 27, 0, 0, 0, 0, 0, 0, 0, 5, 32
+"r:\Code\Javascript\Nextjs\foodica\src\store\pageHeaderSlice.ts", "TypeScript", 134, 0, 0, 0, 0, 0, 0, 0, 7, 141
+"r:\Code\Javascript\Nextjs\foodica\src\store\redux-provider.tsx", "TypeScript JSX", 0, 10, 0, 0, 0, 0, 0, 0, 2, 12
+"r:\Code\Javascript\Nextjs\foodica\src\store\store.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 6, 21
+"r:\Code\Javascript\Nextjs\foodica\src\utils\allSides\blogsFunctions.ts", "TypeScript", 211, 0, 0, 0, 0, 0, 0, 1, 11, 223
+"r:\Code\Javascript\Nextjs\foodica\src\utils\allSides\linksFunctions.ts", "TypeScript", 103, 0, 0, 0, 0, 0, 0, 0, 5, 108
+"r:\Code\Javascript\Nextjs\foodica\src\utils\allSides\usersFunctions.ts", "TypeScript", 33, 0, 0, 0, 0, 0, 0, 0, 4, 37
+"r:\Code\Javascript\Nextjs\foodica\src\utils\clientside\blogFunctions.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 19, 1, 20
+"r:\Code\Javascript\Nextjs\foodica\src\utils\clientside\userFunctions.ts", "TypeScript", 22, 0, 0, 0, 0, 0, 0, 0, 3, 25
+"r:\Code\Javascript\Nextjs\foodica\src\utils\general-utils.tsx", "TypeScript JSX", 0, 16, 0, 0, 0, 0, 0, 0, 4, 20
+"r:\Code\Javascript\Nextjs\foodica\src\utils\serverside\blogIdHashing.ts", "TypeScript", 32, 0, 0, 0, 0, 0, 0, 0, 7, 39
+"r:\Code\Javascript\Nextjs\foodica\src\utils\serverside\blogsFunctions.ts", "TypeScript", 193, 0, 0, 0, 0, 0, 0, 6, 33, 232
+"r:\Code\Javascript\Nextjs\foodica\src\utils\serverside\logoFunctions.ts", "TypeScript", 71, 0, 0, 0, 0, 0, 0, 0, 4, 75
+"r:\Code\Javascript\Nextjs\foodica\src\utils\serverside\passwordFunctions.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 2, 2, 22
+"r:\Code\Javascript\Nextjs\foodica\src\utils\serverside\userFunctions.ts", "TypeScript", 168, 0, 0, 0, 0, 0, 0, 1, 23, 192
+"r:\Code\Javascript\Nextjs\foodica\tailwind.config.ts", "TypeScript", 19, 0, 0, 0, 0, 0, 0, 0, 4, 23
+"r:\Code\Javascript\Nextjs\foodica\tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 34, 0, 0, 1, 35
+"Total", "-", 1348, 4535, 27, 8874, 28, 34, 23, 113, 565, 15547

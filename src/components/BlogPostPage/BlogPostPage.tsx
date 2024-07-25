@@ -11,7 +11,7 @@ async function BlogPostPage({ params }: BlogPostPageProps) {
     return (
       <div
         className={`flex flex-col md:flex-row 
-                    gap-x-[2vw] gap-y-[32px] mt-[32px] w-full`}
+        gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
         <BlogPost blog={blog} />
         <Sidebar />

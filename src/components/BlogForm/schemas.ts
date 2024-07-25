@@ -119,7 +119,6 @@ export const ingUnitSchema = Joi.string()
   });
 export const ingQuanitySchema = Joi.number()
   .label("Ingredient quantity")
-  .max(30)
   .min(0.1)
   .required()
   .messages({

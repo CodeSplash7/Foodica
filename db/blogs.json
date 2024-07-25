@@ -1,407 +1,288 @@
 [
   {
     "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/68e3513e-26b0-46b2-876f-25ba5af2ff64.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/68e3513e-26b0-46b2-876f-25ba5af2ff64-thumb.jpg",
-      "size": 117345,
-      "uploadedAt": "2024-07-04T05:28:54.299Z",
+      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/c8f710d6-9f97-4572-b58a-bce581c98b6c.webp",
+      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/c8f710d6-9f97-4572-b58a-bce581c98b6c-thumb.webp",
+      "size": 152984,
+      "uploadedAt": "2024-07-19T14:16:29.691Z",
       "path": {},
       "pathOrder": [],
       "metadata": {}
     },
-    "title": "Smiths blog",
-    "author": "John Smith",
+    "title": "Delicious Spaghetti Bolognese",
+    "author": "Rosca Rares",
     "mainTag": "Appetizers",
-    "secondaryTags": [
-      "Salads",
-      "Seafood",
-      "Seasonal",
-      "Slow-Cooker",
-      "Snacks",
-      "Soups"
-    ],
-    "description": "fuck you for reading smiths secret recipe         ",
+    "secondaryTags": ["Pasta"],
+    "description": "A classic Italian pasta dish that is hearty, delicious, and perfect for a family dinner.",
     "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
+    "servings": 4,
+    "prepTime": 15,
+    "cookTime": 30,
+    "calories": 600,
+    "ingredients": [
+      { "unit": "g", "quantity": 400, "name": "Spaghetti", "details": "" },
+      { "unit": "g", "quantity": 500, "name": "Beef", "details": "ground" },
+      { "unit": "whole", "quantity": 1, "name": "Onion", "details": "chopped" },
+      {
+        "unit": "whole",
+        "quantity": 2,
+        "name": "Garlic cloves",
+        "details": "minced"
+      },
+      { "unit": "c", "quantity": 2, "name": "Tomato Sauce", "details": "" },
+      { "unit": "Tbsp", "quantity": 2, "name": "Olive oil", "details": "" },
+      { "unit": "pinch", "quantity": 1, "name": "Salt", "details": "" },
+      { "unit": "pinch", "quantity": 1, "name": "Pepper", "details": "" },
+      { "unit": "bunch", "quantity": 1, "name": "Basil", "details": "fresh" }
+    ],
+    "directions": [
+      "fasdfasdfasdfas",
+      "In a large pan, heat the olive oil and sauté the onion and garlic until soft.",
+      "Add the ground beef and cook until browned.",
+      "Pour in the tomato sauce and simmer for 20 minutes.",
+      "Season with salt and pepper.",
+      "Serve the sauce over the cooked spaghetti and garnish with fresh basil."
+    ],
+    "conclusion": "Enjoy this delightful spaghetti bolognese with your loved ones and savor the flavors of Italy.",
+    "creationDate": "Fri Jul 19 2024 17:06:02 GMT+0300 (Eastern European Summer Time)",
+    "id": "c922956da548b9d4b70993308de62fc1",
+    "comments": []
+  },
+  {
+    "picture": {
+      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f3dbb5d3-1a5b-4cb0-b2b2-d75d136c407d.jpg",
+      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f3dbb5d3-1a5b-4cb0-b2b2-d75d136c407d-thumb.jpg",
+      "size": 210445,
+      "uploadedAt": "2024-07-19T14:53:45.847Z",
+      "path": {},
+      "pathOrder": [],
+      "metadata": {}
+    },
+    "title": "Homemade Margherita Pizza",
+    "author": "Rosca Rares",
+    "mainTag": "Italian",
+    "secondaryTags": ["Vegetarian"],
+    "description": "A simple yet delicious Margherita pizza with a crispy crust, fresh tomatoes, mozzarella, and basil.",
+    "difficulty": "easy",
+    "servings": 2,
+    "prepTime": 20,
+    "cookTime": 12,
+    "calories": 500,
+    "ingredients": [
+      {
+        "unit": "whole",
+        "quantity": 1,
+        "name": "Pizza dough ball",
+        "details": ""
+      },
+      { "unit": "c", "quantity": 1, "name": "Tomato sauce", "details": "" },
+      {
+        "unit": "g",
+        "quantity": 200,
+        "name": "Mozzarella cheese",
+        "details": "sliced"
+      },
+      { "unit": "handful", "quantity": 1, "name": "Basil", "details": "fresh" },
+      { "unit": "Tbsp", "quantity": 1, "name": "Olive oil", "details": "" },
+      {
+        "unit": "pinch",
+        "quantity": 1,
+        "name": "Salt",
+        "details": "for taste"
+      },
+      {
+        "unit": "pinch",
+        "quantity": 1,
+        "name": "Pepper",
+        "details": "for taste"
+      }
+    ],
+    "directions": [
+      "fasdfsadfsadfasd",
+      "Roll out the pizza dough on a floured surface.",
+      "Spread the tomato sauce evenly on the dough.",
+      "Arrange the mozzarella slices on top.",
+      "Bake in the oven for 10-12 minutes until the crust is golden and cheese is bubbly.",
+      "Garnish with fresh basil, drizzle with olive oil, and season with salt and pepper."
+    ],
+    "conclusion": "Enjoy the classic taste of Margherita pizza with this easy homemade recipe.",
+    "creationDate": "Fri Jul 19 2024 17:48:20 GMT+0300 (Eastern European Summer Time)",
+    "id": "91564fd560fb66d4249d869dddb488b6",
+    "comments": []
+  },
+  {
+    "picture": {
+      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/8a1cf170-1ad4-4a3f-8b94-6a69d1c73e03.jpg",
+      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/8a1cf170-1ad4-4a3f-8b94-6a69d1c73e03-thumb.jpg",
+      "size": 1039580,
+      "uploadedAt": "2024-07-19T15:05:51.233Z",
+      "path": {},
+      "pathOrder": [],
+      "metadata": {}
+    },
+    "title": "Refreshing Summer Salad",
+    "author": "Rosca Rares",
+    "mainTag": "Appetizers",
+    "secondaryTags": ["Healthy", "Vegetarian", "Quick"],
+    "description": "A vibrant and refreshing salad perfect for hot summer days, packed with fresh veggies and a tangy dressing.",
+    "difficulty": "easy",
+    "servings": 4,
+    "prepTime": 15,
     "cookTime": 0,
-    "calories": 1,
+    "calories": 250,
     "ingredients": [
+      { "unit": "c", "quantity": 4, "name": "Greens", "details": "mixed" },
       {
-        "unit": "whole",
+        "unit": "c",
         "quantity": 1,
-        "name": "smith ingredient 1",
-        "details": ""
+        "name": "Cherry tomatoes",
+        "details": "halved"
       },
       {
-        "unit": "whole",
+        "unit": "item",
         "quantity": 1,
-        "name": "smith ingredient 2",
+        "name": "Cucumber",
+        "details": "sliced"
+      },
+      {
+        "unit": "piece",
+        "quantity": 0.5,
+        "name": "Red onion",
+        "details": "sliced thinly"
+      },
+      {
+        "unit": "g",
+        "quantity": 100,
+        "name": "Feta cheese",
+        "details": "crumbled"
+      },
+      { "unit": "c", "quantity": 0.5, "name": "Olives", "details": "" },
+      { "unit": "c", "quantity": 0.25, "name": "Olive oil", "details": "" },
+      { "unit": "Tbsp", "quantity": 2, "name": "Lemon juice", "details": "" },
+      {
+        "unit": "pinch",
+        "quantity": 1,
+        "name": "Salt",
+        "details": "for taste"
+      },
+      {
+        "unit": "pinch",
+        "quantity": 1,
+        "name": "Pepper",
+        "details": "for taste"
+      }
+    ],
+    "directions": [
+      "Preheat the oven to 350°F (175°C). Grease and flour two 9-inch round baking pans.",
+      " In a large bowl, combine the flour, sugar, cocoa powder, baking powder, baking soda, and salt.",
+      "Add the eggs, milk, oil, and vanilla, and beat on medium speed for 2 minutes. Stir in the boiling water (batter will be thin).",
+      "Pour the batter into the prepared pans and bake for 30-35 minutes, or until a toothpick inserted into the center comes out clean.",
+      "Cool in the pans for 10 minutes, then remove to wire racks to cool completely before frosting."
+    ],
+    "conclusion": "This decadent chocolate cake is rich, moist, and sure to satisfy any chocolate lover's cravings.",
+    "creationDate": "Fri Jul 19 2024 18:04:47 GMT+0300 (Eastern European Summer Time)",
+    "id": "319f56c0b205e012ac926b64fc071fa3",
+    "comments": []
+  },
+  {
+    "picture": {
+      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/4c6cd9bd-e653-4bd0-9dc3-e2bce687ae37.webp",
+      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/4c6cd9bd-e653-4bd0-9dc3-e2bce687ae37-thumb.webp",
+      "size": 132382,
+      "uploadedAt": "2024-07-19T15:12:19.252Z",
+      "path": {},
+      "pathOrder": [],
+      "metadata": {}
+    },
+    "title": "Classic Beef Tacos",
+    "author": "Rosca Rares",
+    "mainTag": "Mexican",
+    "secondaryTags": ["Beef"],
+    "description": "Flavorful and easy-to-make beef tacos that are perfect for a quick weeknight dinner.",
+    "difficulty": "easy",
+    "servings": 4,
+    "prepTime": 10,
+    "cookTime": 15,
+    "calories": 400,
+    "ingredients": [
+      { "unit": "g", "quantity": 500, "name": "Ground beef", "details": "" },
+      {
+        "unit": "bunch",
+        "quantity": 1,
+        "name": "Taco seasoning",
         "details": ""
       },
-      { "unit": "whole", "quantity": 1, "name": "ingredient 3", "details": "" },
-      { "unit": "whole", "quantity": 1, "name": "ingredient 4", "details": "" }
+      { "unit": "whole", "quantity": 8, "name": "Tortillas", "details": "" },
+      { "unit": "c", "quantity": 1, "name": "Lettuce", "details": "diced" },
+      { "unit": "whole", "quantity": 1, "name": "Tomato", "details": "diced" },
+      { "unit": "c", "quantity": 1, "name": "Cheese", "details": "shredded" },
+      { "unit": "c", "quantity": 0.5, "name": "Sour cream", "details": "" },
+      { "unit": "c", "quantity": 0.5, "name": "Salsa", "details": "" }
     ],
     "directions": [
-      "ing 1 + ing 4 = ing 5",
-      "ing 2 + ing 3 = ing 6",
-      "ing 5 + ing 6 = ing 7"
+      "Cook the ground beef in a large skillet over medium heat until browned.",
+      " Add the taco seasoning and water as directed on the packet. Simmer until the sauce thickens.",
+      "Warm the tortillas in a pan or microwave.",
+      "Assemble the tacos by filling the tortillas with the beef mixture and topping with lettuce, tomato, cheese, sour cream, and salsa."
     ],
-    "conclusion": "You must die for reading this secret sacred recipe",
-    "creationDate": "Thu Jul 04 2024 08:28:55 GMT+0300 (Eastern European Summer Time)",
-    "id": "7375fc282d2ff220dca4372cb13e52d5",
+    "conclusion": "These classic beef tacos are a hit at any meal and are quick and easy to prepare.",
+    "creationDate": "Fri Jul 19 2024 18:12:20 GMT+0300 (Eastern European Summer Time)",
+    "id": "16b149367c10677d7f73a48137ba65c0",
     "comments": []
   },
   {
     "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/590de916-5120-44ce-a973-20a286ba8f16.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/590de916-5120-44ce-a973-20a286ba8f16-thumb.jpg",
-      "size": 22901,
-      "uploadedAt": "2024-07-04T07:00:25.096Z",
+      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/04f16feb-56e3-4d89-8788-ec35bab82e47.jpg",
+      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/04f16feb-56e3-4d89-8788-ec35bab82e47-thumb.jpg",
+      "size": 8054,
+      "uploadedAt": "2024-07-19T15:19:35.217Z",
       "path": {},
       "pathOrder": [],
       "metadata": {}
     },
-    "title": "testing",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Family"],
-    "description": "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesting",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
+    "title": "Decadent Chocolate Cake",
+    "author": "Rosca Rares",
+    "mainTag": "Desserts",
+    "secondaryTags": ["Baking"],
+    "description": "A rich and moist chocolate cake that's perfect for celebrations and indulgent treats.",
+    "difficulty": "medium",
+    "servings": 8,
+    "prepTime": 15,
+    "cookTime": 35,
+    "calories": 500,
     "ingredients": [
-      { "unit": "whole", "quantity": 0, "name": "testing", "details": "" }
+      { "unit": "c", "quantity": 0.75, "name": "flour", "details": "" },
+      { "unit": "c", "quantity": 2, "name": "sugar", "details": "" },
+      { "unit": "c", "quantity": 0.75, "name": "cocoa powder", "details": "" },
+      {
+        "unit": "tsp",
+        "quantity": 0.5,
+        "name": "baking powder",
+        "details": ""
+      },
+      { "unit": "tsp", "quantity": 0.5, "name": "baking soda", "details": "" },
+      { "unit": "tsp", "quantity": 1, "name": "salt", "details": "" },
+      { "unit": "whole", "quantity": 2, "name": "eggs", "details": "" },
+      { "unit": "c", "quantity": 1, "name": "milk", "details": "" },
+      { "unit": "c", "quantity": 0.5, "name": "vegetable oil", "details": "" },
+      {
+        "unit": "tsp",
+        "quantity": 2,
+        "name": "vanilla extract",
+        "details": ""
+      },
+      { "unit": "c", "quantity": 1, "name": "boiling water", "details": "" }
     ],
     "directions": [
-      "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtgtesting"
+      "Preheat the oven to 350°F (175°C). Grease and flour two 9-inch round baking pans.",
+      "In a large bowl, combine the flour, sugar, cocoa powder, baking powder, baking soda, and salt.",
+      "Add the eggs, milk, oil, and vanilla, and beat on medium speed for 2 minutes. Stir in the boiling water (batter will be thin).",
+      "Pour the batter into the prepared pans and bake for 30-35 minutes, or until a toothpick inserted into the center comes out clean.",
+      "Cool in the pans for 10 minutes, then remove to wire racks to cool completely before frosting."
     ],
-    "conclusion": "testingtestingtestingtestingtestingtestingtestingtestingtestingtesting",
-    "creationDate": "Thu Jul 04 2024 10:00:26 GMT+0300 (Eastern European Summer Time)",
-    "id": "192e15fde48ac32407b2c8bd69d0e6c7",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/62031c68-cf01-4c0b-b579-a749210974af.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/62031c68-cf01-4c0b-b579-a749210974af-thumb.jpg",
-      "size": 65020,
-      "uploadedAt": "2024-07-04T07:07:49.222Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "wordword",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Asian"],
-    "description": "wordwordwordwordwordwordwordwordwordwordwordwordwordword",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      {
-        "unit": "whole",
-        "quantity": 0,
-        "name": "wordword",
-        "details": "wordword"
-      }
-    ],
-    "directions": ["wordwordwordword"],
-    "conclusion": "wordwordwordword",
-    "creationDate": "Thu Jul 04 2024 10:07:50 GMT+0300 (Eastern European Summer Time)",
-    "id": "85e00e78dcb65abf5acadc5eb72b8246",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/80c524aa-635a-497f-ae12-854cc91f075e.png",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/80c524aa-635a-497f-ae12-854cc91f075e-thumb.png",
-      "size": 1228883,
-      "uploadedAt": "2024-07-04T07:19:41.305Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "wordwordwordword",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Family"],
-    "description": "wordwordwordwordwordwordwordwordwordwordwordwordwordwordwordword",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      {
-        "unit": "whole",
-        "quantity": 0,
-        "name": "wordwordwordwordwordword",
-        "details": ""
-      }
-    ],
-    "directions": ["wordwordwordword"],
-    "conclusion": "wordwordwordwordwordwordwordwordwordword",
-    "creationDate": "Thu Jul 04 2024 10:19:43 GMT+0300 (Eastern European Summer Time)",
-    "id": "fdbdc13163eb2d5825d3a84768cb85fe",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/85009e73-5454-4a09-8363-fe2d33f19651.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/85009e73-5454-4a09-8363-fe2d33f19651-thumb.jpg",
-      "size": 185855,
-      "uploadedAt": "2024-07-04T07:45:39.410Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "grillgrill",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Grilling"],
-    "description": "grillgrillgrillgrillgrillgrillgrillgrillgrillgrillgrillgrill",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      {
-        "unit": "whole",
-        "quantity": 0,
-        "name": "grillgrillgrillgrillgrillgrill",
-        "details": ""
-      }
-    ],
-    "directions": ["grillgrillgrillgrillgrillgrill"],
-    "conclusion": "grillgrillgrillgrillgrillgrillgrillgrillgrillgrillgrillgrill",
-    "creationDate": "Thu Jul 04 2024 10:45:41 GMT+0300 (Eastern European Summer Time)",
-    "id": "801a56b42461460c468482569d75b75c",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/8aa1b2e6-e15d-4849-88b2-11ba8251c9bf.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/8aa1b2e6-e15d-4849-88b2-11ba8251c9bf-thumb.jpg",
-      "size": 22901,
-      "uploadedAt": "2024-07-04T08:08:47.704Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "fasfsafsadfsdafsaf",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Family"],
-    "description": "dsfasfsadfsadfasdfasdfsazfasdfasdfsadfasdfsadfasdfsadfasdfas",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 1, "name": "fasdfasdfas", "details": "" }
-    ],
-    "directions": ["fasdfsafsadfas"],
-    "conclusion": "fffasfsafasf",
-    "creationDate": "Thu Jul 04 2024 11:08:49 GMT+0300 (Eastern European Summer Time)",
-    "id": "1466b0ef024ee1df9d38e22db0b30569",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/e905e88b-3293-40d6-80d4-ee75995b3603.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/e905e88b-3293-40d6-80d4-ee75995b3603-thumb.jpg",
-      "size": 185855,
-      "uploadedAt": "2024-07-04T08:10:47.134Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "fasfsadfas",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Vegan"],
-    "description": "fasfsadfasfasfsadfasfasfsadfasfasfsadfasfasfsadfas",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 1, "name": "fasfsadfas", "details": "" }
-    ],
-    "directions": ["fasfsadfas"],
-    "conclusion": "fasfsadfas",
-    "creationDate": "Thu Jul 04 2024 11:10:51 GMT+0300 (Eastern European Summer Time)",
-    "id": "3787244e2c06d91b4f121822b0409189",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/07834834-4aca-4757-8281-10b78e86da4d.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/07834834-4aca-4757-8281-10b78e86da4d-thumb.jpg",
-      "size": 125040,
-      "uploadedAt": "2024-07-04T18:32:09.225Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "wordword",
-    "author": "John Smith",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Family"],
-    "description": "wordwordwordwordwordwordwordwordwordwordwordwordword",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 1, "name": "wordword", "details": "" }
-    ],
-    "directions": ["wordwordword"],
-    "conclusion": "word",
-    "creationDate": "Thu Jul 04 2024 21:32:10 GMT+0300 (Eastern European Summer Time)",
-    "id": "d2f3b31090074f18028c09e1462f4505",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/fef2e010-5585-4d7c-8876-4eee903ab6fd.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/fef2e010-5585-4d7c-8876-4eee903ab6fd-thumb.jpg",
-      "size": 128443,
-      "uploadedAt": "2024-07-06T09:03:17.297Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "Tomatoes",
-    "author": "Rosca Rares",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Salads", "Vegetables", "Vegan", "Vegetarian"],
-    "description": "TomatoesTomatoesTomatoesTomatoesTomatoesTomatoesTomatoes",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 0.5, "name": "Tomato", "details": "red" },
-      { "unit": "lb", "quantity": 2.5, "name": "Tomato", "details": "green" },
-      { "unit": "kg", "quantity": 1, "name": "Tomato", "details": "purple" }
-    ],
-    "directions": [
-      "Cut the half of the red tomato in half (you should have two quarters of a tomato))",
-      "Mash all the green tomatos",
-      "Cut all the purple tomatoes into pieces",
-      "Cut the 2 quartes of red tomatoes in 4 each",
-      "Put all types of tomato pieces together",
-      "BA'! Yo' hav' a sala'"
-    ],
-    "conclusion": "This tomato salad is not good at all, the purple tomoatos are toxic",
-    "creationDate": "Sat Jul 06 2024 12:03:18 GMT+0300 (Eastern European Summer Time)",
-    "id": "bb09398c2bc269491300edf24bd6de5f",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/18f37c70-708a-4ebb-9b37-887d7e29648e.webp",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/18f37c70-708a-4ebb-9b37-887d7e29648e-thumb.webp",
-      "size": 102790,
-      "uploadedAt": "2024-07-17T06:52:09.547Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "Johns blog",
-    "author": "Rosca Rares",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Family"],
-    "description": "fasdfassdfafasdfassdfafasdfassdfafasdfassdfafasdfassdfa",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 1, "name": "fasdfassdfa", "details": "" },
-      { "unit": "whole", "quantity": 1, "name": "fasdfassdfa", "details": "" }
-    ],
-    "directions": ["fasdfassdfa"],
-    "conclusion": "ffasdfassdfafasdfassdfafasdfassdfa",
-    "creationDate": "Wed Jul 17 2024 09:52:11 GMT+0300 (Eastern European Summer Time)",
-    "id": "5b39db809c8a59b121402bff21f62705",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f901ff23-87b0-423f-a6fa-6c11a1100152.webp",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/f901ff23-87b0-423f-a6fa-6c11a1100152-thumb.webp",
-      "size": 26146,
-      "uploadedAt": "2024-07-17T14:50:59.003Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "Roscas blog",
-    "author": "Rosca Rares",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Desserts"],
-    "description": "This is the description\nThis is the description\nThis is the description",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      { "unit": "whole", "quantity": 1, "name": "ingredient 1", "details": "" },
-      { "unit": "whole", "quantity": 1, "name": "ingredient 2", "details": "" }
-    ],
-    "directions": ["This is a direction"],
-    "conclusion": "FUCK you",
-    "creationDate": "Wed Jul 17 2024 17:51:00 GMT+0300 (Eastern European Summer Time)",
-    "id": "ae543d03e83623f6deebeb78c325847b",
-    "comments": []
-  },
-  {
-    "picture": {
-      "url": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/6ec38c38-6a93-4773-9eb5-3b85b120df25.jpg",
-      "thumbnailUrl": "https://files.edgestore.dev/ah5chke3jf0l6o4k/publicImages/_public/6ec38c38-6a93-4773-9eb5-3b85b120df25-thumb.jpg",
-      "size": 164451,
-      "uploadedAt": "2024-07-17T14:59:27.612Z",
-      "path": {},
-      "pathOrder": [],
-      "metadata": {}
-    },
-    "title": "Roscas second blog",
-    "author": "Rosca Rares",
-    "mainTag": "Appetizers",
-    "secondaryTags": ["Salads"],
-    "description": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    "difficulty": "easy",
-    "servings": 1,
-    "prepTime": 1,
-    "cookTime": 1,
-    "calories": 1,
-    "ingredients": [
-      {
-        "unit": "whole",
-        "quantity": 1,
-        "name": "ffffffffffffff",
-        "details": ""
-      }
-    ],
-    "directions": ["fffffffffffffffffffff"],
-    "conclusion": "ffffffffffffffffffffffffffffffffffffffffffff",
-    "creationDate": "Wed Jul 17 2024 17:59:33 GMT+0300 (Eastern European Summer Time)",
-    "id": "1e2184355dab6f0db74bcdfaf3b797b9",
+    "conclusion": "This decadent chocolate cake is rich, moist, and sure to satisfy any chocolate lover's cravings.",
+    "creationDate": "Fri Jul 19 2024 18:19:35 GMT+0300 (Eastern European Summer Time)",
+    "id": "2e0240574d776084fb19ffacb9a17d1c",
     "comments": []
   }
 ]

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Roboto_Condensed } from "next/font/google";
 
@@ -22,7 +21,7 @@ import AwaitableImage from "./AwaitableImage";
 
 export default function Sidebar() {
   return (
-    <div className={`flex flex-col gap-[64px] md:w-[200px] w-full`}>
+    <div className={`flex flex-col gap-[64px] md:basis-[200px]`}>
       <AboutMeSection />
       <SectionDivider />
       <FollowMeSection />

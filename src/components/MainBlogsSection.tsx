@@ -1,8 +1,6 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
 import { type BlogPageSearchParams } from "@/app/blogs/page";
-import { type Blog } from "@/utils/allSides/blogsFunctions";
-import { Suspense } from "react";
 export default function MainBlogsSection({
   searchParams
 }: {
