@@ -31,7 +31,7 @@ export default function CustomInput({
 }) {
   let { label, errorMessage, type, warningMessage, options } = inputField;
   const rerender = useRender(formRerender);
-  const inputComponentProps = { rerender, inputField };
+  const inputComponentProps = { rerender, inputField, showError };
 
   return (
     <div className="w-full h-fit relative">
@@ -71,11 +71,13 @@ export default function CustomInput({
 function Textarea({
   inputField,
   onChange,
-  rerender
+  rerender,
+  showError
 }: {
   inputField: InputField<string, string>;
   onChange?: () => void;
   rerender: () => void;
+  showError: boolean;
 }) {
   const { setValue, label, max, getCorrectValue, errorMessage } = inputField;
   let value = getCorrectValue();
@@ -107,7 +109,7 @@ function Textarea({
           rounded-sm
           px-[8px]
           py-[8px]
-          ${errorMessage ? "border-red-600" : "border-slate-300"}
+          ${errorMessage && showError ? "border-red-600" : "border-slate-300"}
           focus-within:border-slate-800
           `}
         rows={3}
