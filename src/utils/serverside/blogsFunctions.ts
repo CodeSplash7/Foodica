@@ -3,7 +3,12 @@
 import fs from "fs";
 import path from "path";
 import { redirect } from "next/navigation";
-import { Blog, BlogTag, getDivisions } from "@/utils/allSides/blogsFunctions";
+import {
+  BlogComment,
+  Blog,
+  BlogTag,
+  getDivisions
+} from "@/utils/allSides/blogsFunctions";
 import crypto from "crypto";
 import { addBlogToUser } from "./userFunctions";
 
@@ -148,6 +153,17 @@ export async function checkForBlogName({
   if (blogSelected) {
     redirectToCorrectBlog(blogSelected);
   }
+}
+
+export async function addCommentToBlog(comment: BlogComment, blogId: string) {
+  await initializeBlogs();
+  const blog = await getBlogById(blogId);
+  if (!blog) {
+    return { ok: false, error: "Couldn't find the blog in the database." };
+  }
+  blog.comments.push(comment);
+  updateDb();
+  return { ok: true, error: null };
 }
 
 export async function createBlog(
