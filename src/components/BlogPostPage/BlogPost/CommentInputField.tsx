@@ -6,6 +6,12 @@ import { Blog } from "@/utils/allSides/blogsFunctions";
 import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
 import Joi from "joi";
 import { useState } from "react";
+import { Roboto_Condensed } from "next/font/google";
+
+const roboto_condensed = Roboto_Condensed({
+  weight: "600",
+  subsets: ["latin"]
+});
 
 const commentSchema = Joi.string().label("Comment").max(1000).messages({
   "string.max": "Character limit is 1000."
@@ -30,9 +36,10 @@ export default function CommentInput({
     })
   );
   return (
-    <div>
-      <div>Leave a Comment</div>
-      <div>Your email address will not be published.</div>
+    <div className={`flex flex-col gap-[16px]`}>
+      <div className={`text-[24px] uppercase ${roboto_condensed.className}`}>
+        Leave a Comment
+      </div>
       <div>
         <CustomInput
           showLabel={false}
@@ -40,7 +47,13 @@ export default function CommentInput({
           inputField={commentField}
         />
       </div>
-      <div onClick={handleSubmit}>Post Comment</div>
+      <div
+        className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white
+      `}
+        onClick={handleSubmit}
+      >
+        Post Comment
+      </div>
       <div className="relative">
         <div className="absolute flex gap-[16px] ">
           {isLoading && (
