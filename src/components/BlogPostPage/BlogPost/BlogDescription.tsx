@@ -1,7 +1,7 @@
 import AwaitableImage from "@/components/AwaitableImage";
+import ClickableName from "@/components/ClickableName";
 import { Blog } from "@/utils/allSides/blogsFunctions";
 import { User } from "@/utils/allSides/usersFunctions";
-import { getUserByUsername } from "@/utils/serverside/userFunctions";
 import { Inter } from "next/font/google";
 const inter_600 = Inter({
   weight: "600",
@@ -32,9 +32,11 @@ export default async function BlogDescription({
         />
       </div>
       <div className={`flex-1 flex flex-col gap-[12px] `}>
-        <div className={`${inter_600.className} text-[1.2rem]`}>
+        <ClickableName
+          className={`transition duration-150 text-gray-800 hover:text-gray-500 ${inter_600.className} text-[1.2rem]`}
+        >
           {blog.author}
-        </div>
+        </ClickableName>
         <div
           className={`leading-7 text-gray-700 [word-break:break-all] [overflow-wrap:break-word] ${inter_300.className}`}
         >
