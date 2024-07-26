@@ -24,7 +24,7 @@ export default async function BlogPost({ blog }: { blog: Blog }) {
         <TagList blog={blog} />
         <BlogDescription blog={blog} authorUser={authorUser} />
         <OtherAuthorBlogs blog={blog} authorBlogs={authorBlogs} />
-        <CommentSection blog={blog} authorId={authorUser.id} />
+        <CommentSection blog={blog} />
       </div>
     );
 }

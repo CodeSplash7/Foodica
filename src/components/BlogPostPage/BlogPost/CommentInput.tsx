@@ -19,10 +19,10 @@ const commentSchema = Joi.string().label("Comment").max(1000).messages({
 
 export default function CommentInput({
   blog,
-  authorId
+  commenterId
 }: {
   blog: Blog;
-  authorId: string;
+  commenterId: string | undefined;
 }) {
   const rerender = useRender();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,7 +32,9 @@ export default function CommentInput({
       label: "Comment",
       schema: commentSchema,
       type: "textarea",
-      max: 1000
+      max: 1000,
+      disabled: !commenterId,
+      initialValue: !commenterId ? "Log in to write comments!" : ""
     })
   );
   return (
@@ -47,13 +49,15 @@ export default function CommentInput({
           inputField={commentField}
         />
       </div>
-      <div
-        className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white
+      {!!commenterId && (
+        <div
+          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white
       `}
-        onClick={handleSubmit}
-      >
-        Post Comment
-      </div>
+          onClick={handleSubmit}
+        >
+          Post Comment
+        </div>
+      )}
       <div className="relative">
         <div className="absolute flex gap-[16px] ">
           {isLoading && (
@@ -69,7 +73,11 @@ export default function CommentInput({
 
   async function handleSubmit() {
     addCommentToBlog(
-      { userId: authorId, message: commentField.value },
+      {
+        userId: commenterId as string,
+        message: commentField.value,
+        date: new Date().toString()
+      },
       blog.id
     );
     commentField.setValue("");

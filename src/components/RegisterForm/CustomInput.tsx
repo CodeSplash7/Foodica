@@ -79,7 +79,8 @@ function Textarea({
   rerender: () => void;
   showError: boolean;
 }) {
-  const { setValue, label, max, getCorrectValue, errorMessage } = inputField;
+  const { setValue, label, max, getCorrectValue, errorMessage, disabled } =
+    inputField;
   let value = getCorrectValue();
 
   return (
@@ -90,6 +91,7 @@ function Textarea({
         {value.length}/{max}
       </div>
       <textarea
+        disabled={disabled}
         onChange={(e) => {
           onChange?.();
           setValue(e.target.value.slice(0, max));

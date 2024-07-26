@@ -7,13 +7,11 @@ export const formatCreationDate = (date: string) => {
   });
 };
 
-export const shortenText = (text: string, maxLength: number) => {
-  const words = text.split(" ");
-
-  if (words.length <= maxLength) {
+export const shortenText = (text: string, maxLength: number, end?: string) => {
+  if (text.length <= maxLength) {
     return text;
   }
 
-  const shortenedText = words.slice(0, maxLength).join(" ") + " [...]";
+  const shortenedText = text.slice(0, maxLength) + (end || " [...]");
   return shortenedText;
 };

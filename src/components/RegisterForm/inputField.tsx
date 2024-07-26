@@ -26,6 +26,7 @@ export default class InputField<
   onSet?: (value: T) => void;
   max?: number;
   maxImageSize?: number;
+  disabled?: boolean;
   constructor({
     initialValue = "" as U,
     schema,
@@ -35,7 +36,8 @@ export default class InputField<
     step,
     onSet,
     maxImageSize,
-    max
+    max,
+    disabled
   }: {
     initialValue?: U;
     schema: Joi.AnySchema<T>;
@@ -46,6 +48,7 @@ export default class InputField<
     onSet?: (value: T) => void;
     max?: number;
     maxImageSize?: number;
+    disabled?: boolean;
   }) {
     this.modifiedValue = false;
     this.schema = schema;
@@ -65,6 +68,7 @@ export default class InputField<
     this.onSet = onSet;
     this.max = max;
     this.maxImageSize = maxImageSize;
+    this.disabled = disabled;
   }
 
   getCorrectValue() {

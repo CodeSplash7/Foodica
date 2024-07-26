@@ -4,7 +4,6 @@ import ClickableTag from "./ClickableTag";
 import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate, shortenText } from "@/utils/general-utils";
 import { Roboto_Condensed } from "next/font/google";
-import { Picture } from "@/utils/allSides/usersFunctions";
 import ClickableName from "./ClickableName";
 import { Suspense } from "react";
 import BlogCardPicture from "./BlogCardPicture";
@@ -104,7 +103,7 @@ function BlogCardDesc({ desc }: { desc: string }) {
     <div
       className={`w-full text-[16px] text-[#4c4c4c] [line-height:28.8px] [text-spacing:.7px] break-words`}
     >
-      {shortenText(desc, 56)}
+      {shortenText(desc, 500)}
     </div>
   );
 }
@@ -125,5 +124,3 @@ function BlogCardButton({ blog }: { blog: Blog }) {
     </Suspense>
   );
 }
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
