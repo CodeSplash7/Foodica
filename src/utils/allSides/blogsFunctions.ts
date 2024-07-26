@@ -70,7 +70,15 @@ export type Ingredient = {
   details?: string;
 };
 
-export type BlogComment = { userId: string; message: string; date: string };
+export type BlogComment = {
+  id: string;
+  parentId: string | null;
+  postId: string;
+  userId: string;
+  content: string;
+  timestamp: string;
+  replies: BlogComment[];
+};
 
 export type Blog = {
   id: string;

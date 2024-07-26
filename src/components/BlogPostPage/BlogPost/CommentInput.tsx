@@ -17,12 +17,17 @@ const commentSchema = Joi.string().label("Comment").max(1000).messages({
   "string.max": "Character limit is 1000."
 });
 
+// Used for comments and replies
 export default function CommentInput({
-  blog,
-  commenterId
+  blogId,
+  userId,
+  commentAuthorName,
+  parentCommentId
 }: {
-  blog: Blog;
-  commenterId: string | undefined;
+  blogId: string;
+  userId: string | undefined;
+  parentCommentId?: string;
+  commentAuthorName?: string;
 }) {
   const rerender = useRender();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,14 +38,17 @@ export default function CommentInput({
       schema: commentSchema,
       type: "textarea",
       max: 1000,
-      disabled: !commenterId,
-      initialValue: !commenterId ? "Log in to write comments!" : ""
+      disabled: !userId,
+      initialValue: !userId ? "Log in to write comments!" : ""
     })
   );
+
   return (
     <div className={`flex flex-col gap-[16px]`}>
       <div className={`text-[24px] uppercase ${roboto_condensed.className}`}>
-        Leave a Comment
+        {commentAuthorName
+          ? `Reply to ${commentAuthorName}`
+          : "Leave a Comment"}
       </div>
       <div>
         <CustomInput
@@ -49,7 +57,7 @@ export default function CommentInput({
           inputField={commentField}
         />
       </div>
-      {!!commenterId && (
+      {!!userId && (
         <div
           className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white
       `}
@@ -72,14 +80,7 @@ export default function CommentInput({
   );
 
   async function handleSubmit() {
-    addCommentToBlog(
-      {
-        userId: commenterId as string,
-        message: commentField.value,
-        date: new Date().toString()
-      },
-      blog.id
-    );
+    addCommentToBlog(blogId, userId!, commentField.value, parentCommentId);
     commentField.setValue("");
     rerender();
     await handleSubmittingAnimation();

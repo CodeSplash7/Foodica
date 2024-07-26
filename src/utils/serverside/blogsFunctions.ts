@@ -155,13 +155,28 @@ export async function checkForBlogName({
   }
 }
 
-export async function addCommentToBlog(comment: BlogComment, blogId: string) {
+export async function addCommentToBlog(
+  postId: string,
+  userId: string,
+  content: string,
+  parentCommentId?: string
+) {
   await initializeBlogs();
-  const blog = await getBlogById(blogId);
+  const blog = await getBlogById(postId);
   if (!blog) {
     return { ok: false, error: "Couldn't find the blog in the database." };
   }
-  blog.comments.push(comment);
+  const newComment: BlogComment = {
+    id: crypto.randomBytes(16).toString("hex"),
+    parentId: parentCommentId || null,
+    postId,
+    userId,
+    content,
+    timestamp: new Date().toString(),
+    replies: []
+  };
+
+  blog.comments.push(newComment);
   updateDb();
   return { ok: true, error: null };
 }
