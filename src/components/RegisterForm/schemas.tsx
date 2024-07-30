@@ -18,7 +18,9 @@ const passwordSchema = Joi.string()
   .label("password");
 
 const pictureSchema = Joi.object({
-  size: Joi.number().max(500000),
+  size: Joi.number().max(500000).messages({
+    "number.max": "The image is too big"
+  }),
   type: Joi.string(),
   name: Joi.string()
 }).unknown();

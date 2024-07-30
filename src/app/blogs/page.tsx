@@ -3,8 +3,6 @@ import MessageAboveBlogs from "@/components/MessageAboveBlogs";
 import MainBlogsSection from "@/components/MainBlogsSection";
 import { getRandomBlog } from "@/utils/serverside/blogsFunctions";
 import { Suspense } from "react";
-import { getBlogs } from "@/utils/serverside/blogsFunctions";
-import { Blog } from "@/utils/allSides/blogsFunctions";
 
 export type BlogPageSearchParams = {
   search?: string;

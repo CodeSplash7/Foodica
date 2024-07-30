@@ -5,9 +5,16 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export function SubmitBlogButton({ toUpdate }: { toUpdate: boolean }) {
+export function SubmitBlogButton({
+  toUpdate,
+  submitPost
+}: {
+  toUpdate: boolean;
+  submitPost: (e: React.FormEvent) => Promise<void>;
+}) {
   return (
     <button
+      onClick={submitPost}
       className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
     >
       {toUpdate ? "Update Blog Post" : "Create Blog Post"}

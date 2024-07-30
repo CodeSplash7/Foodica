@@ -1,6 +1,6 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-import { checkForBlogName, getBlogs } from "@/utils/serverside/blogsFunctions";
+import { checkForBlogName } from "@/utils/serverside/blogsFunctions";
 
 export default function BlogPage({
   params
@@ -9,7 +9,7 @@ export default function BlogPage({
 }) {
   checkForBlogName({
     possibleName: params.month
-  })
+  });
 
   return (
     <div className={`flex flex-col gap-[32px] w-full`}>
@@ -26,7 +26,7 @@ export default function BlogPage({
         className={`flex flex-col md:flex-row 
                       gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
-        <BlogList blogs={getBlogs()} year={params.year} month={params.month} />
+        <BlogList searchParams={{}} year={params.year} month={params.month} />
         <Sidebar />
       </div>
     </div>

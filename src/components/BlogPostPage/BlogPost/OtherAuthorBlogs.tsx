@@ -65,7 +65,7 @@ export default function OtherAuthorBlogs({
       <div className="flex flex-row justify-between gap-[8px]">
         {visibleBlogs.map((b, index) => (
           <ClickableTitle
-            key={blog.id}
+            key={b.id}
             blog={blog}
             className={`${blogsTemplateStyles[index]} gap-[16px]`}
           >

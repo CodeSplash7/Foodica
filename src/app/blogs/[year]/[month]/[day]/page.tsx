@@ -1,6 +1,5 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-// import { checkForBlogName } from "../../page";
 import { checkForBlogName, getBlogs } from "@/utils/serverside/blogsFunctions";
 
 export default function BlogPage({
@@ -28,7 +27,7 @@ export default function BlogPage({
                       gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
         <BlogList
-          blogs={getBlogs()}
+          searchParams={{}}
           year={params.year}
           month={params.month}
           day={params.day}

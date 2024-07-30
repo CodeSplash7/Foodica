@@ -24,7 +24,7 @@ export default async function BlogComments({
       <CommentsSeparationLine />
       <div>
         {comments.map((c, i) => (
-          <Comment blogId={blogId} comment={c} commentIndex={i} />
+          <Comment key={i} blogId={blogId} comment={c} commentIndex={i} />
         ))}
       </div>
     </div>

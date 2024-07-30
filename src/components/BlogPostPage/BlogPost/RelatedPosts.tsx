@@ -11,6 +11,7 @@ const roboto_condensed = Roboto_Condensed({
 
 export default async function RelatedPosts({ blog }: { blog: Blog }) {
   const relatedPosts = await getRelatedBlogs(blog.id, blog.mainTag, 3);
+  if (relatedPosts.length)
   return (
     <div className={`flex flex-col gap-[16px]`}>
       <div

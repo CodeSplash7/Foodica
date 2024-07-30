@@ -1,6 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useState } from "react";
 import InputField from "../RegisterForm/inputField"; // Adjust import path as needed
-import Joi from "joi";
 import CustomInput, { useRender } from "../RegisterForm/CustomInput";
 import { directionSchema } from "./schemas";
 import { Inter } from "next/font/google";
@@ -22,8 +21,7 @@ const DirectionsField = ({
   inputField: InputField<string[], string[]>;
 }) => {
   const rerender = useRender(formRerender);
-  let { setValue, label, modifiedValue, errorMessage, getCorrectValue } =
-    inputField;
+  let { setValue, label, errorMessage, getCorrectValue } = inputField;
   let value = getCorrectValue();
 
   const addDirection = () => {
@@ -40,7 +38,7 @@ const DirectionsField = ({
   };
 
   return (
-    <div className="w-full h-fit">
+    <>
       <label
         className="flex flex-wrap gap-x-8 items-center text-slate-700 text-18px font-bold"
         htmlFor={`${label.toLowerCase()}-input`}
@@ -53,11 +51,12 @@ const DirectionsField = ({
       <div className="w-full flex flex-col h-fit gap-[8px]">
         {value.map((direction, index) => {
           return (
-            <div className="flex items-end gap-[8px]" key={index}>
-              <div>{index + 1}.</div>
+            <div className="relative flex items-end gap-[8px]" key={index}>
+              <div className={"absolute w-fit right-[103%] top-[30%]"}>
+                {index + 1}.
+              </div>
               <DirectionField
                 direction={direction}
-                index={index}
                 rerender={rerender}
                 setListValue={(value) => {
                   inputField.value[index] = value;
@@ -80,17 +79,15 @@ const DirectionsField = ({
       >
         Add Direction
       </div>
-    </div>
+    </>
   );
 };
 
 function DirectionField({
   direction,
   rerender,
-  setListValue,
-  index
+  setListValue
 }: {
-  index: number;
   direction: string;
   rerender: () => void;
   setListValue: (value: string) => void;

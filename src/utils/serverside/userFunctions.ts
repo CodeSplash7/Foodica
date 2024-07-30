@@ -152,6 +152,12 @@ export async function registerUser(
     user.account.email = parsedData.email;
     user.profile.username = parsedData.username;
     user.profile.profilePicture = parsedData.profilePicture;
+    cachedUsers.forEach((u, index) => {
+      if (u.id === options.id) {
+        cachedUsers[index] = user;
+      }
+    });
+
     await updateDb();
     return user;
   }

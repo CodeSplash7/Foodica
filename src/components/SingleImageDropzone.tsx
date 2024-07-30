@@ -57,7 +57,6 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       }
       return null;
     }, [value]);
-
     // dropzone configuration
     const {
       getRootProps,

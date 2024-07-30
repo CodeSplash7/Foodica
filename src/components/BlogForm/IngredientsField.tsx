@@ -37,7 +37,7 @@ export default function IngredientsField({
   let { setValue, label, getCorrectValue, errorMessage } = inputField;
   let value = getCorrectValue();
   return (
-    <div className="w-full h-fit">
+    <>
       <label
         className={`${inter.className} flex flex-wrap gap-x-[8px] items-center text-slate-700 text-[18px] font-bold`}
         htmlFor={`${label.toLowerCase()}-input`}
@@ -49,13 +49,14 @@ export default function IngredientsField({
       </label>
       <div className={`w-full h-fit `}>
         {value.map((ing, index) => (
-          <div className={`flex items-end gap-[8px]`} key={index}>
-            <div>{index + 1}.</div>
+          <div className={`relative flex items-end gap-[8px]`} key={index}>
+            <div className={"absolute w-fit right-[103%] top-[45%]"}>
+              {index + 1}.
+            </div>
             <IngredientField
               setListValue={(value) => {
                 const newListValue = inputField.getCorrectValue();
                 newListValue[index] = value;
-                // inputField.value[index] = value;
                 setValue(newListValue);
                 rerender();
               }}
@@ -78,7 +79,7 @@ export default function IngredientsField({
       >
         Add Ingredient
       </div>
-    </div>
+    </>
   );
   function addIngredient() {
     const unit = "whole";

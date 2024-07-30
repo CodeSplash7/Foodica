@@ -1,5 +1,4 @@
 import { Picture } from "@/utils/allSides/usersFunctions";
-import { useState } from "react";
 
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
@@ -14,7 +13,6 @@ export default function ImageInput({
   formRerender?: () => void;
 }) {
   const rerender = useRender(formRerender);
-
   const options = {
     dropzoneOptions: { maxSize: inputField.maxImageSize },
     width: 96,
@@ -37,6 +35,7 @@ export default function ImageInput({
         {inputField.label}
       </div>
       <SingleImageDropzone {...options} />
+      <div className="text-red-600">{inputField.errorMessage}</div>
     </div>
   );
 }

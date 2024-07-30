@@ -9,7 +9,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { createBlog, deleteBlogPost } from "@/utils/serverside/blogsFunctions";
 import { Session } from "next-auth";
 import CustomInput, { useRender } from "../RegisterForm/CustomInput";
-import ImageInput from "../RegisterForm/ProfileImageInput";
+import ImageInput from "../RegisterForm/ImageInput";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 import { SubmitBlogButton, DeleteBlogButton } from "./SubmitBlogButton";
 import {
@@ -215,25 +215,23 @@ export default function BlogForm({
   }, [session]);
 
   const getBlogInfo = useCallback(async () => {
-    if (hashId) {
-      const blog = await findBlogFromHash(hashId);
-      if (!blog) return;
-      setBlogId(blog.id);
-      setBlogDate(blog.creationDate);
-      titleField.setInitialValue(blog.title);
-      mainTagField.setInitialValue(blog.mainTag);
-      secondaryTagsField.setInitialValue(blog.secondaryTags);
-      descField.setInitialValue(blog.description);
-      servingsField.setInitialValue(blog.servings);
-      conclusionField.setInitialValue(blog.conclusion);
-      blogPictureField.setInitialValue(blog.picture);
-      ingredientsField.setInitialValue(blog.ingredients);
-      directionsField.setInitialValue(blog.directions);
-      difficultyField.setInitialValue(blog.difficulty);
-      cookTimeField.setInitialValue(blog.cookTime);
-      prepTimeField.setInitialValue(blog.prepTime);
-      caloriesField.setInitialValue(blog.calories);
-    }
+    const blog = await findBlogFromHash(hashId!);
+    if (!blog) return;
+    setBlogId(blog.id);
+    setBlogDate(blog.creationDate);
+    titleField.setInitialValue(blog.title);
+    mainTagField.setInitialValue(blog.mainTag);
+    secondaryTagsField.setInitialValue(blog.secondaryTags);
+    descField.setInitialValue(blog.description);
+    servingsField.setInitialValue(blog.servings);
+    conclusionField.setInitialValue(blog.conclusion);
+    blogPictureField.setInitialValue(blog.picture);
+    ingredientsField.setInitialValue(blog.ingredients);
+    directionsField.setInitialValue(blog.directions);
+    difficultyField.setInitialValue(blog.difficulty);
+    cookTimeField.setInitialValue(blog.cookTime);
+    prepTimeField.setInitialValue(blog.prepTime);
+    caloriesField.setInitialValue(blog.calories);
   }, [hashId]);
   const stringifyFormInformation = (recipePicture: any) => {
     return JSON.stringify({
@@ -259,6 +257,10 @@ export default function BlogForm({
       return blogPictureField.initialValue;
     }
     const result = await uploadBlogImage();
+    if (result instanceof Error) {
+      blogPictureField.setErrorMessage(result.message);
+      return null;
+    }
     return result;
   };
 
@@ -283,8 +285,7 @@ export default function BlogForm({
       return;
     }
     const recipePicture = await getRecipePicture();
-    if (recipePicture instanceof Error) {
-      blogPictureField.setErrorMessage(recipePicture.message);
+    if (!recipePicture) {
       setIsBlogSent(false);
       setIsLoading(false);
       return;
@@ -312,84 +313,79 @@ export default function BlogForm({
 
   return (
     <>
-      <div className={`w-full text-center relative text-[30px]`}>
-        {toUpdate ? "Modify Blog" : "Create Blog"}
-      </div>
-      <form
-        autoComplete="off"
-        onSubmit={handleSubmit}
-        className={`w-full sm:w-2/3 h-fit items-start flex flex-col gap-[16px]`}
-      >
-        <div className={`w-full flex gap-[16px]`}>
-          <div className="w-1/2">
+      <FormHeader toUpdate={toUpdate} />
+      <Form>
+        <FormRow>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={titleField} />
-          </div>
-          <div className="w-1/2"></div>
-        </div>
-        <div className={`w-full flex gap-[16px] items-end`}>
-          <div className="w-1/2 h-fit">
+          </FormRowItem>
+          <FormRowItem></FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={mainTagField} />
-          </div>
-          <div className="w-1/2 h-fit">
+          </FormRowItem>
+          <FormRowItem>
             <CustomInput
               formRerender={rerender}
               inputField={secondaryTagsField}
             />
-          </div>
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
           <CustomInput formRerender={rerender} inputField={descField} />
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
-          <div className="w-1/2">
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={difficultyField} />
-          </div>
-          <div className="w-1/2"></div>
-        </div>
-        <div className={`w-full flex gap-[16px] items-end`}>
-          <div className="w-1/2 h-fit">
+          </FormRowItem>
+          <FormRowItem></FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={prepTimeField} />
-          </div>
-          <div className="w-1/2 h-fit">
+          </FormRowItem>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={cookTimeField} />
-          </div>
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
-          <div className="w-1/2">
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={caloriesField} />
-          </div>
-          <div className="w-1/2">
+          </FormRowItem>
+          <FormRowItem>
             <CustomInput formRerender={rerender} inputField={servingsField} />
-          </div>
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
-          <IngredientsField
-            formRerender={rerender}
-            inputField={ingredientsField}
-          />
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
-          <DirectionsField
-            formRerender={rerender}
-            inputField={directionsField}
-          />
-        </div>
-        <div className={`w-full flex gap-[16px]`}>
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
+            <IngredientsField
+              formRerender={rerender}
+              inputField={ingredientsField}
+            />
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
+            <DirectionsField
+              formRerender={rerender}
+              inputField={directionsField}
+            />
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
           <CustomInput formRerender={rerender} inputField={conclusionField} />
-        </div>
-        <ImageInput formRerender={rerender} inputField={blogPictureField} />
-        <div className={`self-start text-red-600`}>{postError}</div>
-        {isLoading && (
-          <div className="flex text-black gap-[16px]">
-            Creating Your Blog...
-            <LoadingIcon w={24} />
-          </div>
-        )}
-        <div className={`w-full flex justify-between`}>
-          <SubmitBlogButton toUpdate={toUpdate} />
-          <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDeletePost} />
-        </div>
-      </form>
+        </FormRow>
+        <FormRow>
+          <ImageInput formRerender={rerender} inputField={blogPictureField} />
+        </FormRow>
+      </Form>
+      <FormState isLoading={isLoading} postError={postError} />
+      <FormFooter
+        handleSubmit={handleSubmit}
+        toUpdate={toUpdate}
+        handleDeletePost={handleDeletePost}
+      />
     </>
   );
 
@@ -409,4 +405,68 @@ export default function BlogForm({
     }
     return null;
   }
+}
+
+function FormFooter({
+  toUpdate,
+  handleDeletePost,
+  handleSubmit
+}: {
+  toUpdate: boolean;
+  handleDeletePost: () => Promise<void>;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
+}) {
+  return (
+    <div className={`w-full flex justify-between`}>
+      <SubmitBlogButton toUpdate={toUpdate} submitPost={handleSubmit} />
+      <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDeletePost} />
+    </div>
+  );
+}
+
+function FormRow({ children }: { children: React.ReactNode }) {
+  return <div className={`w-full flex gap-[16px] items-end`}>{children}</div>;
+}
+
+function FormRowItem({ children }: { children?: React.ReactNode }) {
+  return <div className="flex-1 h-fit">{children}</div>;
+}
+
+function FormState({
+  postError,
+  isLoading
+}: {
+  postError: string;
+  isLoading: boolean;
+}) {
+  return (
+    <>
+      <div className={`self-start text-red-600`}>{postError}</div>
+      {isLoading && (
+        <div className="flex text-black gap-[16px]">
+          Creating Your Blog...
+          <LoadingIcon w={24} />
+        </div>
+      )}
+    </>
+  );
+}
+
+function FormHeader({ toUpdate }: { toUpdate: boolean }) {
+  return (
+    <div className={`w-full text-center relative text-[30px]`}>
+      {toUpdate ? "Modify Blog" : "Create Blog"}
+    </div>
+  );
+}
+
+function Form({ children }: { children: React.ReactNode }) {
+  return (
+    <form
+      autoComplete="off"
+      className={`w-full sm:w-2/3 h-fit items-start flex flex-col gap-[16px]`}
+    >
+      {children}
+    </form>
+  );
 }

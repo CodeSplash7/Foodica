@@ -6,9 +6,9 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 // components
-import ImageInput from "./ProfileImageInput";
+import ImageInput from "./ImageInput";
 import SubmitAccountButton from "./SubmitAccountButton";
-import CustomInput from "./CustomInput";
+import CustomInput, { useRender } from "./CustomInput";
 // functions
 import { registerUser, getUserByEmail } from "@/utils/serverside/userFunctions";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
@@ -63,6 +63,7 @@ export default function RegisterForm({ session }: { session: Session | null }) {
   const router = useRouter();
   const { edgestore } = useEdgeStore();
   const searchParams = useSearchParams();
+  const rerender = useRender();
 
   //* state initialization
   const toUpdate = searchParams.get("for") === "update" && !!session;
@@ -71,14 +72,20 @@ export default function RegisterForm({ session }: { session: Session | null }) {
   const [registrationError, setRegistrationError] = useState("");
 
   //* helper functions
-  const isRegistrationError = useCallback(
-    () =>
+  const isRegistrationError = useCallback(() => {
+    console.log(
+      usernameField.errorMessage,
+      emailField.errorMessage,
+      imageField.errorMessage
+    );
+    return (
       usernameField.errorMessage ||
       emailField.errorMessage ||
       imageField.errorMessage ||
-      (toUpdate ? false : passwordField.errorMessage),
-    [usernameField, emailField, imageField, passwordField, toUpdate]
-  );
+      (toUpdate ? false : passwordField.errorMessage)
+    );
+  }, [usernameField, emailField, imageField, passwordField, toUpdate]);
+
   const getUserInfo = useCallback(async () => {
     if (session) {
       const user = await getUserByEmail(session?.user?.email);
@@ -120,8 +127,7 @@ export default function RegisterForm({ session }: { session: Session | null }) {
   //* form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isRegistrationError())
-      return setRegistrationError("Solve the input problems first!");
+    if (isRegistrationError()) return;
 
     const profilePicture = await getPfp();
     const stringJsonData = stringifyFormInformation(profilePicture);

@@ -166,17 +166,21 @@ function SelectInput({
   rerender: () => void;
   mini?: boolean;
 }) {
-  const { setValue, label, options, getCorrectValue, errorMessage } =
-    inputField;
-  let value = getCorrectValue();
-  if (value === "") setValue(options?.[0] || "");
+  const {
+    setValue,
+    label,
+    options,
+    getCorrectValue,
+    errorMessage,
+    initialValue
+  } = inputField;
   return (
     <select
+      value={getCorrectValue()}
       onChange={(e) => {
         setValue(e.target.value);
         rerender();
       }}
-      value={value}
       id={`${label.toLowerCase()}-input`}
       className={`
         w-full outline-none 
@@ -241,7 +245,7 @@ const KeywordInput = ({
   inputField,
   rerender
 }: {
-  inputField: InputField<string[]>;
+  inputField: InputField<string[], string[]>;
   rerender: () => void;
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -274,7 +278,6 @@ const KeywordInput = ({
     inputField.setValue(inputField.value?.filter((k) => k !== keyword));
     rerender();
   };
-
   return (
     <div className="relative w-full h-fit">
       <div
@@ -282,8 +285,8 @@ const KeywordInput = ({
           inputField.errorMessage ? "border-red-600" : "border-slate-300"
         } focus-within:border-slate-800 rounded-sm p-2`}
       >
-        {Array.isArray(inputField.value) &&
-          inputField.value?.map((keyword) => (
+        {Array.isArray(inputField.getCorrectValue()) &&
+          inputField.getCorrectValue()?.map((keyword) => (
             <span
               key={keyword}
               className="bg-slate-200 text-slate-800 px-2 py-1 rounded-sm flex items-center gap-1"
