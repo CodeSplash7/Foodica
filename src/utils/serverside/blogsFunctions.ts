@@ -260,3 +260,19 @@ export async function deleteBlogPost(blogId: string): Promise<boolean> {
     return false;
   }
 }
+
+export async function findRepliesForComment(commentId: string) {
+  const replies = [];
+  const allBlogs = await getBlogs();
+  for (let i = 0; i < allBlogs.length; i++) {
+    const blog = allBlogs[i];
+    const comments = blog.comments;
+    for (let j = 0; j < comments.length; j++) {
+      const comment = comments[j];
+      if (comment.parentId === commentId) {
+        replies.push(comment);
+      }
+    }
+  }
+  return replies;
+}

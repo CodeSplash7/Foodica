@@ -1,28 +1,32 @@
 "use client";
 
 import { shortenText } from "@/utils/general-utils";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function CommentMessage({
   message,
-  commentIndex
+  commentIndex,
+  isTopComment,
+  parentCommentIndex
 }: {
   message: string;
   commentIndex: number;
+  parentCommentIndex?: number;
+  isTopComment: boolean;
 }) {
   const visibleCharLimit = 200;
   const [isReadMore, setIsReadMore] = useState(false);
 
   return (
-    <div
-      className={`[overflow-wrap:break-word] text-gray-700 tracking-wider leading-7`}
-    >
-      {!isReadMore ? shortenText(message, visibleCharLimit) : message}
+    <div className={`w-full break-all  text-gray-700 tracking-wider leading-7`}>
+      {!isReadMore
+        ? replaceNewlinesWithBr(shortenText(message, visibleCharLimit))
+        : replaceNewlinesWithBr(message)}
       {message.length > visibleCharLimit && (
         <div
           onClick={async () => {
             if (isReadMore) {
-              smoothScrollToComment(commentIndex);
+              smoothScrollToComment();
               await delay(300);
             }
             setIsReadMore(!isReadMore);
@@ -35,8 +39,11 @@ export default function CommentMessage({
     </div>
   );
 
-  function smoothScrollToComment(commentIndex: number) {
-    const comment = document.querySelector(`[id="comment${commentIndex}"]`);
+  function smoothScrollToComment() {
+    let selector = isTopComment
+      ? `comment${commentIndex}`
+      : `comment${parentCommentIndex}reply${commentIndex}`;
+    const comment = document.querySelector(`[id="${selector}"]`);
     if (comment) {
       comment.scrollIntoView({ behavior: "smooth" });
     }
@@ -45,4 +52,13 @@ export default function CommentMessage({
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function replaceNewlinesWithBr(str: string) {
+  return str.split("\n").map((item, index) => (
+    <React.Fragment key={index}>
+      {item}
+      {index < str.split("\n").length - 1 && <br />}
+    </React.Fragment>
+  ));
 }

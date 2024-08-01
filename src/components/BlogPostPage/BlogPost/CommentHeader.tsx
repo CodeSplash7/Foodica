@@ -9,30 +9,46 @@ const inter = Inter({
 
 export default function CommentHeader({
   commentAuthor,
-  commentTimestamp
+  commentTimestamp,
+  isTopComment
 }: {
   commentAuthor: User;
   commentTimestamp: string;
+  isTopComment: boolean;
 }) {
   return (
-    <div className={`w-full flex gap-[32px] items-start`}>
-      <div className="w-[80px] basis-[80px] relative">
+    <div
+      className={`w-full flex ${
+        isTopComment ? "gap-[32px]" : "gap-[16px]"
+      } items-start`}
+    >
+      <div
+        className={`relative ${
+          isTopComment ? "basis-[80px] h-[80px]" : "basis-[56px] h-[56px]"
+        }`}
+      >
         <AwaitableImage
           src={commentAuthor.profile.profilePicture?.thumbnailUrl!}
           alt="user picture"
           height={256}
           width={256}
-          fallBackStyles="rounded-full w-full h-[80px] text-[10px] absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
-          className={`transition duration-300 w-full h-[80px] [object-fit:cover] rounded-full`}
+          fallBackStyles="rounded-full w-full h-full text-[10px] absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+          className={`transition duration-300 w-full h-full [object-fit:cover] rounded-full`}
         />
       </div>
       <div className={`flex flex-col gap-[4px] pt-[4px]`}>
         <ClickableName
-          className={`transition duration-150 text-[1.1rem] ${inter.className} text-gray-800 hover:text-gray-500`}
+          className={`transition duration-150 ${
+            isTopComment ? " text-[1.1rem]" : "text-[.8rem]"
+          } ${inter.className} text-gray-800 hover:text-gray-500`}
         >
           {commentAuthor.profile.username}
         </ClickableName>
-        <div className={`italic text-[.85rem] text-gray-400`}>
+        <div
+          className={`italic text-gray-400 ${
+            isTopComment ? "text-[.85rem]" : "text-[.75rem]"
+          }`}
+        >
           {transformDateString(commentTimestamp)}
         </div>
       </div>

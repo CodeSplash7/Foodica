@@ -2,7 +2,6 @@
 import { LoadingIcon } from "@/components/Icons";
 import CustomInput, { useRender } from "@/components/RegisterForm/CustomInput";
 import InputField from "@/components/RegisterForm/inputField";
-import { Blog } from "@/utils/allSides/blogsFunctions";
 import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
 import Joi from "joi";
 import { useState } from "react";
@@ -22,12 +21,14 @@ export default function CommentInput({
   blogId,
   userId,
   commentAuthorName,
-  parentCommentId
+  parentCommentId,
+  closeReply
 }: {
   blogId: string;
   userId: string | undefined;
   parentCommentId?: string;
   commentAuthorName?: string;
+  closeReply?: () => void;
 }) {
   const rerender = useRender();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,10 +46,18 @@ export default function CommentInput({
 
   return (
     <div className={`flex flex-col gap-[16px]`}>
-      <div className={`text-[24px] uppercase ${roboto_condensed.className}`}>
-        {commentAuthorName
-          ? `Reply to ${commentAuthorName}`
-          : "Leave a Comment"}
+      <div className="flex justify-between items-center">
+        <div className={`text-[24px] uppercase ${roboto_condensed.className}`}>
+          {commentAuthorName
+            ? `Reply to ${commentAuthorName}`
+            : "Leave a Comment"}
+        </div>
+        <div
+          onClick={closeReply}
+          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
+        >
+          Cancel
+        </div>
       </div>
       <div>
         <CustomInput
@@ -59,8 +68,7 @@ export default function CommentInput({
       </div>
       {!!userId && (
         <div
-          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white
-      `}
+          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
           onClick={handleSubmit}
         >
           Post Comment
@@ -80,7 +88,14 @@ export default function CommentInput({
   );
 
   async function handleSubmit() {
-    addCommentToBlog(blogId, userId!, commentField.value, parentCommentId);
+    addCommentToBlog(
+      blogId,
+      userId!,
+      `${commentAuthorName ? "@" + commentAuthorName : ""} ${
+        commentField.value
+      }`,
+      parentCommentId
+    );
     commentField.setValue("");
     rerender();
     await handleSubmittingAnimation();
@@ -91,6 +106,7 @@ export default function CommentInput({
     rerender();
     await delay(1500);
     setIsLoading(false);
+    closeReply?.();
     rerender();
   }
 }

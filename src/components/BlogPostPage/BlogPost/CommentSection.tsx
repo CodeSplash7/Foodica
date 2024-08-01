@@ -1,4 +1,4 @@
-import { Blog, BlogComment } from "@/utils/allSides/blogsFunctions";
+import { BlogComment } from "@/utils/allSides/blogsFunctions";
 import CommentInput from "./CommentInput";
 import BlogComments from "./BlogComments";
 import { getServerSession } from "next-auth";
@@ -15,7 +15,7 @@ export default async function CommentSection({
   const user = session?.user;
   const userId = (await getUserByEmail(user?.email))?.id;
   return (
-    <div className={`flex flex-col gap-[32px]`}>
+    <div className={`w-full flex flex-col gap-[32px]`}>
       <CommentInput blogId={blogId} userId={userId} />
       <BlogComments blogId={blogId} comments={blogComments} />
     </div>

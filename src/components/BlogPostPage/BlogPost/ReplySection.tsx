@@ -3,6 +3,7 @@
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import CommentInput from "./CommentInput";
+import { BlogComment } from "@/utils/allSides/blogsFunctions";
 
 const inter_bolder = Inter({
   subsets: ["latin"],
@@ -11,14 +12,16 @@ const inter_bolder = Inter({
 
 export default function ReplySection({
   blogId,
-  parentCommentId,
   commentAuthorName,
-  userId
+  userId,
+  isTopComment,
+  comment
 }: {
   blogId: string;
-  parentCommentId: string;
   commentAuthorName: string;
   userId: string | undefined;
+  isTopComment: boolean;
+  comment: BlogComment;
 }) {
   const [isReplying, setIsReplying] = useState(false);
   const [error, setError] = useState("");
@@ -38,10 +41,11 @@ export default function ReplySection({
     <div>
       {isReplying ? (
         <CommentInput
+          closeReply={() => setIsReplying(false)}
           blogId={blogId}
           userId={userId}
           commentAuthorName={commentAuthorName}
-          parentCommentId={parentCommentId}
+          parentCommentId={isTopComment ? comment.id : comment.parentId!}
         />
       ) : (
         <div

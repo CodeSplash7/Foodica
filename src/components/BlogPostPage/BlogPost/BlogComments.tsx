@@ -14,6 +14,7 @@ export default async function BlogComments({
   comments: BlogComment[];
   blogId: string;
 }) {
+  const topComments = comments.filter((c) => !c.parentId);
   return (
     <div className={`w-full`}>
       <div
@@ -22,9 +23,16 @@ export default async function BlogComments({
         {comments.length} comments
       </div>
       <CommentsSeparationLine />
-      <div>
-        {comments.map((c, i) => (
-          <Comment key={i} blogId={blogId} comment={c} commentIndex={i} />
+      <br />
+      <div className={`w-full flex flex-col gap-[24px]`}>
+        {topComments.map((c, i) => (
+          <Comment
+            isTopComment={true}
+            key={i}
+            blogId={blogId}
+            comment={c}
+            commentIndex={i}
+          />
         ))}
       </div>
     </div>
@@ -32,5 +40,5 @@ export default async function BlogComments({
 }
 
 export function CommentsSeparationLine() {
-  return <div className="w-full border-t my-[32px]"></div>;
+  return <div className="w-full border-t"></div>;
 }
