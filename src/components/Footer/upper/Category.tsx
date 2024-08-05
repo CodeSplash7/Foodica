@@ -8,20 +8,19 @@ const roboto_condensed = Roboto_Condensed({
 
 export default async function Category({ name }: { name: string }) {
   const blogs = await getBlogs();
-  // the number of blogs with the corresponding tag/name
   const count = blogs.filter((blog) => blog.mainTag === name).length;
   return (
     <Link
-      href={`/blogs?t=${name.toLowerCase()}`}
+      href={`/blogs?tag=${name.toLowerCase()}`}
       className={`bg-white border border-[#c7c7c7] rounded-sm
-                    gap-[8px] flex overflow-hidden 
+                    gap-[8px] flex justify-between
                     group`}
     >
       <span
         className={`transition duration-150 group-hover:text-[#777] 
                   text-[#444] text-[14px] ${roboto_condensed.className}
                   flex items-center justify-center 
-                  p-[8px] `}
+                  py-[8px] pl-[8px] break-all`}
       >
         {name.toUpperCase()}
       </span>

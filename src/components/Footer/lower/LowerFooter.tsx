@@ -11,7 +11,7 @@ export default function LowerFooter() {
   return (
     <div
       className={`flex justify-center gap-[32px] 
-                  relative mt-[32px] py-[48px] h-fit`}
+                  relative mt-[32px] py-[48px] h-fit flex-wrap`}
     >
       <div
         className={`z-10 top-0 absolute 

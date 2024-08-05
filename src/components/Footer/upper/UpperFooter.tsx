@@ -16,7 +16,9 @@ export default async function UpperFooter() {
         >
           CATEGORIES
         </div>
-        <div className={`flex flex-wrap gap-x-[16px] gap-y-[8px]`}>
+        <div
+          className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-[16px] gap-y-[8px]`}
+        >
           {tags.map((tag) => (
             <Category key={tag} name={tag} />
           ))}
