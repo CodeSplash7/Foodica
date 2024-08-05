@@ -28,7 +28,10 @@ export default function CommentHeader({
         }`}
       >
         <AwaitableImage
-          src={commentAuthor.profile.profilePicture?.thumbnailUrl!}
+          src={
+            commentAuthor.profile.profilePicture?.thumbnailUrl! ??
+            "/images/userImages/guest-user.png"
+          }
           alt="user picture"
           height={256}
           width={256}

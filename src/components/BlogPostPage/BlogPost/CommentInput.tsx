@@ -52,12 +52,7 @@ export default function CommentInput({
             ? `Reply to ${commentAuthorName}`
             : "Leave a Comment"}
         </div>
-        <div
-          onClick={closeReply}
-          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
-        >
-          Cancel
-        </div>
+        {closeReply && <CloseReply closeReply={closeReply} />}
       </div>
       <div>
         <CustomInput
@@ -66,14 +61,7 @@ export default function CommentInput({
           inputField={commentField}
         />
       </div>
-      {!!userId && (
-        <div
-          className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
-          onClick={handleSubmit}
-        >
-          Post Comment
-        </div>
-      )}
+      {!!userId && <PostComment handleSubmit={handleSubmit} />}
       <div className="relative">
         <div className="absolute flex gap-[16px] ">
           {isLoading && (
@@ -114,3 +102,27 @@ export default function CommentInput({
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+const CloseReply: React.FC<{ closeReply: () => void }> = ({ closeReply }) => {
+  return (
+    <div
+      onClick={closeReply}
+      className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
+    >
+      Cancel
+    </div>
+  );
+};
+
+const PostComment: React.FC<{ handleSubmit: () => void }> = ({
+  handleSubmit
+}) => {
+  return (
+    <div
+      className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
+      onClick={handleSubmit}
+    >
+      Post Comment
+    </div>
+  );
+};

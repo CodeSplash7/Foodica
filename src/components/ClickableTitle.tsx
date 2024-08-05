@@ -7,11 +7,12 @@ export default function ClickableTitle({
   label,
   children
 }: {
-  blog: Blog;
+  blog: Blog | "loading";
   className: string;
   label?: string;
   children?: React.ReactNode;
 }) {
+  if (blog === "loading") return <div className={className}>{children}</div>;
   const urlTitle = blog.title.toLowerCase().split(" ").join("-");
 
   const blogDate = new Date(blog.creationDate);

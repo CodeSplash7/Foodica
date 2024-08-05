@@ -1,43 +1,83 @@
 "use client";
-import { Blog, Ingredient } from "@/utils/allSides/blogsFunctions";
-import { useEffect, useState } from "react";
+import {
+  Blog,
+  Ingredient as IngredientType
+} from "@/utils/allSides/blogsFunctions";
+import { Skeleton } from "@mui/material";
+import { useState } from "react";
 
-export default function RecipeIngredients({ blog }: { blog: Blog }) {
+export default function RecipeIngredients({
+  blog
+}: {
+  blog: Blog | "loading";
+}) {
+  const ingredients: IngredientType[] | "loading" =
+    blog === "loading" ? "loading" : blog.ingredients;
+
   const [checkList, setCheckList] = useState<boolean[]>(
-    blog.ingredients.map(() => false)
+    ingredients === "loading" ? [] : ingredients.map(() => false)
   );
 
-  if (blog.ingredients.length > 0)
-    return (
-      <div
-        className={`bg-[#fbf9e7] p-[32px] rounded-md flex flex-col gap-[16px] `}
-      >
-        <h1 className={`text-gray-900 font-bold text-[22px]`}>Ingredients</h1>
-        <div className={`flex flex-col`}>
-          {checkList.map((checkedState, index) => {
-            const ingredientInfo = blog.ingredients.at(index)!;
-            return (
-              <div
-                key={index}
-                className={`border-t first:border-none text-slate-600 py-[16px] flex items-center gap-[16px]`}
-                onClick={() => {
-                  const oldCheckList = [...checkList];
-                  oldCheckList[index] = !oldCheckList[index];
-                  setCheckList(oldCheckList);
-                }}
-              >
-                <IngredientCheckButton checked={checkedState} />
-                <IngredientText
-                  checked={checkedState}
-                  ingredientInfo={ingredientInfo}
+  return (
+    <div
+      className={`w-full bg-[#fbf9e7] p-[32px] rounded-md flex flex-col gap-[16px] `}
+    >
+      <h1 className={`text-gray-900 font-bold text-[22px] w-full`}>
+        Ingredients
+      </h1>
+      <div className={`flex flex-col w-full`}>
+        {ingredients === "loading"
+          ? Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Ingredient
+                  key={index}
+                  isChecked={false}
+                  handleClick={() => {}}
+                  ingredientInfo="loading"
                 />
-              </div>
-            );
-          })}
-        </div>
+              ))
+          : ingredients.map((ingredient, index) => {
+              return (
+                <Ingredient
+                  key={index}
+                  isChecked={checkList[index]}
+                  handleClick={() => handleIngredientCheck(index)}
+                  ingredientInfo={ingredient}
+                />
+              );
+            })}
       </div>
-    );
+    </div>
+  );
+
+  function handleIngredientCheck(index: number) {
+    const oldCheckList = [...checkList];
+    oldCheckList[index] = !oldCheckList[index];
+    setCheckList(oldCheckList);
+  }
 }
+
+interface IngredientProps {
+  isChecked: boolean;
+  handleClick: () => void;
+  ingredientInfo: IngredientType | "loading";
+}
+const Ingredient: React.FC<IngredientProps> = ({
+  isChecked,
+  handleClick,
+  ingredientInfo
+}) => {
+  return (
+    <div
+      className={`border-t first:border-none text-slate-600 py-[16px] flex items-center gap-[16px] w-full`}
+      onClick={handleClick}
+    >
+      <IngredientCheckButton checked={isChecked} />
+      <IngredientText checked={isChecked} ingredientInfo={ingredientInfo} />
+    </div>
+  );
+};
 
 function IngredientCheckButton({ checked }: { checked: boolean }) {
   return (
@@ -55,13 +95,16 @@ function IngredientCheckButton({ checked }: { checked: boolean }) {
   );
 }
 
-function IngredientText({
+interface IngredientTextProps {
+  ingredientInfo: IngredientType | "loading";
+  checked: boolean;
+}
+const IngredientText: React.FC<IngredientTextProps> = ({
   ingredientInfo,
   checked
-}: {
-  ingredientInfo: Ingredient;
-  checked: boolean;
-}) {
+}) => {
+  if (ingredientInfo === "loading")
+    return <Skeleton sx={{ width: "100%" }} variant="text" />;
   const { quantity, unit, name, details } = ingredientInfo;
   return (
     <div className={checked ? "line-through" : ""}>
@@ -71,7 +114,7 @@ function IngredientText({
       {details && `, ${details}`}
     </div>
   );
-}
+};
 
 const decimalToFraction = (decimal: number) => {
   // Function to find the greatest common divisor (GCD) of two numbers

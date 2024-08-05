@@ -5,7 +5,7 @@ import RecipeHeading from "./RecipeHeading";
 import RecipeDetails from "./RecipeDetails";
 import RecipeInstructions from "./RecipeInstructions";
 
-export default function RecipeCard({ blog }: { blog: Blog }) {
+export default function RecipeCard({ blog }: { blog: Blog | "loading" }) {
   return (
     <div
       className={`flex flex-col w-full h-fit overflow-hidden rounded-lg border gap-[16px] pb-[32px]`}

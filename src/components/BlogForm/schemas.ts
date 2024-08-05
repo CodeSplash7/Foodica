@@ -18,7 +18,7 @@ const customMessages = {
 
 export const titleSchema = Joi.string()
   .pattern(/^[a-zA-Z0-9 ]*$/)
-  .max(30)
+  .max(50)
   .min(3)
   .required()
   .label("Title")

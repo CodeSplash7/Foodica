@@ -1,4 +1,4 @@
-import { getBlogByUrlName, getBlogs } from "@/utils/serverside/blogsFunctions";
+import { getBlogByUrlName } from "@/utils/serverside/blogsFunctions";
 import BlogPost from "./BlogPost/BlogPost";
 import Sidebar from "../Sidebar";
 
