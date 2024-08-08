@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import InputField from "../RegisterForm/inputField";
-import { Ingredient, blogTags } from "@/utils/allSides/blogsFunctions";
+import { Blog, Ingredient, blogTags } from "@/utils/allSides/blogsFunctions";
 import { Picture } from "@/utils/allSides/usersFunctions";
 import { useRouter } from "next/navigation";
 import { useEdgeStore } from "@/lib/edgestore";
@@ -12,6 +12,7 @@ import CustomInput, { useRender } from "../RegisterForm/CustomInput";
 import ImageInput from "../RegisterForm/ImageInput";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 import { SubmitBlogButton, DeleteBlogButton } from "./SubmitBlogButton";
+import { Roboto_Condensed } from "next/font/google";
 import {
   blogPictureSchema,
   caloriesSchema,
@@ -29,28 +30,41 @@ import {
 } from "./schemas";
 import IngredientsField from "./IngredientsField";
 import DirectionsField from "./DirectionsField";
-import { findBlogFromHash } from "@/utils/serverside/blogIdHashing";
-import { LoadingIcon } from "../Icons";
+import { LoadingDots, LoadingSpinner } from "../Icons";
+import ConfirmDelete from "./ConfirmDelete";
+
+const roboto_condesed = Roboto_Condensed({
+  weight: "500",
+  subsets: ["latin"]
+});
 
 export default function BlogForm({
   session,
-  hashId,
+  blog,
   forPurpose
 }: {
-  session: Session | null;
-  hashId?: string;
-  forPurpose: string;
+  session: Session | null | "loading";
+  blog: Blog | undefined | "loading";
+  forPurpose: string | "loading";
 }) {
+  if (blog === "loading" || session === "loading" || forPurpose === "loading")
+    return (
+      <Form>
+        <FormHeader toUpdate="loading" />
+      </Form>
+    );
+
   const author = session?.user?.name;
   if (!author)
     return <div>You can't create blogs unless so log in into an account!</div>;
-  //* Input fields init@ialization
+  //* Input fields initialization
   const [titleField] = useState(
     () =>
       new InputField<string>({
         schema: titleSchema,
         type: "text",
-        label: "Title"
+        label: "Title",
+        initialValue: blog ? blog.title : ""
       })
   );
   const [mainTagField] = useState(
@@ -59,13 +73,14 @@ export default function BlogForm({
         schema: mainTagSchema,
         type: "select",
         options: blogTags,
-        label: "Main Tag"
+        label: "Main Tag",
+        initialValue: blog ? blog.mainTag : blogTags[0]
       })
   );
   const [secondaryTagsField] = useState(
     () =>
       new InputField<string[]>({
-        initialValue: [],
+        initialValue: blog ? blog.secondaryTags : [],
         schema: secondaryTagsSchema,
         type: "keyword-list",
         options: blogTags,
@@ -79,23 +94,24 @@ export default function BlogForm({
         schema: descSchema,
         type: "textarea",
         label: "Description",
-        max: 1000
+        max: 1000,
+        initialValue: blog ? blog.description : ""
       })
   );
   const [servingsField] = useState(
     () =>
-      new InputField<number>({
+      new InputField<number, number>({
         schema: servingsSchema,
-        initialValue: 1,
         type: "number",
         step: 1,
-        label: "Servings"
+        label: "Servings",
+        initialValue: blog ? blog.servings : 1
       })
   );
   const [ingredientsField] = useState(
     () =>
       new InputField<Ingredient[], Ingredient[]>({
-        initialValue: [],
+        initialValue: blog ? blog.ingredients : [],
         schema: ingredientsSchema,
         type: "ingredient-list",
         label: "Ingredients"
@@ -104,7 +120,7 @@ export default function BlogForm({
   const [directionsField] = useState(
     () =>
       new InputField<string[], string[]>({
-        initialValue: [],
+        initialValue: blog ? blog.directions : [],
         schema: directionsSchema,
         type: "directions-list",
         label: "Directions"
@@ -113,6 +129,7 @@ export default function BlogForm({
   const [conclusionField] = useState(
     () =>
       new InputField<string>({
+        initialValue: blog ? blog.conclusion : "",
         schema: conclusionSchema,
         type: "textarea",
         label: "Conclusion",
@@ -194,9 +211,10 @@ export default function BlogForm({
   const { edgestore } = useEdgeStore();
 
   //* state initialization
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isBlogSent, setIsBlogSent] = useState<boolean>(false);
-  const toUpdate = forPurpose === "update" && !!hashId;
+  const toUpdate = forPurpose === "update" && !!blog;
   const [postError, setPostError] = useState("");
   const [blogId, setBlogId] = useState<string>();
   const [blogDate, setBlogDate] = useState<string>(Date.now().toString());
@@ -215,7 +233,6 @@ export default function BlogForm({
   }, [session]);
 
   const getBlogInfo = useCallback(async () => {
-    const blog = await findBlogFromHash(hashId!);
     if (!blog) return;
     setBlogId(blog.id);
     setBlogDate(blog.creationDate);
@@ -232,7 +249,7 @@ export default function BlogForm({
     cookTimeField.setInitialValue(blog.cookTime);
     prepTimeField.setInitialValue(blog.prepTime);
     caloriesField.setInitialValue(blog.calories);
-  }, [hashId]);
+  }, [blog]);
   const stringifyFormInformation = (recipePicture: any) => {
     return JSON.stringify({
       picture: recipePicture,
@@ -304,6 +321,7 @@ export default function BlogForm({
     }
     const urlTitle = newBlog.title.toLowerCase().split(" ").join("-");
 
+    await delay(1000);
     const blogDate = new Date(newBlog.creationDate);
     const href = `/blogs/${blogDate.getFullYear()}/${
       blogDate.getMonth() + 1
@@ -313,13 +331,42 @@ export default function BlogForm({
 
   return (
     <>
-      <FormHeader toUpdate={toUpdate} />
+      <ConfirmDelete
+        isModalOpen={isModalOpen}
+        message={
+          toUpdate
+            ? "Do you really want to delete this post? This process cannot be undone"
+            : "The post will be lost."
+        }
+        closeModal={() => setIsModalOpen(false)}
+        handleDelete={handleDeletePost}
+      />
       <Form>
+        <FormHeader toUpdate={toUpdate} />
         <FormRow>
           <FormRowItem>
             <CustomInput formRerender={rerender} inputField={titleField} />
           </FormRowItem>
           <FormRowItem></FormRowItem>
+        </FormRow>
+        <FormRow>
+          <CustomInput formRerender={rerender} inputField={descField} />
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
+            <IngredientsField
+              formRerender={rerender}
+              inputField={ingredientsField}
+            />
+          </FormRowItem>
+        </FormRow>
+        <FormRow>
+          <FormRowItem>
+            <DirectionsField
+              formRerender={rerender}
+              inputField={directionsField}
+            />
+          </FormRowItem>
         </FormRow>
         <FormRow>
           <FormRowItem>
@@ -332,9 +379,7 @@ export default function BlogForm({
             />
           </FormRowItem>
         </FormRow>
-        <FormRow>
-          <CustomInput formRerender={rerender} inputField={descField} />
-        </FormRow>
+
         <FormRow>
           <FormRowItem>
             <CustomInput formRerender={rerender} inputField={difficultyField} />
@@ -357,35 +402,20 @@ export default function BlogForm({
             <CustomInput formRerender={rerender} inputField={servingsField} />
           </FormRowItem>
         </FormRow>
+
         <FormRow>
-          <FormRowItem>
-            <IngredientsField
-              formRerender={rerender}
-              inputField={ingredientsField}
-            />
-          </FormRowItem>
-        </FormRow>
-        <FormRow>
-          <FormRowItem>
-            <DirectionsField
-              formRerender={rerender}
-              inputField={directionsField}
-            />
-          </FormRowItem>
+          <ImageInput formRerender={rerender} inputField={blogPictureField} />
         </FormRow>
         <FormRow>
           <CustomInput formRerender={rerender} inputField={conclusionField} />
         </FormRow>
-        <FormRow>
-          <ImageInput formRerender={rerender} inputField={blogPictureField} />
-        </FormRow>
+        <FormState isLoading={isLoading} postError={postError} />
+        <FormFooter
+          handleSubmit={handleSubmit}
+          toUpdate={toUpdate}
+          handleDelete={() => setIsModalOpen(true)}
+        />
       </Form>
-      <FormState isLoading={isLoading} postError={postError} />
-      <FormFooter
-        handleSubmit={handleSubmit}
-        toUpdate={toUpdate}
-        handleDeletePost={handleDeletePost}
-      />
     </>
   );
 
@@ -409,17 +439,19 @@ export default function BlogForm({
 
 function FormFooter({
   toUpdate,
-  handleDeletePost,
+  handleDelete,
   handleSubmit
 }: {
   toUpdate: boolean;
-  handleDeletePost: () => Promise<void>;
+  handleDelete: () => void;
   handleSubmit: (e: React.FormEvent) => Promise<void>;
 }) {
   return (
-    <div className={`w-full flex justify-between`}>
+    <div
+      className={`w-full h-fit flex justify-between sm:flex-row flex-col-reverse items-center gap-[16px] sm:gap-0`}
+    >
       <SubmitBlogButton toUpdate={toUpdate} submitPost={handleSubmit} />
-      <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDeletePost} />
+      <DeleteBlogButton toUpdate={toUpdate} deletePost={handleDelete} />
     </div>
   );
 }
@@ -443,19 +475,29 @@ function FormState({
     <>
       <div className={`self-start text-red-600`}>{postError}</div>
       {isLoading && (
-        <div className="flex text-black gap-[16px]">
-          Creating Your Blog...
-          <LoadingIcon w={24} />
+        <div className="flex text-[20px] text-black gap-[4px] items-end">
+          <span className={roboto_condesed.className}>Creating Your Blog</span>
+          <span className={`text-[6px] text-black pb-[4px]`}>
+            <LoadingDots ballsColor="black" />
+          </span>
         </div>
       )}
     </>
   );
 }
 
-function FormHeader({ toUpdate }: { toUpdate: boolean }) {
+function FormHeader({ toUpdate }: { toUpdate: boolean | "loading" }) {
   return (
-    <div className={`w-full text-center relative text-[30px]`}>
-      {toUpdate ? "Modify Blog" : "Create Blog"}
+    <div className={`w-full relative text-[40px] ${roboto_condesed.className}`}>
+      {toUpdate === "loading" ? (
+        <>
+          <LoadingSpinner />
+        </>
+      ) : toUpdate ? (
+        "Modify Blog"
+      ) : (
+        "Create Blog"
+      )}
     </div>
   );
 }
@@ -469,4 +511,8 @@ function Form({ children }: { children: React.ReactNode }) {
       {children}
     </form>
   );
+}
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

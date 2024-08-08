@@ -327,3 +327,25 @@ export const LoadingIcon = ({ w }: IconComponentProps) => {
     </svg>
   );
 };
+
+export const LoadingSpinner = () => {
+  return (
+    <svg className="loading-spinner w-[40px]" viewBox="25 25 50 50">
+      <circle cx="50" cy="50" r="20"></circle>
+    </svg>
+  );
+};
+
+export const LoadingDots: React.FC<{ ballsColor?: string }> = ({
+  ballsColor
+}) => {
+  return (
+    <div className="loading-dots">
+      {Array(3)
+        .fill(0)
+        .map(() => (
+          <div style={{ background: ballsColor }}></div>
+        ))}
+    </div>
+  );
+};

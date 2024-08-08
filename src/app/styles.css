@@ -7,3 +7,237 @@
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
+
+/* *Loading spinner component styles */
+svg.loading-spinner {
+  /* width: 3.75em; */
+  transform-origin: center;
+  animation: rotate 2s linear infinite;
+}
+
+svg.loading-spinner circle {
+  fill: none;
+  stroke: #fc2f70;
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+/** Loading Dots component styles */
+.loading-dots {
+  width: 3.5em;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loading-dots div {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background-color: #fc2f70;
+  animation: fade 0.8s ease-in-out alternate infinite;
+}
+
+.loading-dots div:nth-of-type(1) {
+  animation-delay: -0.4s;
+}
+
+.loading-dots div:nth-of-type(2) {
+  animation-delay: -0.2s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/** Button styles */
+/*? Button 1 */
+/* From Uiverse.io by doniaskima */
+.btn-1,
+.btn-1 *,
+.btn-1 :after,
+.btn-1 :before,
+.btn-1:after,
+.btn-1:before {
+  /* border: 0 solid; */
+  box-sizing: border-box;
+}
+
+.btn-1 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+
+  font-size: 100%;
+  font-weight: 900;
+  height: 100%;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+}
+
+.btn-1:disabled {
+  cursor: default;
+}
+
+.btn-1:-moz-focusring {
+  outline: auto;
+}
+
+.btn-1 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-1 [hidden] {
+  display: none;
+}
+
+.btn-1 {
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.8rem 32px;
+  position: relative;
+}
+
+.btn-1 span {
+  mix-blend-mode: difference;
+}
+
+.btn-1:after,
+.btn-1:before {
+  background: linear-gradient(90deg,
+      #fff 25%,
+      transparent 0,
+      transparent 50%,
+      #fff 0,
+      #fff 75%,
+      transparent 0);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: translateY(var(--progress, 100%));
+  transition: transform 0.2s ease;
+}
+
+.btn-1:after {
+  --progress: -100%;
+  background: linear-gradient(90deg,
+      transparent 0,
+      transparent 25%,
+      #fff 0,
+      #fff 50%,
+      transparent 0,
+      transparent 75%,
+      #fff 0);
+  z-index: -1;
+}
+
+.btn-1:hover:after,
+.btn-1:hover:before {
+  --progress: 0;
+}
+
+/*? Button 2 */
+/* From Uiverse.io by cssbuttons-io */
+.btn-2 {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: red;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.btn-2,
+.btn-2 span {
+  transition: 200ms;
+}
+
+.btn-2 .text {
+  padding-left: 16px;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-2 .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-2 svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.btn-2:hover {
+  background: #ff3636;
+}
+
+.btn-2:hover .text {
+  color: transparent;
+}
+
+.btn-2:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.btn-2:focus {
+  outline: none;
+}
+
+.btn-2:active .icon svg {
+  transform: scale(0.8);
+}

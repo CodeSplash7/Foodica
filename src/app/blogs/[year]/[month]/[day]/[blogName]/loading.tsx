@@ -1,5 +1,4 @@
 import BlogPost from "@/components/BlogPostPage/BlogPost/BlogPost";
-import RecipeImage from "@/components/BlogPostPage/RecipeCard/RecipeImage";
 import Sidebar from "@/components/Sidebar";
 
 export default function Loading() {

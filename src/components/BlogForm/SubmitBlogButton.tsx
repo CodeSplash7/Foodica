@@ -1,3 +1,4 @@
+import { Button1, Button2 } from "@/utils/styled-buttons";
 import { Roboto_Condensed } from "next/font/google";
 
 const roboto_condensed = Roboto_Condensed({
@@ -13,12 +14,9 @@ export function SubmitBlogButton({
   submitPost: (e: React.FormEvent) => Promise<void>;
 }) {
   return (
-    <button
-      onClick={submitPost}
-      className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
-    >
+    <Button1 onClick={submitPost}>
       {toUpdate ? "Update Blog Post" : "Create Blog Post"}
-    </button>
+    </Button1>
   );
 }
 export function DeleteBlogButton({
@@ -29,15 +27,6 @@ export function DeleteBlogButton({
   deletePost: () => void;
 }) {
   return (
-    <div
-      onClick={deletePost}
-      className={`mt-[16px] self-start ${
-        roboto_condensed.className
-      } rounded-sm px-[22px] py-[12px] text-white
-        ${toUpdate ? "bg-red-800" : "bg-gray-500"}
-      `}
-    >
-      {toUpdate ? "Delete Blog Post" : "Cancel Creation"}
-    </div>
+    <Button2 onClick={deletePost}>{toUpdate ? "DELETE" : "CANCEL"}</Button2>
   );
 }

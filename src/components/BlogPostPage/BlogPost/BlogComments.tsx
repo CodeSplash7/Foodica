@@ -2,6 +2,7 @@ import { BlogComment, type Blog } from "@/utils/allSides/blogsFunctions";
 import { Roboto_Condensed } from "next/font/google";
 import Comment from "./Comment";
 import "./LoadingAnimation.css";
+import { LoadingSpinner } from "@/components/Icons";
 
 const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default async function BlogComments({
       <CommentsSeparationLine />
       <br />
       {topComments === "loading" ? (
-        <LoadingAnimation />
+        <LoadingSpinner />
       ) : (
         <div className={`w-full flex flex-col gap-[24px]`}>
           {topComments.map((c, i) => (
@@ -50,11 +51,3 @@ export default async function BlogComments({
 export function CommentsSeparationLine() {
   return <div className="w-full border-t"></div>;
 }
-
-const LoadingAnimation = () => {
-  return (
-    <svg className="loading-spinner w-[40px]" viewBox="25 25 50 50">
-      <circle cx="50" cy="50" r="20"></circle>
-    </svg>
-  );
-};
