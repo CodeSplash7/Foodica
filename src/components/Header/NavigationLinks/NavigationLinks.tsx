@@ -1,7 +1,6 @@
 import NormalMenu from "./NormalMenu/NormalMenu";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import Searchbar from "./Searchbar/Searchbar";
-import Skeleton from "react-loading-skeleton";
 
 export default function NavLinks({
   showSearchBar
@@ -21,6 +20,7 @@ export default function NavLinks({
           </div>
         )}
       </div>
+      
     </>
   );
 }
