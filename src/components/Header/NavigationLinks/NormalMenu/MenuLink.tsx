@@ -30,7 +30,7 @@ export default function MenuLink({
   if (!link.links && miniLink)
     return (
       <Link
-        href={`/blogs?t=${link.href}`}
+        href={link.href}
         className={`${LINK_STYLES_CLASS} ${roboto_condensed.className} text-[12px] px-[15px] py-[10px] border-x border-t last:border-b font-bold tracking-wider`}
       >
         {link.label.toUpperCase()}

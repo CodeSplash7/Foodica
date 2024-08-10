@@ -8,9 +8,10 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 const buttonStyles = `flex flex-row items-center justify-center gap-[5px] px-[20px] py-[10px]
-                      border rounded-[3px] border-transparent sm:border-[#aeaeae] hover:border-[#474747]
+                      border rounded-[3px] border-transparent
                       text-[14px] font-bold [letter-spacing:2px] text-[#50545e] sm:text-[#363940]
-                      transition duration-200`;
+                      hover:text-white hover:bg-[#363940]
+                      transition duration-200 group`;
 
 export default function PaginationDirectionButton({
   direction,

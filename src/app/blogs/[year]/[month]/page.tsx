@@ -1,16 +1,19 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-import { checkForBlogName } from "@/utils/serverside/blogsFunctions";
+import {
+  checkForBlogName,
+  getBlogs,
+  redirectToCorrectBlog
+} from "@/utils/serverside/blogsFunctions";
 
-export default function BlogPage({
+export default async function BlogPage({
   params
 }: {
   params: { year: string; month: string };
 }) {
-  checkForBlogName({
-    possibleName: params.month
-  });
-
+  const isBlogTitle = await checkForBlogName(params.month);
+  if (isBlogTitle) return redirectToCorrectBlog(isBlogTitle);
+  const blogs = await getBlogs();
   return (
     <div className={`flex flex-col gap-[32px] w-full`}>
       <div
@@ -26,7 +29,12 @@ export default function BlogPage({
         className={`flex flex-col md:flex-row 
                       gap-x-[16px] gap-y-[32px] mt-[32px] w-full`}
       >
-        <BlogList searchParams={{}} year={params.year} month={params.month} />
+        <BlogList
+          blogs={blogs}
+          searchParams={{}}
+          year={params.year}
+          month={params.month}
+        />
         <Sidebar />
       </div>
     </div>

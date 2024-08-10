@@ -33,3 +33,7 @@ export const Button2: React.FC<{
     </span>
   </button>
 );
+
+export const Button3 = ({ text }: { text: string }) => {
+  return <div className={`btn-3 ${roboto_condensed.className}`}>{text}</div>;
+};

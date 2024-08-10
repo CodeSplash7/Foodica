@@ -32,6 +32,7 @@ import IngredientsField from "./IngredientsField";
 import DirectionsField from "./DirectionsField";
 import { LoadingDots, LoadingSpinner } from "../Icons";
 import ConfirmDelete from "./ConfirmDelete";
+import LoadingAnimation from "../LoadingAnimation";
 
 const roboto_condesed = Roboto_Condensed({
   weight: "500",
@@ -474,14 +475,7 @@ function FormState({
   return (
     <>
       <div className={`self-start text-red-600`}>{postError}</div>
-      {isLoading && (
-        <div className="flex text-[20px] text-black gap-[4px] items-end">
-          <span className={roboto_condesed.className}>Creating Your Blog</span>
-          <span className={`text-[6px] text-black pb-[4px]`}>
-            <LoadingDots ballsColor="black" />
-          </span>
-        </div>
-      )}
+      {isLoading && <LoadingAnimation text="Creating Your Blog" />}
     </>
   );
 }

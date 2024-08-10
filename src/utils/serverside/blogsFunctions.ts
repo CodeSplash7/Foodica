@@ -141,17 +141,13 @@ export async function redirectToCorrectBlog(blogSelected: Blog) {
   );
 }
 
-export async function checkForBlogName({
-  possibleName
-}: {
-  possibleName: string;
-}) {
+export async function checkForBlogName(possibleName: string) {
   await initializeBlogs();
   const blogSelected = cachedBlogs.find(
     (blog) => blog.title.toLowerCase().split(" ").join("-") === possibleName
   );
   if (blogSelected) {
-    redirectToCorrectBlog(blogSelected);
+    return blogSelected;
   }
 }
 

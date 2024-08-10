@@ -76,12 +76,14 @@ export default function OtherAuthorBlogs({
               .fill(0)
               .map((_, index) => (
                 <OtherBlogCard
+                  key={index}
                   responsiveClass={responsiveClasses[index]}
                   blog={"loading"}
                 />
               ))
           : visibleBlogs.map((b, index) => (
               <OtherBlogCard
+                key={index}
                 responsiveClass={responsiveClasses[index]}
                 blog={b}
               />
@@ -101,7 +103,11 @@ const OtherBlogCard: React.FC<{
   blog: Blog | "loading";
 }> = ({ responsiveClass, blog }) => {
   return (
-    <ClickableTitle blog={blog} className={`${responsiveClass} gap-[16px]`}>
+    <ClickableTitle
+      type="text"
+      blog={blog}
+      addStyles={`${responsiveClass} gap-[16px]`}
+    >
       <div className="relative">
         <>
           {blog === "loading" && (

@@ -6,6 +6,7 @@ import { hashId } from "@/utils/serverside/blogIdHashing";
 import { getServerSession, Session } from "next-auth";
 import { Roboto_Condensed } from "next/font/google";
 import Link from "next/link";
+import { Button3 } from "@/utils/styled-buttons";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "600",
@@ -66,9 +67,9 @@ const UpdateRecipe = async ({
     return (
       <Link
         href={`/create-blog?for=update&blog=${await hashId(blog.id)}`}
-        className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
+        // className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
       >
-        Update Blog
+        <Button3 text="Update Blog" />
       </Link>
     );
 };
@@ -84,7 +85,7 @@ const RecipeAuthor = ({
   return (
     <p className={`text-[16px] font-light italic text-gray-500`}>
       Recipe by{" "}
-      <ClickableName className={`hover:text-gray-700 duration-150 transition`}>
+      <ClickableName addStyles={`hover:text-gray-700 duration-150 transition`}>
         {blogAuthor}
       </ClickableName>
     </p>

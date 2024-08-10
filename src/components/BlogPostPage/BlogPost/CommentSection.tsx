@@ -16,7 +16,7 @@ export default async function CommentSection({
     userId = (await getUserByEmail(user?.email))?.id;
   }
   return (
-    <div className={`w-full flex flex-col gap-[32px]`}>
+    <div id="comments" className={`w-full flex flex-col gap-[32px]`}>
       <CommentInput
         blogId={blog === "loading" ? "loading" : blog.id}
         userId={userId || "loading"}

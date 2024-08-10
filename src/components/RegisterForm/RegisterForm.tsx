@@ -72,19 +72,14 @@ export default function RegisterForm({ session }: { session: Session | null }) {
   const [registrationError, setRegistrationError] = useState("");
 
   //* helper functions
-  const isRegistrationError = useCallback(() => {
-    console.log(
-      usernameField.errorMessage,
-      emailField.errorMessage,
-      imageField.errorMessage
-    );
-    return (
+  const isRegistrationError = useCallback(
+    () =>
       usernameField.errorMessage ||
       emailField.errorMessage ||
       imageField.errorMessage ||
-      (toUpdate ? false : passwordField.errorMessage)
-    );
-  }, [usernameField, emailField, imageField, passwordField, toUpdate]);
+      (toUpdate ? false : passwordField.errorMessage),
+    [usernameField, emailField, imageField, passwordField, toUpdate]
+  );
 
   const getUserInfo = useCallback(async () => {
     if (session) {

@@ -5,13 +5,14 @@ import {
   getNthDivision
 } from "@/utils/allSides/blogsFunctions";
 
-import BlogCard from "@/components/BlogCard"; // const BlogCard = dynamic(() => import("@/components/BlogCard"));
-import Pagination from "./Pagination/Pagination"; // const Pagination = dynamic(() => import("./Pagination/Pagination"));
+import BlogCard from "@/components/BlogCard";
+import Pagination from "./Pagination/Pagination";
 import { type BlogPageSearchParams } from "@/app/blogs/page";
-import { getBlogs } from "@/utils/serverside/blogsFunctions";
+import LoadingAnimation from "../LoadingAnimation";
 
 type BlogListProps = {
   searchParams: BlogPageSearchParams;
+  blogs: Blog[] | "loading";
   year?: string;
   month?: string;
   day?: string;
@@ -21,16 +22,22 @@ type BlogListProps = {
 const blogPageSize = 4;
 export default async function BlogList({
   searchParams,
+  blogs,
   year,
   month,
   day,
   ids
 }: BlogListProps) {
-  const blogs = await getBlogs();
+  if (blogs === "loading")
+    return (
+      <div className="flex-[2]">
+        <LoadingAnimation text="Loading, please wait!" />
+      </div>
+    );
   const { search, tag, page, author } = searchParams;
 
-  const currentDivision = Number(page) || 1;
-  const oneDivisionForAll = !searchParams.page;
+  const currentPage = Number(page) || 1;
+  const onePageForAll = !searchParams.page;
   let selectedBlogs: Blog[] = [];
 
   if (blogs.length > 0) {
@@ -48,31 +55,26 @@ export default async function BlogList({
 
   const pageBlogs = getNthDivision(
     selectedBlogs,
-    currentDivision || 1,
-    oneDivisionForAll ? 9999 : blogPageSize
+    currentPage || 1,
+    onePageForAll ? 9999 : blogPageSize
   );
 
+  if (!pageBlogs) return <div className="flex-[2]">No blogs were found!</div>;
   if (pageBlogs)
     return (
       <>
         <div className={`flex flex-[2] flex-col gap-[32px] w-full`}>
           <div
             className={`flex-[2] grid h-fit gap-x-[3vw] w-full ${
-              !oneDivisionForAll && "gap-y-[72px] grid-cols-1 sm:grid-cols-2 "
-            } ${
-              oneDivisionForAll && "gap-y-[24px] sm:grid-cols-3 grid-cols-2"
-            }`}
+              !onePageForAll && "gap-y-[72px] grid-cols-1 sm:grid-cols-2 "
+            } ${onePageForAll && "gap-y-[24px] grid-cols-2 sm:grid-cols-3 "}`}
           >
             {pageBlogs.map((blog) => (
-              <BlogCard
-                key={blog.id}
-                blog={blog}
-                isSmall={oneDivisionForAll}
-              ></BlogCard>
+              <BlogCard key={blog.id} blog={blog} isSmall={onePageForAll} />
             ))}
           </div>
-          {!oneDivisionForAll && (
-            <Pagination currentBlogPage={currentDivision} allBlogs={blogs} />
+          {!onePageForAll && (
+            <Pagination currentBlogPage={currentPage} allBlogs={blogs} />
           )}
         </div>
       </>
