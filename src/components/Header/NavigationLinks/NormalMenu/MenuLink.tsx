@@ -8,7 +8,8 @@ const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"]
 });
 
-export const LINK_STYLES_CLASS = "hover:text-[#818592] transition duration-150";
+export const LINK_STYLES_CLASS =
+  "relative inline-block before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[2px] before:bg-[#fd6595] before:origin-bottom-right before:scale-x-0 before:transition-transform before:duration-500 hover:before:origin-bottom-left hover:before:scale-x-100";
 
 export default function MenuLink({
   link,

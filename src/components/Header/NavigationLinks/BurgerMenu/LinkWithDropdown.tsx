@@ -12,6 +12,7 @@ import {
   useEffect,
   useState
 } from "react";
+import { LINK_STYLES_CLASS } from "./MenuLink";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "400",
@@ -33,12 +34,12 @@ const LinkWithDropdown = forwardRef<HTMLAnchorElement, LinkWithDropdownProps>(
     }, [isMenuOpen]);
 
     return (
-      <div>
-        <div className="flex gap-[5px] h-fit border-b">
+      <>
+        <div className={`flex gap-[5px] h-fit border-b ${LINK_STYLES_CLASS}`}>
           <Link
             ref={ref}
             href={link.href}
-            className={`hover:text-[#818592] transition ${roboto_condensed.className} flex-shrink-0 w-fit pt-[16px]`}
+            className={` ${roboto_condensed.className} flex-shrink-0`}
           >
             {link.label}
           </Link>
@@ -58,7 +59,7 @@ const LinkWithDropdown = forwardRef<HTMLAnchorElement, LinkWithDropdownProps>(
             />
           </div>
         </div>
-      </div>
+      </>
     );
   }
 );

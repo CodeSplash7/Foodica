@@ -18,7 +18,6 @@ export default function LinkWithDropdown({ link }: { link: LinkType }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div
-      className=""
       onMouseOver={() => setIsOpen(true)}
       onMouseOut={() => setIsOpen(false)}
     >

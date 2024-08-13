@@ -1,4 +1,3 @@
-// components/MenuLink.js
 import { Link as LinkType } from "@/utils/allSides/linksFunctions";
 import Link from "next/link";
 import LinkWithDropdown from "./LinkWithDropdown";
@@ -9,6 +8,9 @@ const roboto_condensed = Roboto_Condensed({
   weight: "400",
   subsets: ["latin"]
 });
+
+export const LINK_STYLES_CLASS =
+  "border-b border-[#e2e2e2] w-full pt-[16px] relative inline-block before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[2px] before:bg-[#fd6595] before:origin-bottom-right before:scale-x-0 before:transition-transform before:duration-500 hover:before:origin-bottom-left hover:before:scale-x-100";
 
 export default function MenuLink({
   setIsMenuOpen,
@@ -25,7 +27,7 @@ export default function MenuLink({
   const isNormalLink = !link.links && !miniLink;
   const isMinilink = !link.links && miniLink;
 
-  const onClick = (e: Event) => {
+  const onClick = () => {
     setIsMenuOpen?.(false);
   };
 
@@ -57,7 +59,7 @@ export default function MenuLink({
       <Link
         ref={linkRef}
         href={link.href}
-        className={`hover:text-[#818592] transition duration-150 ${roboto_condensed.className} border-b last:border-none border-[#e2e2e2] w-full pt-[16px]`}
+        className={`${roboto_condensed.className} ${LINK_STYLES_CLASS} last:border-none`}
       >
         {link.label}
       </Link>
@@ -67,7 +69,7 @@ export default function MenuLink({
       <Link
         ref={linkRef}
         href={link.href}
-        className={`hover:text-[#818592] transition duration-150 ${roboto_condensed.className} border-b border-[#e2e2e2] w-full pt-[16px]`}
+        className={`${roboto_condensed.className} ${LINK_STYLES_CLASS}`}
       >
         {link.label}
       </Link>
