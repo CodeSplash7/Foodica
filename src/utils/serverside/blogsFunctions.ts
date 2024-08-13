@@ -272,3 +272,12 @@ export async function findRepliesForComment(commentId: string) {
   }
   return replies;
 }
+
+export async function replaceAuthorName(blogId: string, newAuthorName: string) {
+  await initializeBlogs();
+  const blog = await getBlogById(blogId);
+  if (!blog) return { ok: false, error: "Blog id is invalid" };
+  blog.author = newAuthorName;
+  updateDb();
+  return { ok: true, error: null };
+}

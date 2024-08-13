@@ -3,13 +3,11 @@
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import {
-  usernameToUrl,
-  type Picture,
-  type User
-} from "../allSides/usersFunctions";
+import { type Picture, type User } from "../allSides/usersFunctions";
 import { hashPassword } from "./passwordFunctions";
 import { backendClient } from "@/lib/edgestore-server";
+import { replaceAuthorName } from "./blogsFunctions";
+import { usernameToUrl } from "@/utils/allSides/usersFunctions";
 
 const filePath = path.join(process.cwd(), "db", "users.json");
 
@@ -148,6 +146,9 @@ export async function registerUser(
     if (existingUserByEmail && existingUserByEmail.id !== user.id) {
       return { error: "Email already in use! Try another email" };
     }
+
+    if (user.profile.username !== parsedData.username)
+      user.blogs.forEach((b) => replaceAuthorName(b, user.profile.username));
 
     user.account.email = parsedData.email;
     user.profile.username = parsedData.username;

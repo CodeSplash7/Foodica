@@ -1,5 +1,4 @@
 import BlogList from "@/components/Bloglist/Bloglist";
-import MainBlogsSection from "@/components/MainBlogsSection";
 import MessageAboveBlogs from "@/components/MessageAboveBlogs";
 import { User } from "@/utils/allSides/usersFunctions";
 import { getBlogs } from "@/utils/serverside/blogsFunctions";
@@ -44,5 +43,11 @@ async function AuthorBlogsSection({
   if (!authorUser) return <div>Author not found!</div>;
   if (authorUser.blogs.length === 0)
     return <div>This author hasn't posted any blogs yet!</div>;
-  return <BlogList searchParams={{}} ids={authorUser.blogs} />;
+  return (
+    <BlogList
+      blogs={await getBlogs()}
+      searchParams={{}}
+      ids={authorUser.blogs}
+    />
+  );
 }
