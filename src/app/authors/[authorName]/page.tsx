@@ -13,6 +13,7 @@ export default async function AuthorPage({
 }) {
   const authorUser = await getUserByUrlName(params.authorName);
   const session = await getServerSession();
+
   let loggedUser = false;
   if (authorUser?.account.email === session?.user?.email) {
     loggedUser = true;

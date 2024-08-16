@@ -5,11 +5,14 @@ const emailSchema = Joi.string()
   .required()
   .label("email");
 const usernameSchema = Joi.string()
-  .pattern(/^[a-zA-Z0-9 ]*$/)
+  .pattern(/^(?!.*  )[a-zA-Z0-9 ]*$/)
   .max(30)
   .min(4)
   .required()
-  .label("username");
+  .label("username")
+  .messages({
+    "string.pattern.base": "Rule: Only numbers, letters and spaces."
+  });
 const passwordSchema = Joi.string()
   .alphanum()
   .max(30)

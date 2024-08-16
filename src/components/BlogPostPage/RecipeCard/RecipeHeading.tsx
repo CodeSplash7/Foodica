@@ -4,14 +4,9 @@ import ClickableName from "@/components/ClickableName";
 import { Blog } from "@/utils/allSides/blogsFunctions";
 import { hashId } from "@/utils/serverside/blogIdHashing";
 import { getServerSession, Session } from "next-auth";
-import { Roboto_Condensed } from "next/font/google";
 import Link from "next/link";
 import { Button3 } from "@/utils/styled-buttons";
-
-const roboto_condensed = Roboto_Condensed({
-  weight: "600",
-  subsets: ["latin"]
-});
+import options from "@/app/api/auth/[...nextauth]/options";
 
 export default async function RecipeHeading({
   blog
@@ -20,7 +15,8 @@ export default async function RecipeHeading({
 }) {
   const isLoading = blog === "loading";
 
-  const session = await getServerSession();
+  const session = await getServerSession(options);
+
   return (
     <div className={`flex flex-col w-full h-fit gap-[16px]`}>
       <RecipeTitle title={isLoading ? "" : blog.title} isLoading={isLoading} />
@@ -65,10 +61,7 @@ const UpdateRecipe = async ({
   if (isLoading) return;
   if (session && session.user?.name === blog.author)
     return (
-      <Link
-        href={`/create-blog?for=update&blog=${await hashId(blog.id)}`}
-        // className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
-      >
+      <Link href={`/create-blog?for=update&blog=${await hashId(blog.id)}`}>
         <Button3 text="Update Blog" />
       </Link>
     );

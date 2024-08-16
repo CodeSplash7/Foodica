@@ -148,11 +148,12 @@ export async function registerUser(
     }
 
     if (user.profile.username !== parsedData.username)
-      user.blogs.forEach((b) => replaceAuthorName(b, user.profile.username));
+      user.blogs.forEach((b) => replaceAuthorName(b, parsedData.username));
 
     user.account.email = parsedData.email;
     user.profile.username = parsedData.username;
     user.profile.profilePicture = parsedData.profilePicture;
+
     cachedUsers.forEach((u, index) => {
       if (u.id === options.id) {
         cachedUsers[index] = user;
@@ -182,7 +183,7 @@ export const createUser = (newUserInfo: {
       password: { salt, hash }
     },
     profile: {
-      username,
+      username: removeDuplicateSpaces(username),
       profilePicture,
       comments: []
     },
@@ -195,4 +196,8 @@ export async function deleteBucketImage(url: string) {
   await backendClient.publicImages.deleteFile({
     url
   });
+}
+
+function removeDuplicateSpaces(input: string): string {
+  return input.replace(/\s{2,}/g, " ");
 }

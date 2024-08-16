@@ -56,8 +56,8 @@ const BlogAuthorPicture: React.FC<{ pictureUrl: string | "loading" }> = ({
           alt="user picture"
           height={256}
           width={256}
-          fallBackStyles="rounded-full w-full h-[80px] text-[10px] absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
           className={`transition duration-300 w-full h-[80px] [object-fit:cover] rounded-full`}
+          loadingSkeletonLayout={{width: "100%", height: "80px", borderRadius: "100%"}}
         />
       )}
     </div>
@@ -73,7 +73,7 @@ const BlogAuthorName: React.FC<{ authorName: string | "loading" }> = ({
     );
   return (
     <ClickableName
-      className={`transition duration-150 text-gray-800 hover:text-gray-500 ${inter_600.className} text-[1.2rem]`}
+      addStyles={`w-fit transition duration-150 text-gray-800 hover:text-gray-500 ${inter_600.className} text-[1.2rem]`}
     >
       {authorName}
     </ClickableName>

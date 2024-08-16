@@ -36,7 +36,7 @@ function AboutMeSection() {
       </div>
       <div className="relative w-full sm:w-1/2 md:w-full h-[70vw] sm:h-[184px]">
         <AwaitableImage
-          fallBackStyles="h-full w-full absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+          loadingSkeletonLayout={{ width: "100%", height: "100%" }}
           alt="about me image"
           src="/images/creator/about-me-image.png"
           width={400}
@@ -87,7 +87,10 @@ async function RecentBlogsSection({ count }: { count: number }) {
           >
             <div className="relative">
               <AwaitableImage
-                fallBackStyles="text-[10px] w-[72px] h-[48px] absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+                loadingSkeletonLayout={{
+                  width: "100%",
+                  height: "48px"
+                }}
                 className={`transition duration-300 w-[72px] h-[48px] [object-fit:cover]`}
                 alt="blog image"
                 src={blog.picture?.url || ""}

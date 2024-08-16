@@ -105,6 +105,7 @@ export default function BlogForm({
         schema: servingsSchema,
         type: "number",
         step: 1,
+        min: 1,
         label: "Servings",
         initialValue: blog ? blog.servings : 1
       })
@@ -153,7 +154,8 @@ export default function BlogForm({
         schema: difficultySchema,
         type: "select",
         options: ["easy", "medium", "hard"],
-        label: "Difficulty"
+        label: "Difficulty",
+        initialValue: blog ? blog.mainTag : blogTags[0]
       })
   );
 
@@ -163,6 +165,7 @@ export default function BlogForm({
         initialValue: 1,
         schema: cookTimeSchema,
         type: "number",
+        min: 1,
         step: 1,
         label: "Cooking Time(minutes)"
       })
@@ -174,6 +177,7 @@ export default function BlogForm({
         initialValue: 1,
         schema: prepTimeSchema,
         type: "number",
+        min: 1,
         step: 1,
         label: "Preparation Time(minutes)"
       })
@@ -186,6 +190,7 @@ export default function BlogForm({
         schema: caloriesSchema,
         type: "number",
         step: 1,
+        min: 1,
         label: "Calories"
       })
   );
@@ -284,7 +289,7 @@ export default function BlogForm({
 
   const handleDeletePost = async () => {
     if (blogId) deleteBlogPost(blogId);
-    router.push("/blogs?p=1");
+    router.push("/blogs?page=1");
   };
 
   //* form submission handler

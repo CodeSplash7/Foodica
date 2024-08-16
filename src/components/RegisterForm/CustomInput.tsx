@@ -129,13 +129,15 @@ function NumberInput({
   rerender: () => void;
   mini?: boolean;
 }) {
-  const { setValue, label, step, getCorrectValue, errorMessage } = inputField;
+  const { setValue, label, step, getCorrectValue, errorMessage, min } =
+    inputField;
   let value = getCorrectValue();
 
   return (
     <input
       onChange={(e) => {
-        setValue(Number(e.target.value));
+        const newValue = Number(e.target.value);
+        if (min && newValue > min) setValue(newValue);
         rerender();
       }}
       step={step}

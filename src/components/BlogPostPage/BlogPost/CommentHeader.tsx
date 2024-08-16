@@ -35,15 +35,19 @@ export default function CommentHeader({
           alt="user picture"
           height={256}
           width={256}
-          fallBackStyles="rounded-full w-full h-full text-[10px] absolute text-gray-500 top-0 left-0 bg-gray-300 w-full flex justify-center items-center"
+          loadingSkeletonLayout={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "100%"
+          }}
           className={`transition duration-300 w-full h-full [object-fit:cover] rounded-full`}
         />
       </div>
       <div className={`flex flex-col gap-[4px] pt-[4px]`}>
         <ClickableName
-          className={`transition duration-150 ${
-            isTopComment ? " text-[1.1rem]" : "text-[.8rem]"
-          } ${inter.className} text-gray-800 hover:text-gray-500`}
+          addStyles={`${isTopComment ? " text-[1.1rem]" : "text-[.8rem]"} ${
+            inter.className
+          } `}
         >
           {commentAuthor.profile.username}
         </ClickableName>

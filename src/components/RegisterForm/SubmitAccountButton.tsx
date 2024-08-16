@@ -1,3 +1,5 @@
+import { Button1 } from "@/utils/styled-buttons";
+import { SignInResponse } from "next-auth/react";
 import { Roboto_Condensed } from "next/font/google";
 
 const roboto_condensed = Roboto_Condensed({
@@ -6,15 +8,15 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 export default function SubmitAccountButton({
-  toUpdate
+  toUpdate,
+  submitAccount
 }: {
   toUpdate: boolean;
+  submitAccount: (e: React.FormEvent) => Promise<void | SignInResponse>;
 }) {
   return (
-    <button
-      className={`mt-[16px] self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white bg-gray-800`}
-    >
+    <Button1 onClick={submitAccount}>
       {toUpdate ? "Update Account Information" : "Create Account"}
-    </button>
+    </Button1>
   );
 }

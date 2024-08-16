@@ -278,6 +278,7 @@ export async function replaceAuthorName(blogId: string, newAuthorName: string) {
   const blog = await getBlogById(blogId);
   if (!blog) return { ok: false, error: "Blog id is invalid" };
   blog.author = newAuthorName;
+  setCache(cachedBlogs.map((b) => (b.id === blog.id ? blog : b)));
   updateDb();
   return { ok: true, error: null };
 }

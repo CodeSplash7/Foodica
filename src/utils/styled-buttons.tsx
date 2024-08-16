@@ -19,7 +19,7 @@ export const Button2: React.FC<{
   children: React.ReactNode;
   onClick: (e: React.FormEvent) => void;
 }> = ({ children, onClick }) => (
-  <button className="noselect btn-2" onClick={onClick}>
+  <div className="noselect btn-2" onClick={onClick}>
     <span className={`text ${roboto_condensed.className}`}>{children}</span>
     <span className="icon">
       <svg
@@ -31,7 +31,7 @@ export const Button2: React.FC<{
         <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
       </svg>
     </span>
-  </button>
+  </div>
 );
 
 export const Button3 = ({ text }: { text: string }) => {

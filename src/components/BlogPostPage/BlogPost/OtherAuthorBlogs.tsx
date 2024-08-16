@@ -118,7 +118,7 @@ const OtherBlogCard: React.FC<{
               src={blog?.picture?.url ?? null}
               alt="blog picture"
               className="transition duration-300 w-[96px] h-[96px] [object-fit:cover]"
-              fallBackStyles="absolute flex items-center justify-center text-gray-500 bg-gray-300 w-[96px] h-[96px]"
+              loadingSkeletonLayout={{ width: "96px", height: "96px" }}
               height={256}
               width={256}
             />

@@ -2,7 +2,6 @@ import HighlightedBlog from "../../components/HighlightedBlog";
 import MessageAboveBlogs from "@/components/MessageAboveBlogs";
 import MainBlogsSection from "@/components/MainBlogsSection";
 import { getBlogs, getRandomBlog } from "@/utils/serverside/blogsFunctions";
-import BackToTop from "@/components/BackToTop";
 
 export type BlogPageSearchParams = {
   search?: string;

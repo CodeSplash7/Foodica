@@ -50,6 +50,9 @@ const options: AuthOptions = {
       }
     })
   ],
+  session: {
+    strategy: "jwt"
+  },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       const users = await getUsers();
@@ -62,20 +65,21 @@ const options: AuthOptions = {
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-    async session({ session, user, token }) {
-      const appUser = await getUserByEmail(session.user?.email);
-      if (!appUser) return undefined!;
+    async session({ session, token }) {
       session.user = {
-        name: appUser.profile.username,
-        email: appUser.account.email,
-        image:
-          appUser.profile.profilePicture?.thumbnailUrl ??
-          appUser.profile.profilePicture?.url ??
-          null
+        name: token.name,
+        email: token.email,
+        image: null
       };
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
+      const appUser = await getUserByEmail(token.email);
+      if (appUser) {
+        token.name = appUser.profile.username;
+        token.email = appUser.account.email;
+      }
+      console.log(token);
       return token;
     }
   }

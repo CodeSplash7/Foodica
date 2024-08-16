@@ -144,7 +144,7 @@ export default function RegisterForm({ session }: { session: Session | null }) {
     setTimeout(() => {
       router.refresh();
     }, 0);
-    router.push("/blogs?p=1");
+    router.push("/blogs?page=1");
   };
 
   return (
@@ -155,14 +155,14 @@ export default function RegisterForm({ session }: { session: Session | null }) {
       <form
         autoComplete="off"
         onSubmit={handleSubmit}
-        className={`w-full lg:w-1/3 sm:w-2/3 h-fit items-center flex flex-col gap-[16px]`}
+        className={`w-full lg:w-1/3 sm:w-2/3 h-fit items-start flex flex-col gap-[16px]`}
       >
         <CustomInput inputField={usernameField} />
         <CustomInput inputField={emailField} />
         {toRegister && <CustomInput inputField={passwordField} />}
         <ImageInput inputField={imageField} />
         <div className={`self-start text-red-600`}>{registrationError}</div>
-        <SubmitAccountButton toUpdate={toUpdate} />
+        <SubmitAccountButton submitAccount={handleSubmit} toUpdate={toUpdate} />
       </form>
     </>
   );

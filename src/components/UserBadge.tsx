@@ -32,11 +32,11 @@ export default async function UserBadge({
     <Link href={session ? userOptionLink : guestUserOptionLink}>
       <div
         title={"See profile"}
-        className="flex items-center h-full text-slate-800 text-[12px] transition duration-150 font-medium gap-[8px] rounded-md hover:bg-[#e4e4e4] px-[8px] py-[4px]"
+        className="w-fit flex items-center h-full text-slate-800 text-[12px] transition duration-150 font-medium gap-[8px] rounded-md hover:bg-[#e4e4e4] px-[8px] py-[4px]"
       >
         <div className="relative h-[32px] w-[40px] ">
           <AwaitableImage
-            fallBackStyles="w-full h-full rounded-full text-gray-500 bg-gray-300 absolute top-0 left-0 flex items-center justify-center text-[0px]"
+            loadingSkeletonLayout={{width: "100%", height: "100%", borderRadius: "100%"}}
             className={`transition duration-300 h-full w-full [object-fit:cover] rounded-full`}
             width={128}
             height={128}
