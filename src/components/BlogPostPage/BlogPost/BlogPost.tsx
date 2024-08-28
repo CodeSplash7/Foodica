@@ -9,6 +9,8 @@ import OtherAuthorBlogs from "./OtherAuthorBlogs";
 import { getUserByUsername } from "@/utils/serverside/userFunctions";
 import { getBlogsByIds } from "@/utils/serverside/blogsFunctions";
 import CommentSection from "./CommentSection";
+import { getServerSession } from "next-auth";
+import { Suspense } from "react";
 
 export default async function BlogPost({ blog }: { blog: Blog | "loading" }) {
   const authorUser =
@@ -17,8 +19,9 @@ export default async function BlogPost({ blog }: { blog: Blog | "loading" }) {
     authorUser === "loading"
       ? "loading"
       : await getBlogsByIds(authorUser?.blogs);
+  const session = await getServerSession();
   return (
-    <div className={`flex flex-[2] flex-col gap-[32px] w-full`}>
+    <div className={`flex  flex-col gap-[32px] w-full max-w-[1000px]`}>
       <RecipeCard blog={blog} />
       <BlogConclusion blog={blog} />
       <BlogDistribution />
@@ -26,7 +29,9 @@ export default async function BlogPost({ blog }: { blog: Blog | "loading" }) {
       <TagList blog={blog} />
       <BlogDescription blog={blog} authorUser={authorUser} />
       <OtherAuthorBlogs blog={blog} authorBlogs={authorBlogs} />
-      <CommentSection blog={blog} />
+      <Suspense>
+        <CommentSection session={session} blog={blog} />
+      </Suspense>
     </div>
   );
 }

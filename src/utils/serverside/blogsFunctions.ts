@@ -7,7 +7,8 @@ import {
   BlogComment,
   Blog,
   BlogTag,
-  getDivisions
+  getDivisions,
+  BlogReply
 } from "@/utils/allSides/blogsFunctions";
 import crypto from "crypto";
 import { addBlogToUser } from "./userFunctions";
@@ -154,17 +155,19 @@ export async function checkForBlogName(possibleName: string) {
 export async function addCommentToBlog(
   postId: string,
   userId: string,
-  content: string,
-  parentCommentId?: string
+  content: string
 ) {
   await initializeBlogs();
   const blog = await getBlogById(postId);
   if (!blog) {
-    return { ok: false, error: "Couldn't find the blog in the database." };
+    return {
+      ok: false,
+      error: "Couldn't find the blog in the database.",
+      res: undefined
+    };
   }
   const newComment: BlogComment = {
     id: crypto.randomBytes(16).toString("hex"),
-    parentId: parentCommentId || null,
     postId,
     userId,
     content,
@@ -174,7 +177,48 @@ export async function addCommentToBlog(
 
   blog.comments.push(newComment);
   updateDb();
-  return { ok: true, error: null };
+  return { ok: true, error: null, res: newComment };
+}
+
+export async function createReply(
+  replyContent: string,
+  commentId: string,
+  userId: string
+) {
+  await initializeBlogs();
+
+  const allBlogs = await getBlogs();
+  let commentBlog: Blog | undefined;
+  let comment: BlogComment | undefined;
+  allBlogs.forEach((b) =>
+    b.comments.forEach((c) => {
+      if (c.id === commentId) {
+        comment = c;
+        commentBlog = b;
+      }
+    })
+  );
+  if (comment === undefined) return { res: null, error: "Comment not found" };
+  if (!commentBlog) return { res: null, error: "Comment not found" };
+
+  const newReply: BlogReply = {
+    content: replyContent,
+    id: crypto.randomBytes(16).toString("hex"),
+    parentId: commentId,
+    postId: commentBlog.id,
+    timestamp: new Date().toString(),
+    userId
+  };
+
+  comment.replies.push(newReply);
+  commentBlog.comments = commentBlog.comments.map((c) =>
+    c.id === comment!.id ? comment! : c
+  );
+  cachedBlogs = cachedBlogs.map((b) =>
+    b.id === commentBlog!.id ? commentBlog! : b
+  );
+  updateDb();
+  return { res: newReply, error: null };
 }
 
 export async function createBlog(
@@ -257,21 +301,21 @@ export async function deleteBlogPost(blogId: string): Promise<boolean> {
   }
 }
 
-export async function findRepliesForComment(commentId: string) {
-  const replies = [];
-  const allBlogs = await getBlogs();
-  for (let i = 0; i < allBlogs.length; i++) {
-    const blog = allBlogs[i];
-    const comments = blog.comments;
-    for (let j = 0; j < comments.length; j++) {
-      const comment = comments[j];
-      if (comment.parentId === commentId) {
-        replies.push(comment);
-      }
-    }
-  }
-  return replies;
-}
+// export async function findRepliesForComment(commentId: string) {
+//   const replies = [];
+//   const allBlogs = await getBlogs();
+//   for (let i = 0; i < allBlogs.length; i++) {
+//     const blog = allBlogs[i];
+//     const comments = blog.comments;
+//     for (let j = 0; j < comments.length; j++) {
+//       const comment = comments[j];
+//       if (comment.parentId === commentId) {
+//         replies.push(comment);
+//       }
+//     }
+//   }
+//   return replies;
+// }
 
 export async function replaceAuthorName(blogId: string, newAuthorName: string) {
   await initializeBlogs();

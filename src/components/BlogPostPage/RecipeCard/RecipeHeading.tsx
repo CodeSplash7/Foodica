@@ -48,7 +48,11 @@ const RecipeTitle = ({
   );
 };
 
-const RecipeTitleSkeleton = () => <Skeleton sx={{ fontSize: "26px" }} />;
+const RecipeTitleSkeleton = () => (
+  <Skeleton
+    sx={{ fontSize: "26px", "@media (min-width: 640px)": { fontSize: "34px" } }}
+  />
+);
 
 const UpdateRecipe = async ({
   session,

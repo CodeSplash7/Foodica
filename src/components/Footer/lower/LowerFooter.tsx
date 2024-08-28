@@ -10,7 +10,7 @@ export default function LowerFooter() {
   const links = getMainLinks();
   return (
     <div
-      className={`flex justify-center gap-[32px] 
+      className={`w-full flex justify-center gap-[32px] 
                   relative mt-[32px] py-[48px] h-fit flex-wrap`}
     >
       <div

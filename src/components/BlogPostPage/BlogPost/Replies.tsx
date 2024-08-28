@@ -1,32 +1,86 @@
-import { findRepliesForComment } from "@/utils/serverside/blogsFunctions";
+"use client";
 import Comment from "./Comment";
-import { CommentsSeparationLine } from "./BlogComments";
+import { CommentsDivider } from "./BlogComments";
+import { useEffect, useState } from "react";
+import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
+import CommentHeader from "./CommentHeader";
+import CommentMessage from "./CommentMessage";
+import ReplySection from "./ReplySection";
+import { User } from "@/utils/allSides/usersFunctions";
 
-export default async function Replies({
-  parentCommentId,
+export default function Replies({
+  replies,
+  commentIndex,
+  commentAuthor,
   blogId,
-  parentCommentIndex
+  comment,
+  incrementCommentCount,
+  addReply
 }: {
-  parentCommentId: string;
+  replies: BlogReply[];
+  commentIndex: number;
   blogId: string;
-  parentCommentIndex?: number;
+  commentAuthor: User;
+  comment: BlogComment;
+  incrementCommentCount: () => void;
+  addReply: (reply: BlogReply) => void;
 }) {
-  const replies = await findRepliesForComment(parentCommentId);
   return (
     <div className="w-full flex flex-col gap-[24px]">
-      {replies.map((r, i) => (
-        <div className="flex w-full h-full flex-col gap-[0px]">
-          <Comment
-            parentCommentIndex={parentCommentIndex}
-            isTopComment={false}
-            key={i}
-            blogId={blogId}
-            comment={r}
-            commentIndex={i}
-          />
-          <CommentsSeparationLine />
-        </div>
+      {replies.map((reply, index) => (
+        <Reply
+          incrementCommentCount={incrementCommentCount}
+          key={index}
+          comment={comment}
+          blogId={blogId}
+          commentAuthor={commentAuthor}
+          reply={reply}
+          htmlReplyId={`comment${commentIndex}:reply${index}`}
+          addReply={addReply}
+        />
       ))}
     </div>
   );
 }
+
+const Reply: React.FC<{
+  commentAuthor: User;
+  htmlReplyId: string;
+  reply: BlogReply;
+  blogId: string;
+  comment: BlogComment;
+  incrementCommentCount: () => void;
+  addReply: (reply: BlogReply) => void;
+}> = ({
+  htmlReplyId,
+  reply,
+  commentAuthor,
+  blogId,
+  comment,
+  incrementCommentCount,
+  addReply
+}) => {
+  return (
+    <div
+      id={htmlReplyId}
+      className={`self-start w-full flex flex-col gap-[16px] pl-[64px]`}
+    >
+      <CommentHeader
+        commentAuthor={commentAuthor}
+        commentTimestamp={reply.timestamp}
+        isReply
+      />
+      <CommentMessage htmlCommentId={htmlReplyId} message={reply.content} />
+      <ReplySection
+        incrementCommentCount={incrementCommentCount}
+        isReply
+        comment={comment}
+        blogId={blogId}
+        commentAuthor={commentAuthor}
+        addReply={addReply}
+      />
+
+      {/* <CommentsSeparationLine /> */}
+    </div>
+  );
+};

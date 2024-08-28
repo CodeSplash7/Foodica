@@ -79,7 +79,6 @@ const options: AuthOptions = {
         token.name = appUser.profile.username;
         token.email = appUser.account.email;
       }
-      console.log(token);
       return token;
     }
   }

@@ -72,12 +72,20 @@ export type Ingredient = {
 
 export type BlogComment = {
   id: string;
-  parentId: string | null;
   postId: string;
   userId: string;
   content: string;
   timestamp: string;
-  replies: BlogComment[];
+  replies: BlogReply[];
+};
+
+export type BlogReply = {
+  id: string;
+  parentId: string;
+  postId: string;
+  userId: string;
+  content: string;
+  timestamp: string;
 };
 
 export type Blog = {

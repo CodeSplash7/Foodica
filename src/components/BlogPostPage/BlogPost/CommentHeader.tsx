@@ -10,21 +10,21 @@ const inter = Inter({
 export default function CommentHeader({
   commentAuthor,
   commentTimestamp,
-  isTopComment
+  isReply
 }: {
   commentAuthor: User;
   commentTimestamp: string;
-  isTopComment: boolean;
+  isReply?: boolean;
 }) {
   return (
     <div
       className={`w-full flex ${
-        isTopComment ? "gap-[32px]" : "gap-[16px]"
+        isReply ? "gap-[16px]" : "gap-[32px]"
       } items-start`}
     >
       <div
         className={`relative ${
-          isTopComment ? "basis-[80px] h-[80px]" : "basis-[56px] h-[56px]"
+          isReply ? "basis-[56px] h-[56px]" : "basis-[80px] h-[80px]"
         }`}
       >
         <AwaitableImage
@@ -45,7 +45,7 @@ export default function CommentHeader({
       </div>
       <div className={`flex flex-col gap-[4px] pt-[4px]`}>
         <ClickableName
-          addStyles={`${isTopComment ? " text-[1.1rem]" : "text-[.8rem]"} ${
+          addStyles={`${isReply ? "text-[.8rem]" : "text-[1.1rem]"} ${
             inter.className
           } `}
         >
@@ -53,7 +53,7 @@ export default function CommentHeader({
         </ClickableName>
         <div
           className={`italic text-gray-400 ${
-            isTopComment ? "text-[.85rem]" : "text-[.75rem]"
+            isReply ? "text-[.75rem]" : "text-[.85rem]"
           }`}
         >
           {transformDateString(commentTimestamp)}

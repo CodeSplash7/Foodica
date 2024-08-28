@@ -1,69 +1,57 @@
-import { BlogComment } from "@/utils/allSides/blogsFunctions";
-import { getUserByEmail, getUserById } from "@/utils/serverside/userFunctions";
-import { getServerSession } from "next-auth";
+"use client";
+import { getUserById } from "@/utils/serverside/userFunctions";
+import { type BlogComment } from "@/utils/allSides/blogsFunctions";
+import { type User } from "@/utils/allSides/usersFunctions";
+
 import CommentMessage from "./CommentMessage";
 import ReplySection from "./ReplySection";
-import { CommentsSeparationLine } from "./BlogComments";
 import CommentHeader from "./CommentHeader";
-import Replies from "./Replies";
 
-export default async function Comment({
-  comment,
-  commentIndex,
-  blogId,
-  isTopComment,
-  parentCommentIndex
-}: {
+import { useCallback, useEffect, useState } from "react";
+
+interface CommentProps {
   commentIndex: number;
   comment: BlogComment;
   blogId: string;
-  isTopComment: boolean;
-  parentCommentIndex?: number;
-}) {
-  const session = await getServerSession();
-  const user = session?.user;
-  const userId = (await getUserByEmail(user?.email))?.id;
-  const commentAuthor = await getUserById(comment.userId);
+  incrementCommentCount: () => void;
+  commentAuthors: Map<string, User | null>;
+}
+
+export default function Comment({
+  comment,
+  commentIndex,
+  blogId,
+  incrementCommentCount,
+  commentAuthors
+}: CommentProps) {
+  const [commentAuthor, setCommentAuthor] = useState<User | null | undefined>();
+  const getCommentAuthor = useCallback(async () => {
+    setCommentAuthor(commentAuthors.get(comment.userId));
+  }, [comment.userId]);
+  useEffect(() => {
+    getCommentAuthor();
+  }, [getCommentAuthor]);
   if (commentAuthor)
     return (
       <div
-        id={`${
-          isTopComment
-            ? `comment${commentIndex}`
-            : `comment${parentCommentIndex}reply${commentIndex}`
-        }`}
-        className={`self-start w-full flex flex-col gap-[16px] ${
-          isTopComment ? "gap-[16px]" : "gap-[8px]"
-        }`}
+        id={`comment${commentIndex}`}
+        className={`self-start w-full flex flex-col gap-[16px] `}
       >
         <CommentHeader
           commentAuthor={commentAuthor}
           commentTimestamp={comment.timestamp}
-          isTopComment={isTopComment}
         />
         <CommentMessage
-          parentCommentIndex={parentCommentIndex}
-          isTopComment={isTopComment}
-          commentIndex={commentIndex}
+          htmlCommentId={`comment${commentIndex}`}
           message={comment.content}
         />
         <ReplySection
+          incrementCommentCount={incrementCommentCount}
           comment={comment}
-          isTopComment={isTopComment}
+          commentIndex={commentIndex}
           blogId={blogId}
-          commentAuthorName={commentAuthor.profile.username}
-          userId={userId}
+          commentAuthor={commentAuthor}
         />
-        <CommentsSeparationLine />
-        {isTopComment && (
-          <div className="self-end w-11/12">
-            <Replies
-              parentCommentIndex={commentIndex}
-              blogId={blogId}
-              parentCommentId={comment.id}
-            />
-          </div>
-        )}
       </div>
     );
 }

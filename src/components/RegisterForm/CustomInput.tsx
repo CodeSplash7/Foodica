@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { LegacyRef, MutableRefObject, useState } from "react";
 import InputField from "./inputField";
 import { Inter } from "next/font/google";
 
@@ -20,6 +20,7 @@ export default function CustomInput({
   formRerender = () => {},
   inputField,
   mini,
+  focused,
   showError = true,
   showLabel = true
 }: {
@@ -28,6 +29,7 @@ export default function CustomInput({
   mini?: boolean;
   showError?: boolean;
   showLabel?: boolean;
+  focused?: boolean;
 }) {
   let { label, errorMessage, type, warningMessage, options } = inputField;
   const rerender = useRender(formRerender);
@@ -72,16 +74,19 @@ function Textarea({
   inputField,
   onChange,
   rerender,
-  showError
+  showError,
 }: {
   inputField: InputField<string, string>;
   onChange?: () => void;
   rerender: () => void;
   showError: boolean;
 }) {
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const { setValue, label, max, getCorrectValue, errorMessage, disabled } =
     inputField;
   let value = getCorrectValue();
+
+  useEffect(() => inputRef.current?.focus(), []);
 
   return (
     <>
@@ -91,6 +96,7 @@ function Textarea({
         {value.length}/{max}
       </div>
       <textarea
+        ref={inputRef}
         disabled={disabled}
         onChange={(e) => {
           onChange?.();

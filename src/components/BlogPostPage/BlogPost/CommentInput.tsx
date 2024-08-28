@@ -1,10 +1,15 @@
 "use client";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRender } from "@/components/RegisterForm/CustomInput";
+
 import { LoadingIcon } from "@/components/Icons";
-import CustomInput, { useRender } from "@/components/RegisterForm/CustomInput";
+import CustomInput from "@/components/RegisterForm/CustomInput";
 import InputField from "@/components/RegisterForm/inputField";
-import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
+import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
+
 import Joi from "joi";
-import { useState } from "react";
+import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
+
 import { Roboto_Condensed } from "next/font/google";
 
 const roboto_condensed = Roboto_Condensed({
@@ -16,33 +21,54 @@ const commentSchema = Joi.string().label("Comment").max(1000).messages({
   "string.max": "Character limit is 1000."
 });
 
+interface CommentInputProps {
+  blogId: string;
+  userId: string | undefined;
+  onAddComment: (content: string) => Promise<{ ok: false | true }>;
+  commentAuthorName?: string;
+  closeReply?: () => void;
+}
+
 // Used for comments and replies
 export default function CommentInput({
   blogId,
   userId,
   commentAuthorName,
-  parentCommentId,
-  closeReply
-}: {
-  blogId: string;
-  userId: string | undefined;
-  parentCommentId?: string;
-  commentAuthorName?: string;
-  closeReply?: () => void;
-}) {
+  closeReply,
+  onAddComment
+}: CommentInputProps) {
   const rerender = useRender();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [submitIsEnabled, setSubmitIsEnabled] = useState(false);
+  const commentField = useMemo(createCommentField, [userId]);
 
-  const [commentField] = useState(
-    new InputField<string, string>({
-      label: "Comment",
-      schema: commentSchema,
-      type: "textarea",
-      max: 1000,
-      disabled: !userId,
-      initialValue: !userId ? "Log in to write comments!" : ""
-    })
+  useEffect(
+    () => setSubmitIsEnabled(!isLoading && !!commentField.value),
+    [isLoading, commentField.value]
   );
+
+  const handleSubmit = useCallback(async () => {
+    if (!userId) return;
+    setIsLoading(true);
+
+    const commentContent = `${
+      commentAuthorName ? "@" + commentAuthorName : ""
+    } ${commentField.value}`;
+
+    await delay(1500);
+    if ((await onAddComment?.(commentContent)).ok) {
+      commentField.setValue("");
+    }
+    setIsLoading(false);
+    closeReply?.();
+  }, [
+    blogId,
+    userId,
+    commentAuthorName,
+    commentField,
+    onAddComment,
+    closeReply
+  ]);
 
   return (
     <div className={`flex flex-col gap-[16px]`}>
@@ -52,50 +78,36 @@ export default function CommentInput({
             ? `Reply to ${commentAuthorName}`
             : "Leave a Comment"}
         </div>
-        {closeReply && <CloseReply closeReply={closeReply} />}
+        {!!closeReply && <CloseReplyButton closeReply={closeReply} />}
       </div>
       <div>
         <CustomInput
+          formRerender={rerender}
+          focused
           showLabel={false}
           showError={false}
           inputField={commentField}
         />
       </div>
-      {!!userId && <PostComment handleSubmit={handleSubmit} />}
-      <div className="relative">
-        <div className="absolute flex gap-[16px] ">
-          {isLoading && (
-            <>
-              Posting comment...
-              <LoadingIcon w={24} />
-            </>
-          )}
-        </div>
-      </div>
+      {!!userId && (
+        <PostCommentButton
+          disabled={!submitIsEnabled}
+          isLoading={isLoading}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 
-  async function handleSubmit() {
-    addCommentToBlog(
-      blogId,
-      userId!,
-      `${commentAuthorName ? "@" + commentAuthorName : ""} ${
-        commentField.value
-      }`,
-      parentCommentId
-    );
-    commentField.setValue("");
-    rerender();
-    await handleSubmittingAnimation();
-  }
-
-  async function handleSubmittingAnimation() {
-    setIsLoading(true);
-    rerender();
-    await delay(1500);
-    setIsLoading(false);
-    closeReply?.();
-    rerender();
+  function createCommentField() {
+    return new InputField<string, string>({
+      label: "Comment",
+      schema: commentSchema,
+      type: "textarea",
+      max: 1000,
+      disabled: !userId,
+      initialValue: !userId ? "Log in to write comments!" : ""
+    });
   }
 }
 
@@ -103,26 +115,41 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const CloseReply: React.FC<{ closeReply: () => void }> = ({ closeReply }) => {
+const CloseReplyButton: React.FC<{ closeReply: () => void }> = ({
+  closeReply
+}) => {
   return (
-    <div
-      onClick={closeReply}
+    <button
+      onClick={(e) => (e.preventDefault(), closeReply())}
       className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
     >
       Cancel
-    </div>
+    </button>
   );
 };
 
-const PostComment: React.FC<{ handleSubmit: () => void }> = ({
-  handleSubmit
-}) => {
+const PostCommentButton: React.FC<{
+  handleSubmit: () => void;
+  isLoading: boolean;
+  disabled: boolean;
+}> = ({ handleSubmit, isLoading, disabled }) => {
   return (
-    <div
-      className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
-      onClick={handleSubmit}
-    >
-      Post Comment
+    <div className="w-full flex justify-between items-end">
+      <button
+        className={`transition duration-150 hover:bg-gray-700 uppercase bg-gray-800 w-fit self-start ${roboto_condensed.className} rounded-sm px-[22px] py-[12px] text-white`}
+        onClick={(e) => (e.preventDefault(), handleSubmit())}
+        disabled={disabled}
+      >
+        Post Comment
+      </button>
+      {isLoading && (
+        <div className="relative">
+          <div className="flex gap-[16px] h-fit">
+            Posting comment...
+            <LoadingIcon w={24} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

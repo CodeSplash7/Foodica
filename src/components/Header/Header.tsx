@@ -16,7 +16,7 @@ export default function Header({ showSearchBar }: { showSearchBar?: boolean }) {
         <FoodicaLogo />
       </div>
       <div
-        className={`flex justify-center text-[#c7c7c7] ${roboto_condensed.className} [font-family:'Roboto_Condensed',sans-serif]`}
+        className={`w-full text-center text-[#c7c7c7] ${roboto_condensed.className}`}
       >
         BY ROSCA RARES
       </div>

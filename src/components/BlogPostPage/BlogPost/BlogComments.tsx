@@ -1,41 +1,59 @@
-import { BlogComment, type Blog } from "@/utils/allSides/blogsFunctions";
-import { Roboto_Condensed } from "next/font/google";
+import { BlogComment } from "@/utils/allSides/blogsFunctions";
 import Comment from "./Comment";
+
 import "./LoadingAnimation.css";
 import { LoadingSpinner } from "@/components/Icons";
 
+import { Roboto_Condensed } from "next/font/google";
+import { useEffect, useMemo, useState } from "react";
+import { fetchAllAuthors } from "@/utils/serverside/authorsFunctions";
+import { User } from "@/utils/allSides/usersFunctions";
 const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"],
   weight: "700"
 });
 
-export default async function BlogComments({
-  comments,
-  blogId
-}: {
-  comments: BlogComment[] | "loading";
+interface BlogCommentProps {
+  commentList: BlogComment[] | "loading";
   blogId: string;
-}) {
-  const topComments =
-    comments === "loading" || blogId === "loading"
-      ? "loading"
-      : comments.filter((c) => !c.parentId);
+}
+
+export default function BlogcommentList({
+  commentList,
+  blogId
+}: BlogCommentProps) {
+  const [commentCount, setCommentCount] = useState(0);
+  useEffect(() => {
+    if (commentList !== "loading") {
+      setCommentCount(commentList.length);
+      fetchCommentAuthors();
+    }
+  }, [commentList]);
+  const [commentAuthors, setCommentAuthors] = useState<Map<
+    string,
+    User | null
+  > | null>(null);
+
+  const fetchCommentAuthors = async () => {
+    if (commentList === "loading") return;
+    const allAuthors = await fetchAllAuthors(commentList);
+    delay(10000);
+    setCommentAuthors(allAuthors);
+  };
+
   return (
     <div className={`w-full`}>
-      <div
-        className={`${roboto_condensed.className} text-gray-800 uppercase w-full text-center text-[24px]`}
-      >
-        {comments === "loading" ? "" : comments.length} comments
-      </div>
-      <CommentsSeparationLine />
+      <CommentsCount commentCount={commentCount} />
+      <CommentsDivider />
       <br />
-      {topComments === "loading" ? (
+      {commentList === "loading" || !commentAuthors?.size ? (
         <LoadingSpinner />
       ) : (
         <div className={`w-full flex flex-col gap-[24px]`}>
-          {topComments.map((c, i) => (
+          {commentList.map((c, i) => (
             <Comment
-              isTopComment={true}
+              commentAuthors={commentAuthors}
+              incrementCommentCount={incrementCommentCount}
               key={i}
               blogId={blogId}
               comment={c}
@@ -46,8 +64,24 @@ export default async function BlogComments({
       )}
     </div>
   );
+
+  function incrementCommentCount() {
+    setCommentCount((prevCount) => prevCount + 1);
+  }
 }
 
-export function CommentsSeparationLine() {
+export function CommentsDivider() {
   return <div className="w-full border-t"></div>;
 }
+
+const CommentsCount: React.FC<{ commentCount: number }> = ({
+  commentCount
+}) => (
+  <div
+    className={`${roboto_condensed.className} text-gray-800 uppercase w-full text-center text-[24px]`}
+  >
+    {commentCount} comments
+  </div>
+);
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

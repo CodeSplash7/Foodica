@@ -5,14 +5,10 @@ import React, { useState } from "react";
 
 export default function CommentMessage({
   message,
-  commentIndex,
-  isTopComment,
-  parentCommentIndex
+  htmlCommentId
 }: {
   message: string;
-  commentIndex: number;
-  parentCommentIndex?: number;
-  isTopComment: boolean;
+  htmlCommentId: string;
 }) {
   const visibleCharLimit = 200;
   const [isReadMore, setIsReadMore] = useState(false);
@@ -40,10 +36,7 @@ export default function CommentMessage({
   );
 
   function smoothScrollToComment() {
-    let selector = isTopComment
-      ? `comment${commentIndex}`
-      : `comment${parentCommentIndex}reply${commentIndex}`;
-    const comment = document.querySelector(`[id="${selector}"]`);
+    const comment = document.querySelector(`[id="${htmlCommentId}"]`);
     if (comment) {
       comment.scrollIntoView({ behavior: "smooth" });
     }

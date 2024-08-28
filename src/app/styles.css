@@ -6,6 +6,9 @@
 * {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
+  box-sizing: border-box;
+
+  /* outline: 1px solid red; */
 }
 
 /* *Loading spinner component styles */
@@ -311,7 +314,7 @@ svg.loading-spinner circle {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:25px;
+  width: 25px;
   height: 25px;
   border-radius: 50%;
   margin: 0 4px;
