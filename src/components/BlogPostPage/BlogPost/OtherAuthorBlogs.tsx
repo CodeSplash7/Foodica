@@ -19,57 +19,15 @@ export default function OtherAuthorBlogs({
   authorBlogs: Blog[] | "loading";
   blog: Blog | "loading";
 }) {
-  const getAllOtherBlogs: () => [Blog[], number] = () => {
-    const otherBlogs =
-      blog === "loading" || authorBlogs === "loading"
-        ? []
-        : authorBlogs.filter((b) => b.id !== blog.id);
-    return [otherBlogs, otherBlogs.length];
-  };
-
-  const [otherBlogs, blogsCount] = getAllOtherBlogs();
-  const [visibleBlogs, setVisibleBlogs] = useState<Blog[]>(
-    otherBlogs.slice(0, 3)
-  );
-  const [visibleBlogsIndex, setVisibleBlogsIndex] = useState<number>(0);
-
-  useEffect(() => handleBlogsNavigation(), []);
-
-  function handleBlogsNavigation(action?: "-" | "+") {
-    let newBlogsIndex = visibleBlogsIndex;
-    if (action === "-") newBlogsIndex--;
-    if (action === "+") newBlogsIndex++;
-    if (newBlogsIndex < 0) {
-      newBlogsIndex = blogsCount - 1;
-    }
-    if (newBlogsIndex > blogsCount - 1) {
-      newBlogsIndex = 0;
-    }
-    const newCurrentBlogs = Array.from(
-      { length: blogsCount <= 3 ? blogsCount : 3 },
-      (_, i) => getElementAtIndex(newBlogsIndex + i)
-    );
-    setVisibleBlogs(newCurrentBlogs as Blog[]);
-    setVisibleBlogsIndex(newBlogsIndex);
-  }
-
-  function getElementAtIndex(index: number) {
-    if (blogsCount === 0) {
-      return undefined;
-    }
-    const wrappedIndex = index % blogsCount;
-    return otherBlogs[wrappedIndex];
-  }
+  const otherBlogs = useOtherBlogs(blog, authorBlogs);
+  const { navigate, visibleBlogs } = useVisibleBlogs(otherBlogs);
 
   const responsiveClasses = ["flex", "hidden lg:flex", "hidden xl:flex"];
   return (
     <div
       className={`flex w-full items-center border-b pb-[32px] px-[32px] gap-[32px]`}
     >
-      <ChangeBlogButton
-        action={"-"}
-        handleBlogsNavigation={handleBlogsNavigation}
-      />
+      <ChangeBlogButton action={"-"} handleBlogsNavigation={navigate} />
       <div className="flex flex-row justify-between gap-[8px]">
         {blog === "loading"
           ? Array(3)
@@ -90,10 +48,7 @@ export default function OtherAuthorBlogs({
             ))}
       </div>
 
-      <ChangeBlogButton
-        action={"+"}
-        handleBlogsNavigation={handleBlogsNavigation}
-      />
+      <ChangeBlogButton action={"+"} handleBlogsNavigation={navigate} />
     </div>
   );
 }
@@ -151,3 +106,56 @@ const OtherBlogCard: React.FC<{
     </ClickableTitle>
   );
 };
+
+function useOtherBlogs(
+  currentBlog: Blog | "loading",
+  authorBlogs: Blog[] | "loading"
+) {
+  const fetchOtherBlogs: () => Blog[] = () => {
+    const otherBlogs =
+      currentBlog === "loading" || authorBlogs === "loading"
+        ? []
+        : authorBlogs.filter((b) => b.id !== currentBlog.id);
+    return otherBlogs;
+  };
+  return fetchOtherBlogs();
+}
+
+function useVisibleBlogs(otherBlogs: Blog[]) {
+  const blogsCount = otherBlogs.length;
+
+  const [visibleBlogs, setVisibleBlogs] = useState<Blog[]>(
+    otherBlogs.slice(0, 3)
+  );
+  const [visibleBlogsIndex, setVisibleBlogsIndex] = useState<number>(0);
+
+  useEffect(() => handleBlogsNavigation(), []);
+
+  function handleBlogsNavigation(action?: "-" | "+") {
+    let newBlogsIndex = visibleBlogsIndex;
+    if (action === "-") newBlogsIndex--;
+    if (action === "+") newBlogsIndex++;
+    if (newBlogsIndex < 0) {
+      newBlogsIndex = blogsCount - 1;
+    }
+    if (newBlogsIndex > blogsCount - 1) {
+      newBlogsIndex = 0;
+    }
+    const newCurrentBlogs = Array.from(
+      { length: blogsCount <= 3 ? blogsCount : 3 },
+      (_, i) => getElementAtIndex(newBlogsIndex + i)
+    );
+    setVisibleBlogs(newCurrentBlogs as Blog[]);
+    setVisibleBlogsIndex(newBlogsIndex);
+  }
+
+  function getElementAtIndex(index: number) {
+    if (blogsCount === 0) {
+      return undefined;
+    }
+    const wrappedIndex = index % blogsCount;
+    return otherBlogs[wrappedIndex];
+  }
+
+  return { navigate: handleBlogsNavigation, visibleBlogs };
+}

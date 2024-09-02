@@ -1,9 +1,7 @@
-import { useAppSelector } from "@/store/store";
+import { getAllLinks } from "@/utils/allSides/linksFunctions";
 
 export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
-  const links = useAppSelector(
-    (state) => state.pageHeader.navigationMenu.links
-  );
+  const links = getAllLinks()
   const thisDropdown = links.find((link) => link.id === linkId);
 
   return (

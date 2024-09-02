@@ -1,7 +1,5 @@
-import { closeBurgerMenu, openBurgerMenu } from "@/store/pageHeaderSlice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import { Roboto_Condensed } from "next/font/google";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "400",

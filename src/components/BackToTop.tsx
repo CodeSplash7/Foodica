@@ -1,16 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export default function BackToTop() {
+function useButtonVisiblity(threshold: number) {
   const [isVisible, setIsVisible] = useState(false);
-
   const toggleVisibility = () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > threshold) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
   };
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
+
+  return isVisible;
+}
+
+export default function BackToTop() {
+  const isVisible = useButtonVisiblity(100);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -18,13 +29,6 @@ export default function BackToTop() {
       behavior: "smooth"
     });
   };
-
-  useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
-  }, []);
 
   return (
     <div className="fixed right-[32px] bottom-[32px] z-[99999]">

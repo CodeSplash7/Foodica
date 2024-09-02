@@ -1,7 +1,5 @@
 "use client";
 
-import { closeDropDownMenu, openDropDownMenu } from "@/store/pageHeaderSlice";
-import { getAllLinks } from "@/utils/allSides/linksFunctions";
 import { Dispatch, SetStateAction } from "react";
 
 export default function DropdownCloseOpenIcon({

@@ -20,7 +20,7 @@ export default function CustomInput({
   formRerender = () => {},
   inputField,
   mini,
-  focused,
+  isFocused,
   showError = true,
   showLabel = true
 }: {
@@ -29,7 +29,7 @@ export default function CustomInput({
   mini?: boolean;
   showError?: boolean;
   showLabel?: boolean;
-  focused?: boolean;
+  isFocused?: boolean;
 }) {
   let { label, errorMessage, type, warningMessage, options } = inputField;
   const rerender = useRender(formRerender);
@@ -57,7 +57,7 @@ export default function CustomInput({
       {type === "keyword-list" && options ? (
         <KeywordInput {...inputComponentProps} />
       ) : type === "textarea" ? (
-        <Textarea {...inputComponentProps} />
+        <Textarea isFocused={isFocused ?? false} {...inputComponentProps} />
       ) : type === "number" ? (
         <NumberInput mini={mini} {...inputComponentProps} />
       ) : options ? (
@@ -75,18 +75,22 @@ function Textarea({
   onChange,
   rerender,
   showError,
+  isFocused
 }: {
   inputField: InputField<string, string>;
   onChange?: () => void;
   rerender: () => void;
   showError: boolean;
+  isFocused: boolean;
 }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { setValue, label, max, getCorrectValue, errorMessage, disabled } =
     inputField;
   let value = getCorrectValue();
 
-  useEffect(() => inputRef.current?.focus(), []);
+  useEffect(() => {
+    if (isFocused) inputRef.current?.focus();
+  }, []);
 
   return (
     <>
@@ -283,7 +287,7 @@ const KeywordInput = ({
   };
 
   const handleRemoveKeyword = (keyword: string) => {
-    inputField.setValue(inputField.value?.filter((k) => k !== keyword));
+    inputField.setValue(inputField.getCorrectValue()?.filter((k) => k !== keyword));
     rerender();
   };
   return (

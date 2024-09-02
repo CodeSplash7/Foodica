@@ -14,10 +14,40 @@ export default function CommentSection({
   session: Session | null;
   blog: Blog | "loading";
 }) {
+  if (blog === "loading") {
+    return <div>Loading comments...</div>;
+  }
+  const currentUserId = useCurrentUserId(session);
+  const { commentList, addComment } = useCommentList(blog);
+  const handleNewComment = useHandleNewComment(blog, addComment, currentUserId);
+
+  return (
+    <div id="comments" className="w-full flex flex-col gap-8">
+      <CommentInput userId={currentUserId} onAddComment={handleNewComment} />
+      <BlogComments blogId={blog.id} commentList={commentList} />
+    </div>
+  );
+}
+
+function useCommentList(blog: Blog | "loading") {
   const [commentList, setCommentList] = useState<BlogComment[] | "loading">(
     "loading"
   );
+  useEffect(() => {
+    if (blog !== "loading") setCommentList(blog.comments);
+  }, []);
 
+  function addComment(newComment: BlogComment) {
+    setCommentList((prevComments) => {
+      if (prevComments !== "loading") return [...prevComments, newComment];
+      return "loading"; // never gonna happen but typescript forces its
+    });
+  }
+
+  return { commentList, addComment };
+}
+
+export function useCurrentUserId(session: Session | null) {
   const [currentUserId, setCurrentUserId] = useState<string | undefined>();
 
   useEffect(() => {
@@ -25,12 +55,18 @@ export default function CommentSection({
       const user = await getUserByEmail(session?.user?.email || "");
       setCurrentUserId(user?.id);
     };
-    if (blog !== "loading") setCommentList(blog.comments);
-
     fetchUser();
   }, []);
 
-  const handleNewComment = async (content: string) => {
+  return currentUserId;
+}
+
+function useHandleNewComment(
+  blog: Blog | "loading",
+  addComment: (newComment: BlogComment) => void,
+  currentUserId?: string
+) {
+  return async (content: string) => {
     if (blog === "loading" || !currentUserId) return { ok: false };
     const { res: newComment } = await addCommentToBlog(
       blog.id,
@@ -38,23 +74,7 @@ export default function CommentSection({
       content
     );
     if (!newComment) return { ok: false };
-    setCommentList((prevComments) => {
-      if (prevComments !== "loading") return [...prevComments, newComment];
-      return "loading"; // never gonna happen but typescript forces its
-    });
+    addComment(newComment);
     return { ok: true };
   };
-  if (blog === "loading" || commentList === "loading") {
-    return <div>Loading comments...</div>;
-  }
-  return (
-    <div id="comments" className="w-full flex flex-col gap-8">
-      <CommentInput
-        blogId={blog.id}
-        userId={currentUserId}
-        onAddComment={handleNewComment}
-      />
-      <BlogComments blogId={blog.id} commentList={commentList} />
-    </div>
-  );
 }

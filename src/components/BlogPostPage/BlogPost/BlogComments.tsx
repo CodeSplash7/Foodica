@@ -5,7 +5,7 @@ import "./LoadingAnimation.css";
 import { LoadingSpinner } from "@/components/Icons";
 
 import { Roboto_Condensed } from "next/font/google";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAllAuthors } from "@/utils/serverside/authorsFunctions";
 import { User } from "@/utils/allSides/usersFunctions";
 const roboto_condensed = Roboto_Condensed({
@@ -18,35 +18,19 @@ interface BlogCommentProps {
   blogId: string;
 }
 
-export default function BlogcommentList({
+export default function BlogComments({
   commentList,
   blogId
 }: BlogCommentProps) {
-  const [commentCount, setCommentCount] = useState(0);
-  useEffect(() => {
-    if (commentList !== "loading") {
-      setCommentCount(commentList.length);
-      fetchCommentAuthors();
-    }
-  }, [commentList]);
-  const [commentAuthors, setCommentAuthors] = useState<Map<
-    string,
-    User | null
-  > | null>(null);
-
-  const fetchCommentAuthors = async () => {
-    if (commentList === "loading") return;
-    const allAuthors = await fetchAllAuthors(commentList);
-    delay(10000);
-    setCommentAuthors(allAuthors);
-  };
+  const { commentCount, incrementCommentCount, commentAuthors } =
+    useCommentInformation(commentList);
 
   return (
     <div className={`w-full`}>
       <CommentsCount commentCount={commentCount} />
       <CommentsDivider />
       <br />
-      {commentList === "loading" || !commentAuthors?.size ? (
+      {!commentAuthors?.size ? null : commentList === "loading" ? (
         <LoadingSpinner />
       ) : (
         <div className={`w-full flex flex-col gap-[24px]`}>
@@ -64,10 +48,6 @@ export default function BlogcommentList({
       )}
     </div>
   );
-
-  function incrementCommentCount() {
-    setCommentCount((prevCount) => prevCount + 1);
-  }
 }
 
 export function CommentsDivider() {
@@ -85,3 +65,31 @@ const CommentsCount: React.FC<{ commentCount: number }> = ({
 );
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function useCommentInformation(commentList: BlogComment[] | "loading") {
+  const [commentCount, setCommentCount] = useState(0);
+  useEffect(() => {
+    if (commentList !== "loading") {
+      setCommentCount(commentList.length);
+      fetchCommentAuthors();
+    }
+  }, [commentList]);
+
+  function incrementCommentCount() {
+    setCommentCount((prevCount) => prevCount + 1);
+  }
+
+  const [commentAuthors, setCommentAuthors] = useState<Map<
+    string,
+    User | null
+  > | null>(null);
+
+  const fetchCommentAuthors = async () => {
+    if (commentList === "loading") return;
+    const allAuthors = await fetchAllAuthors(commentList);
+    delay(10000);
+    setCommentAuthors(allAuthors);
+  };
+
+  return { commentCount, incrementCommentCount, commentAuthors };
+}

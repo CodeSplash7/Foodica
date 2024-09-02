@@ -1,6 +1,5 @@
 "use client";
 // hooks
-import { useCallback, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +13,7 @@ import { registerUser, getUserByEmail } from "@/utils/serverside/userFunctions";
 import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 // types
 import { Session } from "next-auth";
-import { Picture } from "@/utils/allSides/usersFunctions";
+import { Picture, User } from "@/utils/allSides/usersFunctions";
 // schemas
 import {
   emailSchema,
@@ -23,124 +22,63 @@ import {
   pictureSchema
 } from "./schemas";
 import InputField from "./inputField";
+import { useCallback, useEffect, useState } from "react";
 
-export default function RegisterForm({ session }: { session: Session | null }) {
+interface InputFields {
+  usernameField: InputField<string, string | Picture>;
+  emailField: InputField<string, string | Picture>;
+  passwordField: InputField<string, string | Picture>;
+  imageField: InputField<File, Picture>;
+}
+
+export default function RegisterForm({
+  user,
+  actionType
+}: {
+  user: User | null;
+  actionType: string | undefined;
+}) {
+  const toUpdate = actionType === "update" && !!user;
+  const toRegister = !toUpdate;
   //* Input fields initialization
-  const [usernameField] = useState(
-    () =>
-      new InputField<string>({
-        schema: usernameSchema,
-        type: "text",
-        label: "Username"
-      })
-  );
-  const [emailField] = useState(
-    () =>
-      new InputField<string>({
-        schema: emailSchema,
-        type: "email",
-        label: "Email"
-      })
-  );
-  const [passwordField] = useState(
-    () =>
-      new InputField<string>({
-        schema: passwordSchema,
-        type: "password",
-        label: "Password"
-      })
-  );
+  const usernameField = useUsernameInput(user);
+  const emailField = useEmailInput(user);
+  const passwordField = usePasswordInput();
+  const imageField = useImageInput(user);
+  const inputFields: InputFields = {
+    usernameField,
+    emailField,
+    passwordField,
+    imageField
+  };
 
-  const [imageField] = useState(
-    () =>
-      new InputField<File, Picture>({
-        schema: pictureSchema,
-        type: "image",
-        label: "Profile Photo"
-      })
-  );
+  const getImage = useGetPicture(imageField);
+
   //* hooks initialization
   const router = useRouter();
-  const { edgestore } = useEdgeStore();
-  const searchParams = useSearchParams();
-  const rerender = useRender();
+  const signinNewAccount = useSigninNewAccount(inputFields);
 
   //* state initialization
-  const toUpdate = searchParams.get("for") === "update" && !!session;
-  const toRegister = !toUpdate;
-  const [userId, setUserId] = useState("");
-  const [registrationError, setRegistrationError] = useState("");
+  const { isRegistrationError, registrationError, setRegistrationError } =
+    useRegistrationError(inputFields, toUpdate);
 
-  //* helper functions
-  const isRegistrationError = useCallback(
-    () =>
-      usernameField.errorMessage ||
-      emailField.errorMessage ||
-      imageField.errorMessage ||
-      (toUpdate ? false : passwordField.errorMessage),
-    [usernameField, emailField, imageField, passwordField, toUpdate]
-  );
-
-  const getUserInfo = useCallback(async () => {
-    if (session) {
-      const user = await getUserByEmail(session?.user?.email);
-      if (!user) return;
-      usernameField.setInitialValue(user.profile.username);
-      emailField.setInitialValue(user.account.email);
-      imageField.setInitialValue(user.profile.profilePicture);
-      setUserId(user.id);
-    }
-  }, [session]);
-  const stringifyFormInformation = (profilePicture: any) => {
-    return JSON.stringify({
-      password: passwordField.value,
-      username: usernameField.modifiedValue
-        ? usernameField.value
-        : usernameField.initialValue,
-      email: emailField.modifiedValue
-        ? emailField.value
-        : emailField.initialValue,
-      profilePicture
-    });
-  };
-  const getPfp = async () => {
-    if (!imageField.modifiedValue) {
-      return imageField.initialValue;
-    }
-    const result = await uploadProfileImage();
-    if (result instanceof Error) {
-      imageField.setErrorMessage(result.message);
-      return null;
-    }
-    return result;
-  };
-
-  useEffect(() => {
-    if (toUpdate) getUserInfo();
-  }, [session]);
+  const stringifyForm = useStringifyForm(inputFields);
 
   //* form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistrationError()) return;
 
-    const profilePicture = await getPfp();
-    const stringJsonData = stringifyFormInformation(profilePicture);
+    const profilePicture = await getImage();
+    const stringJsonData = stringifyForm(profilePicture);
     const newUser = await registerUser(stringJsonData, {
       update: toUpdate,
-      id: userId
+      id: user?.id
     });
     if ("error" in newUser) return setRegistrationError(newUser.error);
-    if (toRegister) {
-      return signIn("credentials", {
-        username: usernameField.value,
-        email: emailField.value,
-        password: passwordField.value
-      });
-    }
-    if (emailField.modifiedValue) {
-      return router.replace("/api/auth/signin");
-    }
+    if (toRegister) return await signinNewAccount();
+    if (emailField.modifiedValue) return router.replace("/api/auth/signin");
+
     setTimeout(() => {
       router.refresh();
     }, 0);
@@ -166,6 +104,57 @@ export default function RegisterForm({ session }: { session: Session | null }) {
       </form>
     </>
   );
+}
+
+function useUsernameInput(user: User | null) {
+  return useState(
+    () =>
+      new InputField<string, string>({
+        initialValue: user ? user.profile.username : "",
+        schema: usernameSchema,
+        type: "text",
+        label: "Username"
+      })
+  )[0];
+}
+
+function useEmailInput(user: User | null) {
+  return useState(
+    () =>
+      new InputField<string, string>({
+        initialValue: user ? user.account.email : "",
+        schema: emailSchema,
+        type: "email",
+        label: "Email"
+      })
+  )[0];
+}
+
+function usePasswordInput() {
+  return useState(
+    () =>
+      new InputField<string, string>({
+        schema: passwordSchema,
+        type: "password",
+        label: "Password"
+      })
+  )[0];
+}
+
+function useImageInput(user: User | null) {
+  return useState(
+    () =>
+      new InputField<File, Picture>({
+        initialValue: user ? user.profile.profilePicture : undefined,
+        schema: pictureSchema,
+        type: "image",
+        label: "Profile Photo"
+      })
+  )[0];
+}
+
+function useGetPicture(imageField: InputField<File, Picture>) {
+  const { edgestore } = useEdgeStore();
 
   async function uploadProfileImage() {
     if (imageField.value && imageField.initialValue) {
@@ -183,4 +172,79 @@ export default function RegisterForm({ session }: { session: Session | null }) {
     }
     return null;
   }
+
+  const getPfp = async () => {
+    if (!imageField.modifiedValue) {
+      return imageField.initialValue;
+    }
+    const result = await uploadProfileImage();
+    if (result instanceof Error) {
+      imageField.setErrorMessage(result.message);
+      return null;
+    }
+    return result;
+  };
+
+  return getPfp;
+}
+
+function useRegistrationError(inputFields: InputFields, toUpdate: boolean) {
+  const { usernameField, emailField, imageField, passwordField } = inputFields;
+  const [registrationError, setRegistrationError] = useState("");
+
+  //* helper functions
+  const isRegistrationError = useCallback(
+    () =>
+      usernameField.errorMessage ||
+      emailField.errorMessage ||
+      imageField.errorMessage ||
+      (toUpdate ? false : passwordField.errorMessage),
+    [usernameField, emailField, imageField, passwordField, toUpdate]
+  );
+
+  useEffect(() => {
+    const error = isRegistrationError();
+    if (error) {
+      setRegistrationError(error);
+    }
+  }, [isRegistrationError]);
+
+  return { isRegistrationError, registrationError, setRegistrationError };
+}
+
+function useStringifyForm(inputFields: InputFields) {
+  const { passwordField, usernameField, emailField } = inputFields;
+  const stringifyFormInformation = (
+    profilePicture: null | {
+      url: string;
+      thumbnailUrl: string | null;
+      size: number;
+      uploadedAt: Date;
+      metadata: Record<string, never>;
+      path: Record<string, never>;
+      pathOrder: string[];
+    }
+  ) => {
+    return JSON.stringify({
+      password: passwordField.value,
+      username: usernameField.modifiedValue
+        ? usernameField.value
+        : usernameField.initialValue,
+      email: emailField.modifiedValue
+        ? emailField.value
+        : emailField.initialValue,
+      profilePicture
+    });
+  };
+  return stringifyFormInformation;
+}
+
+function useSigninNewAccount(inputFields: InputFields) {
+  const { usernameField, emailField, passwordField } = inputFields;
+  return () =>
+    signIn("credentials", {
+      username: usernameField.value,
+      email: emailField.value,
+      password: passwordField.value
+    });
 }

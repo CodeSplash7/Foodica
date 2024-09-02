@@ -1,7 +1,4 @@
 "use client";
-import Comment from "./Comment";
-import { CommentsDivider } from "./BlogComments";
-import { useEffect, useState } from "react";
 import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
 import CommentHeader from "./CommentHeader";
 import CommentMessage from "./CommentMessage";
@@ -79,8 +76,6 @@ const Reply: React.FC<{
         commentAuthor={commentAuthor}
         addReply={addReply}
       />
-
-      {/* <CommentsSeparationLine /> */}
     </div>
   );
 };

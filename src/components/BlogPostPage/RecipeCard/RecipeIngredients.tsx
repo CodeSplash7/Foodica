@@ -13,11 +13,7 @@ export default function RecipeIngredients({
 }) {
   const ingredients: IngredientType[] | "loading" =
     blog === "loading" ? "loading" : blog.ingredients;
-
-  const [checkList, setCheckList] = useState<boolean[]>(
-    ingredients === "loading" ? [] : ingredients.map(() => false)
-  );
-
+  const { checkList, handleCheck } = useIngredientsCheck(ingredients);
   return (
     <div
       className={`w-full bg-[#fbf9e7] p-[32px] rounded-md flex flex-col gap-[16px] `}
@@ -42,7 +38,7 @@ export default function RecipeIngredients({
                 <Ingredient
                   key={index}
                   isChecked={checkList[index]}
-                  handleClick={() => handleIngredientCheck(index)}
+                  handleClick={() => handleCheck(index)}
                   ingredientInfo={ingredient}
                 />
               );
@@ -50,12 +46,6 @@ export default function RecipeIngredients({
       </div>
     </div>
   );
-
-  function handleIngredientCheck(index: number) {
-    const oldCheckList = [...checkList];
-    oldCheckList[index] = !oldCheckList[index];
-    setCheckList(oldCheckList);
-  }
 }
 
 interface IngredientProps {
@@ -135,3 +125,15 @@ const decimalToFraction = (decimal: number) => {
     return `${numeratorFinal}/${denominatorFinal}`;
   }
 };
+
+function useIngredientsCheck(ingredients: IngredientType[] | "loading") {
+  const [checkList, setCheckList] = useState<boolean[]>(
+    ingredients === "loading" ? [] : ingredients.map(() => false)
+  );
+  function handleIngredientCheck(index: number) {
+    const oldCheckList = [...checkList];
+    oldCheckList[index] = !oldCheckList[index];
+    setCheckList(oldCheckList);
+  }
+  return { checkList, handleCheck: handleIngredientCheck };
+}

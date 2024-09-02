@@ -1,14 +1,12 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRender } from "@/components/RegisterForm/CustomInput";
 
 import { LoadingIcon } from "@/components/Icons";
 import CustomInput from "@/components/RegisterForm/CustomInput";
 import InputField from "@/components/RegisterForm/inputField";
-import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
 
 import Joi from "joi";
-import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
 
 import { Roboto_Condensed } from "next/font/google";
 
@@ -22,7 +20,6 @@ const commentSchema = Joi.string().label("Comment").max(1000).messages({
 });
 
 interface CommentInputProps {
-  blogId: string;
   userId: string | undefined;
   onAddComment: (content: string) => Promise<{ ok: false | true }>;
   commentAuthorName?: string;
@@ -31,44 +28,21 @@ interface CommentInputProps {
 
 // Used for comments and replies
 export default function CommentInput({
-  blogId,
   userId,
   commentAuthorName,
   closeReply,
   onAddComment
 }: CommentInputProps) {
+  const commentField = useCommentField(userId);
   const rerender = useRender();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [submitIsEnabled, setSubmitIsEnabled] = useState(false);
-  const commentField = useMemo(createCommentField, [userId]);
-
-  useEffect(
-    () => setSubmitIsEnabled(!isLoading && !!commentField.value),
-    [isLoading, commentField.value]
-  );
-
-  const handleSubmit = useCallback(async () => {
-    if (!userId) return;
-    setIsLoading(true);
-
-    const commentContent = `${
-      commentAuthorName ? "@" + commentAuthorName : ""
-    } ${commentField.value}`;
-
-    await delay(1500);
-    if ((await onAddComment?.(commentContent)).ok) {
-      commentField.setValue("");
-    }
-    setIsLoading(false);
-    closeReply?.();
-  }, [
-    blogId,
+  const [isLoading, handleSubmit] = useSubmitComment(
     userId,
-    commentAuthorName,
     commentField,
+    commentAuthorName,
     onAddComment,
     closeReply
-  ]);
+  );
+  const submitIsEnabled = useSubmitEnabled(isLoading, commentField);
 
   return (
     <div className={`flex flex-col gap-[16px]`}>
@@ -83,7 +57,7 @@ export default function CommentInput({
       <div>
         <CustomInput
           formRerender={rerender}
-          focused
+          isFocused
           showLabel={false}
           showError={false}
           inputField={commentField}
@@ -98,17 +72,6 @@ export default function CommentInput({
       )}
     </div>
   );
-
-  function createCommentField() {
-    return new InputField<string, string>({
-      label: "Comment",
-      schema: commentSchema,
-      type: "textarea",
-      max: 1000,
-      disabled: !userId,
-      initialValue: !userId ? "Log in to write comments!" : ""
-    });
-  }
 }
 
 function delay(ms: number) {
@@ -153,3 +116,62 @@ const PostCommentButton: React.FC<{
     </div>
   );
 };
+
+function useCommentField(userId?: string) {
+  const commentField = useMemo(
+    () =>
+      new InputField<string, string>({
+        label: "Comment",
+        schema: commentSchema,
+        type: "textarea",
+        max: 1000,
+        disabled: !userId,
+        initialValue: !userId ? "Log in to write comments!" : ""
+      }),
+    [userId]
+  );
+
+  return commentField;
+}
+
+function useSubmitComment(
+  userId: string | undefined,
+  commentField: InputField<string, string>,
+  commentAuthorName: string | undefined,
+  onAddComment: (content: string) => Promise<{
+    ok: false | true;
+  }>,
+  closeReply: (() => void) | undefined
+): [boolean, () => Promise<void>] {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  return [
+    isLoading,
+    async () => {
+      if (!userId) return;
+      setIsLoading(true);
+
+      const commentContent = `${
+        commentAuthorName ? "@" + commentAuthorName : ""
+      } ${commentField.value}`;
+
+      await delay(1500);
+      if ((await onAddComment?.(commentContent)).ok) {
+        commentField.setValue("");
+      }
+      setIsLoading(false);
+      closeReply?.();
+    }
+  ];
+}
+
+function useSubmitEnabled(
+  isLoading: boolean,
+  commentField: InputField<string, string>
+) {
+  const [submitIsEnabled, setSubmitIsEnabled] = useState(false);
+  useEffect(
+    () => setSubmitIsEnabled(!isLoading && !!commentField.value),
+    [isLoading, commentField.value]
+  );
+  return submitIsEnabled;
+}

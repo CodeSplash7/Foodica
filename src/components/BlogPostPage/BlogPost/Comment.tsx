@@ -1,5 +1,4 @@
 "use client";
-import { getUserById } from "@/utils/serverside/userFunctions";
 import { type BlogComment } from "@/utils/allSides/blogsFunctions";
 import { type User } from "@/utils/allSides/usersFunctions";
 
@@ -24,13 +23,7 @@ export default function Comment({
   incrementCommentCount,
   commentAuthors
 }: CommentProps) {
-  const [commentAuthor, setCommentAuthor] = useState<User | null | undefined>();
-  const getCommentAuthor = useCallback(async () => {
-    setCommentAuthor(commentAuthors.get(comment.userId));
-  }, [comment.userId]);
-  useEffect(() => {
-    getCommentAuthor();
-  }, [getCommentAuthor]);
+  const commentAuthor = useCommentAuthor(commentAuthors, comment);
   if (commentAuthor)
     return (
       <div
@@ -54,4 +47,19 @@ export default function Comment({
         />
       </div>
     );
+}
+
+function useCommentAuthor(
+  commentAuthors: Map<string, User | null>,
+  comment: BlogComment
+) {
+  const [commentAuthor, setCommentAuthor] = useState<User | null | undefined>();
+  const getCommentAuthor = useCallback(async () => {
+    setCommentAuthor(commentAuthors.get(comment.userId));
+  }, [comment.userId]);
+  useEffect(() => {
+    getCommentAuthor();
+  }, [getCommentAuthor]);
+
+  return commentAuthor;
 }

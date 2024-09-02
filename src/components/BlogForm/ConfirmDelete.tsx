@@ -1,18 +1,20 @@
+import { Dispatch, SetStateAction } from "react";
+
 export default function ConfirmDelete({
-  isModalOpen,
-  handleDelete,
-  closeModal,
-  message
+  modalProps
 }: {
-  isModalOpen: boolean;
-  handleDelete: () => void;
-  closeModal: () => void;
-  message: string;
+  modalProps: {
+    isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    deletePost: () => Promise<void>;
+    message: string;
+  };
 }) {
+  const { isOpen, message, setIsOpen, deletePost } = modalProps;
   return (
     <div
       className={`${
-        isModalOpen ? "flex" : "hidden"
+        isOpen ? "flex" : "hidden"
       } fixed inset-0 items-center justify-center bg-black bg-opacity-50 z-[100]`}
     >
       <div className="w-[250px] flex flex-col p-4 relative items-center justify-center bg-gray-800 border border-gray-800 shadow-lg rounded-2xl">
@@ -37,13 +39,13 @@ export default function ConfirmDelete({
           </div>
           <div className="p-2 mt-2 text-center space-x-1 md:block">
             <div
-              onClick={closeModal}
+              onClick={() => setIsOpen(false)}
               className="mb-2 md:mb-0 bg-gray-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-gray-300 rounded-full hover:shadow-lg hover:bg-gray-700 transition ease-in duration-150"
             >
               Cancel
             </div>
             <div
-              onClick={handleDelete}
+              onClick={deletePost}
               className="bg-red-600 hover:bg-red-700 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider text-white rounded-full transition ease-in duration-150 "
             >
               Confirm

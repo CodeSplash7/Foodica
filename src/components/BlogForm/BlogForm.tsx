@@ -1,38 +1,23 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import InputField from "../RegisterForm/inputField";
-import { Blog, Ingredient, blogTags } from "@/utils/allSides/blogsFunctions";
-import { Picture } from "@/utils/allSides/usersFunctions";
-import { useRouter } from "next/navigation";
-import { useEdgeStore } from "@/lib/edgestore";
-import { createBlog, deleteBlogPost } from "@/utils/serverside/blogsFunctions";
+import { Blog } from "@/utils/allSides/blogsFunctions";
 import { Session } from "next-auth";
 import CustomInput, { useRender } from "../RegisterForm/CustomInput";
 import ImageInput from "../RegisterForm/ImageInput";
-import { deleteBucketImage } from "@/utils/serverside/userFunctions";
 import { SubmitBlogButton, DeleteBlogButton } from "./SubmitBlogButton";
 import { Roboto_Condensed } from "next/font/google";
-import {
-  blogPictureSchema,
-  caloriesSchema,
-  conclusionSchema,
-  cookTimeSchema,
-  descSchema,
-  difficultySchema,
-  directionsSchema,
-  ingredientsSchema,
-  mainTagSchema,
-  prepTimeSchema,
-  secondaryTagsSchema,
-  servingsSchema,
-  titleSchema
-} from "./schemas";
 import IngredientsField from "./IngredientsField";
 import DirectionsField from "./DirectionsField";
-import { LoadingDots, LoadingSpinner } from "../Icons";
+import { LoadingSpinner } from "../Icons";
 import ConfirmDelete from "./ConfirmDelete";
 import LoadingAnimation from "../LoadingAnimation";
+import {
+  useFormFallback,
+  useInputFields,
+  useModalProps,
+  useNavigateToBlog,
+  useSubmitBlog
+} from "./hooks";
 
 const roboto_condesed = Roboto_Condensed({
   weight: "500",
@@ -42,160 +27,24 @@ const roboto_condesed = Roboto_Condensed({
 export default function BlogForm({
   session,
   blog,
-  forPurpose
+  actionType
 }: {
   session: Session | null | "loading";
   blog: Blog | undefined | "loading";
-  forPurpose: string | "loading";
+  actionType: string | "loading";
 }) {
-  if (blog === "loading" || session === "loading" || forPurpose === "loading")
-    return (
-      <Form>
-        <FormHeader toUpdate="loading" />
-      </Form>
-    );
+  const { res: author, fallback } = useFormFallback(session, blog, actionType);
+  if (fallback || blog === "loading" || session === "loading") return fallback;
 
-  const author = session?.user?.name;
-  if (!author)
-    return <div>You can't create blogs unless so log in into an account!</div>;
-  //* Input fields initialization
-  const [titleField] = useState(
-    () =>
-      new InputField<string>({
-        schema: titleSchema,
-        type: "text",
-        label: "Title",
-        initialValue: blog ? blog.title : ""
-      })
-  );
-  const [mainTagField] = useState(
-    () =>
-      new InputField<string>({
-        schema: mainTagSchema,
-        type: "select",
-        options: blogTags,
-        label: "Main Tag",
-        initialValue: blog ? blog.mainTag : blogTags[0]
-      })
-  );
-  const [secondaryTagsField] = useState(
-    () =>
-      new InputField<string[]>({
-        initialValue: blog ? blog.secondaryTags : [],
-        schema: secondaryTagsSchema,
-        type: "keyword-list",
-        options: blogTags,
-        label: "Secondary Tags"
-      })
-  );
+  const toUpdate = actionType === "update" && !!blog;
 
-  const [descField] = useState(
-    () =>
-      new InputField<string>({
-        schema: descSchema,
-        type: "textarea",
-        label: "Description",
-        max: 1000,
-        initialValue: blog ? blog.description : ""
-      })
-  );
-  const [servingsField] = useState(
-    () =>
-      new InputField<number, number>({
-        schema: servingsSchema,
-        type: "number",
-        step: 1,
-        min: 1,
-        label: "Servings",
-        initialValue: blog ? blog.servings : 1
-      })
-  );
-  const [ingredientsField] = useState(
-    () =>
-      new InputField<Ingredient[], Ingredient[]>({
-        initialValue: blog ? blog.ingredients : [],
-        schema: ingredientsSchema,
-        type: "ingredient-list",
-        label: "Ingredients"
-      })
-  );
-  const [directionsField] = useState(
-    () =>
-      new InputField<string[], string[]>({
-        initialValue: blog ? blog.directions : [],
-        schema: directionsSchema,
-        type: "directions-list",
-        label: "Directions"
-      })
-  );
-  const [conclusionField] = useState(
-    () =>
-      new InputField<string>({
-        initialValue: blog ? blog.conclusion : "",
-        schema: conclusionSchema,
-        type: "textarea",
-        label: "Conclusion",
-        max: 1000
-      })
-  );
-  const [blogPictureField] = useState(
-    () =>
-      new InputField<File, Picture>({
-        schema: blogPictureSchema,
-        type: "image",
-        maxImageSize: 5000000,
-        label: "Recipe picture"
-      })
-  );
+  //* Start hooks
+  const rerender = useRender();
+  const navigateToBlog = useNavigateToBlog();
 
-  const [difficultyField] = useState(
-    () =>
-      new InputField<string>({
-        schema: difficultySchema,
-        type: "select",
-        options: ["easy", "medium", "hard"],
-        label: "Difficulty",
-        initialValue: blog ? blog.mainTag : blogTags[0]
-      })
-  );
-
-  const [cookTimeField] = useState(
-    () =>
-      new InputField<number>({
-        initialValue: 1,
-        schema: cookTimeSchema,
-        type: "number",
-        min: 1,
-        step: 1,
-        label: "Cooking Time(minutes)"
-      })
-  );
-
-  const [prepTimeField] = useState(
-    () =>
-      new InputField<number>({
-        initialValue: 1,
-        schema: prepTimeSchema,
-        type: "number",
-        min: 1,
-        step: 1,
-        label: "Preparation Time(minutes)"
-      })
-  );
-
-  const [caloriesField] = useState(
-    () =>
-      new InputField<number>({
-        initialValue: 1,
-        schema: caloriesSchema,
-        type: "number",
-        step: 1,
-        min: 1,
-        label: "Calories"
-      })
-  );
-
-  const [allFields] = useState([
+  //* Create Input Fields
+  const { inputFields, allFields } = useInputFields(blog);
+  const {
     titleField,
     mainTagField,
     secondaryTagsField,
@@ -209,144 +58,31 @@ export default function BlogForm({
     cookTimeField,
     prepTimeField,
     caloriesField
-  ]);
+  } = inputFields;
 
-  //* hooks initialization
-  const rerender = useRender();
-  const router = useRouter();
-  const { edgestore } = useEdgeStore();
+  const modalProps = useModalProps(blog?.id, toUpdate);
 
-  //* state initialization
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isBlogSent, setIsBlogSent] = useState<boolean>(false);
-  const toUpdate = forPurpose === "update" && !!blog;
-  const [postError, setPostError] = useState("");
-  const [blogId, setBlogId] = useState<string>();
-  const [blogDate, setBlogDate] = useState<string>(Date.now().toString());
-
-  //* helper functions
-  const isPostError = useCallback(() => {
-    return !!allFields.find((f) => f.errorMessage);
-  }, allFields);
-
-  useEffect(() => {
-    if (!isPostError()) setPostError("");
-  });
-
-  useEffect(() => {
-    if (toUpdate) getBlogInfo();
-  }, [session]);
-
-  const getBlogInfo = useCallback(async () => {
-    if (!blog) return;
-    setBlogId(blog.id);
-    setBlogDate(blog.creationDate);
-    titleField.setInitialValue(blog.title);
-    mainTagField.setInitialValue(blog.mainTag);
-    secondaryTagsField.setInitialValue(blog.secondaryTags);
-    descField.setInitialValue(blog.description);
-    servingsField.setInitialValue(blog.servings);
-    conclusionField.setInitialValue(blog.conclusion);
-    blogPictureField.setInitialValue(blog.picture);
-    ingredientsField.setInitialValue(blog.ingredients);
-    directionsField.setInitialValue(blog.directions);
-    difficultyField.setInitialValue(blog.difficulty);
-    cookTimeField.setInitialValue(blog.cookTime);
-    prepTimeField.setInitialValue(blog.prepTime);
-    caloriesField.setInitialValue(blog.calories);
-  }, [blog]);
-  const stringifyFormInformation = (recipePicture: any) => {
-    return JSON.stringify({
-      picture: recipePicture,
-      title: titleField.getCorrectValue(),
-      author: session?.user?.name,
-      mainTag: mainTagField.getCorrectValue(),
-      secondaryTags: secondaryTagsField.getCorrectValue(),
-      description: descField.getCorrectValue(),
-      difficulty: difficultyField.getCorrectValue(),
-      servings: servingsField.getCorrectValue(),
-      prepTime: prepTimeField.getCorrectValue(),
-      cookTime: cookTimeField.getCorrectValue(),
-      calories: caloriesField.getCorrectValue(),
-      ingredients: ingredientsField.getCorrectValue(),
-      directions: directionsField.getCorrectValue(),
-      conclusion: conclusionField.getCorrectValue(),
-      creationDate: blogDate
-    });
-  };
-  const getRecipePicture = async () => {
-    if (!blogPictureField.modifiedValue) {
-      return blogPictureField.initialValue;
-    }
-    const result = await uploadBlogImage();
-    if (result instanceof Error) {
-      blogPictureField.setErrorMessage(result.message);
-      return null;
-    }
-    return result;
-  };
-
-  const handleDeletePost = async () => {
-    if (blogId) deleteBlogPost(blogId);
-    router.push("/blogs?page=1");
-  };
-
+  const { postError, isLoading, serverError, submitBlog } = useSubmitBlog(
+    allFields,
+    inputFields,
+    toUpdate,
+    session,
+    author,
+    blog
+  );
   //* form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isBlogSent) return;
-    setIsBlogSent(true);
-    setIsLoading(true);
-    rerender();
 
-    allFields.forEach((f) => f.validate());
-    if (isPostError()) {
-      setPostError("Solve the input problems first!");
-      setIsBlogSent(false);
-      setIsLoading(false);
-      return;
-    }
-    const recipePicture = await getRecipePicture();
-    if (!recipePicture) {
-      setIsBlogSent(false);
-      setIsLoading(false);
-      return;
-    }
-    const stringJsonData = stringifyFormInformation(recipePicture);
-    const newBlog = await createBlog(stringJsonData, {
-      update: toUpdate,
-      id: blogId,
-      authorEmail: session?.user?.email
-    });
-    if ("error" in newBlog) {
-      setPostError(newBlog.error);
-      setIsBlogSent(false);
-      setIsLoading(false);
-      return;
-    }
-    const urlTitle = newBlog.title.toLowerCase().split(" ").join("-");
+    const newBlog = await submitBlog();
+    if (!newBlog) return;
 
-    await delay(1000);
-    const blogDate = new Date(newBlog.creationDate);
-    const href = `/blogs/${blogDate.getFullYear()}/${
-      blogDate.getMonth() + 1
-    }/${blogDate.getDate()}/${urlTitle}`;
-    router.push(href);
+    navigateToBlog(newBlog);
   };
 
   return (
     <>
-      <ConfirmDelete
-        isModalOpen={isModalOpen}
-        message={
-          toUpdate
-            ? "Do you really want to delete this post? This process cannot be undone"
-            : "The post will be lost."
-        }
-        closeModal={() => setIsModalOpen(false)}
-        handleDelete={handleDeletePost}
-      />
+      <ConfirmDelete modalProps={modalProps} />
       <Form>
         <FormHeader toUpdate={toUpdate} />
         <FormRow>
@@ -415,32 +151,19 @@ export default function BlogForm({
         <FormRow>
           <CustomInput formRerender={rerender} inputField={conclusionField} />
         </FormRow>
-        <FormState isLoading={isLoading} postError={postError} />
+        <FormState
+          isLoading={isLoading}
+          postError={postError}
+          serverError={serverError}
+        />
         <FormFooter
           handleSubmit={handleSubmit}
           toUpdate={toUpdate}
-          handleDelete={() => setIsModalOpen(true)}
+          handleDelete={() => modalProps.setIsOpen(true)}
         />
       </Form>
     </>
   );
-
-  async function uploadBlogImage() {
-    if (blogPictureField.value && blogPictureField.initialValue) {
-      deleteBucketImage(blogPictureField.initialValue.url);
-    }
-    if (blogPictureField.value) {
-      try {
-        const res = await edgestore.publicImages.upload({
-          file: blogPictureField.value
-        });
-        return res;
-      } catch (err) {
-        if (err instanceof Error) return err;
-      }
-    }
-    return null;
-  }
 }
 
 function FormFooter({
@@ -472,20 +195,24 @@ function FormRowItem({ children }: { children?: React.ReactNode }) {
 
 function FormState({
   postError,
-  isLoading
+  isLoading,
+  serverError
 }: {
   postError: string;
   isLoading: boolean;
+  serverError: string;
 }) {
   return (
     <>
-      <div className={`self-start text-red-600`}>{postError}</div>
+      <div className={`self-start text-red-600`}>
+        {postError || serverError}
+      </div>
       {isLoading && <LoadingAnimation text="Creating Your Blog" />}
     </>
   );
 }
 
-function FormHeader({ toUpdate }: { toUpdate: boolean | "loading" }) {
+export function FormHeader({ toUpdate }: { toUpdate: boolean | "loading" }) {
   return (
     <div className={`w-full relative text-[40px] ${roboto_condesed.className}`}>
       {toUpdate === "loading" ? (
@@ -501,7 +228,7 @@ function FormHeader({ toUpdate }: { toUpdate: boolean | "loading" }) {
   );
 }
 
-function Form({ children }: { children: React.ReactNode }) {
+export function Form({ children }: { children: React.ReactNode }) {
   return (
     <form
       autoComplete="off"
@@ -510,8 +237,4 @@ function Form({ children }: { children: React.ReactNode }) {
       {children}
     </form>
   );
-}
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -1,41 +1,42 @@
-import { useAppDispatch } from "@/store/store";
-import {
-  LogoLetterIdentity,
-  hoverLetterWithIndex,
-  unhoverLetterWithIndex
-} from "@/store/pageHeaderSlice";
-import { getAllLetters, getLetter } from "@/utils/serverside/logoFunctions";
+import { LETTER_COLOR, LogoLetter } from "./FoodicaLogo";
 
-const letterHoverOffset = 4;
-
-let LETTER_SIZE = 0.7;
+const HOVER_OFFSET = 4;
+const LETTER_SIZE = 0.7;
+const HOVER_COLOR = "white";
 
 export default function Letter({
-  letterIdentityState
+  letter,
+  letters,
+  setLetters
 }: {
-  letterIdentityState: LogoLetterIdentity;
+  letter: LogoLetter;
+  letters: LogoLetter[];
+  setLetters: (newLetters: LogoLetter[]) => void;
 }) {
-  const letter = getLetter(letterIdentityState.id);
-  const allLetters = getAllLetters();
-  const dispatch = useAppDispatch();
-
-  let targetedLetterIndex = letterIdentityState.id - letterHoverOffset;
-  if (targetedLetterIndex < 0) {
-    targetedLetterIndex += allLetters.length;
+  let offsetLetterId = letter.id - HOVER_OFFSET;
+  if (offsetLetterId < 0) {
+    offsetLetterId += letters.length;
   }
-  const targetedLetter = allLetters.find((l) => l.id === targetedLetterIndex);
-  if (!targetedLetter) return;
+  const offsetLetter = letters.find((l) => l.id === offsetLetterId);
+  if (!offsetLetter) return;
 
-  const { fill } = letterIdentityState;
-  const { width, height, pathData } = letter!;
+  const { width, height, pathData, fill } = letter;
   return (
     <div
       className="group flex items-end h-[36px]"
       onMouseOver={() => {
-        dispatch(hoverLetterWithIndex(targetedLetter.id));
+        const newLetters = letters.map((l) =>
+          l.id === offsetLetter.id ? { ...offsetLetter, fill: HOVER_COLOR } : l
+        );
+        setLetters(newLetters);
       }}
       onMouseOut={() => {
-        dispatch(unhoverLetterWithIndex(targetedLetter.id));
+        const newLetters = letters.map((l) =>
+          l.id === offsetLetter.id
+            ? { ...offsetLetter, fill: LETTER_COLOR }
+            : l
+        );
+        setLetters(newLetters);
       }}
     >
       <svg

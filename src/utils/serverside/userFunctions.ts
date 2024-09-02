@@ -112,7 +112,7 @@ export const getUserByUrlName = async (
 
 export async function registerUser(
   data: string,
-  options?: { update: boolean; id: string }
+  options?: { update: boolean; id?: string }
 ): Promise<User | { error: string }> {
   await initializeUsers();
   let parsedData;

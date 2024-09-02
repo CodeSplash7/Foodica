@@ -122,8 +122,10 @@ function IngredientField({
     })
   );
   const [ingredientQuantityInput] = useState(
-    new InputField<number>({
+    new InputField<number, number>({
       initialValue: ing.quantity,
+      min: 0.1,
+      step: 0.5,
       type: "number",
       label: "Quanity",
       schema: ingQuanitySchema,
