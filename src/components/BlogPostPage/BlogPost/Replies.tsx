@@ -1,9 +1,9 @@
 "use client";
-import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
+import { BlogComment, BlogReply } from "@/types/blog-types";
 import CommentHeader from "./CommentHeader";
 import CommentMessage from "./CommentMessage";
 import ReplySection from "./ReplySection";
-import { User } from "@/utils/allSides/usersFunctions";
+import { User } from "@/types/user-types";
 
 export default function Replies({
   replies,

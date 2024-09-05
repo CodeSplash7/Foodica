@@ -1,5 +1,5 @@
-import { getUserByEmail, getUsers } from "@/utils/serverside/userFunctions";
-import { verifyPassword } from "@/utils/serverside/passwordFunctions";
+import { getUserByEmail, getUsers } from "@/server-utils/userFunctions";
+import { verifyPassword } from "@/server-utils/passwordFunctions";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 

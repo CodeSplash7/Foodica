@@ -1,8 +1,7 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-import { type BlogPageSearchParams } from "@/app/blogs/page";
-import LoadingAnimation from "./LoadingAnimation";
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import { type BlogPageSearchParams } from "@/pages/blogs-page";
+import { Blog } from "@/types/blog-types";
 export default function MainBlogsSection({
   searchParams,
   blogs

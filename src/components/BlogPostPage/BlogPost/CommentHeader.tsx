@@ -1,6 +1,7 @@
 import AwaitableImage from "@/components/AwaitableImage";
 import ClickableName from "@/components/ClickableName";
-import { User } from "@/utils/allSides/usersFunctions";
+import { User } from "@/types/user-types";
+import { guestUserImageSrc } from "@/general-utils/app-routes";
 import { Inter } from "next/font/google";
 const inter = Inter({
   subsets: ["latin"],
@@ -30,7 +31,7 @@ export default function CommentHeader({
         <AwaitableImage
           src={
             commentAuthor.profile.profilePicture?.thumbnailUrl! ??
-            "/images/userImages/guest-user.png"
+            guestUserImageSrc
           }
           alt="user picture"
           height={256}

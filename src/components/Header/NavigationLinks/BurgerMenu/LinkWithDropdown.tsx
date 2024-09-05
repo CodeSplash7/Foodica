@@ -1,4 +1,4 @@
-import { Link as LinkType } from "@/utils/allSides/linksFunctions";
+import { Link as LinkType } from "@/types/link-types";
 import Link from "next/link";
 import DropdownCloseOpenIcon from "./DropdownCloseOpenIcon";
 import dynamic from "next/dynamic";

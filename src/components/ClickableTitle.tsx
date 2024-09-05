@@ -1,4 +1,6 @@
-import { type Blog } from "@/utils/allSides/blogsFunctions";
+
+import { blogLinkByBlog } from "@/general-utils/app-routes";
+import { Blog } from "@/types/blog-types";
 import { Roboto_Condensed } from "next/font/google";
 import Link from "next/link";
 
@@ -24,12 +26,7 @@ export default function ClickableTitle({
   addStyles?: string;
 }) {
   if (blog === "loading") return <div>{children}</div>;
-  const urlTitle = blog.title.toLowerCase().split(" ").join("-");
-
-  const blogDate = new Date(blog.creationDate);
-  const href = `/blogs/${blogDate.getFullYear()}/${
-    blogDate.getMonth() + 1
-  }/${blogDate.getDate()}/${urlTitle}`;
+  const href = blogLinkByBlog(blog);
 
   if (type === "text")
     return (

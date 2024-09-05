@@ -1,4 +1,4 @@
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 import { Skeleton } from "@mui/material";
 
 export default function BlogConclusion({ blog }: { blog: Blog | "loading" }) {

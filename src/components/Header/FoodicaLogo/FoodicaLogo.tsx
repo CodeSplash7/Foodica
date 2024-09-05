@@ -1,18 +1,11 @@
 "use client";
 import { useState } from "react";
 import Letter from "./Letter";
+import { LogoLetter } from "@/types/logo-types";
 
 export const LETTER_COLOR = "#363940";
 
 const letterSpacing = "3px";
-export type LogoLetter = {
-  id: number;
-  fill: string;
-  height: number;
-  width: number;
-  pathData: string | string[];
-  letterSymbol: string;
-};
 
 export default function FoodicaLogo() {
   const [letters, setLetters] = useState<LogoLetter[]>([

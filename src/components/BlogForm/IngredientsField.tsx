@@ -1,10 +1,5 @@
-import {
-  Ingredient,
-  IngredientUnit,
-  ingredientUnits
-} from "@/utils/allSides/blogsFunctions";
-import InputField from "../RegisterForm/inputField";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import InputField from "../../general-utils/inputField";
+import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import { Roboto_Condensed } from "next/font/google";
 import {
@@ -15,13 +10,15 @@ import {
 } from "./schemas";
 import CustomInput from "../RegisterForm/CustomInput";
 import { useRender } from "../RegisterForm/CustomInput";
+import { Ingredient, IngredientUnit } from "@/types/blog-types";
+import { ingredientUnits } from "./../../general-utils/blogsFunctions";
 
 const inter = Inter({
   weight: ["600", "400"],
   subsets: ["latin"]
 });
 
-const roboto_condensed = Roboto_Condensed({
+const robotoCondensed = Roboto_Condensed({
   weight: ["600"],
   subsets: ["latin"]
 });
@@ -60,7 +57,6 @@ export default function IngredientsField({
                 setValue(newListValue);
                 rerender();
               }}
-              rerender={rerender}
               ing={ing}
               index={index}
             />
@@ -75,7 +71,7 @@ export default function IngredientsField({
       </div>
       <div
         onClick={addIngredient}
-        className={`mt-[8px] self-start w-fit ${roboto_condensed.className} rounded-sm px-[16px] py-[8px] text-white bg-gray-800 text-[14px]`}
+        className={`mt-[8px] self-start w-fit ${robotoCondensed.className} rounded-sm px-[16px] py-[8px] text-white bg-gray-800 text-[14px]`}
       >
         Add Ingredient
       </div>
@@ -100,13 +96,11 @@ export default function IngredientsField({
 
 function IngredientField({
   ing,
-  rerender,
   setListValue,
   index
 }: {
   ing: Ingredient;
   index: number;
-  rerender: () => void;
   setListValue: (value: Ingredient) => void;
 }) {
   const [ingredientNameInput] = useState(
@@ -187,8 +181,4 @@ function IngredientField({
       <CustomInput showError={false} mini inputField={ingredientDetailsInput} />
     </div>
   );
-}
-
-function generateRandomId() {
-  return Math.floor(Math.random() * 1000000); // Generates a number between 0 and 999999
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import AwaitableImage from "@/components/AwaitableImage";
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 import { Inter } from "next/font/google";
 import ChangeBlogButton from "./ChangeBlogsButton";
 import { useEffect, useState } from "react";

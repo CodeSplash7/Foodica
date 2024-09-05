@@ -1,4 +1,4 @@
-import { getAllLinks } from "@/utils/allSides/linksFunctions";
+import { getAllLinks } from "@/general-utils/linksFunctions";
 
 export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
   const links = getAllLinks()

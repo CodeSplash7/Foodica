@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 // components
 import ImageInput from "./ImageInput";
 import SubmitAccountButton from "./SubmitAccountButton";
-import CustomInput, { useRender } from "./CustomInput";
+import CustomInput from "./CustomInput";
 // functions
-import { registerUser, getUserByEmail } from "@/utils/serverside/userFunctions";
-import { deleteBucketImage } from "@/utils/serverside/userFunctions";
+import { registerUser } from "@/server-utils/userFunctions";
+import { deleteBucketImage } from "@/server-utils/userFunctions";
 // types
 import { Session } from "next-auth";
-import { Picture, User } from "@/utils/allSides/usersFunctions";
+import { Picture, User } from "@/types/user-types";
 // schemas
 import {
   emailSchema,
@@ -21,8 +21,9 @@ import {
   passwordSchema,
   pictureSchema
 } from "./schemas";
-import InputField from "./inputField";
+import InputField from "../../general-utils/inputField";
 import { useCallback, useEffect, useState } from "react";
+import { blogsLinkByPage, signinPageLink } from "@/general-utils/app-routes";
 
 interface InputFields {
   usernameField: InputField<string, string | Picture>;
@@ -77,12 +78,12 @@ export default function RegisterForm({
     });
     if ("error" in newUser) return setRegistrationError(newUser.error);
     if (toRegister) return await signinNewAccount();
-    if (emailField.modifiedValue) return router.replace("/api/auth/signin");
+    if (emailField.modifiedValue) return router.replace(signinPageLink);
 
     setTimeout(() => {
       router.refresh();
     }, 0);
-    router.push("/blogs?page=1");
+    router.push(blogsLinkByPage(1));
   };
 
   return (

@@ -1,6 +1,6 @@
 "use client";
-import { type BlogComment } from "@/utils/allSides/blogsFunctions";
-import { type User } from "@/utils/allSides/usersFunctions";
+import { type BlogComment } from "@/types/blog-types";
+import { type User } from "@/types/user-types";
 
 import CommentMessage from "./CommentMessage";
 import ReplySection from "./ReplySection";

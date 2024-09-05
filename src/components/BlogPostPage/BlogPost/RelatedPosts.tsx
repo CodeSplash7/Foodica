@@ -1,8 +1,8 @@
 import AwaitableImage from "@/components/AwaitableImage";
 import ClickableTitle from "@/components/ClickableTitle";
-import { Blog } from "@/utils/allSides/blogsFunctions";
-import { formatCreationDate } from "@/utils/general-utils";
-import { getRelatedBlogs } from "@/utils/serverside/blogsFunctions";
+import { Blog } from "@/types/blog-types";
+import { formatCreationDate } from "@/general-utils/formatCreationDate";
+import { getRelatedBlogs } from "@/server-utils/blogsFunctions";
 import { Skeleton } from "@mui/material";
 import { Roboto_Condensed } from "next/font/google";
 const roboto_condensed = Roboto_Condensed({
@@ -30,7 +30,7 @@ export default async function RelatedPosts({
         >
           Related
         </div>
-        <div className={`flex gap-[16px] w-full flex-wrap h-full`}>
+        <div className={`flex gap-[16px] w-full h-[260px]`}>
           {relatedPosts === "loading"
             ? Array(3)
                 .fill(0)
@@ -48,24 +48,23 @@ const RelatedPostCard: React.FC<{ post: Blog | "loading" }> = ({ post }) => {
     <ClickableTitle
       type="other"
       blog={post}
-      addStyles={`flex-[1] basis-[160px] h-[260px] group flex flex-col justify-start gap-[8px] opacity-90 hover:opacity-100`}
+      addStyles={`w-full h-full group flex flex-col justify-start gap-[8px] opacity-90 hover:opacity-100`}
     >
       <>
-        {post === "loading" && (
-          <Skeleton variant="rounded" sx={{ height: "100%", width: "100%" }} />
-        )}
-        {post !== "loading" && (
-          <AwaitableImage
-            loadingSkeletonLayout={{}}
-            width={400}
-            height={400}
-            className={`h-3/4 [object-fit:cover]`}
-            alt="blog image"
-            src={post.picture?.url || ""}
-          />
-        )}
+        <AwaitableImage
+          loadingSkeletonLayout={{
+            width: "100%",
+            height: "75%",
+            background: "black"
+          }}
+          width={400}
+          height={400}
+          className={`h-3/4 [object-fit:cover]`}
+          alt="blog image"
+          src={post.picture?.url || ""}
+        />
       </>
-      <div className="flex flex-col h-1/4">
+      <div className="flex flex-col h-1/4 w-full">
         <>
           {post === "loading" && (
             <Skeleton variant="text" sx={{ fontSize: "0.9rem" }} />

@@ -1,4 +1,4 @@
-import { Picture } from "@/utils/allSides/usersFunctions";
+import { Picture } from "@/general-utils/usersFunctions";
 import AwaitableImage from "./AwaitableImage";
 
 export default function BlogCardPicture({

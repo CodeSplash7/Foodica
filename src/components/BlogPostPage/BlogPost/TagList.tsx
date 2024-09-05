@@ -1,5 +1,5 @@
-import ClickableTag from "@/components/ClickableTag";
-import { Blog, BlogTag } from "@/utils/allSides/blogsFunctions";
+import ClickableTag from "@/style/ClickableTag";
+import { Blog, BlogTag } from "@/types/blog-types";
 import { Skeleton } from "@mui/material";
 import { Roboto_Condensed } from "next/font/google";
 const roboto_condensed = Roboto_Condensed({
@@ -44,7 +44,7 @@ const Tag = ({ tag }: { tag: BlogTag | "loading" }) => {
       {
         <ClickableTag
           tag={tag}
-          className={`${roboto_condensed.className} px-[8px] leading-[3px] border-b-8 border-yellow-400 text-[.9rem] tracking-tighter uppercase`}
+          addStyles={`${roboto_condensed.className} px-[8px] leading-[3px] border-b-8 border-yellow-400 text-[.9rem] tracking-tighter uppercase`}
         ></ClickableTag>
       }
     </div>

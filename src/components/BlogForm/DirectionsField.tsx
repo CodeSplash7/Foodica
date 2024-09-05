@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "../RegisterForm/inputField"; // Adjust import path as needed
+import InputField from "../../general-utils/inputField"; // Adjust import path as needed
 import CustomInput, { useRender } from "../RegisterForm/CustomInput";
 import { directionSchema } from "./schemas";
 import { Inter } from "next/font/google";
@@ -8,7 +8,7 @@ const inter = Inter({
   weight: ["600", "400"],
   subsets: ["latin"]
 });
-const roboto_condensed = Roboto_Condensed({
+const robotoCondensed = Roboto_Condensed({
   weight: "600",
   subsets: ["latin"]
 });
@@ -75,7 +75,7 @@ const DirectionsField = ({
       </div>
       <div
         onClick={addDirection}
-        className={`mt-[8px] self-start w-fit ${roboto_condensed.className} rounded-sm px-[16px] py-[8px] text-white bg-gray-800 text-[14px]`}
+        className={`mt-[8px] self-start w-fit ${robotoCondensed.className} rounded-sm px-[16px] py-[8px] text-white bg-gray-800 text-[14px]`}
       >
         Add Direction
       </div>

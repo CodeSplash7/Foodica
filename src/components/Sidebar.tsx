@@ -6,9 +6,10 @@ const roboto_condensed = Roboto_Condensed({
 });
 
 import ClickableTitle from "./ClickableTitle";
-import { getRecentBlogs } from "@/utils/serverside/blogsFunctions";
-import { formatCreationDate } from "@/utils/general-utils";
 import AwaitableImage from "./AwaitableImage";
+import { aboutMeImageSrc } from "@/general-utils/app-routes";
+import { getRecentBlogs } from "@/server-utils/blogsFunctions";
+import { formatCreationDate } from "@/general-utils/formatCreationDate";
 
 export default function Sidebar() {
   return (
@@ -38,7 +39,7 @@ function AboutMeSection() {
         <AwaitableImage
           loadingSkeletonLayout={{ width: "100%", height: "100%" }}
           alt="about me image"
-          src="/images/creator/about-me-image.png"
+          src={aboutMeImageSrc}
           width={400}
           height={400}
           className={`w-full h-full transition duration-300`}
@@ -80,7 +81,7 @@ async function RecentBlogsSection({ count }: { count: number }) {
       <div className={`gap-[24px] w-full h-fit flex flex-col`}>
         {recentBlogs.map((blog) => (
           <ClickableTitle
-            type={"other"}
+            type={"text"}
             blog={blog}
             key={blog.id}
             addStyles="flex flex-row gap-[16px] w-full"
@@ -100,7 +101,7 @@ async function RecentBlogsSection({ count }: { count: number }) {
             </div>
             <div className={`flex flex-col w-full`}>
               <div
-                className={`w-full hover:text-[#818592] transition duration-150 font-bold [line-height:1.3] text-[16px]`}
+                className={`[word-break:break-all] [overflow-wrap:break-word] w-full hover:text-[#818592] transition duration-150 font-bold [line-height:1.3] text-[16px]`}
               >
                 {blog.title}
               </div>

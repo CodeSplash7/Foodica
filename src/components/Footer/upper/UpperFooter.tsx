@@ -1,4 +1,4 @@
-import { blogTags } from "@/utils/allSides/blogsFunctions";
+import { blogTags } from "@/general-utils/blogsFunctions";
 import Category from "./Category";
 import { Roboto_Condensed } from "next/font/google";
 const roboto_condensed = Roboto_Condensed({

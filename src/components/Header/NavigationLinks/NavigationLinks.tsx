@@ -9,8 +9,8 @@ export default function NavLinks({
 }) {
   if (showSearchBar === undefined) showSearchBar = true;
   return (
-    <>
-      <div className="z-0 absolute left-0 w-screen h-[88px] border-y"></div>
+    <div className="mt-[36px] relative">
+      <div className="z-0 absolute inset-x-[-32px] h-[88px] border-y border-slate-400"></div>
       <div className="relative z-50 w-full h-[88px] flex justify-start md:justify-center items-center">
         <BurgerMenu />
         <NormalMenu />
@@ -20,7 +20,6 @@ export default function NavLinks({
           </div>
         )}
       </div>
-      
-    </>
+    </div>
   );
 }

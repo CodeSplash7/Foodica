@@ -1,12 +1,13 @@
 import Skeleton from "@mui/material/Skeleton";
 
 import ClickableName from "@/components/ClickableName";
-import { Blog } from "@/utils/allSides/blogsFunctions";
-import { hashId } from "@/utils/serverside/blogIdHashing";
 import { getServerSession, Session } from "next-auth";
 import Link from "next/link";
-import { Button3 } from "@/utils/styled-buttons";
+import { Button3 } from "@/components/styled-buttons";
 import options from "@/app/api/auth/[...nextauth]/options";
+import { Blog } from "@/types/blog-types";
+import { createBlogPageLink } from "@/general-utils/app-routes";
+import { hashId } from "@/server-utils/blogIdHashing";
 
 export default async function RecipeHeading({
   blog
@@ -65,7 +66,7 @@ const UpdateRecipe = async ({
   if (isLoading) return;
   if (session && session.user?.name === blog.author)
     return (
-      <Link href={`/create-blog?for=update&blog=${await hashId(blog.id)}`}>
+      <Link href={createBlogPageLink(await hashId(blog.id))}>
         <Button3 text="Update Blog" />
       </Link>
     );

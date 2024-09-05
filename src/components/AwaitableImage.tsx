@@ -26,19 +26,19 @@ const AwaitableImage: React.FC<AwaitableImageProps> = ({
 
   return (
     <>
-      <div className={`relative w-full`}>
+      {/* <div className={``}> */}
         {(isLoading || src === null) && (
           <Skeleton
             variant="rounded"
             sx={{
               ...loadingSkeletonLayout,
-              position: "absolute",
-              top: "0px",
-              left: "0px"
+              // position: "absolute",
+              // top: "0px",
+              // left: "0px"
             }}
           />
         )}
-      </div>
+      {/* </div> */}
       {!!src && (
         <Image
           onLoad={handleImageLoad}

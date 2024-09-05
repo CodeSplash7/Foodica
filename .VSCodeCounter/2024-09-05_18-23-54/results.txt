@@ -1,0 +1,266 @@
+Date : 2024-09-05 18:23:54
+Directory : r:\Code\Javascript\Nextjs\foodica
+Total : 176 files,  17140 codes, 78 comments, 882 blanks, all 18100 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          5 |      8,492 |          0 |          3 |      8,495 |
+| TypeScript JSX     |        120 |      5,974 |         38 |        551 |      6,563 |
+| TypeScript         |         36 |      2,069 |         17 |        222 |      2,308 |
+| CSS                |         11 |        521 |         23 |         89 |        633 |
+| JSON with Comments |          1 |         34 |          0 |          1 |         35 |
+| JavaScript         |          2 |         27 |          0 |          2 |         29 |
+| Markdown           |          1 |         23 |          0 |         14 |         37 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                            |        176 |     17,140 |         78 |        882 |     18,100 |
+| . (Files)                                                                                                    |          8 |      8,593 |          0 |         24 |      8,617 |
+| db                                                                                                           |          2 |          2 |          0 |          0 |          2 |
+| src                                                                                                          |        166 |      8,545 |         78 |        858 |      9,481 |
+| src\app                                                                                                      |         20 |        122 |          0 |         42 |        164 |
+| src\app (Files)                                                                                              |          1 |          2 |          0 |          2 |          4 |
+| src\app\api                                                                                                  |          3 |         88 |          0 |         12 |        100 |
+| src\app\api\auth                                                                                             |          2 |         86 |          0 |          9 |         95 |
+| src\app\api\auth\[...nextauth]                                                                               |          2 |         86 |          0 |          9 |         95 |
+| src\app\api\edgestore                                                                                        |          1 |          2 |          0 |          3 |          5 |
+| src\app\api\edgestore\[...edgestore]                                                                         |          1 |          2 |          0 |          3 |          5 |
+| src\app\authors                                                                                              |          2 |          4 |          0 |          3 |          7 |
+| src\app\authors\[authorName]                                                                                 |          2 |          4 |          0 |          3 |          7 |
+| src\app\blogs                                                                                                |         11 |         22 |          0 |         21 |         43 |
+| src\app\blogs (Files)                                                                                        |          3 |          6 |          0 |          6 |         12 |
+| src\app\blogs\[year]                                                                                         |          8 |         16 |          0 |         15 |         31 |
+| src\app\blogs\[year] (Files)                                                                                 |          2 |          4 |          0 |          4 |          8 |
+| src\app\blogs\[year]\[month]                                                                                 |          6 |         12 |          0 |         11 |         23 |
+| src\app\blogs\[year]\[month] (Files)                                                                         |          2 |          4 |          0 |          3 |          7 |
+| src\app\blogs\[year]\[month]\[day]                                                                           |          4 |          8 |          0 |          8 |         16 |
+| src\app\blogs\[year]\[month]\[day] (Files)                                                                   |          2 |          4 |          0 |          4 |          8 |
+| src\app\blogs\[year]\[month]\[day]\[blogName]                                                                |          2 |          4 |          0 |          4 |          8 |
+| src\app\create-blog                                                                                          |          2 |          4 |          0 |          3 |          7 |
+| src\app\register                                                                                             |          1 |          2 |          0 |          1 |          3 |
+| src\client-utils                                                                                             |          1 |         22 |          0 |          4 |         26 |
+| src\components                                                                                               |         93 |      6,188 |         38 |        525 |      6,751 |
+| src\components (Files)                                                                                       |         23 |      1,522 |         23 |        108 |      1,653 |
+| src\components\BlogForm                                                                                      |         14 |      1,258 |          1 |         91 |      1,350 |
+| src\components\BlogForm (Files)                                                                              |          7 |        762 |          1 |         42 |        805 |
+| src\components\BlogForm\hooks                                                                                |          7 |        496 |          0 |         49 |        545 |
+| src\components\BlogPostPage                                                                                  |         22 |      1,717 |          4 |        162 |      1,883 |
+| src\components\BlogPostPage\BlogPost                                                                         |         16 |      1,287 |          1 |        127 |      1,415 |
+| src\components\BlogPostPage\RecipeCard                                                                       |          6 |        430 |          3 |         35 |        468 |
+| src\components\Bloglist                                                                                      |          8 |        287 |          0 |         31 |        318 |
+| src\components\Bloglist (Files)                                                                              |          1 |         70 |          0 |          7 |         77 |
+| src\components\Bloglist\Pagination                                                                           |          5 |        181 |          0 |         17 |        198 |
+| src\components\Bloglist\hooks                                                                                |          2 |         36 |          0 |          7 |         43 |
+| src\components\Footer                                                                                        |          4 |        112 |          0 |          8 |        120 |
+| src\components\Footer (Files)                                                                                |          1 |         14 |          0 |          2 |         16 |
+| src\components\Footer\lower                                                                                  |          1 |         32 |          0 |          2 |         34 |
+| src\components\Footer\upper                                                                                  |          2 |         66 |          0 |          4 |         70 |
+| src\components\Header                                                                                        |         17 |        657 |          0 |         72 |        729 |
+| src\components\Header (Files)                                                                                |          1 |         25 |          0 |          4 |         29 |
+| src\components\Header\FoodicaLogo                                                                            |          2 |        159 |          0 |         10 |        169 |
+| src\components\Header\NavigationLinks                                                                        |         14 |        473 |          0 |         58 |        531 |
+| src\components\Header\NavigationLinks (Files)                                                                |          1 |         24 |          0 |          3 |         27 |
+| src\components\Header\NavigationLinks\BurgerMenu                                                             |          7 |        281 |          0 |         32 |        313 |
+| src\components\Header\NavigationLinks\NormalMenu                                                             |          5 |        129 |          0 |         16 |        145 |
+| src\components\Header\NavigationLinks\Searchbar                                                              |          1 |         39 |          0 |          7 |         46 |
+| src\components\RegisterForm                                                                                  |          5 |        635 |         10 |         53 |        698 |
+| src\general-utils                                                                                            |         11 |        589 |          1 |         45 |        635 |
+| src\layouts                                                                                                  |          3 |         69 |          0 |          5 |         74 |
+| src\lib                                                                                                      |          3 |         36 |          6 |         15 |         57 |
+| src\loading                                                                                                  |          5 |         80 |          0 |         11 |         91 |
+| src\pages                                                                                                    |          9 |        228 |          0 |         27 |        255 |
+| src\server-utils                                                                                             |          5 |        505 |          9 |         79 |        593 |
+| src\style                                                                                                    |         12 |        548 |         23 |         93 |        664 |
+| src\style (Files)                                                                                            |          6 |        172 |          6 |         30 |        208 |
+| src\style\buttons                                                                                            |          3 |        171 |          4 |         24 |        199 |
+| src\style\social-links                                                                                       |          3 |        205 |         13 |         39 |        257 |
+| src\types                                                                                                    |          4 |        158 |          1 |         12 |        171 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                     | language           | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| r:\Code\Javascript\Nextjs\foodica\.eslintrc.json                                                             | JSON               |          3 |          0 |          1 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\README.md                                                                  | Markdown           |         23 |          0 |         14 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\db\blogs.json                                                              | JSON               |          1 |          0 |          0 |          1 |
+| r:\Code\Javascript\Nextjs\foodica\db\users.json                                                              | JSON               |          1 |          0 |          0 |          1 |
+| r:\Code\Javascript\Nextjs\foodica\next.config.js                                                             | JavaScript         |         21 |          0 |          1 |         22 |
+| r:\Code\Javascript\Nextjs\foodica\package-lock.json                                                          | JSON               |      8,436 |          0 |          1 |      8,437 |
+| r:\Code\Javascript\Nextjs\foodica\package.json                                                               | JSON               |         51 |          0 |          1 |         52 |
+| r:\Code\Javascript\Nextjs\foodica\postcss.config.js                                                          | JavaScript         |          6 |          0 |          1 |          7 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\api\auth\[...nextauth]\options.ts                                  | TypeScript         |         82 |          0 |          6 |         88 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\api\auth\[...nextauth]\route.ts                                    | TypeScript         |          4 |          0 |          3 |          7 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\api\edgestore\[...edgestore]\route.ts                              | TypeScript         |          2 |          0 |          3 |          5 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\authors\[authorName]\layout.tsx                                    | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\authors\[authorName]\page.tsx                                      | TypeScript JSX     |          2 |          0 |          1 |          3 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\[blogName]\loading.tsx                  | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\[blogName]\page.tsx                     | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\loading.tsx                             | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\[day]\page.tsx                                | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\loading.tsx                                   | TypeScript JSX     |          2 |          0 |          1 |          3 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\[month]\page.tsx                                      | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\loading.tsx                                           | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\[year]\page.tsx                                              | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\layout.tsx                                                   | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\loading.tsx                                                  | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\blogs\page.tsx                                                     | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\create-blog\loading.tsx                                            | TypeScript JSX     |          2 |          0 |          1 |          3 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\create-blog\page.tsx                                               | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\layout.tsx                                                         | TypeScript JSX     |          2 |          0 |          2 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\app\register\page.tsx                                                  | TypeScript JSX     |          2 |          0 |          1 |          3 |
+| r:\Code\Javascript\Nextjs\foodica\src\client-utils\userFunctions.ts                                          | TypeScript         |         22 |          0 |          4 |         26 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\AuthorBlogsSection.tsx                                      | TypeScript JSX     |         19 |          0 |          2 |         21 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\AwaitableImage.tsx                                          | TypeScript JSX     |         48 |          5 |          4 |         57 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BackToTop.tsx                                               | TypeScript JSX     |         42 |          0 |          6 |         48 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogCard.tsx                                                | TypeScript JSX     |         92 |          0 |          9 |        101 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogCardPicture.tsx                                         | TypeScript JSX     |         33 |          0 |          2 |         35 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\BlogForm.tsx                                       | TypeScript JSX     |        220 |          1 |         20 |        241 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\ConfirmDelete.tsx                                  | TypeScript JSX     |         57 |          0 |          2 |         59 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\DirectionsField.tsx                                | TypeScript JSX     |        113 |          0 |          7 |        120 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\IngredientsField.tsx                               | TypeScript JSX     |        180 |          0 |          5 |        185 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\SubmitBlogButton.tsx                               | TypeScript JSX     |         30 |          0 |          3 |         33 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\blogError.ts                                       | TypeScript         |          6 |          0 |          0 |          6 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useBlogState.ts                              | TypeScript         |         36 |          0 |          7 |         43 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useFormFallback.tsx                          | TypeScript JSX     |         27 |          0 |          2 |         29 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useInputFields.ts                            | TypeScript         |        244 |          0 |         18 |        262 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useModalProps.ts                             | TypeScript         |         21 |          0 |          5 |         26 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useNavigateToBlog.ts                         | TypeScript         |         12 |          0 |          3 |         15 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useStringifyForm.ts                          | TypeScript         |         47 |          0 |          2 |         49 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useSubmitBlogs.ts                            | TypeScript         |        109 |          0 |         12 |        121 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\schemas.ts                                         | TypeScript         |        156 |          0 |          5 |        161 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogComments.tsx                      | TypeScript JSX     |         80 |          0 |         13 |         93 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogConclusion.tsx                    | TypeScript JSX     |         19 |          0 |          2 |         21 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogDescription.tsx                   | TypeScript JSX     |         99 |          0 |          6 |        105 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogDistribution.tsx                  | TypeScript JSX     |         59 |          0 |         11 |         70 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogPost.tsx                          | TypeScript JSX     |         36 |          0 |          2 |         38 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\ChangeBlogsButton.tsx                 | TypeScript JSX     |         33 |          0 |          3 |         36 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\Comment.tsx                           | TypeScript JSX     |         59 |          0 |          7 |         66 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\CommentHeader.tsx                     | TypeScript JSX     |         90 |          0 |          4 |         94 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\CommentInput.tsx                      | TypeScript JSX     |        157 |          1 |         17 |        175 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\CommentMessage.tsx                    | TypeScript JSX     |         49 |          0 |          6 |         55 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\CommentSection.tsx                    | TypeScript JSX     |         71 |          0 |         10 |         81 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\OtherAuthorBlogs.tsx                  | TypeScript JSX     |        149 |          0 |         13 |        162 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\RelatedPosts.tsx                      | TypeScript JSX     |         94 |          0 |          3 |         97 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\Replies.tsx                           | TypeScript JSX     |         79 |          0 |          3 |         82 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\ReplySection.tsx                      | TypeScript JSX     |        166 |          0 |         21 |        187 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\TagList.tsx                           | TypeScript JSX     |         47 |          0 |          6 |         53 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeCard.tsx                      | TypeScript JSX     |         23 |          0 |          2 |         25 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeDetails.tsx                   | TypeScript JSX     |         91 |          0 |          5 |         96 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeHeading.tsx                   | TypeScript JSX     |        109 |          0 |         12 |        121 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeImage.tsx                     | TypeScript JSX     |         31 |          0 |          4 |         35 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeIngredients.tsx               | TypeScript JSX     |        128 |          3 |          9 |        140 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\RecipeCard\RecipeInstructions.tsx              | TypeScript JSX     |         48 |          0 |          3 |         51 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Bloglist.tsx                                       | TypeScript JSX     |         70 |          0 |          7 |         77 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\DirectionIcon.tsx                       | TypeScript JSX     |         23 |          0 |          1 |         24 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\Pagination.tsx                          | TypeScript JSX     |         35 |          0 |          2 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationButton.tsx                    | TypeScript JSX     |         34 |          0 |          3 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationButtons.tsx                   | TypeScript JSX     |         28 |          0 |          3 |         31 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationDirectionButton.tsx           | TypeScript JSX     |         61 |          0 |          8 |         69 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\hooks\useFilteredBlogs.ts                          | TypeScript         |         15 |          0 |          3 |         18 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\hooks\useRenderedBlogs.ts                          | TypeScript         |         21 |          0 |          4 |         25 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\ClickableName.tsx                                           | TypeScript JSX     |         25 |          0 |          2 |         27 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\ClickableTitle.tsx                                          | TypeScript JSX     |         83 |          0 |          6 |         89 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\CommentsLink.tsx                                            | TypeScript JSX     |         30 |          0 |          4 |         34 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\FollowMe.tsx                                                | TypeScript JSX     |          0 |          0 |          1 |          1 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Footer\Footer.tsx                                           | TypeScript JSX     |         14 |          0 |          2 |         16 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Footer\lower\LowerFooter.tsx                                | TypeScript JSX     |         32 |          0 |          2 |         34 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Footer\upper\Category.tsx                                   | TypeScript JSX     |         38 |          0 |          2 |         40 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Footer\upper\UpperFooter.tsx                                | TypeScript JSX     |         28 |          0 |          2 |         30 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\FoodicaLogo\FoodicaLogo.tsx                          | TypeScript JSX     |         91 |          0 |          4 |         95 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\FoodicaLogo\Letter.tsx                               | TypeScript JSX     |         68 |          0 |          6 |         74 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\Header.tsx                                           | TypeScript JSX     |         25 |          0 |          4 |         29 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\BurgerMenu.tsx            | TypeScript JSX     |         13 |          0 |          4 |         17 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\DropdownCloseOpenIcon.tsx | TypeScript JSX     |         40 |          0 |          4 |         44 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\DroppedLinks.tsx          | TypeScript JSX     |         30 |          0 |          2 |         32 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\Icon.tsx                  | TypeScript JSX     |         32 |          0 |          4 |         36 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\LinkWithDropdown.tsx      | TypeScript JSX     |         61 |          0 |          7 |         68 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\Links.tsx                 | TypeScript JSX     |         35 |          0 |          3 |         38 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\BurgerMenu\MenuLink.tsx              | TypeScript JSX     |         70 |          0 |          8 |         78 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NavigationLinks.tsx                  | TypeScript JSX     |         24 |          0 |          3 |         27 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\DropdownCloseOpenIcon.tsx | TypeScript JSX     |         26 |          0 |          3 |         29 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\DroppedLinks.tsx          | TypeScript JSX     |         13 |          0 |          2 |         15 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\LinkWithDropdown.tsx      | TypeScript JSX     |         41 |          0 |          5 |         46 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\MenuLink.tsx              | TypeScript JSX     |         37 |          0 |          4 |         41 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\NormalMenu\NormalMenu.tsx            | TypeScript JSX     |         12 |          0 |          2 |         14 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Header\NavigationLinks\Searchbar\Searchbar.tsx              | TypeScript JSX     |         39 |          0 |          7 |         46 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\HighlightedBlog.tsx                                         | TypeScript JSX     |         76 |          0 |          3 |         79 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\HighlightedBlogImage.tsx                                    | TypeScript JSX     |         14 |          0 |          2 |         16 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Icons.tsx                                                   | TypeScript JSX     |        338 |          0 |         14 |        352 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\LoadingAnimation.tsx                                        | TypeScript JSX     |         16 |          0 |          3 |         19 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\LoginWidget.tsx                                             | TypeScript JSX     |         35 |          0 |          2 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\MainBlogsSection.tsx                                        | TypeScript JSX     |         21 |          0 |          1 |         22 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\MessageAboveBlogs.tsx                                       | TypeScript JSX     |         43 |          0 |          3 |         46 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Navbar.tsx                                                  | TypeScript JSX     |         19 |          0 |          2 |         21 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\PostsDateDisplay.tsx                                        | TypeScript JSX     |         22 |          0 |          1 |         23 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\CustomInput.tsx                                | TypeScript JSX     |        332 |          0 |         17 |        349 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\ImageInput.tsx                                 | TypeScript JSX     |         38 |          0 |          4 |         42 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\RegisterForm.tsx                               | TypeScript JSX     |        217 |         10 |         25 |        252 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\SubmitAccountButton.tsx                        | TypeScript JSX     |         20 |          0 |          3 |         23 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\schemas.tsx                                    | TypeScript JSX     |         28 |          0 |          4 |         32 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\Sidebar.tsx                                                 | TypeScript JSX     |        167 |          0 |         10 |        177 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\SingleImageDropzone.tsx                                     | TypeScript JSX     |        199 |         12 |         15 |        226 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\SocialWidget.tsx                                            | TypeScript JSX     |        102 |          3 |          8 |        113 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\UserBadge.tsx                                               | TypeScript JSX     |         64 |          2 |          3 |         69 |
+| r:\Code\Javascript\Nextjs\foodica\src\components\styled-buttons.tsx                                          | TypeScript JSX     |         34 |          1 |          5 |         40 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\app-routes.ts                                            | TypeScript         |         32 |          1 |          8 |         41 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\blogsFunctions.ts                                        | TypeScript         |        125 |          0 |          7 |        132 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\delay.ts                                                 | TypeScript         |          3 |          0 |          1 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\filterNulls.ts                                           | TypeScript         |         15 |          0 |          6 |         21 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\formatCreationDate.ts                                    | TypeScript         |         34 |          0 |          3 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\getButtonPages.ts                                        | TypeScript         |         13 |          0 |          1 |         14 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\inputField.ts                                            | TypeScript         |        142 |          0 |          9 |        151 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\linksFunctions.ts                                        | TypeScript         |        209 |          0 |          5 |        214 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\removeDuplicates.ts                                      | TypeScript         |          3 |          0 |          1 |          4 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\shortenText.ts                                           | TypeScript         |          7 |          0 |          2 |          9 |
+| r:\Code\Javascript\Nextjs\foodica\src\general-utils\usersFunctions.ts                                        | TypeScript         |          6 |          0 |          2 |          8 |
+| r:\Code\Javascript\Nextjs\foodica\src\layouts\author-blogs-layout.tsx                                        | TypeScript JSX     |         14 |          0 |          1 |         15 |
+| r:\Code\Javascript\Nextjs\foodica\src\layouts\blogs-layout.tsx                                               | TypeScript JSX     |         16 |          0 |          2 |         18 |
+| r:\Code\Javascript\Nextjs\foodica\src\layouts\root-layout.tsx                                                | TypeScript JSX     |         39 |          0 |          2 |         41 |
+| r:\Code\Javascript\Nextjs\foodica\src\lib\edgestore-server.ts                                                | TypeScript         |         21 |          6 |          7 |         34 |
+| r:\Code\Javascript\Nextjs\foodica\src\lib\edgestore.tsx                                                      | TypeScript JSX     |          6 |          0 |          5 |         11 |
+| r:\Code\Javascript\Nextjs\foodica\src\lib\next-auth-session.tsx                                              | TypeScript JSX     |          9 |          0 |          3 |         12 |
+| r:\Code\Javascript\Nextjs\foodica\src\loading\blog-post-loading.tsx                                          | TypeScript JSX     |         13 |          0 |          2 |         15 |
+| r:\Code\Javascript\Nextjs\foodica\src\loading\blogs-by-date-loading.tsx                                      | TypeScript JSX     |         15 |          0 |          2 |         17 |
+| r:\Code\Javascript\Nextjs\foodica\src\loading\blogs-by-month-loading.tsx                                     | TypeScript JSX     |         15 |          0 |          2 |         17 |
+| r:\Code\Javascript\Nextjs\foodica\src\loading\blogs-by-year-loading.tsx                                      | TypeScript JSX     |         15 |          0 |          2 |         17 |
+| r:\Code\Javascript\Nextjs\foodica\src\loading\blogs-loading.tsx                                              | TypeScript JSX     |         22 |          0 |          3 |         25 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\author-blogs-page.tsx                                            | TypeScript JSX     |         39 |          0 |          4 |         43 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\blog-post-page.tsx                                               | TypeScript JSX     |         20 |          0 |          3 |         23 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\blogs-by-date-page.tsx                                           | TypeScript JSX     |         35 |          0 |          3 |         38 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\blogs-by-month-page.tsx                                          | TypeScript JSX     |         34 |          0 |          2 |         36 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\blogs-by-year-page.tsx                                           | TypeScript JSX     |         29 |          0 |          3 |         32 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\blogs-page.tsx                                                   | TypeScript JSX     |         25 |          0 |          4 |         29 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\create-blog-loading.tsx                                          | TypeScript JSX     |          8 |          0 |          2 |         10 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\create-blog-page.tsx                                             | TypeScript JSX     |         22 |          0 |          2 |         24 |
+| r:\Code\Javascript\Nextjs\foodica\src\pages\register-page.tsx                                                | TypeScript JSX     |         16 |          0 |          4 |         20 |
+| r:\Code\Javascript\Nextjs\foodica\src\server-utils\authorsFunctions.ts                                       | TypeScript         |         21 |          0 |          5 |         26 |
+| r:\Code\Javascript\Nextjs\foodica\src\server-utils\blogIdHashing.ts                                          | TypeScript         |         32 |          0 |          7 |         39 |
+| r:\Code\Javascript\Nextjs\foodica\src\server-utils\blogsFunctions.ts                                         | TypeScript         |        256 |          6 |         38 |        300 |
+| r:\Code\Javascript\Nextjs\foodica\src\server-utils\passwordFunctions.ts                                      | TypeScript         |         18 |          2 |          2 |         22 |
+| r:\Code\Javascript\Nextjs\foodica\src\server-utils\userFunctions.ts                                          | TypeScript         |        178 |          1 |         27 |        206 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\ClickableTag.tsx                                                 | TypeScript JSX     |         27 |          0 |          4 |         31 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\back-to-top-button.css                                           | CSS                |         47 |          4 |          7 |         58 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\burger-menu-button.css                                           | CSS                |         21 |          0 |          6 |         27 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\buttons\1.css                                                    | CSS                |         78 |          2 |         12 |         92 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\buttons\2.css                                                    | CSS                |         53 |          0 |          9 |         62 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\buttons\3.css                                                    | CSS                |         40 |          2 |          3 |         45 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\loading-dots.css                                                 | CSS                |         28 |          0 |          5 |         33 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\loading-spinner.css                                              | CSS                |         31 |          1 |          5 |         37 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\social-links\1.css                                               | CSS                |         69 |          1 |         15 |         85 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\social-links\2.css                                               | CSS                |         72 |          6 |         12 |         90 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\social-links\3.css                                               | CSS                |         64 |          6 |         12 |         82 |
+| r:\Code\Javascript\Nextjs\foodica\src\style\styles.css                                                       | CSS                |         18 |          1 |          3 |         22 |
+| r:\Code\Javascript\Nextjs\foodica\src\types\blog-types.ts                                                    | TypeScript         |        112 |          1 |          8 |        121 |
+| r:\Code\Javascript\Nextjs\foodica\src\types\link-types.ts                                                    | TypeScript         |          8 |          0 |          1 |          9 |
+| r:\Code\Javascript\Nextjs\foodica\src\types\logo-types.ts                                                    | TypeScript         |          8 |          0 |          1 |          9 |
+| r:\Code\Javascript\Nextjs\foodica\src\types\user-types.ts                                                    | TypeScript         |         30 |          0 |          2 |         32 |
+| r:\Code\Javascript\Nextjs\foodica\tailwind.config.ts                                                         | TypeScript         |         19 |          0 |          4 |         23 |
+| r:\Code\Javascript\Nextjs\foodica\tsconfig.json                                                              | JSON with Comments |         34 |          0 |          1 |         35 |
+| Total                                                                                                        |                    |     17,140 |         78 |        882 |     18,100 |
++--------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

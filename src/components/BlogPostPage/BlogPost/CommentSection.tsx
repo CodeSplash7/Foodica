@@ -1,11 +1,11 @@
 "use client";
-import { Blog, BlogComment } from "@/utils/allSides/blogsFunctions";
 import CommentInput from "./CommentInput";
 import BlogComments from "./BlogComments";
-import { getUserByEmail } from "@/utils/serverside/userFunctions";
 import { useEffect, useState } from "react";
 import { Session } from "next-auth";
-import { addCommentToBlog } from "@/utils/serverside/blogsFunctions";
+import { Blog, BlogComment } from "@/types/blog-types";
+import { getUserByEmail } from "@/server-utils/userFunctions";
+import { addCommentToBlog } from "@/server-utils/blogsFunctions";
 
 export default function CommentSection({
   blog,

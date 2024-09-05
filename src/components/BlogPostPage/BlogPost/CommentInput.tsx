@@ -4,11 +4,12 @@ import { useRender } from "@/components/RegisterForm/CustomInput";
 
 import { LoadingIcon } from "@/components/Icons";
 import CustomInput from "@/components/RegisterForm/CustomInput";
-import InputField from "@/components/RegisterForm/inputField";
+import InputField from "@/general-utils/inputField";
 
 import Joi from "joi";
 
 import { Roboto_Condensed } from "next/font/google";
+import { delay } from "@/general-utils/delay";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "600",
@@ -72,10 +73,6 @@ export default function CommentInput({
       )}
     </div>
   );
-}
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const CloseReplyButton: React.FC<{ closeReply: () => void }> = ({

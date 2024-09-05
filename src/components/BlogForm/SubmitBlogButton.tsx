@@ -1,4 +1,4 @@
-import { Button1, Button2 } from "@/utils/styled-buttons";
+import { Button1, Button2 } from "@/components/styled-buttons";
 import { Roboto_Condensed } from "next/font/google";
 
 const roboto_condensed = Roboto_Condensed({

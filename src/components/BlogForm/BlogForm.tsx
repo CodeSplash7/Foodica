@@ -1,6 +1,6 @@
 "use client";
 
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import React, { useCallback } from "react";
 import { Session } from "next-auth";
 import CustomInput, { useRender } from "../RegisterForm/CustomInput";
 import ImageInput from "../RegisterForm/ImageInput";
@@ -11,38 +11,34 @@ import DirectionsField from "./DirectionsField";
 import { LoadingSpinner } from "../Icons";
 import ConfirmDelete from "./ConfirmDelete";
 import LoadingAnimation from "../LoadingAnimation";
-import {
-  useFormFallback,
-  useInputFields,
-  useModalProps,
-  useNavigateToBlog,
-  useSubmitBlog
-} from "./hooks";
+import { Blog } from "@/types/blog-types";
+import useInputFields from "./hooks/useInputFields";
+import useSubmitBlog from "./hooks/useSubmitBlogs";
+import useNavigateToBlog from "./hooks/useNavigateToBlog";
+import { useModalProps } from "./hooks/useModalProps";
+import useFormFallback from "./hooks/useFormFallback";
+// import { BlogError } from "./blogError";
 
-const roboto_condesed = Roboto_Condensed({
+const robotoCondesed = Roboto_Condensed({
   weight: "500",
   subsets: ["latin"]
 });
 
-export default function BlogForm({
-  session,
-  blog,
-  actionType
-}: {
+interface BlogFormProps {
   session: Session | null | "loading";
   blog: Blog | undefined | "loading";
   actionType: string | "loading";
-}) {
+}
+
+export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
   const { res: author, fallback } = useFormFallback(session, blog, actionType);
   if (fallback || blog === "loading" || session === "loading") return fallback;
 
   const toUpdate = actionType === "update" && !!blog;
 
-  //* Start hooks
   const rerender = useRender();
   const navigateToBlog = useNavigateToBlog();
 
-  //* Create Input Fields
   const { inputFields, allFields } = useInputFields(blog);
   const {
     titleField,
@@ -59,7 +55,6 @@ export default function BlogForm({
     prepTimeField,
     caloriesField
   } = inputFields;
-
   const modalProps = useModalProps(blog?.id, toUpdate);
 
   const { postError, isLoading, serverError, submitBlog } = useSubmitBlog(
@@ -70,20 +65,25 @@ export default function BlogForm({
     author,
     blog
   );
-  //* form submission handler
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    const newBlog = await submitBlog();
-    if (!newBlog) return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      const newBlog = await submitBlog();
+      if (newBlog) navigateToBlog(newBlog);
+    },
+    [submitBlog, navigateToBlog]
+  );
 
-    navigateToBlog(newBlog);
-  };
+  const handleDelete = useCallback(
+    () => modalProps.setIsOpen(true),
+    [modalProps]
+  );
 
   return (
     <>
       <ConfirmDelete modalProps={modalProps} />
-      <Form>
+      <Form aria-label={toUpdate ? "Modify Blog Form" : "Create Blog Form"}>
         <FormHeader toUpdate={toUpdate} />
         <FormRow>
           <FormRowItem>
@@ -159,7 +159,7 @@ export default function BlogForm({
         <FormFooter
           handleSubmit={handleSubmit}
           toUpdate={toUpdate}
-          handleDelete={() => modalProps.setIsOpen(true)}
+          handleDelete={handleDelete}
         />
       </Form>
     </>
@@ -214,7 +214,7 @@ function FormState({
 
 export function FormHeader({ toUpdate }: { toUpdate: boolean | "loading" }) {
   return (
-    <div className={`w-full relative text-[40px] ${roboto_condesed.className}`}>
+    <div className={`w-full relative text-[40px] ${robotoCondesed.className}`}>
       {toUpdate === "loading" ? (
         <>
           <LoadingSpinner />

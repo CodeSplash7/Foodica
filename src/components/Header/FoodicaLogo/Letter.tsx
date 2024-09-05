@@ -1,4 +1,5 @@
-import { LETTER_COLOR, LogoLetter } from "./FoodicaLogo";
+import { LETTER_COLOR } from "./FoodicaLogo";
+import { type LogoLetter } from "@/types/logo-types";
 
 const HOVER_OFFSET = 4;
 const LETTER_SIZE = 0.7;
@@ -32,9 +33,7 @@ export default function Letter({
       }}
       onMouseOut={() => {
         const newLetters = letters.map((l) =>
-          l.id === offsetLetter.id
-            ? { ...offsetLetter, fill: LETTER_COLOR }
-            : l
+          l.id === offsetLetter.id ? { ...offsetLetter, fill: LETTER_COLOR } : l
         );
         setLetters(newLetters);
       }}

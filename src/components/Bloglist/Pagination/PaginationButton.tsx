@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Roboto_Condensed } from "next/font/google";
+import { blogsLinkByPage } from "@/general-utils/app-routes";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "400",
@@ -15,7 +16,7 @@ export default function PaginationButton({
 }) {
   return (
     <Link
-      href={`/blogs?page=${String(btn)}`}
+      href={!!btn ? blogsLinkByPage(btn) : "/"}
       className={`bg-white h-fit
                     border ${
                       isActive ? "border-[#c7c9cf]" : "border-transparent"

@@ -1,6 +1,7 @@
 "use client";
 
-import { shortenText } from "@/utils/general-utils";
+import { delay } from "@/general-utils/delay";
+import { shortenText } from "@/general-utils/shortenText";
 import React, { useState } from "react";
 
 export default function CommentMessage({
@@ -41,10 +42,6 @@ export default function CommentMessage({
       comment.scrollIntoView({ behavior: "smooth" });
     }
   }
-}
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function replaceNewlinesWithBr(str: string) {

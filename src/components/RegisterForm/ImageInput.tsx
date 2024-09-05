@@ -1,8 +1,8 @@
-import { Picture } from "@/utils/allSides/usersFunctions";
+import { Picture } from "@/types/user-types";
 
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
-import { deleteBucketImage } from "@/utils/serverside/userFunctions";
-import InputField from "./inputField";
+import { deleteBucketImage } from "@/server-utils/userFunctions";
+import InputField from "../../general-utils/inputField";
 import { useRender } from "./CustomInput";
 
 export default function ImageInput({

@@ -3,13 +3,14 @@
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import CommentInput from "./CommentInput";
-import { BlogComment, BlogReply } from "@/utils/allSides/blogsFunctions";
 import { CommentsDivider } from "./BlogComments";
 import Replies from "./Replies";
 import { useSession } from "next-auth/react";
-import { User } from "@/utils/allSides/usersFunctions";
-import { createReply } from "@/utils/serverside/blogsFunctions";
 import { useCurrentUserId } from "./CommentSection";
+import { delay } from "@/general-utils/delay";
+import { BlogComment, BlogReply } from "@/types/blog-types";
+import { User } from "@/types/user-types";
+import { createReply } from "@/server-utils/blogsFunctions";
 
 const inter_bolder = Inter({
   subsets: ["latin"],
@@ -62,7 +63,10 @@ export default function ReplySection({
         {error && <div>{error}</div>}
       </div>
       <CommentsDivider />
-      {replyHandler.addReply && replyHandler.replies.length && !isReply && commentIndex !== undefined ? (
+      {replyHandler.addReply &&
+      replyHandler.replies.length &&
+      !isReply &&
+      commentIndex !== undefined ? (
         <Replies
           incrementCommentCount={incrementCommentCount}
           comment={comment}
@@ -77,10 +81,6 @@ export default function ReplySection({
       )}
     </div>
   );
-}
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const ReplyButton: React.FC<{ handleClick: () => void }> = ({

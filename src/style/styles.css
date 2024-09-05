@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+}
+
+@import "./burger-menu-button.css";
+@import "./loading-spinner.css";
+@import "./loading-dots.css";
+@import "./buttons/1.css";
+@import "./buttons/2.css";
+@import "./buttons/3.css";
+@import "./social-links/1.css";
+@import "./social-links/2.css";
+@import "./social-links/3.css";
+@import "./back-to-top-button.css"

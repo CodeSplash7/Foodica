@@ -1,0 +1,82 @@
+/* From Uiverse.io by 0800Gonza */
+.card3 {
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+}
+
+/* for all social containers*/
+.socialContainer3 {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: 1s;
+}
+
+/* instagram*/
+.container3One:hover {
+  background-color: #d62976;
+  transition-duration: 0.3s;
+}
+
+/* twitter*/
+.container3Two:hover {
+  background-color: #00acee;
+  transition-duration: 0.3s;
+}
+
+/* linkdin*/
+.container3Three:hover {
+  background-color: #128c7e;
+  transition-duration: 0.3s;
+}
+
+/* Whatsapp*/
+.container3Four:hover {
+  background-color: #4267b2;
+  transition-duration: 0.3s;
+}
+
+.container3Five:hover {
+  background-color: #007bff;
+  transition-duration: 0.3s;
+}
+
+.socialContainer3:active {
+  transform: scale(0.9);
+  transition-duration: 0.3s;
+}
+
+.socialSvg3 {
+  width: 17px;
+}
+
+.socialSvg3 path {
+  fill: rgb(255, 255, 255);
+}
+
+.socialContainer3:hover .socialSvg3 {
+  animation: slide-in-top-3 0.3s both;
+}
+
+@keyframes slide-in-top-3 {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

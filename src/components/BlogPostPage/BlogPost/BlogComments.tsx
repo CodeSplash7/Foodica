@@ -1,13 +1,13 @@
-import { BlogComment } from "@/utils/allSides/blogsFunctions";
+"use client";
+import { BlogComment } from "@/types/blog-types";
 import Comment from "./Comment";
 
-import "./LoadingAnimation.css";
 import { LoadingSpinner } from "@/components/Icons";
 
 import { Roboto_Condensed } from "next/font/google";
 import { useEffect, useState } from "react";
-import { fetchAllAuthors } from "@/utils/serverside/authorsFunctions";
-import { User } from "@/utils/allSides/usersFunctions";
+import { fetchAllAuthors } from "@/server-utils/authorsFunctions";
+import { User } from "@/types/user-types";
 const roboto_condensed = Roboto_Condensed({
   subsets: ["latin"],
   weight: "700"
@@ -64,8 +64,6 @@ const CommentsCount: React.FC<{ commentCount: number }> = ({
   </div>
 );
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 function useCommentInformation(commentList: BlogComment[] | "loading") {
   const [commentCount, setCommentCount] = useState(0);
   useEffect(() => {
@@ -87,7 +85,6 @@ function useCommentInformation(commentList: BlogComment[] | "loading") {
   const fetchCommentAuthors = async () => {
     if (commentList === "loading") return;
     const allAuthors = await fetchAllAuthors(commentList);
-    delay(10000);
     setCommentAuthors(allAuthors);
   };
 

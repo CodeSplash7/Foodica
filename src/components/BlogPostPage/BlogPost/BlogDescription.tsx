@@ -1,7 +1,7 @@
 import AwaitableImage from "@/components/AwaitableImage";
 import ClickableName from "@/components/ClickableName";
-import { Blog } from "@/utils/allSides/blogsFunctions";
-import { User } from "@/utils/allSides/usersFunctions";
+import { Blog } from "@/types/blog-types";
+import { User } from "@/types/user-types";
 import { Skeleton } from "@mui/material";
 import { Inter } from "next/font/google";
 import React from "react";
@@ -57,7 +57,11 @@ const BlogAuthorPicture: React.FC<{ pictureUrl: string | "loading" }> = ({
           height={256}
           width={256}
           className={`transition duration-300 w-full h-[80px] [object-fit:cover] rounded-full`}
-          loadingSkeletonLayout={{width: "100%", height: "80px", borderRadius: "100%"}}
+          loadingSkeletonLayout={{
+            width: "100%",
+            height: "80px",
+            borderRadius: "100%"
+          }}
         />
       )}
     </div>

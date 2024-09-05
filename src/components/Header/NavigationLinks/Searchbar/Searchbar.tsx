@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
+import { blogsLinkBySearch } from "@/general-utils/app-routes";
 
 export default function Searchbar() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Searchbar() {
   }
 
   function searchBlogs() {
-    router.replace(`/blogs/?search=${textSearch}`);
+    router.replace(blogsLinkBySearch(textSearch));
   }
 
   return (

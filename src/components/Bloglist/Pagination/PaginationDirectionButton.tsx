@@ -1,6 +1,8 @@
 import Link from "next/link";
 import DirectionIcon from "./DirectionIcon";
 import { Roboto_Condensed } from "next/font/google";
+import { blogsLinkByPage } from "@/general-utils/app-routes";
+import { useMemo } from "react";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "700",
@@ -22,24 +24,12 @@ export default function PaginationDirectionButton({
   currentBlogPage: number;
   pagesCount: number;
 }) {
-  let destinatedPage: number = 1;
-  let buttonInvisibilityCondition: boolean = false;
-  let buttonTextLabel = "";
-
-  if (direction === "left") {
-    buttonInvisibilityCondition = currentBlogPage <= 1;
-    buttonTextLabel = "PREVIOUS";
-    destinatedPage = currentBlogPage - 1;
-  }
-  if (direction === "right") {
-    buttonInvisibilityCondition = currentBlogPage >= pagesCount;
-    buttonTextLabel = "NEXT";
-    destinatedPage = currentBlogPage + 1;
-  }
+  const { destinatedPage, buttonInvisibilityCondition, buttonTextLabel } =
+    useButtonProperties(direction, currentBlogPage, pagesCount);
 
   return (
     <Link
-      href={`/blogs?page=${destinatedPage}`}
+      href={blogsLinkByPage(destinatedPage)}
       className={
         buttonStyles +
         (buttonInvisibilityCondition ? " opacity-0 pointer-events-none" : "")
@@ -50,4 +40,29 @@ export default function PaginationDirectionButton({
       {direction === "right" && <DirectionIcon direction={direction} />}
     </Link>
   );
+}
+
+function useButtonProperties(
+  direction: "left" | "right",
+  currentBlogPage: number,
+  pagesCount: number
+) {
+  return useMemo(() => {
+    let destinatedPage: number = 1;
+    let buttonInvisibilityCondition: boolean = false;
+    let buttonTextLabel = "";
+
+    if (direction === "left") {
+      buttonInvisibilityCondition = currentBlogPage <= 1;
+      buttonTextLabel = "PREVIOUS";
+      destinatedPage = currentBlogPage - 1;
+    }
+    if (direction === "right") {
+      buttonInvisibilityCondition = currentBlogPage >= pagesCount;
+      buttonTextLabel = "NEXT";
+      destinatedPage = currentBlogPage + 1;
+    }
+
+    return { destinatedPage, buttonInvisibilityCondition, buttonTextLabel };
+  }, [direction, currentBlogPage, pagesCount]);
 }

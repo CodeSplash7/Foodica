@@ -1,17 +1,19 @@
-import { getBlogs } from "@/utils/serverside/blogsFunctions";
 import Link from "next/link";
 import { Roboto_Condensed } from "next/font/google";
+import { BlogTag } from "@/types/blog-types";
+import { getBlogs } from "@/server-utils/blogsFunctions";
+import { blogsLinkByTag } from "@/general-utils/app-routes";
 const roboto_condensed = Roboto_Condensed({
   weight: "400",
   subsets: ["latin"]
 });
 
-export default async function Category({ name }: { name: string }) {
+export default async function Category({ name }: { name: BlogTag }) {
   const blogs = await getBlogs();
   const count = blogs.filter((blog) => blog.mainTag === name).length;
   return (
     <Link
-      href={`/blogs?tag=${name.toLowerCase()}`}
+      href={blogsLinkByTag(name)}
       className={`bg-white border border-[#c7c7c7] rounded-sm
                     gap-[8px] flex justify-between
                     group`}

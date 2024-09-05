@@ -1,0 +1,32 @@
+"filename", "language", "TypeScript JSX", "TypeScript", "CSS", "comment", "blank", "total"
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogCard.tsx", "TypeScript JSX", 1, 0, 0, 0, 0, 1
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\BlogForm.tsx", "TypeScript JSX", 2, 0, 0, -2, 0, 0
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\IngredientsField.tsx", "TypeScript JSX", -9, 0, 0, 0, -1, -10
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\blogError.ts", "TypeScript", 0, 6, 0, 0, 0, 6
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks.tsx", "TypeScript JSX", -442, 0, 0, 0, -34, -476
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useBlogState.ts", "TypeScript", 0, 36, 0, 0, 7, 43
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useFormFallback.tsx", "TypeScript JSX", 27, 0, 0, 0, 2, 29
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useInputFields.ts", "TypeScript", 0, 244, 0, 0, 18, 262
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useModalProps.ts", "TypeScript", 0, 21, 0, 0, 5, 26
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useNavigateToBlog.ts", "TypeScript", 0, 12, 0, 0, 3, 15
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useStringifyForm.ts", "TypeScript", 0, 47, 0, 0, 2, 49
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogForm\hooks\useSubmitBlogs.ts", "TypeScript", 0, 109, 0, 0, 12, 121
+"r:\Code\Javascript\Nextjs\foodica\src\components\BlogPostPage\BlogPost\BlogComments.tsx", "TypeScript JSX", 1, 0, 0, 0, 0, 1
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Bloglist.tsx", "TypeScript JSX", -4, 0, 0, 0, -2, -6
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\Pagination.tsx", "TypeScript JSX", 4, 0, 0, 0, 0, 4
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationButtons.tsx", "TypeScript JSX", -10, 0, 0, 0, -3, -13
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\Pagination\PaginationDirectionButton.tsx", "TypeScript JSX", 12, 0, 0, 0, 2, 14
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\hooks\useFilteredBlogs.ts", "TypeScript", 0, 15, 0, 0, 3, 18
+"r:\Code\Javascript\Nextjs\foodica\src\components\Bloglist\hooks\useRenderedBlogs.ts", "TypeScript", 0, 21, 0, 0, 4, 25
+"r:\Code\Javascript\Nextjs\foodica\src\components\ClickableTitle.tsx", "TypeScript JSX", 0, 0, 0, 0, 1, 1
+"r:\Code\Javascript\Nextjs\foodica\src\components\MainBlogsSection.tsx", "TypeScript JSX", -1, 0, 0, 0, 0, -1
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\CustomInput.tsx", "TypeScript JSX", 2, 0, 0, 0, 0, 2
+"r:\Code\Javascript\Nextjs\foodica\src\components\RegisterForm\inputField.tsx", "TypeScript JSX", -142, 0, 0, 0, -9, -151
+"r:\Code\Javascript\Nextjs\foodica\src\general-utils\getButtonPages.ts", "TypeScript", 0, 13, 0, 0, 1, 14
+"r:\Code\Javascript\Nextjs\foodica\src\general-utils\inputField.ts", "TypeScript", 0, 142, 0, 0, 9, 151
+"r:\Code\Javascript\Nextjs\foodica\src\pages\blogs-by-date-page.tsx", "TypeScript JSX", 0, 0, 0, 0, 1, 1
+"r:\Code\Javascript\Nextjs\foodica\src\server-utils\authorsFunctions.ts", "TypeScript", 0, -2, 0, 0, 0, -2
+"r:\Code\Javascript\Nextjs\foodica\src\server-utils\blogsFunctions.ts", "TypeScript", 0, -5, 0, -15, -2, -22
+"r:\Code\Javascript\Nextjs\foodica\src\style\styles.css", "CSS", 0, 0, 0, 0, -1, -1
+"r:\Code\Javascript\Nextjs\foodica\src\types\blog-types.ts", "TypeScript", 0, 9, 0, 0, 1, 10
+"Total", "-", -559, 668, 0, -17, 19, 111

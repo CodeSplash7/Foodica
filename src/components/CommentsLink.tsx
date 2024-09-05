@@ -1,4 +1,5 @@
-import { type Blog } from "@/utils/allSides/blogsFunctions";
+import { type Blog } from "@/types/blog-types";
+import { blogCommentsLinkByBlog } from "@/general-utils/app-routes";
 import Link from "next/link";
 
 export default function CommentsLink({
@@ -11,12 +12,8 @@ export default function CommentsLink({
   addStyles?: string;
 }) {
   if (blog === "loading") return <div>{children}</div>;
-  const urlTitle = blog.title.toLowerCase().split(" ").join("-");
 
-  const blogDate = new Date(blog.creationDate);
-  const href = `/blogs/${blogDate.getFullYear()}/${
-    blogDate.getMonth() + 1
-  }/${blogDate.getDate()}/${urlTitle}#comments`;
+  const href = blogCommentsLinkByBlog(blog);
 
   return (
     <Link

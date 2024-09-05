@@ -1,6 +1,6 @@
 import Skeleton from "@mui/material/Skeleton";
 
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 import Image from "next/image";
 
 export default function RecipeImage({ blog }: { blog: Blog | "loading" }) {

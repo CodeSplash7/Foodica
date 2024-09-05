@@ -1,17 +1,3 @@
-import BackToTop from "@/components/BackToTop";
+import BlogsLayout from "@/layouts/blogs-layout";
 
-export default async function BlogsPageLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <div
-      className={`flex flex-col md:flex-row 
-           gap-[16px] mt-[32px] `}
-    >
-      {children}
-      <BackToTop />
-    </div>
-  );
-}
+export default BlogsLayout;

@@ -1,4 +1,4 @@
-import { Button1 } from "@/utils/styled-buttons";
+import { Button1 } from "@/components/styled-buttons";
 import { SignInResponse } from "next-auth/react";
 import { Roboto_Condensed } from "next/font/google";
 

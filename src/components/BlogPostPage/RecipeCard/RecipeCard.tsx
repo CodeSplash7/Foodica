@@ -1,4 +1,4 @@
-import { Blog } from "@/utils/allSides/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeImage from "./RecipeImage";
 import RecipeHeading from "./RecipeHeading";

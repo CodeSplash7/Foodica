@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import MenuLink from "./MenuLink";
-import { getAllLinks } from "@/utils/allSides/linksFunctions";
+import { getAllLinks } from "@/general-utils/linksFunctions";
 
 export default function DroppedLinks({
   setIsMenuOpen,

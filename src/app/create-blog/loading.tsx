@@ -1,9 +1,3 @@
-import BlogForm from "@/components/BlogForm/BlogForm";
+import CreateBlogLoading from "@/pages/create-blog-loading";
 
-export default function LoadingBlogForm() {
-  return (
-    <div className={`w-full h-fit flex flex-col items-center gap-[32px]`}>
-      <BlogForm session={"loading"} blog={"loading"} forPurpose={"loading"} />
-    </div>
-  );
-}
+export default CreateBlogLoading

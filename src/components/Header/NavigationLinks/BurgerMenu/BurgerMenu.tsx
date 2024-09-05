@@ -1,7 +1,5 @@
 "use client";
 
-import "./styles.css";
-
 import Icon from "./Icon";
 import { useState } from "react";
 import Links from "./Links";

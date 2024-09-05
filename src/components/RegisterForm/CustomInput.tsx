@@ -1,5 +1,5 @@
 import { LegacyRef, MutableRefObject, useState } from "react";
-import InputField from "./inputField";
+import InputField from "../../general-utils/inputField";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -287,7 +287,9 @@ const KeywordInput = ({
   };
 
   const handleRemoveKeyword = (keyword: string) => {
-    inputField.setValue(inputField.getCorrectValue()?.filter((k) => k !== keyword));
+    inputField.setValue(
+      inputField.getCorrectValue()?.filter((k) => k !== keyword)
+    );
     rerender();
   };
   return (

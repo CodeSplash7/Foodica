@@ -1,8 +1,8 @@
-import { type Blog } from "@/utils/allSides/blogsFunctions";
-import { type BlogPageSearchParams } from "@/app/blogs/page";
-import ClickableTag from "@/components/ClickableTag";
+import { type Blog } from "@/types/blog-types";
+import { type BlogPageSearchParams } from "@/pages/blogs-page";
+import ClickableTag from "@/style/ClickableTag";
 import ClickableTitle from "@/components/ClickableTitle";
-import { formatCreationDate } from "@/utils/general-utils";
+import { formatCreationDate } from "@/general-utils/formatCreationDate";
 import { HighlightedBlogImage } from "./HighlightedBlogImage";
 import CommentsLink from "./CommentsLink";
 import { Skeleton } from "@mui/material";

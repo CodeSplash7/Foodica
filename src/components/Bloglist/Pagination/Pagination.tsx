@@ -1,7 +1,8 @@
-import { type Blog } from "@/utils/allSides/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 import PaginationButtons from "./PaginationButtons";
 import PaginationDirectionButton from "./PaginationDirectionButton";
-import { getDivisions } from "@/utils/allSides/blogsFunctions";
+import { getDivisions } from "@/general-utils/blogsFunctions";
+import { useMemo } from "react";
 
 export default function Pagination({
   currentBlogPage,
@@ -10,7 +11,10 @@ export default function Pagination({
   currentBlogPage: number;
   allBlogs: Blog[];
 }) {
-  const pagesCount = getDivisions(allBlogs, 4).length;
+  const pagesCount = useMemo(
+    () => getDivisions(allBlogs, 4).length,
+    [allBlogs]
+  );
   return (
     <div className="relative mt-[32px] flex flex-row w-full h-fit gap-[16px] justify-between">
       <PaginationDirectionButton

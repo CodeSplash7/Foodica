@@ -1,11 +1,12 @@
-import { type Blog, type BlogComment } from "@/utils/allSides/blogsFunctions";
+import { type Blog, type BlogComment } from "@/types/blog-types";
 
-import ClickableTag from "./ClickableTag";
+import ClickableTag from "../style/ClickableTag";
 import ClickableTitle from "./ClickableTitle";
-import { formatCreationDate, shortenText } from "@/utils/general-utils";
+import { formatCreationDate } from "@/general-utils/formatCreationDate";
 import ClickableName from "./ClickableName";
 import BlogCardPicture from "./BlogCardPicture";
 import CommentsLink from "./CommentsLink";
+import { shortenText } from "@/general-utils/shortenText";
 
 type BlogCardProps = {
   blog: Blog;

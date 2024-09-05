@@ -1,10 +1,9 @@
 import {
   getMainLinks,
   getRecipeIndexLinks
-} from "@/utils/allSides/linksFunctions";
+} from "@/general-utils/linksFunctions";
 
-import dynamic from "next/dynamic";
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction } from "react";
 import MenuLink from "./MenuLink";
 
 export default function Links({

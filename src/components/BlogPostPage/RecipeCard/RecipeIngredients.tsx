@@ -2,7 +2,7 @@
 import {
   Blog,
   Ingredient as IngredientType
-} from "@/utils/allSides/blogsFunctions";
+} from "@/types/blog-types";
 import { Skeleton } from "@mui/material";
 import { useState } from "react";
 

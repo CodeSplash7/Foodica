@@ -20,9 +20,7 @@ export default function Header({ showSearchBar }: { showSearchBar?: boolean }) {
       >
         BY ROSCA RARES
       </div>
-      <div className="mt-[36px]">
-        <NavLinks showSearchBar={showSearchBar} />
-      </div>
+      <NavLinks showSearchBar={showSearchBar} />
     </div>
   );
 }

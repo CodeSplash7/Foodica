@@ -1,14 +1,15 @@
-import { type Blog } from "@/utils/allSides/blogsFunctions";
-
-import {
-  filterSelectedBlogs,
-  getNthDivision
-} from "@/utils/allSides/blogsFunctions";
+import { BlogListFilters, type Blog } from "@/types/blog-types";
 
 import BlogCard from "@/components/BlogCard";
 import Pagination from "./Pagination/Pagination";
-import { type BlogPageSearchParams } from "@/app/blogs/page";
 import LoadingAnimation from "../LoadingAnimation";
+import { BlogPageSearchParams } from "@/pages/blogs-page";
+import {
+  filterSelectedBlogs,
+  getNthDivision
+} from "@/general-utils/blogsFunctions";
+import useFilteredBlogs from "./hooks/useFilteredBlogs";
+import useRenderedBlogs from "./hooks/useRenderedBlogs";
 
 type BlogListProps = {
   searchParams: BlogPageSearchParams;
@@ -19,7 +20,6 @@ type BlogListProps = {
   ids?: string[];
 };
 
-const blogPageSize = 4;
 export default async function BlogList({
   searchParams,
   blogs,
@@ -36,31 +36,25 @@ export default async function BlogList({
     );
   const { search, tag, page, author } = searchParams;
 
-  const currentPage = Number(page) || 1;
-  const onePageForAll = !searchParams.page;
-  let selectedBlogs: Blog[] = [];
+  const listFilters: BlogListFilters = [
+    tag,
+    search,
+    author,
+    year,
+    month,
+    day,
+    ids
+  ];
+  const filteredBlogs = useFilteredBlogs(blogs, listFilters);
 
-  if (blogs.length > 0) {
-    selectedBlogs = filterSelectedBlogs(
-      blogs,
-      tag,
-      search,
-      author,
-      year,
-      month,
-      day,
-      ids
-    );
-  }
-
-  const pageBlogs = getNthDivision(
-    selectedBlogs,
-    currentPage || 1,
-    onePageForAll ? 9999 : blogPageSize
+  const { renderedBlogs, onePageForAll, currentPage } = useRenderedBlogs(
+    page,
+    filteredBlogs
   );
 
-  if (!pageBlogs) return <div className="flex-[2]">No blogs were found!</div>;
-  if (pageBlogs)
+  if (!renderedBlogs)
+    return <div className="flex-[2]">No blogs were found!</div>;
+  if (renderedBlogs)
     return (
       <>
         <div className={`flex flex-[2] flex-col gap-[32px] w-full`}>
@@ -69,7 +63,7 @@ export default async function BlogList({
               !onePageForAll && "gap-y-[72px] grid-cols-1 sm:grid-cols-2 "
             } ${onePageForAll && "gap-y-[24px] grid-cols-2 sm:grid-cols-3 "}`}
           >
-            {pageBlogs.map((blog) => (
+            {renderedBlogs.map((blog) => (
               <BlogCard key={blog.id} blog={blog} isSmall={onePageForAll} />
             ))}
           </div>

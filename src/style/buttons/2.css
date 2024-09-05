@@ -1,0 +1,62 @@
+.btn-2 {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: red;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.btn-2,
+.btn-2 span {
+  transition: 200ms;
+}
+
+.btn-2 .text {
+  padding-left: 16px;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-2 .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-2 svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.btn-2:hover {
+  background: #ff3636;
+}
+
+.btn-2:hover .text {
+  color: transparent;
+}
+
+.btn-2:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.btn-2:focus {
+  outline: none;
+}
+
+.btn-2:active .icon svg {
+  transform: scale(0.8);
+}

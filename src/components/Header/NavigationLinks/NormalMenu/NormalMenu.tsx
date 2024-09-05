@@ -1,4 +1,4 @@
-import { getMainLinks } from "@/utils/allSides/linksFunctions";
+import { getMainLinks } from "@/general-utils/linksFunctions";
 import MenuLink from "./MenuLink";
 
 export default function NormalMenu() {
