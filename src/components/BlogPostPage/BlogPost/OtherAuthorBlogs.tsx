@@ -73,7 +73,7 @@ const OtherBlogCard: React.FC<{
               src={blog?.picture?.url ?? null}
               alt="blog picture"
               className="transition duration-300 w-[96px] h-[96px] [object-fit:cover]"
-              loadingSkeletonLayout={{ width: "96px", height: "96px" }}
+              skeletonClassName={{ width: "96px", height: "96px" }}
               height={256}
               width={256}
             />

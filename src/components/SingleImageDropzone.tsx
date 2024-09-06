@@ -139,7 +139,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 
           {imageUrl ? (
             <AwaitableImage
-              loadingSkeletonLayout={{ width: "100%", height: "100%" }}
+            skeletonClassName={{ width: "100%", height: "100%" }}
               className="h-full w-full rounded-full object-cover"
               src={imageUrl}
               alt={acceptedFiles[0]?.name}

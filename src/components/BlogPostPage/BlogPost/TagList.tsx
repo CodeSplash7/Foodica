@@ -14,7 +14,7 @@ export default function TagList({ blog }: { blog: Blog | "loading" }) {
       : Array.from(new Set([blog.mainTag, ...blog.secondaryTags]));
 
   return (
-    <div className={`w-full h-fit  flex flex-col items-center gap-[16px]`}>
+    <div className={`w-full h-fit flex flex-col items-center gap-[16px]`}>
       <div className={"border-t-2 border-gray-200 w-[128px] pb-[24px]"}></div>
 
       <div className={`${roboto_condensed.className} uppercase font-bold`}>

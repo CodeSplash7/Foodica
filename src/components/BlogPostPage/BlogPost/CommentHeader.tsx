@@ -36,7 +36,7 @@ export default function CommentHeader({
           alt="user picture"
           height={256}
           width={256}
-          loadingSkeletonLayout={{
+          skeletonClassName={{
             width: "100%",
             height: "100%",
             borderRadius: "100%"

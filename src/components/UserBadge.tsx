@@ -37,7 +37,7 @@ export default async function UserBadge({
       >
         <div className="relative h-[32px] w-[40px] ">
           <AwaitableImage
-            loadingSkeletonLayout={{
+            skeletonClassName={{
               width: "100%",
               height: "100%",
               borderRadius: "100%"

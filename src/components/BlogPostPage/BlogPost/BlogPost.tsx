@@ -21,7 +21,7 @@ export default async function BlogPost({ blog }: { blog: Blog | "loading" }) {
       : await getBlogsByIds(authorUser?.blogs);
   const session = await getServerSession();
   return (
-    <div className={`flex flex-col gap-[32px] w-full `}>
+    <div className={`flex flex-col gap-[32px] w-full h-fit`}>
       <RecipeCard blog={blog} />
       <BlogConclusion blog={blog} />
       <BlogDistribution />

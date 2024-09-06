@@ -107,19 +107,19 @@ export const getPagesCount: () => Promise<number> = async () => {
 };
 
 export const getRelatedBlogs: (
-  irrelevanBlogId: string,
+  sourceBlogId: string,
   tag: string,
   count: number
-) => Promise<Blog[]> = async (irrelevanBlogId, tag, count) => {
+) => Promise<Blog[]> = async (sourceBlogId, tag, count) => {
   await initializeBlogs();
   let result: Blog[] = [];
   cachedBlogs.forEach((b) => {
-    if (result.length > count - 1 || b.id === irrelevanBlogId) return;
+    if (result.length > count - 1 || b.id === sourceBlogId) return;
     if (b.mainTag === tag) result.push(b);
   });
   if (result.length < count) {
     cachedBlogs.forEach((b) => {
-      if (result.length > 2 || b.id === irrelevanBlogId) return;
+      if (result.length > 2 || b.id === sourceBlogId) return;
       if (b.secondaryTags.includes(tag as BlogTag)) result.push(b);
     });
   }

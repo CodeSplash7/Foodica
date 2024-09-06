@@ -37,7 +37,7 @@ function AboutMeSection() {
       </div>
       <div className="relative w-full sm:w-1/2 md:w-full h-[70vw] sm:h-[184px]">
         <AwaitableImage
-          loadingSkeletonLayout={{ width: "100%", height: "100%" }}
+          skeletonClassName={{ width: "100%", height: "100%" }}
           alt="about me image"
           src={aboutMeImageSrc}
           width={400}
@@ -88,7 +88,7 @@ async function RecentBlogsSection({ count }: { count: number }) {
           >
             <div className="relative">
               <AwaitableImage
-                loadingSkeletonLayout={{
+                skeletonClassName={{
                   width: "100%",
                   height: "48px"
                 }}

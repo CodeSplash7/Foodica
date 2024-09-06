@@ -1,4 +1,4 @@
-import { Picture } from "@/general-utils/usersFunctions";
+import { Picture } from "@/types/user-types";
 import AwaitableImage from "./AwaitableImage";
 
 export default function BlogCardPicture({
@@ -19,7 +19,7 @@ export default function BlogCardPicture({
       src={picture?.url || ""}
       width={500}
       height={500}
-      loadingSkeletonLayout={{
+      skeletonClassName={{
         width: "100%",
         height: isSmall ? "32vw" : "540px",
         "@media (min-width: 640px)": {

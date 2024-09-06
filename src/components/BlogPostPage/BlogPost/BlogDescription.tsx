@@ -57,7 +57,7 @@ const BlogAuthorPicture: React.FC<{ pictureUrl: string | "loading" }> = ({
           height={256}
           width={256}
           className={`transition duration-300 w-full h-[80px] [object-fit:cover] rounded-full`}
-          loadingSkeletonLayout={{
+          skeletonClassName={{
             width: "100%",
             height: "80px",
             borderRadius: "100%"

@@ -3,53 +3,43 @@ import { Skeleton, SxProps } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 
-type AwaitableImageProps = {
-  className: string;
+interface AwaitableImageProps {
+  src: string | null | undefined;
   alt: string;
-  src: string | null;
   width: number;
   height: number;
-  loadingSkeletonLayout: SxProps;
-};
+  className?: string;
+  skeletonClassName?: SxProps;
+}
+
 const AwaitableImage: React.FC<AwaitableImageProps> = ({
-  className,
-  alt,
   src,
+  alt,
   width,
   height,
-  loadingSkeletonLayout
+  className,
+  skeletonClassName
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
+
+  if (!src) {
+    return <Skeleton variant="rectangular" sx={skeletonClassName} />;
+  }
 
   return (
-    <>
-      {/* <div className={``}> */}
-        {(isLoading || src === null) && (
-          <Skeleton
-            variant="rounded"
-            sx={{
-              ...loadingSkeletonLayout,
-              // position: "absolute",
-              // top: "0px",
-              // left: "0px"
-            }}
-          />
-        )}
-      {/* </div> */}
-      {!!src && (
-        <Image
-          onLoad={handleImageLoad}
-          className={`${className} ${isLoading ? "opacity-0" : "opacity-100"}`}
-          alt={alt}
-          src={src}
-          width={width}
-          height={height}
-        />
+    <div className={className}>
+      {isLoading && (
+        <Skeleton variant="rectangular" sx={skeletonClassName} />
       )}
-    </>
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={`${className} ${isLoading ? "invisible w-0 h-0" : ""}`}
+        onLoad={() =>( setIsLoading(false))}
+      />
+    </div>
   );
 };
 
