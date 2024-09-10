@@ -10,12 +10,10 @@ export default async function AuthorBlogsPage({
   params: { authorName: string };
 }) {
   const session = await getServerSession();
+  const author = await getUserByUrlName(params.authorName);
 
   let loggedUser = false;
-  if (
-    (await getUserByUrlName(params.authorName))?.account.email ===
-    session?.user?.email
-  ) {
+  if (author?.account.email === session?.user?.email) {
     loggedUser = true;
   }
 
@@ -27,16 +25,11 @@ export default async function AuthorBlogsPage({
           msg={
             loggedUser
               ? "Your blogs"
-              : `author: ${
-                  (await getUserByUrlName(params.authorName))?.profile
-                    .username || "Author not found!"
-                }`
+              : `author: ${author?.profile.username || "Author not found!"}`
           }
         />
       </Suspense>
-      <AuthorBlogsSection
-        authorUser={await getUserByUrlName(params.authorName)}
-      />
+      <AuthorBlogsSection authorUser={author} />
     </div>
   );
 }

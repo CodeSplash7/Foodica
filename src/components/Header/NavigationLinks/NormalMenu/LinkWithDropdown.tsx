@@ -28,7 +28,7 @@ export default function LinkWithDropdown({ link }: { link: LinkType }) {
         >
           {link.label.toUpperCase()}
         </Link>
-        <DropdownCloseOpenIcon linkId={link.id} />
+        <DropdownCloseOpenIcon isOpen={isOpen} />
       </div>
       <div
         className={`overflow-hidden absolute transition-all duration-500 w-[216px]`}

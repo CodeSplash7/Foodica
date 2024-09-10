@@ -1,4 +1,3 @@
-
 import { blogLinkByBlog } from "@/general-utils/app-routes";
 import { Blog } from "@/types/blog-types";
 import { Roboto_Condensed } from "next/font/google";
@@ -25,14 +24,11 @@ export default function ClickableTitle({
   children?: React.ReactNode;
   addStyles?: string;
 }) {
-  if (blog === "loading") return <div>{children}</div>;
+  if (blog === "loading") return <div className={addStyles}>{children}</div>;
   const href = blogLinkByBlog(blog);
 
-  if (type === "text")
-    return (
-      <Link
-        href={href}
-        className={`relative 
+  if (type === "text") {
+    const classnames = `relative 
         before:absolute before:top-0 before:bottom-0 before:left-[-8px] before:w-[2px] before:bg-[#fc2f70] before:scale-y-0 before:origin-top 
         hover:before:origin-bottom hover:before:scale-y-100 
         before:transition-transform before:duration-300 before:ease-linear 
@@ -40,11 +36,13 @@ export default function ClickableTitle({
         hover:after:origin-top hover:after:scale-y-100 after:transition-transform after:duration-300 after:ease-linear 
         font-bold 
         ${addStyles}
-      transition duration-150 `}
-      >
+      transition duration-150 `;
+    return (
+      <Link href={href} className={classnames}>
         {children ? children : label ? label : blog.title}
       </Link>
     );
+  }
 
   if (type === "button")
     return (

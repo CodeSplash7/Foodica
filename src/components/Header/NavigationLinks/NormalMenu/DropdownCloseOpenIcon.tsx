@@ -1,9 +1,6 @@
 import { getAllLinks } from "@/general-utils/linksFunctions";
 
-export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
-  const links = getAllLinks()
-  const thisDropdown = links.find((link) => link.id === linkId);
-
+export default function DropdownCloseOpenIcon({ isOpen }: { isOpen: boolean }) {
   return (
     <svg
       width="12"
@@ -12,7 +9,7 @@ export default function DropdownCloseOpenIcon({ linkId }: { linkId: number }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${
-        thisDropdown?.isOpen ? "rotate-180" : "rotate-0"
+        isOpen ? "rotate-180" : "rotate-0"
       } transition duration-200 flex items-start`}
     >
       <g clipPath="url(#clip0_210_2)">

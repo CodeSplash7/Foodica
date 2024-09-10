@@ -3,9 +3,11 @@ import Link from "next/link";
 
 export default function ClickableName({
   addStyles,
+  label,
   children
 }: {
   children: string;
+  label?: string;
   addStyles?: string;
 }) {
   return (
@@ -20,7 +22,7 @@ export default function ClickableName({
     ${addStyles}
   transition duration-150 `}
     >
-      {children}
+      {label ? label : children}
     </Link>
   );
 }

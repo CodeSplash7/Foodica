@@ -1,4 +1,4 @@
-import ClickableTag from "@/style/ClickableTag";
+import ClickableTag from "@/components/ClickableTag";
 import { Blog, BlogTag } from "@/types/blog-types";
 import { Skeleton } from "@mui/material";
 import { Roboto_Condensed } from "next/font/google";

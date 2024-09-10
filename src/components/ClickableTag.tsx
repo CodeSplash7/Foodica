@@ -1,7 +1,8 @@
-import { Blog, BlogTag } from "@/types/blog-types";
+"use client" ;import { Blog, BlogTag } from "@/types/blog-types";
 import Link from "next/link";
 import { Roboto_Condensed } from "next/font/google";
 import { blogsLinkByTag } from "@/general-utils/app-routes";
+import { useRouter } from "next/navigation";
 
 const roboto_condensed_400 = Roboto_Condensed({
   weight: "400",
@@ -9,20 +10,38 @@ const roboto_condensed_400 = Roboto_Condensed({
 });
 
 export default function ClickableTag({
+  useNavigation,
   blog,
   addStyles,
   tag
 }: {
+  useNavigation?: boolean;
   blog?: Blog;
   tag?: BlogTag;
   addStyles?: string;
 }) {
+  const router = useRouter();
   const tagToClick = blog ? blog.mainTag : tag ? tag : "";
+  const classnames = `tag-link ${roboto_condensed_400.className} ${addStyles}`;
+
+  const handleClick = () => {
+    if (tagToClick) {
+      router.push(blogsLinkByTag(tagToClick));
+    }
+  };
+
+  if (useNavigation) {
+    return (
+      <span className={classnames} onClick={handleClick}>
+        {tagToClick}
+      </span>
+    );
+  }
 
   return (
     <Link
       href={tagToClick ? blogsLinkByTag(tagToClick) : "#"}
-      className={`relative z-10 before:content-[''] before:absolute before:z-[-1] before:top-0 before:bottom-0 before:left-[-0.25em] before:right-[-0.25em] before:bg-[#fc2f70] before:origin-bottom before:scale-y-[0.1] before:transition-transform before:duration-100 before:ease-in-out hover:before:scale-y-[1] hover:before:bg-[hsla(341,97%,59%,0.75)] ${roboto_condensed_400.className} transition duration-150 ${addStyles}`}
+      className={classnames}
     >
       {tagToClick}
     </Link>

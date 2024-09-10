@@ -1,6 +1,6 @@
 import { type Blog } from "@/types/blog-types";
 import { type BlogPageSearchParams } from "@/pages/blogs-page";
-import ClickableTag from "@/style/ClickableTag";
+import ClickableTag from "@/components/ClickableTag";
 import ClickableTitle from "@/components/ClickableTitle";
 import { formatCreationDate } from "@/general-utils/formatCreationDate";
 import { HighlightedBlogImage } from "./HighlightedBlogImage";

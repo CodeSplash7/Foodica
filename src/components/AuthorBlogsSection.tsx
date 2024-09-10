@@ -8,6 +8,7 @@ export default async function AuthorBlogsSection({
   authorUser: User | undefined;
 }) {
   if (!authorUser) return <div>Author not found!</div>;
+  console.log(authorUser.blogs)
   if (authorUser.blogs.length === 0)
     return <div>This author hasn't posted any blogs yet!</div>;
   return (

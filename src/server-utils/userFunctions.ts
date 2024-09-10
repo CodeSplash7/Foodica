@@ -107,9 +107,9 @@ export const getUserByUrlName = async (
   urlName: string
 ): Promise<User | undefined> => {
   await initializeUsers();
-  return cachedUsers.find(
-    (u) => urlNameToUsername(urlName) === u.profile.username
-  );
+  return cachedUsers.find((u) => {
+    return urlNameToUsername(urlName) === u.profile.username;
+  });
 };
 
 export async function registerUser(

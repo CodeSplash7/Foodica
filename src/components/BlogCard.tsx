@@ -1,6 +1,6 @@
 import { type Blog, type BlogComment } from "@/types/blog-types";
 
-import ClickableTag from "../style/ClickableTag";
+import ClickableTag from "./ClickableTag";
 import ClickableTitle from "./ClickableTitle";
 import { formatCreationDate } from "@/general-utils/formatCreationDate";
 import ClickableName from "./ClickableName";

@@ -1,8 +1,5 @@
 import { Blog, BlogTag } from "@/types/blog-types";
-import {
-  urlNameToUsername,
-  usernameToUrl
-} from "./usersFunctions";
+import { urlNameToUsername, usernameToUrl } from "./usersFunctions";
 
 // Accounts
 export const signoutPageLink = "/api/auth/signout";
@@ -21,7 +18,7 @@ export const blogLinkByBlog = (blogSelected: Blog) => {
   const blogDate = new Date(blogSelected.creationDate);
   return `/blogs/${blogDate.getFullYear()}/${
     blogDate.getMonth() + 1
-  }/${blogDate.getDate()}/${urlNameToUsername(blogSelected.title)}`;
+  }/${blogDate.getDate()}/${usernameToUrl(blogSelected.title)}`;
 };
 export const blogsLinkBySearch = (textSearch: string) =>
   `/blogs/?search=${textSearch}`;
@@ -38,3 +35,5 @@ export const createBlogPageLink = (blogId?: string) =>
   blogId ? `/create-blog?actionType=update&blog=${blogId}` : "/create-blog";
 
 export const contactPageLink = "/contact";
+
+export const projectAuthorGithub = "https://github.com/CodeSplash7";
