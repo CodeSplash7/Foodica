@@ -6,19 +6,20 @@ import { useCallback, useEffect, useState } from "react";
 export default function useBlogState(
   allFields: InputField<any, any>[],
   toUpdate: boolean,
-  session: Session | null,
-  blog?: Blog
+  session: Session | null | "loading",
+  blog?: Blog | "loading"
 ) {
   const [blogId, setBlogId] = useState<string>();
   const [blogDate, setBlogDate] = useState<string>(Date.now().toString());
   const [postError, setPostError] = useState("");
 
   useEffect(() => {
+    if (blog === "loading") return;
     if (!!blog && toUpdate) {
       setBlogId(blog.id);
       setBlogDate(blog.creationDate);
     }
-  }, [session]);
+  }, [session, blog, toUpdate]);
 
   useEffect(() => {
     checkPostError();
@@ -36,7 +37,7 @@ export default function useBlogState(
 
   const isPostError = useCallback(() => {
     return !!allFields.find((f) => f.errorMessage);
-  }, allFields);
+  }, [allFields]);
 
   return { blogId, blogDate, postError, checkPostError };
 }

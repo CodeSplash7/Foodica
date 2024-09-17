@@ -24,8 +24,8 @@ export default function TagList({ blog }: { blog: Blog | "loading" }) {
         {tagList === "loading"
           ? Array(3)
               .fill(0)
-              .map(() => <Tag tag="loading" />)
-          : tagList.map((tag) => <Tag tag={tag} />)}
+              .map((_, index) => <Tag key={index} tag="loading" />)
+          : tagList.map((tag, index) => <Tag key={index} tag={tag} />)}
       </div>
 
       <div className={"border-b-2 border-gray-200 w-[100px] pt-[24px]"}></div>

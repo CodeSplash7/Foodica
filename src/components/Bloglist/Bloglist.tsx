@@ -28,14 +28,7 @@ export default async function BlogList({
   day,
   ids
 }: BlogListProps) {
-  if (blogs === "loading")
-    return (
-      <div className="flex-[2]">
-        <LoadingAnimation text="Loading, please wait!" />
-      </div>
-    );
   const { search, tag, page, author } = searchParams;
-
   const listFilters: BlogListFilters = [
     tag,
     search,
@@ -51,6 +44,13 @@ export default async function BlogList({
     page,
     filteredBlogs
   );
+  if (blogs === "loading")
+    return (
+      <div className="flex-[2]">
+        <LoadingAnimation text="Loading, please wait!" />
+      </div>
+    );
+
 
   if (!renderedBlogs)
     return <div className="flex-[2]">No blogs were found!</div>;

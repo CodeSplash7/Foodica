@@ -68,6 +68,10 @@ function useCommentInformation(commentList: BlogComment[] | "loading") {
   const [commentCount, setCommentCount] = useState(0);
   useEffect(() => {
     if (commentList !== "loading") {
+      const fetchCommentAuthors = async () => {
+        const allAuthors = await fetchAllAuthors(commentList);
+        setCommentAuthors(allAuthors);
+      };
       setCommentCount(commentList.length);
       fetchCommentAuthors();
     }
@@ -81,12 +85,6 @@ function useCommentInformation(commentList: BlogComment[] | "loading") {
     string,
     User | null
   > | null>(null);
-
-  const fetchCommentAuthors = async () => {
-    if (commentList === "loading") return;
-    const allAuthors = await fetchAllAuthors(commentList);
-    setCommentAuthors(allAuthors);
-  };
 
   return { commentCount, incrementCommentCount, commentAuthors };
 }

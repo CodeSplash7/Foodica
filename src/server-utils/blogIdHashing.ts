@@ -2,7 +2,7 @@
 
 import crypto from "crypto";
 import { getBlogs } from "./blogsFunctions";
-import { Blog } from "../../general-utils/blogsFunctions";
+import { Blog } from "@/types/blog-types";
 
 const secret = process.env.ID_HASH_SECRET_KEY || "english_or_spanish";
 

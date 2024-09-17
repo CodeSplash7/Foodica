@@ -3,15 +3,13 @@ import { Blog, BlogListFilters } from "@/types/blog-types";
 import { useMemo } from "react";
 
 export default function useFilteredBlogs(
-  blogs: Blog[],
+  blogs: Blog[] | "loading",
   filters: BlogListFilters
 ) {
-  if (!blogs.length) return [];
-  let selectedBlogs: Blog[] = [];
-  selectedBlogs = useMemo(
-    () => filterSelectedBlogs(blogs, ...filters),
-    [filters]
-  );
+  const selectedBlogs = useMemo(() => {
+    if (blogs === "loading" || !blogs.length) return [];
+    return filterSelectedBlogs(blogs, ...filters);
+  }, [filters, blogs]);
 
   return selectedBlogs;
 }

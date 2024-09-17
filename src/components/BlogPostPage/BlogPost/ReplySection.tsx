@@ -128,14 +128,21 @@ function useHandleReplies(
   let handleNewReply;
   let hookAddReply;
 
+  const replyToReply = useReplyToReply(userId, comment, addReply);
+  const replyToComment = useReplyToComment(
+    userId,
+    comment,
+    incrementCommentCount
+  );
+
   if (isReply && addReply) {
-    const res = useReplyToReply(userId, comment, addReply);
+    const res = replyToReply;
     (replies = res.replies), (handleNewReply = res.handleNewReply);
   } else {
-    const res = useReplyToComment(userId, comment, incrementCommentCount);
-    (replies = res.replies),
-      (handleNewReply = res.handleNewReply),
-      (hookAddReply = res.addReply);
+    const res = replyToComment;
+    replies = res.replies;
+    handleNewReply = res.handleNewReply;
+    hookAddReply = res.addReply;
   }
 
   return {
@@ -170,7 +177,7 @@ function useReplyToComment(
 function useReplyToReply(
   userId: string | undefined,
   comment: BlogComment,
-  addReply: (reply: BlogReply) => void
+  addReply: ((reply: BlogReply) => void) | undefined
 ) {
   const [replies] = useState<BlogReply[]>(comment.replies);
 
@@ -178,7 +185,7 @@ function useReplyToReply(
     if (!userId) return { ok: false };
     const { res: reply } = await createReply(content, comment.id, userId);
     if (!reply) return { ok: false };
-    addReply(reply);
+    addReply?.(reply);
     return { ok: true };
   };
 

@@ -14,12 +14,12 @@ export default function CommentSection({
   session: Session | null;
   blog: Blog | "loading";
 }) {
+  const { commentList, addComment } = useCommentList(blog);
+  const currentUserId = useCurrentUserId(session);
+  const handleNewComment = useHandleNewComment(blog, addComment, currentUserId);
   if (blog === "loading") {
     return <div>Loading comments...</div>;
   }
-  const currentUserId = useCurrentUserId(session);
-  const { commentList, addComment } = useCommentList(blog);
-  const handleNewComment = useHandleNewComment(blog, addComment, currentUserId);
 
   return (
     <div id="comments" className="w-full flex flex-col gap-8">
@@ -35,7 +35,7 @@ function useCommentList(blog: Blog | "loading") {
   );
   useEffect(() => {
     if (blog !== "loading") setCommentList(blog.comments);
-  }, []);
+  }, [blog]);
 
   function addComment(newComment: BlogComment) {
     setCommentList((prevComments) => {
@@ -56,7 +56,7 @@ export function useCurrentUserId(session: Session | null) {
       setCurrentUserId(user?.id);
     };
     fetchUser();
-  }, []);
+  }, [session?.user?.email]);
 
   return currentUserId;
 }

@@ -10,8 +10,9 @@ export default function RecipeInstructions({
   const directions = isLoading
     ? Array(3)
         .fill(0)
-        .map(() => (
+        .map((_, index) => (
           <Skeleton
+            key={index}
             variant="text"
             className="w-full"
             sx={{ width: "100%", fontSize: "22px" }}
@@ -23,7 +24,7 @@ export default function RecipeInstructions({
       <div className={` text-[26px] w-full text-start`}>Directions</div>
       <div className={`flex flex-col w-full h-fit gap-[24px]`}>
         {directions.map((direction, index) => (
-          <RecipeInstruction index={index}>{direction}</RecipeInstruction>
+          <RecipeInstruction key={index} index={index}>{direction}</RecipeInstruction>
         ))}
       </div>
     </div>

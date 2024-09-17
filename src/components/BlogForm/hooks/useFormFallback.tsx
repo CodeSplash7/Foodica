@@ -21,7 +21,7 @@ export default function useFormFallback(
     return {
       res: null,
       fallback: (
-        <div>You can't create blogs unless so log in into an account!</div>
+        <div>You can&apos;t create blogs unless so log in into an account!</div>
       )
     };
   return { res: author, fallback: null };

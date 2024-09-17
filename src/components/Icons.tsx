@@ -343,8 +343,8 @@ export const LoadingDots: React.FC<{ ballsColor?: string }> = ({
     <div className="loading-dots">
       {Array(3)
         .fill(0)
-        .map(() => (
-          <div style={{ background: ballsColor }}></div>
+        .map((_, index) => (
+          <div key={index} style={{ background: ballsColor }}></div>
         ))}
     </div>
   );

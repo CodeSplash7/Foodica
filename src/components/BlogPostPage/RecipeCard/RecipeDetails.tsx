@@ -57,8 +57,8 @@ export default function RecipeDetails({ blog }: { blog: Blog | "loading" }) {
           className={`flex flex-row w-full 
                 first:border-b first:sm:border-b-0 sm:first:border-r border-gray-400 border-dashed`}
         >
-          {detailsRow.map((detail) => (
-            <RecipeDetail detail={detail} isLoading={isLoading} />
+          {detailsRow.map((detail, index) => (
+            <RecipeDetail key={index} detail={detail} isLoading={isLoading} />
           ))}
         </div>
       ))}

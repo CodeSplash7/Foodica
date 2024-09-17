@@ -12,7 +12,6 @@ import { LoadingSpinner } from "../Icons";
 import ConfirmDelete from "./ConfirmDelete";
 import LoadingAnimation from "../LoadingAnimation";
 import { Blog } from "@/types/blog-types";
-import useInputFields from "./hooks/useInputFields";
 import useSubmitBlog from "./hooks/useSubmitBlogs";
 import useNavigateToBlog from "./hooks/useNavigateToBlog";
 import { useModalProps } from "./hooks/useModalProps";
@@ -30,16 +29,22 @@ interface BlogFormProps {
   actionType: string | "loading";
 }
 
+import useInputFields, { InputFields } from "./hooks/useInputFields";
+
 export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
   const { res: author, fallback } = useFormFallback(session, blog, actionType);
-  if (fallback || blog === "loading" || session === "loading") return fallback;
 
   const toUpdate = actionType === "update" && !!blog;
 
   const rerender = useRender();
   const navigateToBlog = useNavigateToBlog();
 
-  const { inputFields, allFields } = useInputFields(blog);
+  const inputFieldsResult = useInputFields(blog);
+
+  const inputFields: InputFields =
+    inputFieldsResult?.inputFields ?? ({} as InputFields);
+  const allFields = inputFieldsResult?.allFields ?? [];
+
   const {
     titleField,
     mainTagField,
@@ -55,7 +60,11 @@ export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
     prepTimeField,
     caloriesField
   } = inputFields;
-  const modalProps = useModalProps(blog?.id, toUpdate);
+
+  const modalProps = useModalProps(
+    blog === "loading" ? undefined : blog?.id,
+    toUpdate
+  );
 
   const { postError, isLoading, serverError, submitBlog } = useSubmitBlog(
     allFields,
@@ -69,7 +78,7 @@ export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      const newBlog = await submitBlog();
+      const newBlog = await submitBlog?.();
       if (newBlog) navigateToBlog(newBlog);
     },
     [submitBlog, navigateToBlog]
@@ -79,6 +88,7 @@ export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
     () => modalProps.setIsOpen(true),
     [modalProps]
   );
+  if (fallback || blog === "loading" || session === "loading") return fallback;
 
   return (
     <>
@@ -87,69 +97,98 @@ export default function BlogForm({ session, blog, actionType }: BlogFormProps) {
         <FormHeader toUpdate={toUpdate} />
         <FormRow>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={titleField} />
+            {titleField && (
+              <CustomInput formRerender={rerender} inputField={titleField} />
+            )}
           </FormRowItem>
           <FormRowItem></FormRowItem>
         </FormRow>
         <FormRow>
-          <CustomInput formRerender={rerender} inputField={descField} />
+          {descField && (
+            <CustomInput formRerender={rerender} inputField={descField} />
+          )}
         </FormRow>
         <FormRow>
           <FormRowItem>
-            <IngredientsField
-              formRerender={rerender}
-              inputField={ingredientsField}
-            />
+            {ingredientsField && (
+              <IngredientsField
+                formRerender={rerender}
+                inputField={ingredientsField}
+              />
+            )}
           </FormRowItem>
         </FormRow>
         <FormRow>
           <FormRowItem>
-            <DirectionsField
-              formRerender={rerender}
-              inputField={directionsField}
-            />
+            {directionsField && (
+              <DirectionsField
+                formRerender={rerender}
+                inputField={directionsField}
+              />
+            )}
           </FormRowItem>
         </FormRow>
         <FormRow>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={mainTagField} />
+            {mainTagField && (
+              <CustomInput formRerender={rerender} inputField={mainTagField} />
+            )}
           </FormRowItem>
           <FormRowItem>
-            <CustomInput
-              formRerender={rerender}
-              inputField={secondaryTagsField}
-            />
+            {secondaryTagsField && (
+              <CustomInput
+                formRerender={rerender}
+                inputField={secondaryTagsField}
+              />
+            )}
           </FormRowItem>
         </FormRow>
 
         <FormRow>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={difficultyField} />
+            {difficultyField && (
+              <CustomInput
+                formRerender={rerender}
+                inputField={difficultyField}
+              />
+            )}
           </FormRowItem>
           <FormRowItem></FormRowItem>
         </FormRow>
         <FormRow>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={prepTimeField} />
+            {prepTimeField && (
+              <CustomInput formRerender={rerender} inputField={prepTimeField} />
+            )}
           </FormRowItem>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={cookTimeField} />
+            {cookTimeField && (
+              <CustomInput formRerender={rerender} inputField={cookTimeField} />
+            )}
           </FormRowItem>
         </FormRow>
         <FormRow>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={caloriesField} />
+            {caloriesField && (
+              <CustomInput formRerender={rerender} inputField={caloriesField} />
+            )}
           </FormRowItem>
           <FormRowItem>
-            <CustomInput formRerender={rerender} inputField={servingsField} />
+            {servingsField && (
+              <CustomInput formRerender={rerender} inputField={servingsField} />
+            )}
           </FormRowItem>
         </FormRow>
 
         <FormRow>
-          <ImageInput formRerender={rerender} inputField={blogPictureField} />
+          {blogPictureField && (
+            <ImageInput formRerender={rerender} inputField={blogPictureField} />
+          )}
         </FormRow>
         <FormRow>
-          <CustomInput formRerender={rerender} inputField={conclusionField} />
+          {conclusionField && (
+            <CustomInput formRerender={rerender} inputField={conclusionField} />
+          )}
         </FormRow>
         <FormState
           isLoading={isLoading}

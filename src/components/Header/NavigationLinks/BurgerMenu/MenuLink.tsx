@@ -27,13 +27,13 @@ export default function MenuLink({
   const isNormalLink = !link.links && !miniLink;
   const isMinilink = !link.links && miniLink;
 
-  const onClick = () => {
-    setIsMenuOpen?.(false);
-  };
-
   const linkRef: RefObject<HTMLAnchorElement> = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
+    const onClick = () => {
+      setIsMenuOpen?.(false);
+    };
+    
     const linkElement = linkRef.current;
     if (linkElement) {
       linkElement.addEventListener("click", onClick);
@@ -43,7 +43,7 @@ export default function MenuLink({
         linkElement.removeEventListener("click", onClick);
       }
     };
-  }, [linkRef]);
+  }, [linkRef, setIsMenuOpen]);
 
   if (isDropdownLink)
     return (

@@ -90,7 +90,7 @@ function Textarea({
 
   useEffect(() => {
     if (isFocused) inputRef.current?.focus();
-  }, []);
+  }, [isFocused]);
 
   return (
     <>
@@ -276,7 +276,7 @@ const KeywordInput = ({
     } else {
       setSuggestions([]);
     }
-  }, [inputValue, inputField.options]);
+  }, [inputField.value, inputValue, inputField.options]);
 
   const handleSuggestionClick = (keyword: string) => {
     inputField.setValue([...inputField.value, keyword]);

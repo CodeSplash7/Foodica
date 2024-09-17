@@ -1,6 +1,7 @@
 import { Roboto_Condensed } from "next/font/google";
-import { type BlogPageSearchParams } from "@/app/blogs/page";
+// import { type BlogPageSearchParams } from "@/app/blogs/page";
 import { Skeleton } from "@mui/material";
+import { BlogPageSearchParams } from "@/page-components/blogs-page";
 
 const roboto_condensed = Roboto_Condensed({
   weight: "700",

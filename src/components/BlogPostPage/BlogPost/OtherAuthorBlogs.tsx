@@ -4,7 +4,7 @@ import AwaitableImage from "@/components/AwaitableImage";
 import { Blog } from "@/types/blog-types";
 import { Inter } from "next/font/google";
 import ChangeBlogButton from "./ChangeBlogsButton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ClickableTitle from "@/components/ClickableTitle";
 import { Skeleton } from "@mui/material";
 const inter = Inter({
@@ -129,9 +129,15 @@ function useVisibleBlogs(otherBlogs: Blog[]) {
   );
   const [visibleBlogsIndex, setVisibleBlogsIndex] = useState<number>(0);
 
-  useEffect(() => handleBlogsNavigation(), []);
+  const getElementAtIndex = useCallback((index: number) => {
+    if (blogsCount === 0) {
+      return undefined;
+    }
+    const wrappedIndex = index % blogsCount;
+    return otherBlogs[wrappedIndex];
+  }, [blogsCount, otherBlogs]);
 
-  function handleBlogsNavigation(action?: "-" | "+") {
+  const handleBlogsNavigation = useCallback((action?: "-" | "+") => {
     let newBlogsIndex = visibleBlogsIndex;
     if (action === "-") newBlogsIndex--;
     if (action === "+") newBlogsIndex++;
@@ -147,15 +153,9 @@ function useVisibleBlogs(otherBlogs: Blog[]) {
     );
     setVisibleBlogs(newCurrentBlogs as Blog[]);
     setVisibleBlogsIndex(newBlogsIndex);
-  }
+  }, [visibleBlogsIndex, blogsCount, getElementAtIndex]);
 
-  function getElementAtIndex(index: number) {
-    if (blogsCount === 0) {
-      return undefined;
-    }
-    const wrappedIndex = index % blogsCount;
-    return otherBlogs[wrappedIndex];
-  }
+  useEffect(() => handleBlogsNavigation(), [handleBlogsNavigation]);
 
   return { navigate: handleBlogsNavigation, visibleBlogs };
 }

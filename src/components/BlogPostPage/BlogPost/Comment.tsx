@@ -56,7 +56,7 @@ function useCommentAuthor(
   const [commentAuthor, setCommentAuthor] = useState<User | null | undefined>();
   const getCommentAuthor = useCallback(async () => {
     setCommentAuthor(commentAuthors.get(comment.userId));
-  }, [comment.userId]);
+  }, [comment.userId, commentAuthors]);
   useEffect(() => {
     getCommentAuthor();
   }, [getCommentAuthor]);

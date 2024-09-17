@@ -117,7 +117,12 @@ export async function registerUser(
   options?: { update: boolean; id?: string }
 ): Promise<User | { error: string }> {
   await initializeUsers();
-  let parsedData;
+  let parsedData: {
+    password: string;
+    username: string;
+    email: string;
+    profilePicture: Picture | null;
+  };
   try {
     parsedData = JSON.parse(data);
   } catch (error) {

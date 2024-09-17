@@ -1,7 +1,6 @@
 import { InputFields } from "./useInputFields";
 
 export function useStringifyForm(
-  author: string,
   blogDate: string,
   inputFields: InputFields
 ) {
@@ -19,6 +18,7 @@ export function useStringifyForm(
     prepTimeField,
     caloriesField
   } = inputFields;
+
   return (recipePicture: {
     url: string;
     thumbnailUrl: string | null;
@@ -27,11 +27,13 @@ export function useStringifyForm(
     metadata: Record<string, never>;
     path: Record<string, never>;
     pathOrder: string[];
-  }) =>
-    JSON.stringify({
+  }, author?: string) => {
+    const safeAuthor = author?.trim() || "Anonymous";
+
+    return JSON.stringify({
       picture: recipePicture,
       title: titleField.getCorrectValue(),
-      author,
+      author: safeAuthor,
       mainTag: mainTagField.getCorrectValue(),
       secondaryTags: secondaryTagsField.getCorrectValue(),
       description: descField.getCorrectValue(),
@@ -45,4 +47,5 @@ export function useStringifyForm(
       conclusion: conclusionField.getCorrectValue(),
       creationDate: blogDate
     });
+  };
 }

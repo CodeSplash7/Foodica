@@ -64,4 +64,6 @@ const LinkWithDropdown = forwardRef<HTMLAnchorElement, LinkWithDropdownProps>(
   }
 );
 
+LinkWithDropdown.displayName = 'LinkWithDropdown';
+
 export default LinkWithDropdown;

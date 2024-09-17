@@ -35,19 +35,25 @@ export type InputFields = {
   prepTimeField: InputField<number, number>;
   caloriesField: InputField<number, number>;
 };
-export default function useInputFields(blog: Blog | undefined) {
-  const titleField = useTitleField(blog);
-  const { mainTagField, secondaryTagsField } = useTagsField(blog);
-  const descField = useDescField(blog);
-  const servingsField = useServingsField(blog);
-  const ingredientsField = useIngredientsField(blog);
-  const directionsField = useDirectionsField(blog);
-  const conclusionField = useConclusionField(blog);
-  const blogPictureField = useBlogPictureField(blog);
-  const difficultyField = useDifficultyField(blog);
-  const cookTimeField = useCookTimeField(blog);
-  const prepTimeField = usePrepTimeField(blog);
-  const caloriesField = useCaloriesField(blog);
+
+type InputFieldsResult = {
+  inputFields: InputFields;
+  allFields: InputField<any, any>[];
+} | undefined;
+
+export default function useInputFields(blog: Blog | undefined | "loading"): InputFieldsResult {
+  const titleField = useTitleField(blog === "loading" ? undefined : blog);
+  const { mainTagField, secondaryTagsField } = useTagsField(blog === "loading" ? undefined : blog);
+  const descField = useDescField(blog === "loading" ? undefined : blog);
+  const servingsField = useServingsField(blog === "loading" ? undefined : blog);
+  const ingredientsField = useIngredientsField(blog === "loading" ? undefined : blog);
+  const directionsField = useDirectionsField(blog === "loading" ? undefined : blog);
+  const conclusionField = useConclusionField(blog === "loading" ? undefined : blog);
+  const blogPictureField = useBlogPictureField(blog === "loading" ? undefined : blog);
+  const difficultyField = useDifficultyField(blog === "loading" ? undefined : blog);
+  const cookTimeField = useCookTimeField(blog === "loading" ? undefined : blog);
+  const prepTimeField = usePrepTimeField(blog === "loading" ? undefined : blog);
+  const caloriesField = useCaloriesField(blog === "loading" ? undefined : blog);
 
   const inputFields: InputFields = {
     titleField,
@@ -64,7 +70,9 @@ export default function useInputFields(blog: Blog | undefined) {
     prepTimeField,
     caloriesField
   };
-  const allFields = useState(Object.values(inputFields))[0];
+  const [allFields] = useState(Object.values(inputFields));
+
+  if (blog === "loading") return undefined;
 
   return { inputFields, allFields };
 }

@@ -16,9 +16,9 @@ export default function useSubmitBlog(
   allFields: InputField<any, any>[],
   inputFields: InputFields,
   toUpdate: boolean,
-  session: Session | null,
-  author: string,
-  blog?: Blog
+  session: Session | null | "loading",
+  author: string | null,
+  blog?: Blog | "loading"
 ) {
   const getRecipePicture = useRecipePicture(inputFields.blogPictureField);
 
@@ -33,48 +33,53 @@ export default function useSubmitBlog(
   const [isBlogSent, setIsBlogSent] = useState<boolean>(false);
   const [serverError, setServerError] = useState<string>("");
 
+  const stringifyForm = useStringifyForm(blogDate, inputFields);
+
   return {
     isLoading,
     serverError,
-    postError,
-    submitBlog: async () => {
-      try {
-        const stringifyForm = useStringifyForm(author, blogDate, inputFields);
-        allFields.forEach((f) => f.validate());
-        if (checkPostError())
-          throw new BlogError("Solve the input problems first!");
-        if (isBlogSent) throw new BlogError("Blog is already being submitted");
-        setIsBlogSent(true);
-        setIsLoading(true);
+    postError: !author ? "Could not find author information" : postError,
+    submitBlog: !author
+      ? undefined
+      : async () => {
+          try {
+            allFields.forEach((f) => f.validate());
+            if (checkPostError())
+              throw new BlogError("Solve the input problems first!");
+            if (isBlogSent)
+              throw new BlogError("Blog is already being submitted");
+            setIsBlogSent(true);
+            setIsLoading(true);
 
-        const recipePicture = await getRecipePicture();
-        if (!recipePicture) {
-          throw new BlogError("Failed to get recipe picture");
-        }
-        const stringJsonData = stringifyForm(recipePicture);
-        const newBlog = await createBlog(stringJsonData, {
-          update: toUpdate,
-          id: blogId,
-          authorEmail: session?.user?.email
-        });
+            const recipePicture = await getRecipePicture();
+            if (!recipePicture) {
+              throw new BlogError("Failed to get recipe picture");
+            }
+            const stringJsonData = stringifyForm(recipePicture, author);
+            const newBlog = await createBlog(stringJsonData, {
+              update: toUpdate,
+              id: blogId,
+              authorEmail:
+                session === "loading" ? undefined : session?.user?.email
+            });
 
-        if ("error" in newBlog) {
-          throw new BlogError(newBlog.error);
-        }
+            if ("error" in newBlog) {
+              throw new BlogError(newBlog.error);
+            }
 
-        await delay(1000);
-        return newBlog;
-      } catch (error) {
-        if (error instanceof BlogError) {
-          setServerError(error.message);
-        } else {
-          setServerError("An unexpected error occurred. Please try again.");
+            await delay(1000);
+            return newBlog;
+          } catch (error) {
+            if (error instanceof BlogError) {
+              setServerError(error.message);
+            } else {
+              setServerError("An unexpected error occurred. Please try again.");
+            }
+          } finally {
+            setIsBlogSent(false);
+            setIsLoading(false);
+          }
         }
-      } finally {
-        setIsBlogSent(false);
-        setIsLoading(false);
-      }
-    }
   };
 }
 

@@ -10,7 +10,7 @@ export default async function AuthorBlogsSection({
   if (!authorUser) return <div>Author not found!</div>;
   console.log(authorUser.blogs)
   if (authorUser.blogs.length === 0)
-    return <div>This author hasn't posted any blogs yet!</div>;
+    return <div>This author hasn&apos;t posted any blogs yet!</div>;
   return (
     <BlogList
       blogs={await getBlogs()}

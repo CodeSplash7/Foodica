@@ -154,19 +154,19 @@ function IngredientField({
       }
     })
   );
-  const inputFields = [
+  useEffect(() => {
+    const inputFields = [
+      ingredientDetailsInput,
+      ingredientNameInput,
+      ingredientQuantityInput,
+      ingredientUnitInput
+    ];
+    inputFields.forEach((f) => f.validate());
+  }, [
     ingredientDetailsInput,
     ingredientNameInput,
     ingredientQuantityInput,
-    ingredientUnitInput
-  ];
-  useEffect(() => {
-    inputFields.forEach((f) => f.validate());
-  }, [
-    ingredientDetailsInput.value,
-    ingredientNameInput.value,
-    ingredientQuantityInput.value,
-    ingredientUnitInput.value,
+    ingredientUnitInput,
     index
   ]);
   return (

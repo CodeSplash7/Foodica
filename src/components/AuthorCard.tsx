@@ -47,7 +47,7 @@ export default async function AuthorCard({
           />
         ) : (
           <div className="w-full text-left py-2 px-4 bg-gray-100 rounded-md mt-4">
-            This author hasn't posted any blogs yet.
+            This author hasn&apos;t posted any blogs yet.
           </div>
         )}
       </div>

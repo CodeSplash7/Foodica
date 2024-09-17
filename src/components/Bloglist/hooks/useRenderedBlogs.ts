@@ -17,7 +17,7 @@ export default function useRenderedBlogs(
         currentPage || 1,
         onePageForAll ? 9999 : blogPageSize
       ),
-    [filteredBlogs]
+    [filteredBlogs, currentPage, onePageForAll]
   );
 
   return { renderedBlogs, onePageForAll, currentPage };
