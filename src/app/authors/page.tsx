@@ -1,2 +1,2 @@
-import AuthorsPage from "@/pages/authors-page";
+import AuthorsPage from "@/page-components/authors-page";
 export default AuthorsPage;

@@ -1,3 +1,3 @@
-import BlogByYearPage from "@/pages/blogs-by-year-page";
+import BlogByYearPage from "@/page-components/blogs-by-year-page";
 
 export default BlogByYearPage;

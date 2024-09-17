@@ -1,3 +1,3 @@
-import RegisterPage from "@/pages/register-page";
+import RegisterPage from "@/page-components/register-page";
 
-export default RegisterPage
+export default RegisterPage;

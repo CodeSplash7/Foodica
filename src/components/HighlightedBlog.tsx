@@ -1,5 +1,5 @@
 import { type Blog } from "@/types/blog-types";
-import { type BlogPageSearchParams } from "@/pages/blogs-page";
+import { type BlogPageSearchParams } from "@/page-components/blogs-page";
 import ClickableTag from "@/components/ClickableTag";
 import ClickableTitle from "@/components/ClickableTitle";
 import { formatCreationDate } from "@/general-utils/formatCreationDate";

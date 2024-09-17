@@ -1,2 +1,2 @@
-import AuthorBlogsPage from "@/pages/author-blogs-page";
+import AuthorBlogsPage from "@/page-components/author-blogs-page";
 export default AuthorBlogsPage;

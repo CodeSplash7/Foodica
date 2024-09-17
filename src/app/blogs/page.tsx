@@ -1,3 +1,3 @@
-import BlogsPage from "@/pages/blogs-page";
+import BlogsPage from "@/page-components/blogs-page";
 
 export default BlogsPage;

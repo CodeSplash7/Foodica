@@ -3,7 +3,7 @@ import { BlogListFilters, type Blog } from "@/types/blog-types";
 import BlogCard from "@/components/BlogCard";
 import Pagination from "./Pagination/Pagination";
 import LoadingAnimation from "../LoadingAnimation";
-import { BlogPageSearchParams } from "@/pages/blogs-page";
+import { BlogPageSearchParams } from "@/page-components/blogs-page";
 import {
   filterSelectedBlogs,
   getNthDivision

@@ -1,3 +1,3 @@
-import CreateBlogPage from "@/pages/create-blog-page";
+import CreateBlogPage from "@/page-components/create-blog-page";
 
 export default CreateBlogPage;

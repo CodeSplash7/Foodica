@@ -1,3 +1,3 @@
-import BlogsByMonthPage from "@/pages/blogs-by-month-page";
+import BlogsByMonthPage from "@/page-components/blogs-by-month-page";
 
 export default BlogsByMonthPage;

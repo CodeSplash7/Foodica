@@ -1,6 +1,6 @@
 import BlogList from "@/components/Bloglist/Bloglist";
 import Sidebar from "@/components/Sidebar";
-import { type BlogPageSearchParams } from "@/pages/blogs-page";
+import { type BlogPageSearchParams } from "@/page-components/blogs-page";
 import { Blog } from "@/types/blog-types";
 export default function MainBlogsSection({
   searchParams,
