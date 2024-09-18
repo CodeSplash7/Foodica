@@ -4,10 +4,6 @@ import BlogCard from "@/components/BlogCard";
 import Pagination from "./Pagination/Pagination";
 import LoadingAnimation from "../LoadingAnimation";
 import { BlogPageSearchParams } from "@/page-components/blogs-page";
-import {
-  filterSelectedBlogs,
-  getNthDivision
-} from "@/general-utils/blogsFunctions";
 import useFilteredBlogs from "./hooks/useFilteredBlogs";
 import useRenderedBlogs from "./hooks/useRenderedBlogs";
 
@@ -21,7 +17,7 @@ type BlogListProps = {
 };
 
 export default async function BlogList({
-  searchParams,
+  searchParams = {},
   blogs,
   year,
   month,
@@ -50,7 +46,6 @@ export default async function BlogList({
         <LoadingAnimation text="Loading, please wait!" />
       </div>
     );
-
 
   if (!renderedBlogs)
     return <div className="flex-[2]">No blogs were found!</div>;

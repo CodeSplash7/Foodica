@@ -1,6 +1,8 @@
 import { createEdgeStoreNextHandler } from "@edgestore/server/adapters/next/app";
-import { initEdgeStoreClient } from "@edgestore/server/core";
 import { initEdgeStore } from "@edgestore/server";
+import { getServerSession } from "next-auth";
+import options from "@/app/api/auth/[...nextauth]/options";
+import { initEdgeStoreClient } from "@edgestore/server/core";
 
 const es = initEdgeStore.create();
 
@@ -13,7 +15,18 @@ export const edgeStoreRouter = es.router({
       maxSize: 5 * 1024 * 1024, // 5MB
       accept: ["image/jpeg", "image/png", "image/webp", "image/jpg"]
     })
-    .beforeDelete(({ ctx, fileInfo }) => {
+    .beforeUpload(async () => {
+      const session = await getServerSession();
+      if (!session) {
+        throw new Error("Unauthorized");
+      }
+      return true;
+    })
+    .beforeDelete(async () => {
+      const session = await getServerSession();
+      if (!session) {
+        throw new Error("Unauthorized");
+      }
       return true; // allow delete
     })
 });
@@ -30,4 +43,3 @@ export const backendClient = initEdgeStoreClient({
  * This type is used to create the type-safe client for the frontend.
  */
 export type EdgeStoreRouter = typeof edgeStoreRouter;
-
